@@ -176,6 +176,7 @@ MonoBehaviour:
   downSpeed: 8
   leftSpeed: 8
   rightSpeed: 5
+  quickDecelMod: 0.85
   vAccelCurve:
     serializedVersion: 2
     m_Curve:
