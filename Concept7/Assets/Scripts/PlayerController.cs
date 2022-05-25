@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private InputHandler input;
-    [SerializeField] private Rigidbody2D rbody;
-    [SerializeField] private float speed;
+    [SerializeField] private MovementController movement;
     void FixedUpdate()
     {
-        rbody.velocity = speed * input.dir;
+        if (input.move.pressed || input.move.released)
+            movement.ChangeDir(input.dir);
     }
 
     public void SetInput(InputHandler input) {

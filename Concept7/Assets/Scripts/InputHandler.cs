@@ -9,34 +9,25 @@ public class InputHandler : MonoBehaviour
         get;
         private set;
     }
+    private Button m_move;
+    public Button move => m_move;
     private Button m_primary;
-    public Button primary {
-        get {return m_primary;}
-    }
+    public Button primary => m_primary;
     private Button m_secondary;
-    public Button secondary {
-        get {return m_secondary;}
-    }
+    public Button secondary => m_secondary;
     private Button m_action1;
-    public Button action1 {
-        get {return m_action1;}
-    }
+    public Button action1 => m_action1;
     private Button m_action2;
-    public Button action2 {
-        get {return m_action2;}
-    }
+    public Button action2 => m_action2;
     private Button m_action3;
-    public Button action3 {
-        get {return m_action3;}
-    }
+    public Button action3 => m_action3;
     private Button m_action4;
-    public Button action4 {
-        get {return m_action4;}
-    }
+    public Button action4 => m_action4;
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        m_move.Reset();
         m_primary.Reset();
         m_secondary.Reset();
         m_action1.Reset();
@@ -47,6 +38,7 @@ public class InputHandler : MonoBehaviour
 
     public void Move(InputAction.CallbackContext ctx) {
         dir = ctx.ReadValue<Vector2>();
+        m_move.Set(ctx);
     }
 
     public void Primary(InputAction.CallbackContext ctx) {
