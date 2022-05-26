@@ -9,5 +9,6 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public int damage = 1;
+    public float fireRate = 0.5f;
     
 }

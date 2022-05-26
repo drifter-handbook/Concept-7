@@ -17,8 +17,6 @@ public class MovementController : MonoBehaviour
     [SerializeField] private AnimationCurve hAccelCurve;
     [SerializeField] private AnimationCurve hDecelCurve;
 
-    [SerializeField] private GameObject mainWeapon;
-
     // mdir  -   preserves the direction to travel at any point, especially when 
     //           a key is released and a direction is needed for deceleration
     // dir   -   preserves the direction that was last inputed
@@ -70,10 +68,5 @@ public class MovementController : MonoBehaviour
             speed.y = Mathf.Abs(rbody.velocity.y);
 
         dir = ndir;
-    }
-
-    public void FireMainWeapon(bool toggle)
-    {
-        mainWeapon.SetActive(toggle);
     }
 }
