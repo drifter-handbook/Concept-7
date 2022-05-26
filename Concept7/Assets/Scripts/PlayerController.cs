@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
     {
         if (input.move.pressed || input.move.released)
             movement.ChangeDir(input.dir);
+
+        //Toggles main weapon
+        if(input.primary.pressed)movement.FireMainWeapon(true);
+        else if(input.primary.released)movement.FireMainWeapon(false);
+            
     }
 
     public void SetInput(InputHandler input) {
