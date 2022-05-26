@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: PixelClean SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
-  material: {fileID: 0}
-  materialHashCode: 0
-  m_Version: 
+  hashCode: 2020508316
+  material: {fileID: 2100000, guid: ff307ad012fc342489fdc4659acde499, type: 3}
+  materialHashCode: 1898478524
+  m_Version: 1.1.0
   m_SourceFontFileGUID: 
   m_SourceFontFile_EditorRef: {fileID: 0}
   m_SourceFontFile: {fileID: 0}
@@ -25,7 +25,7 @@ MonoBehaviour:
     m_FamilyName: 
     m_StyleName: 
     m_PointSize: 0
-    m_Scale: 0
+    m_Scale: 1
     m_LineHeight: 0
     m_AscentLine: 0
     m_CapLine: 0
@@ -41,9 +41,28 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  m_GlyphTable: []
-  m_CharacterTable: []
-  m_AtlasTextures: []
+  m_GlyphTable:
+  - m_Index: 0
+    m_Metrics:
+      m_Width: 0
+      m_Height: 0
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 0
+      m_HorizontalAdvance: 0
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 0
+      m_Width: 0
+      m_Height: 0
+    m_Scale: 1
+    m_AtlasIndex: 0
+  m_CharacterTable:
+  - m_ElementType: 1
+    m_Unicode: 32
+    m_GlyphIndex: 0
+    m_Scale: 1
+  m_AtlasTextures:
+  - {fileID: 0}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
   m_ClearDynamicDataOnBuild: 0
@@ -75,7 +94,7 @@ MonoBehaviour:
   m_AtlasWidth: 0
   m_AtlasHeight: 0
   m_AtlasPadding: 0
-  m_AtlasRenderMode: 0
+  m_AtlasRenderMode: 4121
   m_glyphInfoList: []
   m_KerningTable:
     kerningPairs: []
