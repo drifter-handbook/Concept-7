@@ -5,11 +5,19 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField] private WeaponPrefabList weaponPrefabs;
+
+    [SerializeField] private Animator[] pips;
+
+    public void Start()
+    {
+        ResetQueue();
+    }
+
     private float timeStamp;
-    private List<WeaponType> alchemyQueue = new List<WeaponType>();
+    private Queue<WeaponType> alchemyQueue = new Queue<WeaponType>();
     public void Fire(WeaponType type) {
         if (type == WeaponType.DEFAULT) {
-            alchemyQueue.Clear();
+            ResetQueue();
             return;
         }
         if (Time.time >= timeStamp) {
@@ -20,8 +28,29 @@ public class WeaponController : MonoBehaviour
     }
 
     public void TryAddAlchemy(WeaponType type) {
-        alchemyQueue.Insert(0, type);
+        alchemyQueue.Enqueue(type);
         while (alchemyQueue.Count > 3) //TODO have a group discussion on what we want to do when the list fills up
-            alchemyQueue.RemoveAt(alchemyQueue.Count - 1);
+            alchemyQueue.Dequeue();
+
+        WeaponType[] alchemyArray = alchemyQueue.ToArray();
+        for(int i = 0; i < alchemyArray.Length; i++)
+            pips[i].SetInteger("Color",(int)alchemyArray[i]);
+    
+    }
+
+    public void TryFireAlchemy() {
+        ResetQueue();
+
+    }
+
+    private void ResetQueue() {
+
+        alchemyQueue.Clear();
+        for(int i = 0; i < 3; i++)
+        {
+            alchemyQueue.Enqueue(WeaponType.DEFAULT);
+            pips[i].SetInteger("Color",-1);
+        }
+
     }
 }

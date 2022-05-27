@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private InputHandler input;
     [SerializeField] private MovementController movement;
     [SerializeField] private WeaponController weapon;
+
     void FixedUpdate()
     {
         if (input.move.pressed || input.move.released)
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
             weapon.Fire(WeaponType.PRIMARYBLUE);
             
         if (input.action4.pressed)
-            weapon.Fire(WeaponType.DEFAULT);
+            weapon.TryFireAlchemy();
     }
 
     public void SetInput(InputHandler input) {
