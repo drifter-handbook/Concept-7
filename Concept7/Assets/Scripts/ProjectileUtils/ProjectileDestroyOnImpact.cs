@@ -5,7 +5,8 @@ using UnityEngine;
 public class ProjectileDestroyOnImpact : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) {
-        StartCoroutine(DestroyAfterDelay());
+    	if(other.gameObject.tag != "PlayArea")
+        	StartCoroutine(DestroyAfterDelay());
     }
 
     private IEnumerator DestroyAfterDelay() {
