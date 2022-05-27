@@ -3,7 +3,7 @@ core:
   name: basestage
   prefab: BaseStage
   invuln: true
-  defaultrun: stage
+  default_run: stage
   tags: ["stage"]
 
 timeline_stage: []

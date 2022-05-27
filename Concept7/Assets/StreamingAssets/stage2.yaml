@@ -1,4 +1,4 @@
 # Stage 2 Sub-director
 core:
   name: stage2
-  copyFrom: basestage
+  copy_from: basestage

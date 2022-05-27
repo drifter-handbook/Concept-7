@@ -1,11 +1,12 @@
 # Homing bullet
 core:
   name: followbullet
-  copyFrom: basebullet
-  defaultrun: follow
+  copy_from: basebullet
+  default_run: follow
 
 timeline_follow:
   - time: 1
-  move_at_player:
-    max_turn: 10
-    repeat: {count: 20, delay: 0.5}
+    move_at_player:
+      max_turn: 10
+    repeat: 20
+    interval: 0.5

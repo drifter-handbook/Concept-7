@@ -5,5 +5,5 @@ core:
   invuln: true
   turn_on_move: true
   tags: ["bullet"]
-  z: -1
+  depth: -1
   speed: 5

@@ -1,7 +1,7 @@
 # Base mob
 core:
   name: testmob
-  copyFrom: basemob
+  copy_from: basemob
 
 emitter_gun:
   x: -1
@@ -11,67 +11,70 @@ emitter_gun:
 timeline_path0:
   - time: 0
     move:
-      pos: {dir: 225}
+      dir: 225
   - time: 2.5
     shoot_at_player:
       num: 3
       angle: 30
   - time: 3
     move:
-      pos: {dir: 135}
+      dir: 135
   - time: 8
     destroy: true
 
 timeline_path0:
   - time: 0
     move:
-      pos: {dir: 135}
+      dir: 135
   - time: 2
-    shoot_at_player:
-      repeat: {count: 8, delay: 2}
+    shoot_at_player: {}
+    repeat: 8
+    interval: 2
   - time: 2
     move:
-      pos: {y: 10}
+      y: 10
   - time: 4
     move:
-      pos: {x: -10}
+      x: -10
   - time: 6
     move:
-      pos: {y: -10}
+      y: -10
   - time: 8
     move:
-      pos: {x: 10}
+      x: 10
   - time: 10
     move:
-      pos: {y: 10}
+      y: 10
   - time: 12
     move:
-      pos: {x: -10}
+      x: -10
   - time: 14
     move:
-      pos: {y: -10}
+      y: -10
   - time: 16
     move:
-      pos: {x: 10}
+      x: 10
   - time: 18
     move:
-      pos: {x: 10}
+      x: 10
   - time: 20
     destroy: true
 
 timeline_path0:
   - time: -1
     move_abs:
-      pos: {x: 8, y: 5}
+      x: 8
+      y: 5
       speed: 0
   - time: 0
     move:
-      pos: {dir: 225, dist: 3}
+      dir: 225
+      dist: 3
   - time: 2.5
     shoot_at_player:
       actor: followbullet
   - time: 3
     move:
-      pos: {dir: 135}
+      dir: 135
   - time: 8
     destroy: true
