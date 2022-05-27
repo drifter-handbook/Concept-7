@@ -1,0 +1,7 @@
+# Base mob
+core:
+  name: basemob
+  prefab: BaseMob
+  hp: 1
+  tags: ["enemy"]
+  speed: 1

@@ -1,0 +1,6 @@
+# Stages
+stages:
+  - name: Blue Hill Zone
+    actor: stage1
+  - name: Red Hill Zone
+    actor: stage2

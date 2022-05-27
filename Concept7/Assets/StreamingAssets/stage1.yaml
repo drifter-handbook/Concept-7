@@ -1,0 +1,24 @@
+# Stage 1 Sub-director
+core:
+  name: stage1
+  copyFrom: basestage
+
+timeline_stage:
+  - time: 5
+    spawn:
+      actor: testmob
+      pos: {x: 100, y: 100}
+      run: path0
+      repeat: {count: 5, delay: 1}
+  - time: 15
+    spawn:
+      actor: testmob
+      pos: {x: 100, y: 100}
+      run: path1
+      repeat: {count: 3, delay: 1}
+  - time: 25
+    spawn:
+      actor: testmob
+      pos: {x: 100, y: 100}
+      run: path2
+      repeat: {count: 3, delay: 1}

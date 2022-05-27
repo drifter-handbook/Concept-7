@@ -1,0 +1,13 @@
+# Stage 1 Sub-director
+core:
+  name: basestage
+  prefab: BaseStage
+  invuln: true
+  defaultrun: stage
+  tags: ["stage"]
+
+timeline_stage: []
+
+emitter_0:
+  x: 0
+  y: 0
