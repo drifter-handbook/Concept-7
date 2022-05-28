@@ -8,6 +8,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private MovementController movement;
     [SerializeField] private WeaponController weapon;
 
+    public static PlayerController Instance { get; private set; }
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     void FixedUpdate()
     {
         if (input.move.pressed || input.move.released)

@@ -65,7 +65,7 @@ timeline_path0:
     move_abs:
       x: 8
       y: 5
-      speed: 0
+      instant: true
   - time: 0
     move:
       dir: 225

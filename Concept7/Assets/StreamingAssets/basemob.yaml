@@ -1,7 +1,7 @@
 # Base mob
 core:
   name: basemob
-  prefab: BaseMob
+  prefab: Shadow_Bird
   hp: 1
   tags: ["enemy"]
   speed: 1

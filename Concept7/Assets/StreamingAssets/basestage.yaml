@@ -1,7 +1,6 @@
 # Stage 1 Sub-director
 core:
   name: basestage
-  prefab: BaseStage
   invuln: true
   default_run: stage
   tags: ["stage"]
