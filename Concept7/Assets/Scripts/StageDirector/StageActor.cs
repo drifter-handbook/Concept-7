@@ -102,18 +102,19 @@ public class StageActor : MonoBehaviour
         movementCoroutine = StartCoroutine(c);
     }
     // move in a direction for a duration, or forever
-    public IEnumerator MoveCoroutine(Vector2 vel, float? dur = null, Vector2? target = null)
+    public IEnumerator MoveCoroutine(Vector2 vel, float? dur = null, Vector2? target = null, float smoothness = 0f)
     {
-        Velocity = vel;
         if (dur == null)
         {
             while (true)
             {
+                Velocity = vel;
                 yield return null;
             }
         }
         for (float t = 0f; t < dur; t += Time.deltaTime)
         {
+            Velocity = vel * SigmoidSmoothDeriv(t / dur.Value, smoothness);
             yield return null;
         }
         Velocity = Vector2.zero;
@@ -121,5 +122,25 @@ public class StageActor : MonoBehaviour
         {
             transform.position = new Vector3(target.Value.x, target.Value.y, transform.position.z);
         }
+    }
+    // t is clamped to [0, 1]
+    // smoothness 0 means line, smoothness 5 means gentle start/stop
+    float SigmoidSmooth(float t, float smoothness)
+    {
+        t = Mathf.Lerp(-1, 1, Mathf.Clamp01(t));
+        if (smoothness == 0f)
+        {
+            return t;
+        }
+        return Mathf.Clamp01(Mathf.Atan(t * smoothness) / (2 * Mathf.Atan(smoothness)) + 0.5f);
+    }
+    float SigmoidSmoothDeriv(float t, float smoothness)
+    {
+        t = Mathf.Lerp(-1, 1, Mathf.Clamp01(t));
+        if (smoothness == 0f)
+        {
+            return 1;
+        }
+        return smoothness / (smoothness * smoothness * t * t * Mathf.Atan(smoothness) + Mathf.Atan(smoothness));
     }
 }

@@ -10,8 +10,8 @@ timeline_stage:
       x: 8
       y: 5
       run: path0
-    repeat: 5
-    interval: 1
+    repeat: 3
+    interval: 3
   - time: 15
     spawn:
       actor: testmob
@@ -27,4 +27,4 @@ timeline_stage:
       y: 5
       run: path2
     repeat: 3
-    interval: 1
+    interval: 2

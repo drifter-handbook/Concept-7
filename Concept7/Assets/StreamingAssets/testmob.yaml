@@ -13,20 +13,26 @@ timeline_path0:
   - time: 0
     move:
       dir: 225
-  - time: 2.5
+      dist: 6
+      smoothness: 5
+      speed: 1
+  - time: 5.5
     shoot:
       num: 5
       angle: 50
       interval: 0.1
-  - time: 3
+  - time: 6
     shoot:
       num: 5
       angle: -50
       interval: 0.1
-  - time: 3
+  - time: 6
     move:
       dir: 135
-  - time: 8
+      dist: 6
+      smoothness: 5
+      speed: 1
+  - time: 16
     destroy: true
 
 timeline_path1:
@@ -76,12 +82,17 @@ timeline_path2:
   - time: 0
     move:
       dir: 0
-      dist: 10
-  - time: 2.5
+      dist: 5
+      smoothness: 5
+      speed: 1
+  - time: 5
     shoot:
       actor: followbullet
-  - time: 3
+  - time: 5
     move:
       dir: 270
-  - time: 8
+      dist: 8
+      smoothness: 5
+      speed: 1.5
+  - time: 12
     destroy: true

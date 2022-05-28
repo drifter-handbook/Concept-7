@@ -1,7 +1,6 @@
 # Concept 7 Stage Director
 Everything is YAML
 
-TODO: Smooth sigmoid movement
 TODO: Linked shots
 TODO: Autogenerate RBY combos
     output: GameObject FindWeapon(int r, int b, int y)

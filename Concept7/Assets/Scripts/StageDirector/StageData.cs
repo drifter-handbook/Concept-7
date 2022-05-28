@@ -443,6 +443,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
     public float? Dist;
     public float? Speed;
     public bool? Instant;
+    public float Smoothness;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -459,7 +460,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
             Vector2 vel = diff.normalized * speed;
             float dur = diff.magnitude / speed;
             Vector2 target = (Vector2)runner.transform.position + diff;
-            actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target));
+            actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target, Smoothness));
         }
         else if (Dir != null)
         {
@@ -468,7 +469,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
             {
                 float dur = Dist.Value / speed;
                 Vector2 target = (Vector2)runner.transform.position + dur * vel;
-                actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target));
+                actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target, Smoothness));
             }
             else
             {
@@ -491,6 +492,7 @@ public class MoveAbsTimelineEvent : StageData.Actor.Timeline.IEvent
     public float Y;
     public float? Speed;
     public bool? Instant;
+    public float Smoothness;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -505,7 +507,7 @@ public class MoveAbsTimelineEvent : StageData.Actor.Timeline.IEvent
         Vector2 diff = target - (Vector2)runner.transform.position;
         Vector2 vel = diff.normalized * speed;
         float dur = diff.magnitude / speed;
-        actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target));
+        actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target, Smoothness));
     }
 }
 
