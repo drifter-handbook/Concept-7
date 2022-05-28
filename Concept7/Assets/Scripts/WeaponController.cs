@@ -8,6 +8,8 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] private Animator[] pips;
 
+    [SerializeField] private int MaxComboLength = 3;
+
     public void Start()
     {
         ResetQueue();
@@ -44,11 +46,11 @@ public class WeaponController : MonoBehaviour
 
     public void TryAddAlchemy(WeaponType type) {
         alchemyQueue.Enqueue(type);
-        while (alchemyQueue.Count > 3) //TODO have a group discussion on what we want to do when the list fills up
+        while (alchemyQueue.Count > MaxComboLength) //TODO have a group discussion on what we want to do when the list fills up
             alchemyQueue.Dequeue();
 
         WeaponType[] alchemyArray = alchemyQueue.ToArray();
-        for(int i = 0; i < alchemyArray.Length; i++)
+        for(int i = 0; i < pips.Length; i++)
             pips[i].SetInteger("Color",(int)alchemyArray[i]);
     
     }
@@ -84,7 +86,7 @@ public class WeaponController : MonoBehaviour
 
         if(prefab != null)
             Instantiate(prefab, transform.position, Quaternion.identity);
-            
+
         ResetQueue();
 
     }
@@ -92,7 +94,7 @@ public class WeaponController : MonoBehaviour
     private void ResetQueue() {
 
         alchemyQueue.Clear();
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < pips.Length; i++)
         {
             alchemyQueue.Enqueue(WeaponType.DEFAULT);
             pips[i].SetInteger("Color",-1);

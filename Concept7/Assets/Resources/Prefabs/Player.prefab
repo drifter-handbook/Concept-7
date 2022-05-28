@@ -322,11 +322,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4230a7e9bbfb94b941aa5a992126b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefabs: {fileID: 11400000, guid: 14d8cad114f29914a8860262f7f454b9, type: 2}
   pips:
   - {fileID: 5194069456003285890}
   - {fileID: 4038275210721228733}
   - {fileID: 56266630762109850}
+  MaxComboLength: 3
 --- !u!1001 &49247804366335446
 PrefabInstance:
   m_ObjectHideFlags: 0
