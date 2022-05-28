@@ -14,9 +14,15 @@ timeline_path0:
     move:
       dir: 225
   - time: 2.5
-    shoot_at_player:
-      num: 3
-      angle: 30
+    shoot:
+      num: 5
+      angle: 50
+      interval: 0.1
+  - time: 3
+    shoot:
+      num: 5
+      angle: -50
+      interval: 0.1
   - time: 3
     move:
       dir: 135
@@ -28,7 +34,7 @@ timeline_path1:
     move:
       dir: 135
   - time: 2
-    shoot_at_player: {}
+    shoot: {}
     repeat: 8
     interval: 2
   - time: 2
@@ -72,7 +78,7 @@ timeline_path2:
       dir: 0
       dist: 10
   - time: 2.5
-    shoot_at_player:
+    shoot:
       actor: followbullet
   - time: 3
     move:

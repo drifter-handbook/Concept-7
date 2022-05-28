@@ -44,7 +44,7 @@ public class StageActor : MonoBehaviour
 
     public void RefreshAngle()
     {
-        if (Actor?.TurnOnMove ?? false)
+        if (Actor?.TurnOnMove ?? false && Velocity != Vector2.zero)
         {
             transform.rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.right, Velocity));
         }
