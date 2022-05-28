@@ -12,7 +12,6 @@ public class WeaponPrefabList : ScriptableObject {
     }
 }
 
-//Possibly make these values equal to their alchemy code value?
 public enum WeaponType {
     DEFAULT = -1, PRIMARYRED, PRIMARYYELLOW, PRIMARYBLUE,
 }
