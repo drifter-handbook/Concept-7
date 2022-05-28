@@ -8,9 +8,13 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] private Animator[] pips;
 
+    private WeaponData[] alchemyWeapons = new WeaponData[100];
+
     public void Start()
     {
         ResetQueue();
+
+        AggregateAlchemy();
     }
 
     private float timeStamp;
@@ -38,11 +42,6 @@ public class WeaponController : MonoBehaviour
     
     }
 
-    public void TryFireAlchemy() {
-        ResetQueue();
-
-    }
-
     private void ResetQueue() {
 
         alchemyQueue.Clear();
@@ -53,4 +52,51 @@ public class WeaponController : MonoBehaviour
         }
 
     }
+
+
+    //Converts the currently queued alchemy combo into an alchemyCode and grabs the associated weapon data from the list
+    public void TryFireAlchemy() {
+        int code = 0;
+        int curr;
+
+        //Icky
+        while(alchemyQueue.Count > 0)
+        {
+            curr = (int)alchemyQueue.Dequeue();
+            switch(curr)
+            {
+                case 0:
+                    code++;
+                    break;
+                case 1:
+                    code+=5;
+                    break;
+                case 2:
+                    code+=21;
+                    break;
+                default:
+                    break;
+            }
+            //Grab the data here and instantite its associated prefab
+            UnityEngine.Debug.Log(alchemyWeapons[code]);
+        }
+
+        ResetQueue();
+    }
+
+    
+    //Grabs all Weapon data objects from the WeaponData folder and adds them to the alchemy outcome list to be queried from later
+    private void AggregateAlchemy() {
+
+        UnityEngine.Object[] loadedWeapons = Resources.LoadAll("WeaponData", typeof(WeaponData));
+
+        foreach(WeaponData weapon in loadedWeapons)
+            if(weapon.alchemyCode >= 0)
+            {
+                alchemyWeapons[weapon.alchemyCode] = weapon; 
+                UnityEngine.Debug.Log("Added " + weapon.alchemyCode);
+            }
+    }
+
+    
 }
