@@ -3,7 +3,6 @@ Everything is YAML
 
 TODO: Smooth sigmoid movement
 TODO: Linked shots
-TODO: Load Prefabs from Resources
 TODO: Autogenerate RBY combos
     output: GameObject FindWeapon(int r, int b, int y)
 

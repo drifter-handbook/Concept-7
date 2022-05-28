@@ -236,16 +236,11 @@ public class StageData
             // check prefab exists
             if (Prefab != null)
             {
-                var prefabObjs = StageDirector.Instance.Prefabs.Where(x => x.name == Prefab).ToList();
-                if (prefabObjs.Count == 0)
+                if (!StageDirector.Instance.Prefabs.ContainsKey(Prefab))
                 {
                     throw new InvalidOperationException($"Actor {Name} in file {File} attempts to use prefab {Prefab} which is not registered with StageDirector.Prefabs");
                 }
-                if (prefabObjs.Count > 1)
-                {
-                    throw new InvalidOperationException($"Actor {Name} in file {File} attempts to use prefab {Prefab} which has too many ({prefabObjs.Count}) matches in StageDirector.Prefabs");
-                }
-                PrefabObj = prefabObjs.First();
+                PrefabObj = StageDirector.Instance.Prefabs[Prefab];
             }
             else
             {

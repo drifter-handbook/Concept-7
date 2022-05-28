@@ -7,7 +7,7 @@ public class StageDirector : MonoBehaviour
 {
     public StageData Data;
     public GameObject DefaultActorPrefab;
-    public List<GameObject> Prefabs;
+    public Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
 
     // Singleton is a good design pattern, I swear
     public static StageDirector Instance { get; private set; }
@@ -21,6 +21,22 @@ public class StageDirector : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+        // load all prefabs
+        if (Prefabs.Count == 0)
+        {
+            foreach (GameObject prefab in Resources.LoadAll<GameObject>("Prefabs"))
+            {
+                if (prefab)
+                {
+                    if (Prefabs.ContainsKey(prefab.name))
+                    {
+                        throw new InvalidOperationException($"Failed to load prefab {prefab.name}: another prefab has the same name in Resources/Prefabs");
+                    }
+                    Prefabs[prefab.name] = prefab;
+                    Debug.Log(prefab.name);
+                }
+            }
         }
     }
 

@@ -280,9 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultActorPrefab: {fileID: 8303589307971982775, guid: e1a90e5d44747c340b49ccfa28b7d8bd, type: 3}
-  Prefabs:
-  - {fileID: 8303589307971982775, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
-  - {fileID: 7055567995567791160, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
+  Prefabs: []
 --- !u!1001 &502168834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -432,7 +430,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.1583333
+  orthographic size: 3.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
