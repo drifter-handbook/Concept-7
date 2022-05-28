@@ -13,5 +13,5 @@ public class WeaponPrefabList : ScriptableObject {
 }
 
 public enum WeaponType {
-    DEFAULT = -1, RED, YELLOW, BLUE,
+    DEFAULT = -1, PRIMARYRED, PRIMARYYELLOW, PRIMARYBLUE,
 }
