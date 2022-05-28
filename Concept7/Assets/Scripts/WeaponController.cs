@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private WeaponPrefabList weaponPrefabs;
+    //[SerializeField] private WeaponPrefabList weaponPrefabs;
 
     [SerializeField] private Animator[] pips;
 
@@ -21,7 +21,22 @@ public class WeaponController : MonoBehaviour
             return;
         }
         if (Time.time >= timeStamp) {
-            GameObject prefab = weaponPrefabs.Get(type);
+            GameObject prefab = null;
+            switch(type)
+            {
+                case WeaponType.PRIMARYRED:
+                    prefab = StageDirector.FindWeapon(-1, 0, 0);
+                    break;
+                case WeaponType.PRIMARYYELLOW:
+                    prefab = StageDirector.FindWeapon(0, -1, 0);
+                    break;
+                case WeaponType.PRIMARYBLUE:
+                    prefab = StageDirector.FindWeapon(0, 0, -1);
+                    break;
+                default:
+                    break;
+            }       
+            
             timeStamp = Time.time + prefab.GetComponent<PlayerWeapon>().weaponData.fireRate;
             Instantiate(prefab, transform.position, Quaternion.identity);
         }
@@ -39,6 +54,37 @@ public class WeaponController : MonoBehaviour
     }
 
     public void TryFireAlchemy() {
+
+        int r = 0;
+        int y = 0;
+        int b = 0;
+
+        while (alchemyQueue.Count > 0) //TODO have a group discussion on what we want to do when the list fills up
+        {
+            WeaponType type = alchemyQueue.Dequeue();
+
+            switch(type)
+            {
+                case WeaponType.PRIMARYRED:
+                    r++;
+                    break;
+                case WeaponType.PRIMARYYELLOW:
+                    y++;
+                    break;
+                case WeaponType.PRIMARYBLUE:
+                    b++;
+                    break;
+                default:
+                    break;
+            }
+            
+        } 
+
+        GameObject prefab = StageDirector.FindWeapon(r, y, b);
+
+        if(prefab != null)
+            Instantiate(prefab, transform.position, Quaternion.identity);
+            
         ResetQueue();
 
     }
