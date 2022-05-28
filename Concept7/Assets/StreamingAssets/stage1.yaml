@@ -20,7 +20,7 @@ timeline_stage:
       run: path1
     repeat: 3
     interval: 1
-  - time: 25
+  - time: 35
     spawn:
       actor: testmob
       x: 8

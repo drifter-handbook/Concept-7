@@ -7,6 +7,6 @@ core:
 timeline_follow:
   - time: 1
     move_at_player:
-      max_turn: 10
-    repeat: 20
-    interval: 0.5
+      max_turn: 3
+    repeat: 200
+    interval: 0.03

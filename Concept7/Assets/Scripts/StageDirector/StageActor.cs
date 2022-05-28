@@ -8,7 +8,7 @@ public class StageActor : MonoBehaviour
     public Vector2 Velocity;
 
     public string ActorType;
-    public Dictionary<string, GameObject> Emitters;
+    public Dictionary<string, GameObject> Emitters = new Dictionary<string, GameObject>();
     StageData.Actor Actor;
 
     // Only one movement coroutine allowed at a time.
@@ -39,6 +39,11 @@ public class StageActor : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3)Velocity * Time.deltaTime;
+        RefreshAngle();
+    }
+
+    public void RefreshAngle()
+    {
         if (Actor?.TurnOnMove ?? false)
         {
             transform.rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.right, Velocity));
@@ -52,6 +57,7 @@ public class StageActor : MonoBehaviour
         {
             throw new InvalidOperationException($"Attempting to run timeline named {name} on actor {ActorType} but no such timeline exists.");
         }
+        Debug.Log($"Running {name} with {timelines[name].Entries.Count} entries on actor {ActorType}");
         StartCoroutine(RunTimelineCoroutine(timelines[name]));
     }
 
@@ -60,15 +66,13 @@ public class StageActor : MonoBehaviour
         float time = 0f;
         foreach (var entry in timeline.Entries)
         {
-            if (time >= entry.Time)
-            {
-                StartCoroutine(RunEntry(entry));
-            }
-            else
+            while (time < entry.Time)
             {
                 yield return null;
                 time += Time.deltaTime;
             }
+            Debug.Log($"Running entry at time {entry.Time} on actor {ActorType}");
+            StartCoroutine(RunEntry(entry));
         }
     }
 
@@ -79,15 +83,12 @@ public class StageActor : MonoBehaviour
         float time = 0f;
         for (int i = 0; i < repeat; i++)
         {
-            if (time >= interval * i)
-            {
-                entry.Event.Start(this);
-            }
-            else
+            while (time < interval * i)
             {
                 yield return null;
                 time += Time.deltaTime;
             }
+            entry.Event.Start(this);
         }
     }
 

@@ -377,8 +377,8 @@ public class ShootAtPlayerTimelineEvent : StageData.Actor.Timeline.IEvent, Stage
         for (int i = 0; i < shots; i++)
         {
             float angle = Mathf.Lerp(Angle * -0.5f, Angle * 0.5f, (float)i / shots);
-            StageDirector.Spawn(Actor, em.transform.position, 0f, Run);
-            runner.GetComponent<StageActor>().Velocity = Quaternion.Euler(0, 0, angle) * toPlayer * speed;
+            GameObject shot = StageDirector.Spawn(Actor, em.transform.position, 0f, Run);
+            shot.GetComponent<StageActor>().Velocity = Quaternion.Euler(0, 0, angle) * toPlayer * speed;
         }
     }
 
@@ -515,10 +515,18 @@ public class MoveAtPlayerTimelineEvent : StageData.Actor.Timeline.IEvent
         StageActor actor = runner.GetComponent<StageActor>();
         float speed = Speed ?? StageDirector.Instance.Data.Actors[actor.ActorType].Speed ?? 1;
         Vector2 target = PlayerController.Instance.transform.position;
-        Vector2 diff = target - (Vector2)runner.transform.position;
-        Vector2 vel = diff.normalized * speed;
-        float dur = diff.magnitude / speed;
-        actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target));
+        Vector2 dir = (target - (Vector2)runner.transform.position).normalized;
+        Vector2 vel = dir.normalized * speed;
+        if (MaxTurn != null)
+        {
+            if (actor.Velocity != Vector2.zero)
+            {
+                dir = actor.Velocity.normalized;
+                float turn = Mathf.Clamp(Vector2.SignedAngle(dir, vel), -MaxTurn.Value, MaxTurn.Value);
+                vel = Quaternion.Euler(0f, 0f, turn) * dir * speed;
+            }
+        }
+        actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? (int?)0 : null));
     }
 }
 
