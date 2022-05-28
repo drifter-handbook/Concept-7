@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9095937952439631880}
   - component: {fileID: 3010781896562639256}
   - component: {fileID: 6547265937071600272}
+  - component: {fileID: -2414006439892431610}
   m_Layer: 6
   m_Name: BasicProjectile
   m_TagString: PlayerWeapon
@@ -187,3 +188,15 @@ MonoBehaviour:
   rbody: {fileID: 149635933975341681}
   direction: {x: 1, y: 0}
   speed: 20
+--- !u!114 &-2414006439892431610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858225846118643195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3114cffddf95440bd4d989b1490818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
