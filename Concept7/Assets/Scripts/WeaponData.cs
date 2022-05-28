@@ -8,6 +8,11 @@ using UnityEngine;
 
 public class WeaponData : ScriptableObject
 {
+	//color values
+	public int r = -1;
+	public int y = -1;
+	public int b = -1;
+
     public int damage = 1;
     public float fireRate = 0.5f;
     
