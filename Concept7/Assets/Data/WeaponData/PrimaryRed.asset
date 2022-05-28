@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
   m_Name: PrimaryRed
   m_EditorClassIdentifier: 
+  r: -1
+  y: 0
+  b: 0
   damage: 3
   fireRate: 0.15

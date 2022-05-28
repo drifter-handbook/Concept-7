@@ -8,6 +8,7 @@ public class StageDirector : MonoBehaviour
     public StageData Data;
     public GameObject DefaultActorPrefab;
     public Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
+    Dictionary<string, string> Weapons = new Dictionary<string, string>();
 
     // Singleton is a good design pattern, I swear
     public static StageDirector Instance { get; private set; }
@@ -34,7 +35,12 @@ public class StageDirector : MonoBehaviour
                         throw new InvalidOperationException($"Failed to load prefab {prefab.name}: another prefab has the same name in Resources/Prefabs");
                     }
                     Prefabs[prefab.name] = prefab;
-                    Debug.Log(prefab.name);
+                    // check for weapon, if weapon, populate the thing
+                    WeaponData weap = prefab.GetComponent<PlayerWeapon>()?.weaponData;
+                    if (weap != null)
+                    {
+                        Weapons[RYBStr(weap.r, weap.y, weap.b)] = prefab.name;
+                    }
                 }
             }
         }
@@ -51,7 +57,34 @@ public class StageDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public static GameObject FindWeapon(int r, int y, int b)
+    {
+        string k = RYBStr(r, y, b);
+        if (!Instance.Weapons.ContainsKey(k))
+        {
+            Debug.Log($"Warning! No weapon exists with combo R{r}Y{y}B{b} ({k})");
+            return null;
+        }
+        return Instance.Prefabs[Instance.Weapons[k]];
+    }
+
+    static string[] rybOrder = { "R", "Y", "B" };
+    static string RYBStr(int r, int y, int b)
+    {
+        string s = "";
+        int[] ryb = {r, y, b};
+        for (int i = 0; i < rybOrder.Length; i++)
+        {
+            while (ryb[i] != 0)
+            {
+                s += ryb[i] > 0 ? rybOrder[i] : rybOrder[i].ToLower();
+                ryb[i] = (int)Mathf.Round(Mathf.MoveTowards(ryb[i], 0, 1));
+            }
+        }
+        return s;
     }
 
     public static GameObject StartStage(int i)
