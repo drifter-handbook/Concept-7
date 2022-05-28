@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WeaponPrefabList
   m_EditorClassIdentifier: 
   weaponPrefabs:
-  - {fileID: 6858225846118643195, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
-  - {fileID: 6858225846118643195, guid: 6f4c43ae163137a40b05c80d7c7b7f00, type: 3}
-  - {fileID: 6858225846118643195, guid: f14686e3d23acfe42992ac2839f48d60, type: 3}
+  - {fileID: 49639889694583250, guid: 17899dea1b1821749841ed67e8eb02b7, type: 3}
+  - {fileID: 6042101781473753412, guid: 6f4c43ae163137a40b05c80d7c7b7f00, type: 3}
+  - {fileID: 3191077140079119679, guid: f14686e3d23acfe42992ac2839f48d60, type: 3}
