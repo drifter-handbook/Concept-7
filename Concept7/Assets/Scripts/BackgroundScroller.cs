@@ -44,7 +44,7 @@ public class BackgroundScroller : MonoBehaviour
     //TODO:
     //1. Currently only supports a single background layer, should also support additional layers for parallax purposes
     //2. In BackgroundData you assign a sprite, change to a gameobject instead so we can have more complex backgrounds
-    //3. MoveToNextBackground function call we can call in the codebase to force next background 
+    //3. MoveToNextBackground function call we can call in the codebase to force next background (think I handled this? Need to test)
 
     void FixedUpdate()
     {
@@ -66,13 +66,10 @@ public class BackgroundScroller : MonoBehaviour
             }
             else if(offsetXval < (rightSide - (objectWidth/2) + 3f) && currentBackgrounds[index].isNewBackground)
             {
+                //Current background is filling up viewport, should start up new one
                 //Note: 3 is an arbitrary magic number so we aren't creating the new game object exactly right before it needs to appear, gives us a little bit of loading time.
                 //It literally means we are creating this gameObject 10 units before the camera view frame.
-
-                //Current background is filling up viewport, should start up new one
-                //TODO: Add some function that keeps looping background until called to move on, so this can be called in a different script. 
-                //(Example, we may want a background to keep looping until all enemies are cleared.)
-
+                
                 //decrement repeat count or increment list entry if applicable
                 if (forceNewBackground || !scrollingBackgrounds[currentListEntry].shouldrepeatNonstop && scrollingBackgrounds[currentListEntry].repeatCount <= 0)
                 {
@@ -128,7 +125,7 @@ public class BackgroundScroller : MonoBehaviour
         forceNewBackground = false;
     }
 
-    //TODO: Function call to be used in other scripts
+    //Function call to be used in other scripts, forces next background gameObject to be next background in data list
     public void ForceNextBackground()
     {
         forceNewBackground = true;
