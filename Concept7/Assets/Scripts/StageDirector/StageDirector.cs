@@ -12,7 +12,9 @@ public class StageDirector : MonoBehaviour
     public StageData Data;
     public GameObject DefaultActorPrefab;
     public Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
+    // used in FindWeapon
     Dictionary<string, string> Weapons = new Dictionary<string, string>();
+    Dictionary<string, StageData.Actor> WeaponsActor = new Dictionary<string, StageData.Actor>();
 
     // Singleton is a good design pattern, I swear
     public static StageDirector Instance { get; private set; }
@@ -53,6 +55,11 @@ public class StageDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Load();
+    }
+
+    void Load()
+    {
         // load YAML data
         // if this is too much of a performance hit, load over a coroutine and set a flag when ready
         Data = new StageData();
@@ -64,7 +71,7 @@ public class StageDirector : MonoBehaviour
 
     }
 
-    public static GameObject FindWeapon(int r, int y, int b)
+    public static StageData.Actor FindWeapon(int r, int y, int b)
     {
         string k = RYBStr(r, y, b);
         if (!Instance.Weapons.ContainsKey(k))
@@ -72,7 +79,25 @@ public class StageDirector : MonoBehaviour
             Debug.Log($"Warning! No weapon exists with combo R{r}Y{y}B{b} ({k})");
             return null;
         }
-        return Instance.Prefabs[Instance.Weapons[k]];
+        // find prefab for actor type
+        string prefabname = Instance.Weapons[k];
+        // find actor for prefab
+        if (Instance.WeaponsActor.ContainsKey(prefabname))
+        {
+            return Instance.WeaponsActor[prefabname];
+        }
+        foreach (var actor in Instance.Data.Actors.Values)
+        {
+            if (actor.Prefab == prefabname)
+            {
+                Instance.WeaponsActor[prefabname] = actor;
+            }
+        }
+        if (!Instance.WeaponsActor.ContainsKey(prefabname))
+        {
+            throw new InvalidOperationException($"Prefab exists but actor for combo combo R{r}Y{y}B{b} ({k}) does not exist.");
+        }
+        return Instance.WeaponsActor[prefabname];
     }
 
     static string[] rybOrder = { "R", "Y", "B" };

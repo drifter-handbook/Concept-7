@@ -1,0 +1,5 @@
+core:
+  name: blueprimary
+  prefab: ProjectilePrimaryBlue
+  copy_from: baseprimary
+  speed: 10

@@ -23,24 +23,24 @@ public class WeaponController : MonoBehaviour
             return;
         }
         if (Time.time >= timeStamp) {
-            GameObject prefab = null;
+            StageData.Actor actor = null;
             switch(type)
             {
                 case WeaponType.PRIMARYRED:
-                    prefab = StageDirector.FindWeapon(-1, 0, 0);
+                    actor = StageDirector.FindWeapon(-1, 0, 0);
                     break;
                 case WeaponType.PRIMARYYELLOW:
-                    prefab = StageDirector.FindWeapon(0, -1, 0);
+                    actor = StageDirector.FindWeapon(0, -1, 0);
                     break;
                 case WeaponType.PRIMARYBLUE:
-                    prefab = StageDirector.FindWeapon(0, 0, -1);
+                    actor = StageDirector.FindWeapon(0, 0, -1);
                     break;
                 default:
                     break;
             }       
             
-            timeStamp = Time.time + prefab.GetComponent<PlayerWeapon>().weaponData.fireRate;
-            Instantiate(prefab, transform.position, Quaternion.identity);
+            timeStamp = Time.time + actor.PrefabObj.GetComponent<PlayerWeapon>().weaponData.fireRate;
+            StageDirector.Spawn(actor.Name, transform.position, 0f);
         }
     }
 
@@ -82,11 +82,9 @@ public class WeaponController : MonoBehaviour
             
         } 
 
-        GameObject prefab = StageDirector.FindWeapon(r, y, b);
-
-        if(prefab != null)
-            Instantiate(prefab, transform.position, Quaternion.identity);
-
+        StageData.Actor actor = StageDirector.FindWeapon(r, y, b);
+        if(actor != null)
+            StageDirector.Spawn(actor.Name, transform.position, 0f);
         ResetQueue();
 
     }

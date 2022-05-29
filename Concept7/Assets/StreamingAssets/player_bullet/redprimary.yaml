@@ -1,0 +1,5 @@
+core:
+  name: redprimary
+  prefab: ProjectilePrimaryRed
+  copy_from: baseprimary
+  speed: 15

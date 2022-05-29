@@ -4,6 +4,7 @@ core:
   invuln: true
   default_run: stage
   tags: ["stage"]
+  destroy_offscreen: false
 
 timeline_stage: []
 

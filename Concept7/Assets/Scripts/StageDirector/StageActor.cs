@@ -31,6 +31,20 @@ public class StageActor : MonoBehaviour
             go.transform.localPosition = new Vector2(em.Value.X, em.Value.Y);
             Emitters[em.Key] = go;
         }
+        // init vars
+        if (Actor.DestroyOffscreen ?? true)
+        {
+            var comp = GetComponent<ActorDestroyOffscreen>() ?? gameObject.AddComponent<ActorDestroyOffscreen>();
+        }
+        if (Actor.DestroyOnImpact)
+        {
+            var comp = GetComponent<ActorDestroyOnImpact>() ?? gameObject.AddComponent<ActorDestroyOnImpact>();
+        }
+        if (!(Actor.Invuln ?? false))
+        {
+            var comp = GetComponent<ActorUseHP>() ?? gameObject.AddComponent<ActorUseHP>();
+            comp.Initialize(Actor);
+        }
     }
 
     // Start is called before the first frame update

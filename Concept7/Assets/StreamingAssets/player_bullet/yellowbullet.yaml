@@ -1,0 +1,5 @@
+core:
+  name: yellowprimary
+  prefab: ProjectilePrimaryYellow
+  copy_from: baseprimary
+  speed: 25

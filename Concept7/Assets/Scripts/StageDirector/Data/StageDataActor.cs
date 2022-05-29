@@ -22,6 +22,8 @@ public partial class StageData
         public List<string> Tags;
         public float? Speed;
         public float? Depth;
+        public bool? DestroyOffscreen;
+        public bool DestroyOnImpact;
         public Dictionary<string, Emitter> Emitters = new Dictionary<string, Emitter>();
         public Dictionary<string, Timeline> Timelines = new Dictionary<string, Timeline>();
 

@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileDestroyOnImpact : MonoBehaviour
+public class ActorDestroyOnImpact : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
     	if(other.gameObject.tag != "PlayArea")
-        	StartCoroutine(DestroyAfterDelay());
+        {
+            StartCoroutine(DestroyAfterDelay());
+        }
     }
 
     private IEnumerator DestroyAfterDelay() {

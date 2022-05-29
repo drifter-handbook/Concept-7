@@ -3,6 +3,7 @@ core:
   name: followbullet
   copy_from: basebullet
   default_run: follow
+  destroy_offscreen: false
 
 timeline_follow:
   - time: 1
@@ -10,3 +11,5 @@ timeline_follow:
       max_turn: 3
     repeat: 200
     interval: 0.03
+  - time: 12
+    destroy: true

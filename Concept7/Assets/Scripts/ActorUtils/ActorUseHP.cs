@@ -1,31 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class ActorUseHP : MonoBehaviour
 {
+	public float health;
 
-	public int health = 5;
-
-    void OnTriggerExit2D(Collider2D collider)
+    public void Initialize(StageData.Actor actor)
     {
-    	if(collider.gameObject.tag == "PlayArea")
-    		Destroy(gameObject);
-    	
+        health = actor.Hp ?? 1;
     }
 
     void OnTriggerStay2D(Collider2D collider)
     {
-
     	if(collider.gameObject.tag == "PlayerWeapon")
     	{
     		health -= collider.gameObject.GetComponent<PlayerWeapon>().weaponData.damage;
-    		UnityEngine.Debug.Log(health);
+    		Debug.Log(health);
     	}
-    		
-    	if(health <=0)
-    		Die();
-    	
+    	if(health <= 0)
+        {
+            Die();
+        }
     }
 
     void Die()
@@ -33,6 +30,4 @@ public class EnemyController : MonoBehaviour
     	//play an animation here maybe?
     	Destroy(gameObject);
     }
-
-
 }

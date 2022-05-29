@@ -1,9 +1,8 @@
 # Concept 7 Stage Director
 Everything is YAML
 
+### TODO
 TODO: Linked shots
-TODO: Autogenerate RBY combos
-    output: GameObject FindWeapon(int r, int b, int y)
 
 ## Overview
 The Concept 7 Stage Director (aka "The Director") allows developers to write easy-to-use YAML files which create things like bullets, bullet patterns, enemies and bosses. These files are human-readable, and are loaded during runtime. This allows us to easily test bullet patterns and modify sprites without recompiling.
@@ -30,18 +29,20 @@ A `Timeline` is a list of events, each with a timestamp at which they occur rela
 
 ### core
 
-| Field        | Type   | Description                                                                          |
-|--------------|--------|--------------------------------------------------------------------------------------|
-| name         | string | Required. Unique name for this actor type.                                           |
-| copy_from    | string | Inherit fields from other actor.                                                     |
-| prefab       | string | Name of prefab in Resources/Prefabs to use for this actor. Defaults to DefaultActor. |
-| invuln       | bool   | Whether or not the actor can be hit. Defaults to false.                              |
-| hp           | int    | How much HP the actor should have. Defaults to 1.                                    |
-| default_run  | string | What timeline to run when the actor spawns.                                          |
-| turn_on_move | bool   | Whether the actor should rotate when moving in a direction. Defaults to false.       |
-| tags         | list   | List of string tags. Empty list by default.                                          |
-| speed        | float  | Default speed for movement events. 1 by default.                                     |
-| depth        | float  | Render depth (Z position). 0 by default.                                             |
+| Field             | Type   | Description                                                                          |
+|-------------------|--------|--------------------------------------------------------------------------------------|
+| name              | string | Required. Unique name for this actor type.                                           |
+| copy_from         | string | Inherit fields from other actor.                                                     |
+| prefab            | string | Name of prefab in Resources/Prefabs to use for this actor. Defaults to DefaultActor. |
+| invuln            | bool   | Whether or not the actor can be hit. Defaults to false.                              |
+| hp                | int    | How much HP the actor should have. Defaults to 1.                                    |
+| default_run       | string | What timeline to run when the actor spawns.                                          |
+| turn_on_move      | bool   | Whether the actor should rotate when moving in a direction. Defaults to false.       |
+| tags              | list   | List of string tags. Empty list by default.                                          |
+| speed             | float  | Default speed for movement events. 1 by default.                                     |
+| depth             | float  | Render depth (Z position). 0 by default.                                             |
+| destroy_offscreen | bool   | Render depth (Z position). 0 by default.                                             |
+| destroy_on_impact | bool   | Render depth (Z position). 0 by default.                                             |
 
 ### emitter_NAME
 
