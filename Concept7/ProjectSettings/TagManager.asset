@@ -44,3 +44,33 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1539063191
+    locked: 0
+  - name: BackgroundUI
+    uniqueID: 440802439
+    locked: 0
+  - name: Player
+    uniqueID: 1799239455
+    locked: 0
+  - name: Enemy
+    uniqueID: 134466713
+    locked: 0
+  - name: PlayerProjectile
+    uniqueID: 816293727
+    locked: 0
+  - name: EnemyProjectile
+    uniqueID: 1230285691
+    locked: 0
+  - name: PlayerBeam
+    uniqueID: 3162536619
+    locked: 0
+  - name: EnemyBeam
+    uniqueID: 3456655981
+    locked: 0
+  - name: WorldUI
+    uniqueID: 4131639975
+    locked: 0
+  - name: ScreenUI
+    uniqueID: 4012216965
+    locked: 0
