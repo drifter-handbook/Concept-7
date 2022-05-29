@@ -79,7 +79,7 @@ public class StageActor : MonoBehaviour
         {
             throw new InvalidOperationException($"Attempting to run timeline named {name} on actor {ActorType} but no such timeline exists.");
         }
-        Debug.Log($"Running {name} with {timelines[name].Entries.Count} entries on actor {ActorType}");
+        // Debug.Log($"Running {name} with {timelines[name].Entries.Count} entries on actor {ActorType}");
         StartCoroutine(RunTimelineCoroutine(timelines[name]));
     }
 
@@ -93,7 +93,7 @@ public class StageActor : MonoBehaviour
                 yield return null;
                 time += Time.deltaTime;
             }
-            Debug.Log($"Running entry at time {entry.Time} on actor {ActorType}");
+            // Debug.Log($"Running entry at time {entry.Time} on actor {ActorType}");
             StartCoroutine(RunEntry(entry));
         }
     }
