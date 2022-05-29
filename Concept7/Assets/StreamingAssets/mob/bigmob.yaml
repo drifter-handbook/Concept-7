@@ -15,6 +15,10 @@ emitter_gun2:
   x: 0
   y: -.5
   actor: atomHeart
+emitter_gun3:
+  x: 0
+  y: 0
+  actor: longinus
 
 timeline_path0:
   - time: 0
@@ -27,7 +31,7 @@ timeline_path0:
   - time: 3.5
     shoot:
       num: 1
-      dir: 180
+      dir: 200
       interval: 0.1
       run: boom
       emitter: gun1
@@ -35,11 +39,20 @@ timeline_path0:
   - time: 3.5
     shoot:
       num: 1
-      dir: 180
+      dir: 160
       interval: 0.1
       run: boom
       emitter: gun2
+
   - time: 4.5
+    shoot:
+      num: 1
+      dir: 180
+      interval: 0.1
+      run: eva
+      emitter: gun3
+
+  - time: 6
     move:
       dir: 135
       dist: 15
