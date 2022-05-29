@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// MonoBehaviour which controls spawned Actor GameObjects.
+// Controlled by running timelines via RunTimeline(name).
 public class StageActor : MonoBehaviour
 {
     public Vector2 Velocity;
+    // normalized last nonzero velocity
+    public Vector2 Direction;
 
     public string ActorType;
     public Dictionary<string, GameObject> Emitters = new Dictionary<string, GameObject>();
@@ -44,9 +48,13 @@ public class StageActor : MonoBehaviour
 
     public void RefreshAngle()
     {
-        if (Actor?.TurnOnMove ?? false && Velocity != Vector2.zero)
+        if (Velocity != Vector2.zero)
         {
-            transform.rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.right, Velocity));
+            Direction = Velocity.normalized;
+            if (Actor?.TurnOnMove ?? false)
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.right, Direction));
+            }
         }
     }
 

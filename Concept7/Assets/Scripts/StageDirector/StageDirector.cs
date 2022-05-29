@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// See stagedirector.md
+// Singleton data store which loads YAML from StreamingAssets,
+// and allows reference of any prefabs in Resources/Prefabs by name.
+// Allows for spawning in actors, or finding weapons by RYB count.
 public class StageDirector : MonoBehaviour
 {
     public StageData Data;
