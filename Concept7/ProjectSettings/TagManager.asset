@@ -47,7 +47,10 @@ TagManager:
   - name: Background
     uniqueID: 1539063191
     locked: 0
-  - name: BackgroundUI
+  - name: VFXBackground
+    uniqueID: 2644659035
+    locked: 0
+  - name: UIBackground
     uniqueID: 440802439
     locked: 0
   - name: Player
@@ -68,9 +71,12 @@ TagManager:
   - name: EnemyBeam
     uniqueID: 3456655981
     locked: 0
-  - name: WorldUI
+  - name: VFXForeground
+    uniqueID: 624998595
+    locked: 0
+  - name: UIWorld
     uniqueID: 4131639975
     locked: 0
-  - name: ScreenUI
+  - name: UIScreen
     uniqueID: 4012216965
     locked: 0

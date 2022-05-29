@@ -1,0 +1,11 @@
+# Stage 1 Sub-director
+core:
+  name: linebullet
+  prefab: LineBullet
+  invuln: true
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 5
+  destroy_offscreen: true
+  destroy_on_impact: true
