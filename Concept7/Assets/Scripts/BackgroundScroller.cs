@@ -31,6 +31,8 @@ public class BackgroundScroller : MonoBehaviour
     private float leftSide;
     private float rightSide;
 
+    private bool forceNewBackground = false;
+
     void Start()
     {
         leftSide = standardCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, standardCamera.nearClipPlane)).x;
@@ -42,8 +44,7 @@ public class BackgroundScroller : MonoBehaviour
     //TODO:
     //1. Currently only supports a single background layer, should also support additional layers for parallax purposes
     //2. In BackgroundData you assign a sprite, change to a gameobject instead so we can have more complex backgrounds
-    //3. Positioning is based on size of background, should really take viewport size into account
-    //4. MoveToNextBackground function call we can call in the codebase to force next background 
+    //3. MoveToNextBackground function call we can call in the codebase to force next background 
 
     void FixedUpdate()
     {
@@ -73,13 +74,13 @@ public class BackgroundScroller : MonoBehaviour
                 //(Example, we may want a background to keep looping until all enemies are cleared.)
 
                 //decrement repeat count or increment list entry if applicable
-                if(scrollingBackgrounds[currentListEntry].repeatCount > 0)
-                {
-                    scrollingBackgrounds[currentListEntry].repeatCount--;
-                }
-                else if(!scrollingBackgrounds[currentListEntry].shouldrepeatNonstop)
+                if (forceNewBackground || !scrollingBackgrounds[currentListEntry].shouldrepeatNonstop && scrollingBackgrounds[currentListEntry].repeatCount <= 0)
                 {
                     currentListEntry++;
+                }
+                else if(scrollingBackgrounds[currentListEntry].repeatCount > 0)
+                {
+                    scrollingBackgrounds[currentListEntry].repeatCount--;
                 }
 
                 //Start new background assuming we have the data for it
@@ -87,6 +88,10 @@ public class BackgroundScroller : MonoBehaviour
                 {
                     currentBackgrounds[index].isNewBackground = false;
                     StartNewBackground();
+                }
+                else
+                {
+                    Debug.Log("OUT OF BACKGROUNDS!");
                 }
             }
             else
@@ -120,5 +125,12 @@ public class BackgroundScroller : MonoBehaviour
         background.gameObject = initialObject;
         background.isNewBackground = true;
         currentBackgrounds.Add(background);
+        forceNewBackground = false;
+    }
+
+    //TODO: Function call to be used in other scripts
+    public void ForceNextBackground()
+    {
+        forceNewBackground = true;
     }
 }
