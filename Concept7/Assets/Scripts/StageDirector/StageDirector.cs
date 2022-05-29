@@ -38,7 +38,7 @@ public class StageDirector : MonoBehaviour
                 {
                     if (Prefabs.ContainsKey(prefab.name))
                     {
-                        throw new InvalidOperationException($"Failed to load prefab {prefab.name}: another prefab has the same name in Resources/Prefabs");
+                        throw new StageDataException($"Failed to load prefab {prefab.name}: another prefab has the same name in Resources/Prefabs");
                     }
                     Prefabs[prefab.name] = prefab;
                     // check for weapon, if weapon, populate the thing
@@ -95,7 +95,7 @@ public class StageDirector : MonoBehaviour
         }
         if (!Instance.WeaponsActor.ContainsKey(prefabname))
         {
-            throw new InvalidOperationException($"Prefab exists but actor for combo combo R{r}Y{y}B{b} ({k}) does not exist.");
+            throw new StageDataException($"Prefab exists but actor for combo combo R{r}Y{y}B{b} ({k}) does not exist.");
         }
         return Instance.WeaponsActor[prefabname];
     }

@@ -27,11 +27,11 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     {
         if (Actor == null)
         {
-            throw new InvalidOperationException($"Timeline spawn action in actor {current.Name} in file {current.File} is missing 'actor' field.");
+            throw new StageDataException($"Timeline spawn action in actor {current.Name} in file {current.File} is missing 'actor' field.");
         }
         if (!actors.ContainsKey(Actor))
         {
-            throw new InvalidOperationException($"Timeline spawn action in actor {current.Name} in file {current.File} attempts to spawn {Actor} which does not exist.");
+            throw new StageDataException($"Timeline spawn action in actor {current.Name} in file {current.File} attempts to spawn {Actor} which does not exist.");
         }
     }
 }

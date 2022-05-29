@@ -54,7 +54,7 @@ public partial class StageData
             Actor actor = ToActor(p, deserializer, serializer);
             if (Actors.ContainsKey(actor.Name))
             {
-                throw new InvalidOperationException($"Duplicate actor {actor.Name} in both {actor.File} and {Actors[actor.Name].File}");
+                throw new StageDataException($"Duplicate actor {actor.Name} in both {actor.File} and {Actors[actor.Name].File}");
             }
             Actors[actor.Name] = actor;
         }
@@ -76,13 +76,13 @@ public partial class StageData
         }
         catch (YamlException e)
         {
-            throw new InvalidOperationException($"Failed to parse {path} as YAML: {e.Message}");
+            throw new StageDataException($"Failed to parse {path} as YAML: {e.Message}");
         }
         Actor actor = deserializer.Deserialize<Actor>(serializer.Serialize(actorData["core"]));
         actor.File = path;
         if (string.IsNullOrEmpty(actor.Name))
         {
-            throw new InvalidOperationException($"Failed to load {actor.File}: Missing actor name");
+            throw new StageDataException($"Failed to load {actor.File}: Missing actor name");
         }
         // load emitters and timelines
         foreach (string s in actorData.Keys)
@@ -95,7 +95,7 @@ public partial class StageData
                 em.Name = name;
                 if (actor.Emitters.ContainsKey(em.Name))
                 {
-                    throw new InvalidOperationException($"Duplicate emitter {em.Name} in {actor.File}");
+                    throw new StageDataException($"Duplicate emitter {em.Name} in {actor.File}");
                 }
                 actor.Emitters[em.Name] = em;
             }
@@ -106,7 +106,7 @@ public partial class StageData
                 Actor.Timeline timeline = new Actor.Timeline() { Name = name };
                 if (actor.Timelines.ContainsKey(name))
                 {
-                    throw new InvalidOperationException($"Duplicate timeline {name} in {actor.File}");
+                    throw new StageDataException($"Duplicate timeline {name} in {actor.File}");
                 }
                 actor.Timelines[name] = timeline;
                 foreach (Dictionary<object, object> evdata in (List<object>)actorData[s])
@@ -116,7 +116,7 @@ public partial class StageData
                     Dictionary<string, object> ev = new Dictionary<string, object>(evconv);
                     if (!ev.ContainsKey("time"))
                     {
-                        throw new InvalidOperationException($"Timeline entry in timeline {name}, file {actor.File} contains no 'time' field.");
+                        throw new StageDataException($"Timeline entry in timeline {name}, file {actor.File} contains no 'time' field.");
                     }
                     Dictionary<string, object> ev2 = new Dictionary<string, object>();
                     foreach (string field in ev.Keys)
@@ -128,12 +128,12 @@ public partial class StageData
                         if (ev2.Count > 1)
                         {
                             List<string> actions = ev2.Keys.ToList();
-                            throw new InvalidOperationException($"Timeline entry in timeline {name}, file {actor.File} contains more than one action: {actions[0]} and {actions[1]}");
+                            throw new StageDataException($"Timeline entry in timeline {name}, file {actor.File} contains more than one action: {actions[0]} and {actions[1]}");
                         }
                     }
                     if (ev2.Count == 0)
                     {
-                        throw new InvalidOperationException($"Timeline entry in timeline {name}, file {actor.File} contains no action.");
+                        throw new StageDataException($"Timeline entry in timeline {name}, file {actor.File} contains no action.");
                     }
                     // parse action field
                     ev = ev.Where(x => Actor.Timeline.Entry.Fields.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Value);
@@ -145,14 +145,14 @@ public partial class StageData
                         {
                             if (ste.Event != null)
                             {
-                                throw new InvalidOperationException($"Action {action} matches more than one action in StageData.TimelineEvents!");
+                                throw new StageDataException($"Action {action} matches more than one action in StageData.TimelineEvents!");
                             }
                             ste.Event = evt.CloneFrom(serializer.Serialize(ev2[action]), deserializer);
                         }
                     }
                     if (ste.Event == null)
                     {
-                        throw new InvalidOperationException($"Action {action} is not registered in StageData.TimelineEvents");
+                        throw new StageDataException($"Action {action} is not registered in StageData.TimelineEvents");
                     }
                     timeline.Entries.Add(ste);
                 }

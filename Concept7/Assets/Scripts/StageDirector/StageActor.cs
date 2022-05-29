@@ -77,7 +77,7 @@ public class StageActor : MonoBehaviour
         var timelines = Actor.Timelines;
         if (!timelines.ContainsKey(name))
         {
-            throw new InvalidOperationException($"Attempting to run timeline named {name} on actor {ActorType} but no such timeline exists.");
+            throw new StageDataException($"Attempting to run timeline named {name} on actor {ActorType} but no such timeline exists.");
         }
         // Debug.Log($"Running {name} with {timelines[name].Entries.Count} entries on actor {ActorType}");
         StartCoroutine(RunTimelineCoroutine(timelines[name]));

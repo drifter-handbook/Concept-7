@@ -35,7 +35,7 @@ public partial class StageData
             {
                 if (!actors.ContainsKey(CopyFrom))
                 {
-                    throw new InvalidOperationException($"Actor {Name} in file {File} attempts to copy_from {CopyFrom} which does not exist.");
+                    throw new StageDataException($"Actor {Name} in file {File} attempts to copy_from {CopyFrom} which does not exist.");
                 }
                 Actor copySrc = actors[CopyFrom];
                 // copy over core fields
@@ -73,7 +73,7 @@ public partial class StageData
             {
                 if (!StageDirector.Instance.Prefabs.ContainsKey(Prefab))
                 {
-                    throw new InvalidOperationException($"Actor {Name} in file {File} attempts to use prefab {Prefab} which is not registered with StageDirector.Prefabs");
+                    throw new StageDataException($"Actor {Name} in file {File} attempts to use prefab {Prefab} which is not registered with StageDirector.Prefabs");
                 }
                 PrefabObj = StageDirector.Instance.Prefabs[Prefab];
             }
@@ -114,7 +114,7 @@ public partial class StageData
             {
                 if (Actor != null && !actors.ContainsKey(Actor))
                 {
-                    throw new InvalidOperationException($"Emitter {Name} in actor {current.Name} in file {current.File} attempts to emit {Actor} which does not exist.");
+                    throw new StageDataException($"Emitter {Name} in actor {current.Name} in file {current.File} attempts to emit {Actor} which does not exist.");
                 }
             }
         }

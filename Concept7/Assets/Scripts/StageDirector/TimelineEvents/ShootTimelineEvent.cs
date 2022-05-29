@@ -59,13 +59,13 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         StageData.Actor.Emitter em = current.DefaultEmitter;
         if (em == null)
         {
-            throw new InvalidOperationException($"Timeline shoot action in actor {current.Name} in file {current.File} cannot be run on an actor without any emitters.");
+            throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} cannot be run on an actor without any emitters.");
         }
         if (Emitter != null)
         {
             if (!current.Emitters.ContainsKey(Emitter))
             {
-                throw new InvalidOperationException($"Timeline shoot action in actor {current.Name} in file {current.File} uses emitter {Emitter} which does not exist.");
+                throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} uses emitter {Emitter} which does not exist.");
             }
             em = current.Emitters[Emitter];
         }
@@ -78,7 +78,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         {
             if (em?.Actor == null)
             {
-                throw new InvalidOperationException($"Timeline shoot action in actor {current.Name} in file {current.File} is missing an 'actor' field.");
+                throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} is missing an 'actor' field.");
             }
             else
             {
@@ -87,7 +87,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         }
         if (!actors.ContainsKey(Actor))
         {
-            throw new InvalidOperationException($"Timeline shoot action in actor {current.Name} in file {current.File} attempts to shoot {Actor} which does not exist.");
+            throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} attempts to shoot {Actor} which does not exist.");
         }
     }
 }
