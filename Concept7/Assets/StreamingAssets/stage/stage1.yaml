@@ -4,14 +4,25 @@ core:
   copy_from: basestage
 
 timeline_stage:
-  - time: 5
+  - time: 1
     spawn:
-      actor: testmob
-      x: 8
-      y: 5
+      actor: bigmob
+      x: 17
+      y: 3
       run: path0
-    repeat: 3
-    interval: 3
+    repeat: 2
+    interval: 4
+    
+  - time: 2
+    spawn:
+      actor: bigmob
+      x: 17
+      y: -3
+      run: path0
+    repeat: 2
+    interval: 4
+
+
   - time: 15
     spawn:
       actor: testmob
