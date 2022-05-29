@@ -9,12 +9,12 @@ core:
 emitter_gun1:
   x: 0
   y: .5
-  actor: linebullet
+  actor: atomHeart
 
 emitter_gun2:
   x: 0
   y: -.5
-  actor: linebullet
+  actor: atomHeart
 
 timeline_path0:
   - time: 0
@@ -29,6 +29,7 @@ timeline_path0:
       num: 1
       dir: 180
       interval: 0.1
+      run: boom
       emitter: gun1
 
   - time: 3.5
@@ -36,8 +37,9 @@ timeline_path0:
       num: 1
       dir: 180
       interval: 0.1
+      run: boom
       emitter: gun2
-  - time: 6
+  - time: 4.5
     move:
       dir: 135
       dist: 15

@@ -1,0 +1,36 @@
+# Homing bullet
+core:
+  name: atomHeart
+  prefab: AtomHeart
+  invuln: false
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 1
+  destroy_offscreen: true
+  destroy_on_impact: true
+
+emitter_burst:
+  x: 0
+  y: 0
+  actor: needle
+
+    
+timeline_boom:
+  - time: 0
+    move:
+      dir: 180
+      dist: 3
+      speed: 1
+      smoothness: 0
+
+  - time: 2
+    shoot:
+      num: 10
+      dir: 180
+      angle: 360
+      speed: 6
+      emitter: burst
+
+  - time: 2.1
+    destroy: true
