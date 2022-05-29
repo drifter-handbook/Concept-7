@@ -41,8 +41,8 @@ A `Timeline` is a list of events, each with a timestamp at which they occur rela
 | tags              | list   | List of string tags. Empty list by default.                                          |
 | speed             | float  | Default speed for movement events. 1 by default.                                     |
 | depth             | float  | Render depth (Z position). 0 by default.                                             |
-| destroy_offscreen | bool   | Render depth (Z position). 0 by default.                                             |
-| destroy_on_impact | bool   | Render depth (Z position). 0 by default.                                             |
+| destroy_offscreen | bool   | Destroy actor when it leaves the play area. Defaults to true.                        |
+| destroy_on_impact | bool   | Destroy actor when it impacts another actor. Defaults to false.                      |
 
 ### emitter_NAME
 
