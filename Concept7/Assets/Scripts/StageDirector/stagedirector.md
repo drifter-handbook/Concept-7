@@ -84,16 +84,16 @@ The list of actions is as follows:
 
 #### Shoot
 
-| Field    | Type   | Description                                                                                     |
-|----------|--------|-------------------------------------------------------------------------------------------------|
-| num      | int    | Number of actors to shoot out. Defaults to 1.                                                   |
-| angle    | float  | Angle spread to use when shooting out the actors, if shooting multiple.                         |
-| emitter  | string | Emitter to use when shooting out the actors. Defaults to one of the emitters on the actor.      |
-| actor    | string | Actor to shoot out. Defaults to using the emitter's default actor, if it exists.                |
-| run      | string | Timeline to run on the spawned actor.                                                           |
-| speed    | float  | Shoot out the actor using the given speed. Defaults to using the spawned actor's default speed. |
-| dir      | float  | Shoot at a fixed angle, rather than at the player. Omit this to shoot at the player.            |
-| interval | float  | Wait this number of seconds between each shot if the 'num' field is specified. Defaults to 0.   |
+| Field    | Type   | Description                                                                                                               |
+|----------|--------|---------------------------------------------------------------------------------------------------------------------------|
+| num      | int    | Number of actors to shoot out. Defaults to 1.                                                                             |
+| angle    | float  | Angle spread to use when shooting out the actors, if shooting multiple.                                                   |
+| emitter  | string | Emitter to use when shooting out the actors, WITHOUT the 'emitter_' prefix. Defaults to one of the emitters on the actor. |
+| actor    | string | Actor to shoot out. Defaults to using the emitter's default actor, if it exists.                                          |
+| run      | string | Timeline to run on the spawned actor.                                                                                     |
+| speed    | float  | Shoot out the actor using the given speed. Defaults to using the spawned actor's default speed.                           |
+| dir      | float  | Shoot at a fixed angle, rather than at the player. Omit this to shoot at the player.                                      |
+| interval | float  | Wait this number of seconds between each shot if the 'num' field is specified. Defaults to 0.                             |
 
 #### Move
 

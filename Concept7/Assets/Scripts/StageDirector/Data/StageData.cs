@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -68,7 +69,15 @@ public partial class StageData
     private Actor ToActor(string path, IDeserializer deserializer, ISerializer serializer)
     {
         // load actor core fields
-        Dictionary<string, object> actorData = deserializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(path));
+        Dictionary<string, object> actorData = null;
+        try
+        {
+            actorData = deserializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(path));
+        }
+        catch (YamlException e)
+        {
+            throw new InvalidOperationException($"Failed to parse {path} as YAML: {e.Message}");
+        }
         Actor actor = deserializer.Deserialize<Actor>(serializer.Serialize(actorData["core"]));
         actor.File = path;
         if (string.IsNullOrEmpty(actor.Name))
