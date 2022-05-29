@@ -2,7 +2,11 @@
 Everything is YAML
 
 ### TODO
-TODO: Linked shots
+1. Replace velocity-based control with position control
+2. Allow for specifying start/end smoothness
+3. Bezier curve movement
+4. Smooth between command speeds
+5. Linked shots
 
 ## Overview
 The Concept 7 Stage Director (aka "The Director") allows developers to write easy-to-use YAML files which create things like bullets, bullet patterns, enemies and bosses. These files are human-readable, and are loaded during runtime. This allows us to easily test bullet patterns and modify sprites without recompiling.
