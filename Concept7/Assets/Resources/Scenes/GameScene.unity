@@ -169,18 +169,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pixelCamera: {fileID: 519420033}
   standardCamera: {fileID: 519420031}
-  spriteGameObjectPrefab: {fileID: 2459087421529202704, guid: 72ba36166084bc94aa5a6091af1bab97, type: 3}
-  scrollingSpeed: -0.1
+  mainBackgroundPrefab: {fileID: 2459087421529202704, guid: 72ba36166084bc94aa5a6091af1bab97, type: 3}
+  secondaryBackgroundPrefab: {fileID: 2459087421529202704, guid: 72ba36166084bc94aa5a6091af1bab97, type: 3}
+  mainScrollingSpeed: 0.1
+  secondaryScrollingSpeed: 0.2
   scrollingBackgrounds:
-  - sprite: {fileID: 21300000, guid: 15da76036a9326f449f20d9af2481126, type: 3}
-    repeatCount: 2
-    shouldrepeatNonstop: 0
-  - sprite: {fileID: 21300000, guid: d7984254326d5264db8d1dce95c1bc83, type: 3}
-    repeatCount: 0
-    shouldrepeatNonstop: 0
-  - sprite: {fileID: 21300000, guid: cfb1221facfded74aa25f212e41d0f1b, type: 3}
+  - mainBackground: {fileID: 21300000, guid: b9fbff8350fe9234ca2f52babe6d247f, type: 3}
+    secondaryBackground: {fileID: 0}
     repeatCount: 0
     shouldrepeatNonstop: 1
+    shouldStopScrolling: 0
 --- !u!1 &58875867
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,128 +6,148 @@ public class BackgroundScroller : MonoBehaviour
 {
     public UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera pixelCamera;
     public Camera standardCamera;
-    public GameObject spriteGameObjectPrefab;   //Background Prefab
-    public float scrollingSpeed = 2;            //Scrolling speed
+    public GameObject mainBackgroundPrefab;
+    public GameObject secondaryBackgroundPrefab;
+    public float mainScrollingSpeed = 2;
+    public float secondaryScrollingSpeed = 2;
 
     [System.Serializable]
-    public class ScrollingBackgroundData        //Background data from component, stores the sprite used and repeat data.
+    public class ScrollingBackgroundData        //Stores the sprite used and repeat data.
     {
-        public Sprite sprite;
+        public Sprite mainBackground;
+        public Sprite secondaryBackground;
         public int repeatCount;
         public bool shouldrepeatNonstop;
+        public bool shouldStopScrolling;
     }
-    public ScrollingBackgroundData[] scrollingBackgrounds;
     
+    public ScrollingBackgroundData[] scrollingBackgrounds;
+
     public class ActiveBackground               //Stores created instantiated background prefab and associated data.
     {
         public ScrollingBackgroundData data;
         public GameObject gameObject;
         public bool isNewBackground; //HACK: Keeps track of whether or not this background is the one most recently made. Can't think of a better place to put this right now
     }
-    private List<ActiveBackground> currentBackgrounds = new List<ActiveBackground>();
+    private List<ActiveBackground> currentMainBackgrounds = new List<ActiveBackground>();
+    private List<ActiveBackground> currentSecondaryBackgrounds = new List<ActiveBackground>();
 
     private int currentListEntry = 0;           //index of next scrollingBackgrounds entry to instantiate.
     private float cameraWidth;
     private float leftSide;
     private float rightSide;
-
-    private bool forceNewBackground = false;
-
+    private bool stopScrollingAnim = false;
+    
+    //TODO (maybe?) In BackgroundData you assign a sprite, change to a gameobject instead so we can have more complex backgrounds
     void Start()
     {
         leftSide = standardCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, standardCamera.nearClipPlane)).x;
         rightSide = standardCamera.ViewportToWorldPoint(new Vector3(1, 0.5f, standardCamera.nearClipPlane)).x;
         cameraWidth = standardCamera.orthographicSize * standardCamera.aspect;
-        StartNewBackground();
-
+        CreateNewBackground(scrollingBackgrounds[currentListEntry].mainBackground, currentMainBackgrounds, mainBackgroundPrefab);
+        CreateNewBackground(scrollingBackgrounds[currentListEntry].secondaryBackground, currentSecondaryBackgrounds, secondaryBackgroundPrefab);
     }
-
-    //TODO:
-    //1. Currently only supports a single background layer, should also support additional layers for parallax purposes
-    //2. In BackgroundData you assign a sprite, change to a gameobject instead so we can have more complex backgrounds
-    //3. MoveToNextBackground function call we can call in the codebase to force next background (think I handled this? Need to test)
 
     void FixedUpdate()
     {
         //loop over the currently instantiated background objects in the scene
-        for(int index = 0; index < currentBackgrounds.Count; index++)
+        for(int index = 0; index < currentMainBackgrounds.Count; index++)
         {
             //Initialize vars
-            ActiveBackground activeBackground = currentBackgrounds[index];
+            ActiveBackground activeBackground = currentMainBackgrounds[index];
             GameObject backgroundObject = activeBackground.gameObject;
-            float offsetXval = backgroundObject.transform.position.x + scrollingSpeed;
+            float offsetXval = backgroundObject.transform.position.x - mainScrollingSpeed;
             float objectWidth = backgroundObject.GetComponent<SpriteRenderer>().bounds.size.x;
-            
+
             if(offsetXval < (leftSide - (objectWidth / 2)))
             {
-                //object has passed viewport, get rid of it
-                bool success = currentBackgrounds.Remove(activeBackground);
+                //Object has passed viewport, get rid of it
+                currentMainBackgrounds.Remove(activeBackground);
                 Destroy(backgroundObject);
-            }
-            else if(offsetXval < (rightSide - (objectWidth/2) + 3f) && activeBackground.isNewBackground)
-            {
-                //Current background is filling up viewport, should start up new one
-                //Note: 3 is an arbitrary magic number so we aren't creating the new game object exactly right before it needs to appear, gives us a little bit of loading time.
-                //It literally means we are creating this gameObject 10 units before the camera view frame.
-                
-                //decrement repeat count or increment list entry if applicable
-                if (forceNewBackground || !activeBackground.data.shouldrepeatNonstop && activeBackground.data.repeatCount <= 0)
-                {
-                    currentListEntry++;
-                }
-                else if(activeBackground.data.repeatCount > 0)
-                {
-                    activeBackground.data.repeatCount--;
-                }
 
-                //Start new background assuming we have the data for it
-                if(currentListEntry < scrollingBackgrounds.Length)
+                if(currentSecondaryBackgrounds.Count > index)
                 {
-                    activeBackground.isNewBackground = false;
-                    StartNewBackground();
-                }
-                else
-                {
-                    Debug.Log("OUT OF BACKGROUNDS!");
+                    ActiveBackground secondaryBackground = currentSecondaryBackgrounds[index];
+                    currentSecondaryBackgrounds.Remove(secondaryBackground);
+                    Destroy(secondaryBackground.gameObject);
                 }
             }
-            else
+            else if(offsetXval < (rightSide - (objectWidth/2)) && activeBackground.isNewBackground)
             {
-                //update background position
+                //Current background is filling up viewport, should start up new one if applicable
+                TryStartNewBackground(activeBackground, false);
+            }
+            
+            if(!stopScrollingAnim)
+            {
+                //Update background position, and secondary background position if applicable.
                 backgroundObject.transform.position = new Vector3(offsetXval, backgroundObject.transform.position.y, backgroundObject.transform.position.z);
+                if(currentSecondaryBackgrounds.Count > index)
+                {
+                    GameObject secondaryBackgroundObject = currentSecondaryBackgrounds[index].gameObject;
+                    float offset = secondaryBackgroundObject.transform.position.x - secondaryScrollingSpeed;
+                    secondaryBackgroundObject.transform.position = new Vector3(offset, secondaryBackgroundObject.transform.position.y, secondaryBackgroundObject.transform.position.z);
+                }
             }
         }
     }
 
-    void StartNewBackground()
-    {
-        Sprite newSprite = scrollingBackgrounds[currentListEntry].sprite;
-        float spriteWidth = newSprite.bounds.size.x;
 
-        //Instantiate background game object and assign current list entry data to it
-        Vector3 startingPosition = standardCamera.ViewportToWorldPoint(new Vector3(currentBackgrounds.Count > 0 ? 1 : 0, 0.5f, standardCamera.farClipPlane));
-        startingPosition.x = startingPosition.x + (spriteWidth / 2);
-
-        if(currentBackgrounds.Count > 0)
-        {
-            startingPosition.x = startingPosition.x + 3f; //arbitrary magic number so we aren't creating the new game object exactly right before it needs to appear, gives us a little bit of loading time.
-        }
-
-        GameObject initialObject = Instantiate(spriteGameObjectPrefab, startingPosition, Quaternion.identity);
-        initialObject.GetComponent<SpriteRenderer>().sprite = newSprite;
-
-        //add newly instantiated gameobject to currentBackgrounds list
-        ActiveBackground background = new ActiveBackground();
-        background.data = scrollingBackgrounds[currentListEntry];
-        background.gameObject = initialObject;
-        background.isNewBackground = true;
-        currentBackgrounds.Add(background);
-        forceNewBackground = false;
-    }
-
-    //Function call to be used in other scripts, forces next background gameObject to be next background in data list
     public void ForceNextBackground()
     {
-        forceNewBackground = true;
+        //Function call to be used in other scripts, forces next background gameObject to be next background in data list
+        stopScrollingAnim = false;
+        TryStartNewBackground(currentMainBackgrounds[currentMainBackgrounds.Count - 1], true);
+    }
+
+    public void TryStartNewBackground(ActiveBackground activeBackground, bool forceStart)
+    {
+        //Current background is filling up viewport, should start up new one if applicable
+        UpdateScrollingValues(activeBackground, forceStart);
+
+        if(currentListEntry < scrollingBackgrounds.Length && !stopScrollingAnim)
+        {
+            activeBackground.isNewBackground = false;
+            CreateNewBackground(scrollingBackgrounds[currentListEntry].mainBackground, currentMainBackgrounds, mainBackgroundPrefab);
+            CreateNewBackground(scrollingBackgrounds[currentListEntry].secondaryBackground, currentSecondaryBackgrounds, secondaryBackgroundPrefab);
+        }
+    }
+
+    public void UpdateScrollingValues(ActiveBackground activeBackground, bool forceStart)
+    {
+        if(!forceStart && activeBackground.data.shouldStopScrolling)
+        {
+            stopScrollingAnim = true;
+        }
+        else if ((forceStart || !activeBackground.data.shouldrepeatNonstop) && activeBackground.data.repeatCount <= 0)
+        {
+            currentListEntry++;
+        }
+        else if(activeBackground.data.repeatCount > 0)
+        {
+            activeBackground.data.repeatCount--;
+        }
+    }
+
+    void CreateNewBackground(Sprite sprite, List<ActiveBackground> backgrounds, GameObject prefab)
+    {
+        if(sprite != null)
+        {
+            float spriteWidth = sprite.bounds.size.x;
+
+            //Instantiate background game object and assign current list entry data to it
+            Vector3 startingPosition = standardCamera.ViewportToWorldPoint(new Vector3(backgrounds.Count > 0 ? 1 : 0, 0.5f, standardCamera.farClipPlane));
+            startingPosition.x = startingPosition.x + (spriteWidth / 2);
+
+            GameObject initialObject = Instantiate(prefab, startingPosition, Quaternion.identity);
+            initialObject.GetComponent<SpriteRenderer>().sprite = sprite;
+
+            //add newly instantiated gameobject to currentBackgrounds list
+            ActiveBackground background = new ActiveBackground();
+            background.data = scrollingBackgrounds[currentListEntry];
+            background.gameObject = initialObject;
+            background.isNewBackground = true;
+            backgrounds.Add(background);
+        }
     }
 }
