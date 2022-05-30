@@ -1,0 +1,210 @@
+# Base mob
+core:
+  name: boss1
+  prefab: Boss1
+  hp: 500
+  tags: ["enemy"]
+  speed: 1
+
+emitter_gun0:
+  x: -1.9
+  y: 0
+
+emitter_gun1:
+  x: -.4
+  y: -.8
+emitter_gun2:
+  x: -.4
+  y: .8
+
+emitter_gun3:
+  x: .8
+  y: -.4
+emitter_gun4:
+  x: .8
+  y: .4
+
+
+timeline_arrive:
+  - time: 0
+    move:
+      dir: 180
+      dist: 5
+      speed: 2
+      smoothness: 3
+
+# timeline_phase1loop:
+#   - time: 0
+#     move:
+#       dir: 180
+#       dist: 10
+#       speed: 2
+#       smoothness: 3
+
+  - time: 3.5
+    shoot:
+      num: 10
+      # dir: 120
+      angle: 120
+      speed: 6
+      interval: .1
+      actor: pellet
+      emitter: gun1
+    repeat: 4
+    interval: 2
+
+  - time: 4.5
+    shoot:
+      num: 10
+      # dir: 120
+      angle: -120
+      speed: 4
+      interval: .1
+      actor: pellet
+      emitter: gun2
+    repeat: 4
+    interval: 2
+
+  - time: 13
+    shoot:
+      num: 3
+      angle: 90
+      dir: 0
+      interval: .05
+      run: follow
+      emitter: gun3
+      actor: missile
+    repeat: 3
+    interval: 5
+
+  - time: 15.5
+    shoot:
+      num: 3
+      angle: 90
+      dir: 0
+      interval: .05
+      run: follow
+      emitter: gun4
+      actor: missile
+    repeat: 3
+    interval: 5
+
+  - time: 15
+    shoot:
+      num: 3
+      angle: 90
+      dir: 180
+      emitter: gun0
+      actor: orb
+      speed: 6
+    repeat: 7
+    interval: 2
+    
+  - time: 16
+    shoot:
+      num: 4
+      angle: 100
+      dir: 180
+      emitter: gun0
+      actor: orb
+      speed: 6
+    repeat: 7
+    interval: 2
+
+  - time: 30
+    shoot:
+      num: 16
+      angle: 360
+      dir: 270
+      interval: .1
+      speed: 3
+      run: ringburst
+      emitter: gun1
+      actor: atomHeart
+    repeat: 3
+    interval: 3
+
+  - time: 30
+    shoot:
+      num: 16
+      angle: -360
+      dir: 90
+      interval: .1
+      speed: 3
+      run: ringburst
+      emitter: gun2
+      actor: atomHeart
+    repeat: 3
+    interval: 3
+
+
+  # - time: 3.5
+  #   shoot:
+  #     num: 3
+  #     dir: 180
+  #     angle: 45
+  #     speed: 4
+  #     run: follow
+  #     emitter: gun1
+
+  # - time: 3.5
+  #   shoot:
+  #     num: 3
+  #     dir: 180
+  #     angle: 45
+  #     speed: 4
+  #     actor: homingRay
+  #     run: follow
+  #     emitter: gun0
+
+  # - time: 4.5
+  #   shoot:
+  #     num: 1
+  #     dir: 180
+  #     run: eva
+  #     emitter: gun3
+
+
+
+  # - time: 3.5
+  #   shoot:
+  #     num: 6
+  #     angle: 90
+  #     dir: 180
+  #     interval: .05
+  #     run: follow
+  #     emitter: gun3
+  #     actor: missile
+
+
+  # - time: 3.5
+  #   shoot:
+  #     num: 21
+  #     angle: 360
+  #     dir: 45
+  #     emitter: gun3
+  #     actor: pellet
+  #     interval: 0.1
+  #   repeat: 3
+  #   interval: 1
+
+  # - time: 3.5
+  #   shoot:
+  #     num: 21
+  #     angle: -360
+  #     dir: -45
+  #     emitter: gun3
+  #     actor: pellet
+  #     interval: 0.1
+  #   repeat: 3
+  #   interval: 1
+
+  # - time: 3.5
+  #   shoot:
+  #     num: 13
+  #     angle: 360
+  #     dir: 180
+  #     emitter: gun3
+  #     actor: orb
+
+

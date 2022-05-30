@@ -2,11 +2,11 @@
 core:
   name: atomHeart
   prefab: AtomHeart
-  invuln: false
+  invuln: true
   turn_on_move: true
   tags: ["bullet"]
   depth: -1
-  speed: 1
+  speed: 2
   destroy_offscreen: true
   destroy_on_impact: true
 
@@ -33,4 +33,16 @@ timeline_boom:
       emitter: burst
 
   - time: 2.1
+    destroy: true
+
+timeline_ringburst:
+
+  - time: .5
+    shoot:
+      num: 3
+      speed: 7
+      actor: needle
+      emitter: burst
+
+  - time: .5
     destroy: true
