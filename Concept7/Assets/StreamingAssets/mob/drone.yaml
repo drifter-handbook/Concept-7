@@ -52,3 +52,47 @@ timeline_sine:
       speed: 4
       actor: pellet
       emitter: gun0
+
+timeline_negasine:
+  - time: 0
+    move:
+      dest:
+        - x: -3
+          y: -1
+          rel: dir
+          post: {x: -1}
+        - x: -6
+          y: 1
+          rel: dir
+          post: {x: -1}
+        - x: -10
+          y: -1
+          rel: dir
+          post: {x: -1}
+        - x: -14
+          y: 1
+          rel: dir
+          post: {x: -1}
+        - x: -18
+          y: -1
+          rel: dir
+          post: {x: -1}
+        - x: -22
+          y: 1
+          rel: dir
+          post: {x: -1}
+        - x: -26
+          y: -1
+          rel: dir
+          post: {x: -1}
+        - x: -30
+          y: 1
+          rel: dir
+          post: {x: -1}
+
+  - time: 4
+    shoot:
+      num: 1
+      speed: 4
+      actor: pellet
+      emitter: gun0

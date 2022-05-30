@@ -18,7 +18,7 @@ timeline_stage:
       actor: drone
       x: 17
       y: -4
-      run: sine
+      run: negasine
     repeat: 6
     interval: .5
 
