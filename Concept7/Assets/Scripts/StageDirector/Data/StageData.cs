@@ -25,7 +25,7 @@ public partial class StageData
 
     List<Actor.Timeline.IEvent> TimelineEvents = new List<Actor.Timeline.IEvent>()
     {
-        new SpawnTimelineEvent(), new ShootTimelineEvent(), new MoveTimelineEvent(), new MoveAtPlayerTimelineEvent(), new DestroyTimelineEvent()
+        new SpawnTimelineEvent(), new ShootTimelineEvent(), new MoveTimelineEvent(), new MoveAtPlayerTimelineEvent(), new DestroyTimelineEvent(), new SetSpeedTimelineEvent()
     };
 
     public StageData()

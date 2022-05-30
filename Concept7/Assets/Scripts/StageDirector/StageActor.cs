@@ -19,6 +19,7 @@ public class StageActor : MonoBehaviour
     // Only one movement coroutine allowed at a time.
     // Otherwise, they will fight and weird stuff will happen
     Coroutine movementCoroutine;
+    Coroutine speedCoroutine;
 
     public void Initialize(string actorType)
     {
@@ -115,6 +116,28 @@ public class StageActor : MonoBehaviour
         }
     }
 
+    // enforce only one speed coroutine allowed at once
+    public void RunSpeedCoroutine(IEnumerator c)
+    {
+        if (speedCoroutine != null)
+        {
+            StopCoroutine(speedCoroutine);
+        }
+        speedCoroutine = StartCoroutine(c);
+    }
+    public IEnumerator SpeedCoroutine(float speed, float dur)
+    {
+        float time = 0f;
+        float startSpd = Speed;
+        while (time < dur)
+        {
+            Speed = Mathf.Lerp(startSpd, speed, time / dur);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        Speed = speed;
+    }
+
     // enforce only one movement coroutine allowed at once
     public void RunMoveCoroutine(IEnumerator c)
     {
@@ -198,14 +221,14 @@ public class StageActor : MonoBehaviour
         }
         movementCoroutine = null;
     }
-    public Vector2 CubicBezier(MoveTarget cur, MoveTarget next, float t)
+    Vector2 CubicBezier(MoveTarget cur, MoveTarget next, float t)
     {
         Vector2 v = Vector2.Lerp(cur.Post, next.Pre, t);
         Vector2 a = Vector2.Lerp(Vector2.Lerp(cur.Pos, cur.Post, t), v, t);
         Vector2 b = Vector2.Lerp(v, Vector2.Lerp(next.Pre, next.Pos, t), t);
         return Vector2.Lerp(a, b, t);
     }
-    public float SpeedLerp(List<float> curveSpd, float dist)
+    float SpeedLerp(List<float> curveSpd, float dist)
     {
         for (int i = 0; i < curveSpd.Count; i++)
         {

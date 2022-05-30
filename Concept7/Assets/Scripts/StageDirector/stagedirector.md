@@ -2,18 +2,14 @@
 Everything is YAML
 
 ### TODO
-1. Replace velocity-based control with position control
-2. Allow for specifying start/end smoothness
-3. Bezier curve movement
-4. Smooth between command speeds, setspeed
-5. Mirroring move velocities
-6. Loop curve
-7. Timeline tracking
+1. Smooth between command speeds, setspeed
+2. Mirroring move velocities
+3. Spawn actor on death
+4. Spawn actor with set parent new/emitter/actor
+5. Timeline tracking
 6. Linked shots
-7. Spawn actor on death
-8. Spawn actor with set parent new/emitter/actor
-9. Orbit command
-10. Pause
+7. Orbit command
+8. Pause
 
 Move command should take a list of "destinations" which include x/y/dir/dist/spd/abs/rel/reldir/controlpts. Then, they are connected using a bezier curve, which the actor then follows.
 
