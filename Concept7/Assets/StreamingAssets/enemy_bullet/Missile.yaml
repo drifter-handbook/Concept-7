@@ -6,7 +6,7 @@ core:
   turn_on_move: true
   tags: ["bullet"]
   depth: -2
-  speed: 6
+  speed: 2
   destroy_offscreen: true
   destroy_on_impact: true
 
@@ -25,17 +25,17 @@ timeline_follow:
 
   - time: .9
     move_at_player:
-      max_turn: 2
+      max_turn: 15
       speed: 10
     repeat: 200
     interval: 0.03
 
   - time: 2
     shoot:
-      num: 6
+      num: 5
       dir: 180
       angle: 360
-      speed: 4
+      speed: 3
       emitter: burst
 
   - time: 2

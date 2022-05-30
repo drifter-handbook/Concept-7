@@ -7,32 +7,99 @@ core:
   speed: 1
 
 emitter_gun0:
-  x: 2
+  x: -1.9
   y: 0
 
 emitter_gun1:
-  x: 0
-  y: -.5
+  x: -.4
+  y: -.8
 emitter_gun2:
-  x: 0
-  y: .5
+  x: -.4
+  y: .8
+
+emitter_gun3:
+  x: .8
+  y: -.4
+emitter_gun4:
+  x: .8
+  y: .4
 
 
 timeline_arrive:
   - time: 0
     move:
       dir: 180
-      dist: 10
+      dist: 5
       speed: 2
       smoothness: 3
 
-timeline_phase1loop:
-  - time: 0
-    move:
+# timeline_phase1loop:
+#   - time: 0
+#     move:
+#       dir: 180
+#       dist: 10
+#       speed: 2
+#       smoothness: 3
+
+  - time: 3.5
+    shoot:
+      num: 10
+      # dir: 120
+      angle: 120
+      speed: 6
+      interval: .1
+      actor: pellet
+      emitter: gun1
+    repeat: 4
+    interval: 2
+
+  - time: 4.5
+    shoot:
+      num: 10
+      # dir: 120
+      angle: -120
+      speed: 4
+      interval: .1
+      actor: pellet
+      emitter: gun2
+    repeat: 4
+    interval: 2
+
+  - time: 13
+    shoot:
+      num: 3
+      angle: 90
+      dir: 0
+      interval: .05
+      run: follow
+      emitter: gun3
+      actor: missile
+    repeat: 3
+    interval: 5
+
+  - time: 15.5
+    shoot:
+      num: 3
+      angle: 90
+      dir: 0
+      interval: .05
+      run: follow
+      emitter: gun4
+      actor: missile
+    repeat: 3
+    interval: 5
+
+  - time: 15
+    shoot:
+      num: 3
+      angle: 90
       dir: 180
-      dist: 10
-      speed: 2
-      smoothness: 3
+      emitter: gun0
+      actor: orb
+      speed: 6
+    repeat: 10
+    interval: 1
+
 
   # - time: 3.5
   #   shoot:
@@ -43,15 +110,15 @@ timeline_phase1loop:
   #     run: follow
   #     emitter: gun1
 
-  - time: 3.5
-    shoot:
-      num: 3
-      dir: 180
-      angle: 45
-      speed: 4
-      actor: homingRay
-      run: follow
-      emitter: gun0
+  # - time: 3.5
+  #   shoot:
+  #     num: 3
+  #     dir: 180
+  #     angle: 45
+  #     speed: 4
+  #     actor: homingRay
+  #     run: follow
+  #     emitter: gun0
 
   # - time: 4.5
   #   shoot:
@@ -102,12 +169,5 @@ timeline_phase1loop:
   #     dir: 180
   #     emitter: gun3
   #     actor: orb
-
-  - time: 8
-    move:
-      dir: 135
-      dist: 15
-      smoothness: 2
-      speed: 4
 
 
