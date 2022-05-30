@@ -31,11 +31,10 @@ timeline_stage:
       run: path1
     repeat: 3
     interval: 1
-  - time: 35
+    
+  - time: 20
     spawn:
-      actor: testmob
-      x: 8
-      y: 5
-      run: path2
-    repeat: 3
-    interval: 2
+      actor: boss1
+      x: 17
+      y: 0
+      run: arrive

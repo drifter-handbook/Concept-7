@@ -1,31 +1,37 @@
 # Base mob
 core:
-  name: bigmob
-  prefab: BigMob
-  hp: 25
+  name: boss1
+  prefab: Boss1
+  hp: 500
   tags: ["enemy"]
   speed: 1
 
+emitter_gun0:
+  x: 2
+  y: 0
+
 emitter_gun1:
   x: 0
-  y: .5
-  actor: homingRay
-
+  y: -.5
 emitter_gun2:
   x: 0
-  y: -.5
-  actor: homingRay
-emitter_gun3:
-  x: 0
-  y: 0
-  actor: longinus
+  y: .5
 
-timeline_path0:
+
+timeline_arrive:
   - time: 0
     move:
       dir: 180
       dist: 10
-      speed: 3
+      speed: 2
+      smoothness: 3
+
+timeline_phase1loop:
+  - time: 0
+    move:
+      dir: 180
+      dist: 10
+      speed: 2
       smoothness: 3
 
   # - time: 3.5
@@ -45,7 +51,7 @@ timeline_path0:
       speed: 4
       actor: homingRay
       run: follow
-      emitter: gun2
+      emitter: gun0
 
   # - time: 4.5
   #   shoot:
@@ -103,6 +109,5 @@ timeline_path0:
       dist: 15
       smoothness: 2
       speed: 4
-  - time: 16
-    destroy: true
+
 
