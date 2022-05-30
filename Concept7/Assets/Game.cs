@@ -6,6 +6,7 @@ public class Game : MonoBehaviour
 {
     [Header("Debug Cheats")]
     public bool Invulnerable = false;
+    public bool ContinueWithNoLives = true;
 
     [Header("Game Info")]
     public int CurrentLives;
@@ -28,6 +29,7 @@ public class Game : MonoBehaviour
         CurrentLives = StartingLives;
         TimeElapsed = 0;
         GameScreen.Game = this;
+        GameScreen.UpdateLives();
     }
 
     public void Update(){
@@ -45,7 +47,7 @@ public class Game : MonoBehaviour
     public void LivesChanged(int num){
         if(Invulnerable) return;
         CurrentLives = Mathf.Clamp(CurrentLives+num, 0, StartingLives);
-        if(CurrentLives <= 0){
+        if(CurrentLives <= 0 && !ContinueWithNoLives){
             EndGame(false);
         }
         GameScreen.UpdateLives();
@@ -53,7 +55,9 @@ public class Game : MonoBehaviour
 
     public void EndGame(bool wasWin){
         gameState = GameState.ENDED;
-        Points = Points += (MaxTimePoints -= TimeElapsed);
+        if(wasWin){
+             Points = Points += (MaxTimePoints -= TimeElapsed);
+        }
         GameScreen.ShowEndScreen(wasWin);
     }
     

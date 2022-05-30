@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 5422951869001148457}
   - component: {fileID: 6704792361205421719}
   - component: {fileID: 8629570695135495274}
+  - component: {fileID: 8331864054002892803}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 6704792361205421719}
   weapon: {fileID: 8629570695135495274}
+  healthHandler: {fileID: 8331864054002892803}
 --- !u!114 &6704792361205421719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +330,18 @@ MonoBehaviour:
   - {fileID: 4038275210721228733}
   - {fileID: 56266630762109850}
   MaxComboLength: 3
+--- !u!114 &8331864054002892803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2644144979099465970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23dd6dbd994dd142aaac543eb752e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9033647795911875814
 GameObject:
   m_ObjectHideFlags: 0

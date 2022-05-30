@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class HealthHandler : MonoBehaviour
 {
+    //lives are now tracked in the Game script, but impact is still handled here
+    Game game;
 
-	[SerializeField] private int health = 5;
-	[SerializeField] private Animator healthBar;
+    public void Start(){
+        game = FindObjectOfType<Game>();
+    }
 
-	public void OnTriggerEnter2D(Collider2D other) {
-        health--;
+	void OnTriggerEnter2D(Collider2D col)
+    {
+        game.LivesChanged(-1);
         //Play hurt animation?
-        if(other.gameObject.tag == "Enemy")
+        if(col.gameObject.tag == "Enemy")
         {
-        	healthBar.SetInteger("Health",health);
+        	//healthBar.SetInteger("Health",health);
             StartCoroutine(flickerHurtbox());
-            UnityEngine.Debug.Log("OUCH");
-            if(health <=0)
-                UnityEngine.Debug.Log("DED");
         }
-        
     }
 
     private IEnumerator flickerHurtbox()

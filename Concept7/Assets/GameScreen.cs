@@ -30,12 +30,12 @@ public class GameScreen : MonoBehaviour
 
     public void UpdateLives(){
         if(LifebarParent.childCount != Game.CurrentLives){
-            while(LifebarParent.childCount > Game.CurrentLives){
-                Destroy(LifebarParent.GetChild(0).gameObject);
-            }
-
-            while(LifebarParent.childCount < Game.CurrentLives){
+            for(int i = LifebarParent.childCount; i < Game.CurrentLives; i++){
                 Instantiate(LifePrefab, LifebarParent);
+            }
+            
+            for(int i = LifebarParent.childCount; i > Game.CurrentLives; i--){
+                Destroy(LifebarParent.GetChild(0).gameObject);
             }
         }
     }
@@ -46,6 +46,7 @@ public class GameScreen : MonoBehaviour
         EndScreenHeaderText.text = "Defeat";
         EndScreenHeaderTextShadow.text = "Defeat";
         QuitContinueButton.text = "Quit";
+        EndScreen.SetActive(true);
 
         if(wasWin){
             objsToEnable = VictoryUIObjs;
@@ -53,10 +54,18 @@ public class GameScreen : MonoBehaviour
             EndScreenHeaderText.text = "Victory";
             EndScreenHeaderTextShadow.text = "Victory";
             QuitContinueButton.text = "Continue";
+        }
 
-            EnemiesKilledLabel.text = Game.EnemiesKilled.ToString();
-            TimeElapsedLabel.text = Game.TimeElapsed.ToString();
-            ScoreLabel.text = Game.Points.ToString();
+        EnemiesKilledLabel.text = Game.EnemiesKilled.ToString();
+        TimeElapsedLabel.text = Game.TimeElapsed.ToString();
+        ScoreLabel.text = Game.Points.ToString();
+
+        foreach(GameObject objToEnable in objsToEnable){
+            objToEnable.SetActive(true);
+        }
+
+         foreach(GameObject objToDisable in objsToDisable){
+            objToDisable.SetActive(false);
         }
 
     }
