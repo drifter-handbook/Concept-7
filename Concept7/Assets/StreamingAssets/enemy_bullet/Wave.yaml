@@ -1,6 +1,6 @@
 core:
-  name: pellet
-  prefab: Pellet
+  name: wave
+  prefab: Wave
   invuln: true
   turn_on_move: true
   tags: ["bullet"]

@@ -1,0 +1,42 @@
+# Homing bullet
+core:
+  name: missile
+  prefab: Missile
+  invuln: false
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -2
+  speed: 6
+  destroy_offscreen: true
+  destroy_on_impact: true
+
+emitter_burst:
+  x: 0
+  y: 0
+  actor: basebullet
+
+timeline_follow:
+  - time: .6
+    move_at_player:
+      max_turn: 5
+      speed: .01
+    repeat: 9
+    interval: 0.03
+
+  - time: .9
+    move_at_player:
+      max_turn: 2
+      speed: 10
+    repeat: 200
+    interval: 0.03
+
+  - time: 2
+    shoot:
+      num: 6
+      dir: 180
+      angle: 360
+      speed: 4
+      emitter: burst
+
+  - time: 2
+    destroy: true

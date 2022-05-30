@@ -10,15 +10,10 @@ core:
   destroy_offscreen: true
   destroy_on_impact: true
 
-emitter_trail1:
+emitter_trail:
   x: 0
   y: 0
   actor: needle
-emitter_trail2:
-  x: 0
-  y: 0
-  actor: needle
-
     
 timeline_eva:
   - time: 0
@@ -34,14 +29,14 @@ timeline_eva:
       dir: 270
       speed: 4
       interval: 0.1
-      emitter: trail1
+      emitter: trail
   - time: 0
     shoot:
       num: 20
       dir: 90
       speed: 4
       interval: 0.1
-      emitter: trail2
+      emitter: trail
 
   - time: 5
     destroy: true

@@ -87,7 +87,7 @@ timeline_path2:
       speed: 1
   - time: 5
     shoot:
-      actor: followbullet
+      actor: missile
   - time: 5
     move:
       dir: 270
