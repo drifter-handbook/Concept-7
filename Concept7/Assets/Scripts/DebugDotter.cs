@@ -32,10 +32,6 @@ public class DebugDotter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerController.Instance != null)
-        {
-            PlayerController.Instance.transform.position = Vector2.zero;
-        }
     }
 
     public static GameObject Dot(Vector2 position, Color c)
