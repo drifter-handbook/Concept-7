@@ -145,7 +145,10 @@ public class StageActor : MonoBehaviour
         {
             StopCoroutine(movementCoroutine);
         }
-        movementCoroutine = StartCoroutine(c);
+        if (c != null)
+        {
+            movementCoroutine = StartCoroutine(c);
+        }
     }
     // move in a direction for a duration, or forever
     const int ARCLEN_SEGMENTS = 7;

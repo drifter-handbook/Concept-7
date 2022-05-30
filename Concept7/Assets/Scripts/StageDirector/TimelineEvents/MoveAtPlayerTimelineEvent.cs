@@ -20,12 +20,14 @@ public class MoveAtPlayerTimelineEvent : StageData.Actor.Timeline.IEvent
     public void Start(MonoBehaviour runner)
     {
         StageActor actor = runner.GetComponent<StageActor>();
+        // stop currently running move coroutine
+        actor.RunMoveCoroutine(null);
         Vector2 target = PlayerController.Instance.transform.position;
         Vector2 dir = (target - (Vector2)runner.transform.position).normalized;
         if (MaxTurn != null)
         {
             float turn = Mathf.Clamp(Vector2.SignedAngle(actor.Direction, dir), -MaxTurn.Value, MaxTurn.Value);
-            dir = Quaternion.Euler(0f, 0f, turn) * dir;
+            dir = Quaternion.Euler(0f, 0f, turn) * actor.Direction;
         }
         actor.Direction = dir;
         if (Speed != null)
