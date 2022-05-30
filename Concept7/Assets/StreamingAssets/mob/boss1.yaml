@@ -97,8 +97,45 @@ timeline_arrive:
       emitter: gun0
       actor: orb
       speed: 6
-    repeat: 10
-    interval: 1
+    repeat: 7
+    interval: 2
+    
+  - time: 16
+    shoot:
+      num: 4
+      angle: 100
+      dir: 180
+      emitter: gun0
+      actor: orb
+      speed: 6
+    repeat: 7
+    interval: 2
+
+  - time: 30
+    shoot:
+      num: 16
+      angle: 360
+      dir: 270
+      interval: .1
+      speed: 3
+      run: ringburst
+      emitter: gun1
+      actor: atomHeart
+    repeat: 3
+    interval: 3
+
+  - time: 30
+    shoot:
+      num: 16
+      angle: -360
+      dir: 90
+      interval: .1
+      speed: 3
+      run: ringburst
+      emitter: gun2
+      actor: atomHeart
+    repeat: 3
+    interval: 3
 
 
   # - time: 3.5
