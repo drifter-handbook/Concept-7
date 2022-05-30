@@ -1,0 +1,17 @@
+core:
+  name: homingRayTrail
+  prefab: HomingRayTrail
+  invuln: true
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -1
+  speed: .01
+  destroy_offscreen: true
+  destroy_on_impact: false
+
+timeline_decay:
+  - time: 0.01
+    move_at_player:
+      max_turn: 3
+  - time: 0.3
+    destroy: true

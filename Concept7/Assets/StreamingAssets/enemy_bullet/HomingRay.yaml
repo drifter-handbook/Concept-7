@@ -1,0 +1,33 @@
+# Homing bullet
+core:
+  name: homingRay
+  prefab: HomingRayHead
+  invuln: true
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -2
+  speed: 8
+  destroy_offscreen: true
+  destroy_on_impact: false
+
+emitter_trail:
+  x: -0.2
+  y: 0
+  actor: homingRayTrail
+
+timeline_follow:
+  - time: 0
+    move_at_player:
+      max_turn: 3
+    repeat: 100
+    interval: 0.03
+  - time: 0
+    shoot:
+      num: 1000
+      speed: .1
+      interval: 0.02
+      emitter: trail
+      run: decay
+  - time: 12
+    destroy: true
+

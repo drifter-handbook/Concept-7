@@ -9,12 +9,12 @@ core:
 emitter_gun1:
   x: 0
   y: .5
-  actor: atomHeart
+  actor: homingRay
 
 emitter_gun2:
   x: 0
   y: -.5
-  actor: atomHeart
+  actor: homingRay
 emitter_gun3:
   x: 0
   y: 0
@@ -31,24 +31,23 @@ timeline_path0:
   - time: 3.5
     shoot:
       num: 1
-      dir: 200
-      interval: 0.1
-      run: boom
+      dir: 180
+      speed: 4
+      run: follow
       emitter: gun1
 
   - time: 3.5
     shoot:
       num: 1
-      dir: 160
-      interval: 0.1
-      run: boom
+      dir: 180
+      speed: 4
+      run: follow
       emitter: gun2
 
   - time: 4.5
     shoot:
       num: 1
       dir: 180
-      interval: 0.1
       run: eva
       emitter: gun3
 
