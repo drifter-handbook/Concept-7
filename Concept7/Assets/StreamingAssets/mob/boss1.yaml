@@ -28,10 +28,10 @@ emitter_gun4:
 timeline_arrive:
   - time: 0
     move:
-      dir: 180
-      dist: 5
+      dest:
+        - dir: 180
+          dist: 5
       speed: 2
-      smoothness: 3
 
 # timeline_phase1loop:
 #   - time: 0
