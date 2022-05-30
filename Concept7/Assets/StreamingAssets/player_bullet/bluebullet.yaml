@@ -4,23 +4,23 @@ core:
   copy_from: baseprimary
   speed: 10
 
-timeline_travel:
-  - time: 0
-    move:
-      loop: true
-      dest:
-        - x: 4
-          y: 0
-          post: {x: 0, y: -2}
-        - x: 0
-          y: -4
-          post: {x: -2, y: 0}
-        - x: -4
-          y: 0
-          post: {x: 0, y: 2}
-        - x: 0
-          y: 4
-          post: {x: 2, y: 0}
-        - x: 4
-          y: 0
-          post: {x: 0, y: -2}
+# timeline_travel:
+#   - time: 0
+#     move:
+#       loop: true
+#       dest:
+#         - x: 4
+#           y: 0
+#           post: {x: 0, y: -2}
+#         - x: 0
+#           y: -4
+#           post: {x: -2, y: 0}
+#         - x: -4
+#           y: 0
+#           post: {x: 0, y: 2}
+#         - x: 0
+#           y: 4
+#           post: {x: 2, y: 0}
+#         - x: 4
+#           y: 0
+#           post: {x: 0, y: -2}

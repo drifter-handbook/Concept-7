@@ -1,0 +1,54 @@
+# Base mob
+core:
+  name: drone
+  copy_from: basemob
+  prefab: Drone
+  speed: 4
+
+emitter_gun0:
+  x: -.8
+  y: 0
+
+timeline_sine:
+  - time: 0
+    move:
+      dest:
+        - x: -3
+          y: 1
+          rel: dir
+          post: {x: -1}
+        - x: -6
+          y: -1
+          rel: dir
+          post: {x: -1}
+        - x: -10
+          y: 1
+          rel: dir
+          post: {x: -1}
+        - x: -14
+          y: -1
+          rel: dir
+          post: {x: -1}
+        - x: -18
+          y: 1
+          rel: dir
+          post: {x: -1}
+        - x: -22
+          y: -1
+          rel: dir
+          post: {x: -1}
+        - x: -26
+          y: 1
+          rel: dir
+          post: {x: -1}
+        - x: -30
+          y: -1
+          rel: dir
+          post: {x: -1}
+
+  - time: 4
+    shoot:
+      num: 1
+      speed: 4
+      actor: pellet
+      emitter: gun0
