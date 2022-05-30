@@ -12,4 +12,5 @@ core:
 timeline_travel:
   - time: 0
     move:
-      dir: 0
+      dest:
+        - dir: 0

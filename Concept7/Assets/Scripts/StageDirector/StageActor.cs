@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // MonoBehaviour which controls spawned Actor GameObjects.
 // Controlled by running timelines via RunTimeline(name).
 public class StageActor : MonoBehaviour
 {
-    public Vector2 Velocity;
+    public float Speed;
     // normalized last nonzero velocity
     public Vector2 Direction;
 
@@ -32,6 +33,7 @@ public class StageActor : MonoBehaviour
             Emitters[em.Key] = go;
         }
         // init vars
+        Speed = Actor.Speed ?? 1f;
         if (Actor.DestroyOffscreen ?? true)
         {
             var comp = GetComponent<ActorDestroyOffscreen>() ?? gameObject.AddComponent<ActorDestroyOffscreen>();
@@ -56,19 +58,18 @@ public class StageActor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += (Vector3)Velocity * Time.deltaTime;
-        RefreshAngle();
+        if (movementCoroutine == null)
+        {
+            transform.position += (Vector3)Direction * Speed * Time.deltaTime;
+            RefreshAngle();
+        }
     }
 
     public void RefreshAngle()
     {
-        if (Velocity != Vector2.zero)
+        if (Actor?.TurnOnMove ?? false)
         {
-            Direction = Velocity.normalized;
-            if (Actor?.TurnOnMove ?? false)
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.right, Direction));
-            }
+            transform.rotation = Quaternion.Euler(0f, 0f, Vector2.SignedAngle(Vector2.right, Direction));
         }
     }
 
@@ -124,45 +125,104 @@ public class StageActor : MonoBehaviour
         movementCoroutine = StartCoroutine(c);
     }
     // move in a direction for a duration, or forever
-    public IEnumerator MoveCoroutine(Vector2 vel, float? dur = null, Vector2? target = null, float smoothness = 0f)
+    const int ARCLEN_SEGMENTS = 7;
+    const float SPLINE_TOOCLOSE = 0.01f;
+    public IEnumerator MoveCoroutine(List<MoveTarget> spline, Vector2? finishdir=null, bool loop=false)
     {
-        if (dur == null)
+        spline = new List<MoveTarget>(spline);
+        // Remove keypoints too close together
+        for (int i = 0; i < spline.Count - 1; i++)
         {
-            while (true)
+            if ((spline[i].Pos - spline[i + 1].Pos).magnitude < SPLINE_TOOCLOSE)
             {
-                Velocity = vel;
-                yield return null;
+                spline[i].Post = spline[i + 1].Post;
+                spline.RemoveAt(i + 1);
+                i--;
             }
         }
-        for (float t = 0f; t < dur; t += Time.deltaTime)
+        // add loop at end, if not close enough starting point
+        if (loop && spline.Count > 1 && (spline[spline.Count - 1].Pos - spline[1].Pos).magnitude >= SPLINE_TOOCLOSE)
         {
-            Velocity = vel * SigmoidSmoothDeriv(t / dur.Value, smoothness);
-            yield return null;
+            MoveTarget first = new MoveTarget()
+            {
+                Pos = spline[1].Pos,
+                Pre = spline[1].Pre,
+                Post = spline[1].Post
+            };
+            first.Pre = first.Pos - (first.Post - first.Pos);
+            spline[1] = first;
+            MoveTarget last = spline[spline.Count - 1];
+            spline[spline.Count - 1].Post = last.Pos + (last.Pos - last.Pre);
+            spline.Add(first);
         }
-        Velocity = Vector2.zero;
-        if (target != null)
+        float dist = 0f;
+        // run the spline
+        for (int i = 0; i < spline.Count - 1; i++)
         {
-            transform.position = new Vector3(target.Value.x, target.Value.y, transform.position.z);
+            // arc-length parameterizing
+            List<Vector2> samples = new List<Vector2>();
+            samples.Add(spline[i].Pos);
+            for (int j = 1; j < ARCLEN_SEGMENTS; j++)
+            {
+                samples.Add(CubicBezier(spline[i], spline[i + 1], (float)j/ARCLEN_SEGMENTS));
+            }
+            samples.Add(spline[i + 1].Pos);
+            List<float> curveSpd = new List<float>();
+            for (int j = 0; j < samples.Count - 1; j++)
+            {
+                curveSpd.Add((samples[j + 1] - samples[j]).magnitude);
+            }
+            float totalDist = curveSpd.Sum();
+            // move along the curve
+            float t = SpeedLerp(curveSpd, dist);
+            while (t < 1)
+            {
+                dist += Speed * Time.deltaTime;
+                t = SpeedLerp(curveSpd, dist);
+                Vector2 pos = CubicBezier(spline[i], spline[i + 1], t);
+                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+                Direction = (CubicBezier(spline[i], spline[i + 1], t + 0.01f) - pos).normalized;
+                yield return null;
+            }
+            dist -= totalDist;
+            // at the end, loop if necessary
+            if (loop && i == spline.Count - 2)
+            {
+                i = 0;
+            }
         }
+        // set finishdir if needed, for "move infinitely in direction"
+        if (finishdir != null)
+        {
+            Direction = finishdir.Value;
+        }
+        movementCoroutine = null;
     }
-    // t is clamped to [0, 1]
-    // smoothness 0 means line, smoothness 5 means gentle start/stop
-    float SigmoidSmooth(float t, float smoothness)
+    public Vector2 CubicBezier(MoveTarget cur, MoveTarget next, float t)
     {
-        t = Mathf.Lerp(-1, 1, Mathf.Clamp01(t));
-        if (smoothness == 0f)
-        {
-            return t;
-        }
-        return Mathf.Clamp01(Mathf.Atan(t * smoothness) / (2 * Mathf.Atan(smoothness)) + 0.5f);
+        Vector2 v = Vector2.Lerp(cur.Post, next.Pre, t);
+        Vector2 a = Vector2.Lerp(Vector2.Lerp(cur.Pos, cur.Post, t), v, t);
+        Vector2 b = Vector2.Lerp(v, Vector2.Lerp(next.Pre, next.Pos, t), t);
+        return Vector2.Lerp(a, b, t);
     }
-    float SigmoidSmoothDeriv(float t, float smoothness)
+    public float SpeedLerp(List<float> curveSpd, float dist)
     {
-        t = Mathf.Lerp(-1, 1, Mathf.Clamp01(t));
-        if (smoothness == 0f)
+        for (int i = 0; i < curveSpd.Count; i++)
         {
-            return 1;
+            if (dist <= curveSpd[i])
+            {
+                return Mathf.Lerp((float)i / curveSpd.Count, (float)(i + 1) / curveSpd.Count, dist / curveSpd[i]);
+            }
+            dist -= curveSpd[i];
         }
-        return smoothness / (smoothness * smoothness * t * t * Mathf.Atan(smoothness) + Mathf.Atan(smoothness));
+        return 1f;
+    }
+
+    // target in world space
+    public class MoveTarget
+    {
+        public Vector2 Pos;
+        public Vector2 Pre;
+        public Vector2 Post;
     }
 }

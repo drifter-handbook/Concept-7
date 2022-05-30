@@ -23,10 +23,10 @@ emitter_gun3:
 timeline_path0:
   - time: 0
     move:
-      dir: 180
-      dist: 10
+      dest:
+        - dir: 180
+          dist: 10
       speed: 3
-      smoothness: 3
 
   # - time: 3.5
   #   shoot:
@@ -84,9 +84,9 @@ timeline_path0:
 
   - time: 8
     move:
-      dir: 135
-      dist: 15
-      smoothness: 2
+      dest:
+        - dir: 135
+          dist: 15
       speed: 4
   - time: 16
     destroy: true

@@ -5,8 +5,19 @@ Everything is YAML
 1. Replace velocity-based control with position control
 2. Allow for specifying start/end smoothness
 3. Bezier curve movement
-4. Smooth between command speeds
-5. Linked shots
+4. Smooth between command speeds, setspeed
+5. Mirroring move velocities
+6. Loop curve
+7. Timeline tracking
+6. Linked shots
+7. Spawn actor on death
+8. Spawn actor with set parent new/emitter/actor
+9. Orbit command
+10. Pause
+
+Move command should take a list of "destinations" which include x/y/dir/dist/spd/abs/rel/reldir/controlpts. Then, they are connected using a bezier curve, which the actor then follows.
+
+Movement coroutines should set Dir/Spd, and then it should use Dir/Spd only when no Move coroutine is running.
 
 ## Overview
 The Concept 7 Stage Director (aka "The Director") allows developers to write easy-to-use YAML files which create things like bullets, bullet patterns, enemies and bosses. These files are human-readable, and are loaded during runtime. This allows us to easily test bullet patterns and modify sprites without recompiling.

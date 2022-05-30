@@ -19,10 +19,10 @@ emitter_burst:
 timeline_boom:
   - time: 0
     move:
-      dir: 180
-      dist: 6
+      dest:
+        - dir: 180
+          dist: 6
       speed: 1
-      smoothness: 0
 
   - time: 2
     shoot:

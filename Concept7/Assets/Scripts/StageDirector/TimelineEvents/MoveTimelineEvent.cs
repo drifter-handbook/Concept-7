@@ -7,14 +7,110 @@ using YamlDotNet.Serialization;
 public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
 {
     public string Action => "move";
-
-    public float? X;
-    public float? Y;
-    public float? Dir;
-    public float? Dist;
+    
     public float? Speed;
-    public bool? Instant;
-    public float Smoothness;
+    public bool Instant;
+    public bool Loop;
+    public List<Destination> Dest;
+
+    public class ControlPt
+    {
+        public float? X;
+        public float? Y;
+        public float? Dir;
+        public float? Dist;
+        public string Rel;
+    }
+
+    public class Destination
+    {
+        public float? X;
+        public float? Y;
+        public float? Dir;
+        public float? Dist;
+        public string Rel;
+        public ControlPt Pre;
+        public ControlPt Post;
+
+        public bool IsInfinite => X == null && Y == null && Dist == null;
+
+        // Dist cannot be null.
+        public static Vector2 FindDestPosition(float? X, float? Y, float? Dir, float? Dist, string Rel, Vector2 pos, Vector2 dir)
+        {
+            string rel = Rel ?? "pos";
+            // relative position, absolute rotation
+            if (rel == "pos")
+            {
+                if (X != null || Y != null)
+                {
+                    return new Vector2(pos.x + (X ?? 0), pos.y + (Y ?? 0));
+                }
+                else if (Dir != null)
+                {
+                    return pos + (Vector2)(Quaternion.Euler(0, 0, Dir.Value) * Vector2.right * Dist.Value);
+                }
+            }
+            // set absolute (world) position
+            if (rel == "abs")
+            {
+                return new Vector2(X ?? pos.x, Y ?? pos.y);
+            }
+            // relative to dir when command began
+            if (rel == "dir")
+            {
+                if (X != null || Y != null)
+                {
+                    Vector2 diff = new Vector2(X ?? 0, Y ?? 0);
+                    return pos + (Vector2)(Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)) * diff);
+                }
+                else if (Dir != null)
+                {
+                    Vector2 diff = Quaternion.Euler(0, 0, Dir.Value) * Vector2.right * Dist.Value;
+                    return pos + (Vector2)(Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)) * diff);
+                }
+            }
+            throw new StageDataException($"Invalid rel value: {rel}, allowed values are ['abs', 'pos', 'dir']");
+        }
+
+        public StageActor.MoveTarget FindControlPoints(Vector2 prev, Vector2 cur, Vector2 next, Vector2 dir)
+        {
+            if (Pre != null && Post == null)
+            {
+                Vector2 v = FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel, cur, dir);
+                return new StageActor.MoveTarget()
+                {
+                    Pos = cur,
+                    Pre = v,
+                    Post = (cur - v) + cur
+                };
+            }
+            if (Pre == null && Post != null)
+            {
+                Vector2 v = FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel, cur, dir);
+                return new StageActor.MoveTarget()
+                {
+                    Pos = cur,
+                    Pre = cur - (v - cur),
+                    Post = v
+                };
+            }
+            if (Pre != null && Post != null)
+            {
+                return new StageActor.MoveTarget()
+                {
+                    Pos = cur,
+                    Pre = FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel, cur, dir),
+                    Post = FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel, cur, dir)
+                };
+            }
+            return new StageActor.MoveTarget()
+            {
+                Pos = cur,
+                Pre = Vector2.Lerp(prev, cur, 0.5f),
+                Post = Vector2.Lerp(cur, next, 0.5f)
+            };
+        }
+    }
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -23,48 +119,73 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
 
     public void Start(MonoBehaviour runner)
     {
+        if (Dest.Count == 0)
+        {
+            return;
+        }
+        List<Destination> dests = new List<Destination>(Dest);
         StageActor actor = runner.GetComponent<StageActor>();
-        float speed = Speed ?? StageDirector.Instance.Data.Actors[actor.ActorType].Speed ?? 1;
-        if (X != null || Y != null)
+        // filter out 'move infinitely' command
+        Destination infinite = null;
+        for (int i = 0; i < dests.Count; i++)
         {
-            Vector2 diff = new Vector2(X ?? 0, Y ?? 0);
-            Vector2 vel = diff.normalized * speed;
-            float dur = diff.magnitude / speed;
-            Vector2 target = (Vector2)runner.transform.position + diff;
-            actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target, Smoothness));
-        }
-        else if (Dir != null)
-        {
-            Vector2 vel = Quaternion.Euler(0, 0, Dir.Value) * Vector2.right * speed;
-            if (Dist != null)
+            if (dests[i].IsInfinite)
             {
-                float dur = Dist.Value / speed;
-                Vector2 target = (Vector2)runner.transform.position + dur * vel;
-                actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target, Smoothness));
+                infinite = dests[i];
             }
-            else
+            // if we've already found an infinite dest, delete the rest
+            if (infinite != null)
             {
-                actor.RunMoveCoroutine(actor.MoveCoroutine(vel));
+                dests.RemoveAt(i);
+                i--;
             }
         }
-        else if (Dist != null)
+        // calculate positions
+        List<StageActor.MoveTarget> spline = new List<StageActor.MoveTarget>();
+        if (dests.Count > 0)
         {
-            Vector2 vel = actor.Direction * speed;
-            if (Dist != null)
+            List<Vector2> pos = new List<Vector2>();
+            Vector2 current = runner.transform.position;
+            pos.Add(current);
+            for (int i = 0; i < dests.Count; i++)
             {
-                float dur = Dist.Value / speed;
-                Vector2 target = (Vector2)runner.transform.position + dur * vel;
-                actor.RunMoveCoroutine(actor.MoveCoroutine(vel, (Instant ?? false) ? 0 : dur, target, Smoothness));
+                Destination d = dests[i];
+                current = Destination.FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.position, actor.Direction);
+                pos.Add(current);
             }
-            else
+            // calculate Move Targets
+            Destination startDest = new Destination { X = actor.transform.position.x, Y = actor.transform.position.y };
+            spline.Add(startDest.FindControlPoints(pos[0], pos[0], pos[1], actor.Direction));
+            for (int i = 1; i < pos.Count - 1; i++)
             {
-                actor.RunMoveCoroutine(actor.MoveCoroutine(vel));
+                spline.Add(dests[i - 1].FindControlPoints(pos[i - 1], pos[i], pos[i + 1], actor.Direction));
+            }
+            spline.Add(dests[dests.Count - 1].FindControlPoints(pos[pos.Count - 2], pos[pos.Count - 1], pos[pos.Count - 1], actor.Direction));
+        }
+        // set initial speed
+        if (Speed != null)
+        {
+            actor.Speed = Speed.Value;
+        }
+        // if moving infinitely, set finishdir
+        Vector2? finishdir = null;
+        if (infinite != null)
+        {
+            finishdir = Quaternion.Euler(0f, 0f, infinite.Dir ?? 0) * Vector2.right;
+        }
+        // if instant, move to final point
+        if (Instant && spline.Count > 0)
+        {
+            actor.transform.position = spline[spline.Count - 1].Pos;
+            if (finishdir != null)
+            {
+                actor.Direction = finishdir.Value;
             }
         }
+        // if normal movement, kick off coroutine
         else
         {
-            // stop if no args
-            actor.RunMoveCoroutine(actor.MoveCoroutine(Vector2.zero));
+            actor.RunMoveCoroutine(actor.MoveCoroutine(spline, finishdir, Loop));
         }
     }
 }

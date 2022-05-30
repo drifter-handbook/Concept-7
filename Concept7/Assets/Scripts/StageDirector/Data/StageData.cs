@@ -25,7 +25,7 @@ public partial class StageData
 
     List<Actor.Timeline.IEvent> TimelineEvents = new List<Actor.Timeline.IEvent>()
     {
-        new SpawnTimelineEvent(), new ShootTimelineEvent(), new MoveTimelineEvent(), new MoveAbsTimelineEvent(), new MoveAtPlayerTimelineEvent(), new DestroyTimelineEvent()
+        new SpawnTimelineEvent(), new ShootTimelineEvent(), new MoveTimelineEvent(), new MoveAtPlayerTimelineEvent(), new DestroyTimelineEvent()
     };
 
     public StageData()
@@ -78,6 +78,7 @@ public partial class StageData
         {
             throw new StageDataException($"Failed to parse {path} as YAML: {e.Message}");
         }
+        Debug.Log($"Parsing {path}");
         Actor actor = deserializer.Deserialize<Actor>(serializer.Serialize(actorData["core"]));
         actor.File = path;
         if (string.IsNullOrEmpty(actor.Name))

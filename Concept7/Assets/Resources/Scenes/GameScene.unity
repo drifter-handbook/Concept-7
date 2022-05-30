@@ -564,7 +564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -43.119995, y: -45.300076}
+  m_AnchoredPosition: {x: -43.119995, y: -45.30005}
   m_SizeDelta: {x: 69.32001, y: 58.75699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &102001375
@@ -1730,6 +1730,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377686191}
   m_CullTransparentMesh: 1
+--- !u!1 &379081454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379081455}
+  - component: {fileID: 379081456}
+  m_Layer: 0
+  m_Name: Debug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &379081455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379081454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &379081456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379081454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2065c7982c2644749a966c2c8881c1f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DotPrefab: {fileID: 6194181913833771492, guid: 96e1fc093c47d2c41b23f7ee47d0d90a, type: 3}
 --- !u!1 &380232251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2904,7 +2949,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3532,7 +3577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400.00995, y: -69.64506}
+  m_AnchoredPosition: {x: 400.00995, y: -69.64508}
   m_SizeDelta: {x: 800.02, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &648467523
@@ -5206,7 +5251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400.00995, y: -104.290115}
+  m_AnchoredPosition: {x: 400.00995, y: -104.2901}
   m_SizeDelta: {x: 800.02, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130809170
@@ -5445,7 +5490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400.00995, y: -221.55028}
+  m_AnchoredPosition: {x: 400.00995, y: -221.5503}
   m_SizeDelta: {x: 206.63, y: 56.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281895512
@@ -6291,7 +6336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -43.119995, y: -109.2}
+  m_AnchoredPosition: {x: -43.119995, y: -109.20001}
   m_SizeDelta: {x: 69.32001, y: 58.75699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1495286050

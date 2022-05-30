@@ -12,9 +12,9 @@ emitter_gun:
 timeline_path0:
   - time: 0
     move:
-      dir: 225
-      dist: 6
-      smoothness: 5
+      dest:
+        - dir: 225
+          dist: 6
       speed: 1
   - time: 5.5
     shoot:
@@ -28,9 +28,9 @@ timeline_path0:
       interval: 0.1
   - time: 6
     move:
-      dir: 135
-      dist: 6
-      smoothness: 5
+      dest:
+        - dir: 135
+          dist: 6
       speed: 1
   - time: 16
     destroy: true
@@ -38,61 +38,73 @@ timeline_path0:
 timeline_path1:
   - time: 0
     move:
-      dir: 135
+      dest:
+        - dir: 135
   - time: 2
     shoot: {}
     repeat: 8
     interval: 2
   - time: 2
     move:
-      y: 10
+      dest:
+        - y: 10
   - time: 4
     move:
-      x: -10
+      dest:
+        - x: -10
   - time: 6
     move:
-      y: -10
+      dest:
+        - y: -10
   - time: 8
     move:
-      x: 10
+      dest:
+        - x: 10
   - time: 10
     move:
-      y: 10
+      dest:
+        - y: 10
   - time: 12
     move:
-      x: -10
+      dest:
+        - x: -10
   - time: 14
     move:
-      y: -10
+      dest:
+        - y: -10
   - time: 16
     move:
-      x: 10
+      dest:
+        - x: 10
   - time: 18
     move:
-      x: 10
+      dest:
+        - x: 10
   - time: 20
     destroy: true
 
 timeline_path2:
   - time: -1
-    move_abs:
-      x: -8
-      y: 3
+    move:
+      dest:
+        - x: -8
+          y: 3
+          rel: abs
       instant: true
   - time: 0
     move:
-      dir: 0
-      dist: 5
-      smoothness: 5
+      dest:
+        - dir: 0
+          dist: 5
       speed: 1
   - time: 5
     shoot:
       actor: missile
   - time: 5
     move:
-      dir: 270
-      dist: 8
-      smoothness: 5
+      dest:
+        - dir: 270
+          dist: 8
       speed: 1.5
   - time: 12
     destroy: true

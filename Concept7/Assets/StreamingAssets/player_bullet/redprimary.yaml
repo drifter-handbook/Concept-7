@@ -3,3 +3,41 @@ core:
   prefab: ProjectilePrimaryRed
   copy_from: baseprimary
   speed: 15
+
+timeline_travel:
+  - time: 0
+    move:
+      speed: 15
+      dest:
+        - x: 3
+          y: 1
+          rel: dir
+          post: {x: 1}
+        - x: 6
+          y: -1
+          rel: dir
+          post: {x: 1}
+        - x: 10
+          y: 1
+          rel: dir
+          post: {x: 1}
+        - x: 14
+          y: -1
+          rel: dir
+          post: {x: 1}
+        - x: 18
+          y: 1
+          rel: dir
+          post: {x: 1}
+        - x: 22
+          y: -1
+          rel: dir
+          post: {x: 1}
+        - x: 26
+          y: 1
+          rel: dir
+          post: {x: 1}
+        - x: 30
+          y: -1
+          rel: dir
+          post: {x: 1}

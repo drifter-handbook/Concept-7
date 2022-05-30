@@ -10,6 +10,6 @@ public class AttachToPlayer : MonoBehaviour
     {
         GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player.GetComponent<PlayerController>().SetInput(input);
-        StageDirector.StartStage(0);
+        // StageDirector.StartStage(0);
     }
 }

@@ -49,7 +49,9 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
             }
             float angle = Mathf.Lerp(Angle * -0.5f, Angle * 0.5f, (float)i / shots);
             GameObject shot = StageDirector.Spawn(Actor, em.transform.position, 0f, Run);
-            shot.GetComponent<StageActor>().Velocity = Quaternion.Euler(0, 0, angle) * toTarget * speed;
+            StageActor actor = shot.GetComponent<StageActor>();
+            actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget;
+            actor.Speed = speed;
         }
     }
 
