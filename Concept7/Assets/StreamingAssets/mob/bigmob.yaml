@@ -70,7 +70,7 @@ timeline_path0:
     shoot:
       num: 26
       angle: 700
-      diir: 0
+      dir: 0
       emitter: gun3
       actor: pellet
 
