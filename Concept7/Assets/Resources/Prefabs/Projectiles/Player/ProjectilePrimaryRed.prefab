@@ -59,9 +59,29 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 107224694, guid: dcba72dd34ae2ba46b41224e3d3ec500, type: 3}
+    - target: {fileID: 5012352336466682233, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 6547265937071600272, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
       propertyPath: speed
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718282621170672093, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718282621170672093, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718282621170672093, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[0]
+      value: 134466713
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718282621170672093, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: 1799239455
       objectReference: {fileID: 0}
     - target: {fileID: 6858225846118643195, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
       propertyPath: m_Name
