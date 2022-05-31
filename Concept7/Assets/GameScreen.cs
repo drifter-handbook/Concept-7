@@ -6,6 +6,7 @@ using TMPro;
 public class GameScreen : MonoBehaviour
 {
     public Game Game;
+    public PlayerController ClientPlayer; //the user's player
     
     public GameObject LifePrefab;
     public Transform LifebarParent;
