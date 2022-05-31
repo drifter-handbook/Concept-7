@@ -7,8 +7,8 @@ timeline_stage:
   - time: 1
     spawn:
       actor: drone
-      x: 17
-      y: 4
+      x: 15
+      y: 2
       run: sine
     repeat: 6
     interval: .5
@@ -16,8 +16,8 @@ timeline_stage:
   - time: 2
     spawn:
       actor: drone
-      x: 17
-      y: -4
+      x: 15
+      y: -1
       run: negasine
     repeat: 6
     interval: .5
@@ -35,6 +35,6 @@ timeline_stage:
   - time: 8
     spawn:
       actor: boss1
-      x: 12
-      y: 0
+      x: 15
+      y: 1
       run: arrive

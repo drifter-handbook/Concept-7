@@ -58,7 +58,7 @@ timeline_arrive:
       num: 10
       # dir: 120
       angle: 120
-      speed: 6
+      speed: 3
       interval: .1
       actor: pellet
       emitter: gun1
@@ -70,7 +70,7 @@ timeline_arrive:
       num: 10
       # dir: 120
       angle: -120
-      speed: 4
+      speed: 3
       interval: .1
       actor: pellet
       emitter: gun2
