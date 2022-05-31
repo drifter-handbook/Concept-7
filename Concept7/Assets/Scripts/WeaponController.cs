@@ -10,9 +10,15 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] private int MaxComboLength = 3;
 
+    private GameScreen screen;
+
     public void Start()
     {
         ResetQueue();
+    }
+
+    public void Initialize(GameScreen screen){
+        this.screen = screen;
     }
 
     private float timeStamp;
@@ -47,13 +53,14 @@ public class WeaponController : MonoBehaviour
 
     public void TryAddAlchemy(WeaponType type) {
         alchemyQueue.Enqueue(type);
-        while (alchemyQueue.Count > MaxComboLength) //TODO have a group discussion on what we want to do when the list fills up
+        while (alchemyQueue.Count > MaxComboLength) {
+            //TODO have a group discussion on what we want to do when the list fills up
             alchemyQueue.Dequeue();
-
+        }
+        screen.AddQueueElement(type);//update the UI
         WeaponType[] alchemyArray = alchemyQueue.ToArray();
         for(int i = 0; i < pips.Length; i++)
             pips[i].SetInteger("Color",(int)alchemyArray[i]);
-    
     }
 
     public void TryFireAlchemy() {
@@ -96,6 +103,7 @@ public class WeaponController : MonoBehaviour
     private void ResetQueue() {
 
         alchemyQueue.Clear();
+        screen.ClearQueue();
         for(int i = 0; i < pips.Length; i++)
         {
             alchemyQueue.Enqueue(WeaponType.DEFAULT);

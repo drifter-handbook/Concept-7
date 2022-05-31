@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameScreen : MonoBehaviour
 {
     public Game Game;
-    public PlayerController ClientPlayer; //the user's player
-    
+   
     public GameObject LifePrefab;
     public Transform LifebarParent;
 
@@ -25,8 +25,45 @@ public class GameScreen : MonoBehaviour
 
     public TextMeshProUGUI QuitContinueButton;
 
-    public void UpdateComboQueue(){
+    public Transform QueueParent;
+    public Sprite RImage;
+    public Sprite BImage;
+    public Sprite YImage;
+    public Sprite EmptyImage;
 
+
+    public void AddQueueElement(WeaponType queueElement){
+       Sprite newElem;
+       switch(queueElement){
+           case WeaponType.PRIMARYBLUE: newElem = BImage;  break;
+           case WeaponType.PRIMARYRED: newElem = RImage;  break;
+           case WeaponType.PRIMARYYELLOW:
+           default: newElem = YImage; break;
+       }
+       
+        bool setImage = false;
+
+       for(int i = 0; !setImage && i<QueueParent.childCount; i++){
+           Image img = QueueParent.GetChild(i).GetComponent<Image>();
+           if(img.sprite == EmptyImage){
+               img.sprite = newElem; 
+               setImage = true;
+           }
+       }
+
+        if(!setImage){
+            //shift
+            QueueParent.GetChild(2).GetComponent<Image>().sprite =  QueueParent.GetChild(1).GetComponent<Image>().sprite;
+            QueueParent.GetChild(1).GetComponent<Image>().sprite =  QueueParent.GetChild(0).GetComponent<Image>().sprite;
+            QueueParent.GetChild(0).GetComponent<Image>().sprite =  newElem;
+        }
+
+    }
+
+    public void ClearQueue(){
+        for(int i = 0; i < QueueParent.childCount; i++){
+            QueueParent.GetChild(i).GetComponent<Image>().sprite = EmptyImage;
+        }
     }
 
     public void UpdateLives(){
