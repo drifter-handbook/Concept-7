@@ -77,7 +77,7 @@ public class SpritePalette : ScriptableObject {
         
         Dictionary<Color32, Vector2Int> dict = new Dictionary<Color32, Vector2Int>();
         Vector2Int pos = Vector2Int.zero;
-        int max = 1;
+        int max = 0;
         public Vector2Int Get(Color32 color) {
             if (dict.ContainsKey(color))
                 return dict[color];
@@ -101,6 +101,7 @@ public class SpritePalette : ScriptableObject {
     
 
         public void Output(string path) {
+            max = max + 1;
             var tex = new Texture2D(max, max);
             foreach(var val in dict) {
                 tex.SetPixel(val.Value.x, val.Value.y, val.Key);
