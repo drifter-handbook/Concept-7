@@ -3,7 +3,7 @@ core:
   name: drone
   copy_from: basemob
   prefab: Drone
-  speed: 4
+  speed: 2
 
 emitter_gun0:
   x: -.8
@@ -50,7 +50,7 @@ timeline_sine:
     shoot:
       num: 1
       speed: 4
-      actor: pellet
+      actor: basebullet
       emitter: gun0
 
 timeline_negasine:
@@ -90,9 +90,9 @@ timeline_negasine:
           rel: dir
           post: {x: -1}
 
-  - time: 4
+  - time: 3
     shoot:
       num: 1
       speed: 4
-      actor: pellet
+      actor: basebullet
       emitter: gun0
