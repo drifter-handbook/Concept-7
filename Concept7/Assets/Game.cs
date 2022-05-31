@@ -11,25 +11,31 @@ public class Game : MonoBehaviour
     [Header("Game Info")]
     public int CurrentLives;
     public int StartingLives = 3; //Also doubles as Max Lives
+    [HideInInspector] public int NumPlayers = 0;
     //Queue
 
     [Header("Point Information")]
     public int PointsPerEnemy = 10;
     public float MaxTimePoints = 180;
     [HideInInspector] public float TimeElapsed;
-    [HideInInspector] public float  EnemiesKilled;
-    [HideInInspector] public float  Points;
+    [HideInInspector] public float EnemiesKilled;
+    [HideInInspector] public float Points;
 
     [Header("UI")]
     public GameScreen GameScreen;
+    
 
     private GameState gameState = GameState.PLAYING;
-
+    private PlayerController ClientPlayer; //the user's player
+    
     public void Start(){
         CurrentLives = StartingLives;
         TimeElapsed = 0;
         GameScreen.Game = this;
         GameScreen.UpdateLives();
+
+        //
+
     }
 
     public void Update(){

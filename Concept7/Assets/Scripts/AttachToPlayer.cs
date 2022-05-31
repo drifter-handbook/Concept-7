@@ -6,10 +6,12 @@ public class AttachToPlayer : MonoBehaviour
 {
     [SerializeField] private InputHandler input;
     [SerializeField] private GameObject playerPrefab;
+    
     void Start()
     {
         GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        player.GetComponent<PlayerController>().SetInput(input);
+        PlayerController controller = player.GetComponent<PlayerController>();
+        controller.SetInput(input);
         StageDirector.StartStage(0);
     }
 }
