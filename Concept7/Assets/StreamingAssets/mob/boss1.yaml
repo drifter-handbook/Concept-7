@@ -62,6 +62,7 @@ timeline_arrive:
       interval: .1
       actor: pellet
       emitter: gun1
+      parent: new
     repeat: 4
     interval: 2
 
@@ -74,6 +75,7 @@ timeline_arrive:
       interval: .1
       actor: pellet
       emitter: gun2
+      parent: new
     repeat: 4
     interval: 2
 

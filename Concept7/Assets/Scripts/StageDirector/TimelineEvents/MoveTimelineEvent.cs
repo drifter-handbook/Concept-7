@@ -147,7 +147,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
         // if normal movement, kick off coroutine
         else
         {
-            actor.RunMoveCoroutine(actor.MoveCoroutine(spline, finishdir, Loop));
+            actor.RunCoroutine(ref actor.movementCoroutine, actor.MoveCoroutine(spline, finishdir, Loop));
         }
     }
 }

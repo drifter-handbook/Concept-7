@@ -11,6 +11,8 @@ public class StageActor : MonoBehaviour
     public float Speed;
     // normalized last nonzero velocity
     public Vector2 Direction;
+    // angular velocity only used for the orbit command.
+    public float OrbitSpeed;
 
     public string ActorType;
     public Dictionary<string, GameObject> Emitters = new Dictionary<string, GameObject>();
@@ -18,8 +20,9 @@ public class StageActor : MonoBehaviour
 
     // Only one movement coroutine allowed at a time.
     // Otherwise, they will fight and weird stuff will happen
-    Coroutine movementCoroutine;
-    Coroutine speedCoroutine;
+    public Coroutine movementCoroutine;
+    public Coroutine speedCoroutine;
+    public Coroutine orbitSpeedCoroutine;
 
     public void Initialize(string actorType)
     {
@@ -120,14 +123,17 @@ public class StageActor : MonoBehaviour
         }
     }
 
-    // enforce only one speed coroutine allowed at once
-    public void RunSpeedCoroutine(IEnumerator c)
+    // enforce only one coroutine of this type allowed at once
+    public void RunCoroutine(ref Coroutine crt, IEnumerator c)
     {
-        if (speedCoroutine != null)
+        if (crt != null)
         {
-            StopCoroutine(speedCoroutine);
+            StopCoroutine(crt);
         }
-        speedCoroutine = StartCoroutine(c);
+        if (c != null)
+        {
+            crt = StartCoroutine(c);
+        }
     }
     public IEnumerator SpeedCoroutine(float speed, float dur)
     {
@@ -141,19 +147,28 @@ public class StageActor : MonoBehaviour
         }
         Speed = speed;
     }
-
-    // enforce only one movement coroutine allowed at once
-    public void RunMoveCoroutine(IEnumerator c)
+    public IEnumerator OrbitSpeedCoroutine(float orbitspeed, float dur)
     {
-        if (movementCoroutine != null)
+        float time = 0f;
+        float startOrbitSpd = OrbitSpeed;
+        while (time < dur)
         {
-            StopCoroutine(movementCoroutine);
+            OrbitSpeed = Mathf.Lerp(startOrbitSpd, orbitspeed, time / dur);
+            time += Time.deltaTime;
+            yield return null;
         }
-        if (c != null)
+        OrbitSpeed = orbitspeed;
+    }
+
+    public IEnumerator OrbitCoroutine()
+    {
+        while (true)
         {
-            movementCoroutine = StartCoroutine(c);
+            transform.localPosition = Quaternion.Euler(0f, 0f, Time.deltaTime * OrbitSpeed) * transform.localPosition;
+            yield return null;
         }
     }
+
     // move in a direction for a duration, or forever
     const int ARCLEN_SEGMENTS = 7;
     const float SPLINE_TOOCLOSE = 0.01f;

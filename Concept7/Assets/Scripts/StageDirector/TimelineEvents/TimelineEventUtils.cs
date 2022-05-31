@@ -52,11 +52,8 @@ public class TimelineEventUtils
         }
         if (parenting == "new")
         {
-            if (actor == null)
-            {
-                actor = UnityEngine.Object.Instantiate(StageDirector.Instance.Prefabs["SpawnParent"]);
-                actor.transform.position = new Vector3(pos.x, pos.y, actor.transform.position.z);
-            }
+            actor = UnityEngine.Object.Instantiate(StageDirector.Instance.Prefabs["ActorGroup"]);
+            actor.transform.position = new Vector3(pos.x, pos.y, actor.transform.position.z);
             return actor;
         }
         if (parenting == "actor")

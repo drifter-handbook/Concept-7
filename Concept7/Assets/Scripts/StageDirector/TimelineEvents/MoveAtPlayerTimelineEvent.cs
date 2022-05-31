@@ -21,7 +21,7 @@ public class MoveAtPlayerTimelineEvent : StageData.Actor.Timeline.IEvent
     {
         StageActor actor = runner.GetComponent<StageActor>();
         // stop currently running move coroutine
-        actor.RunMoveCoroutine(null);
+        actor.RunCoroutine(ref actor.movementCoroutine, null);
         Vector2 target = PlayerController.Instance.transform.position;
         Vector2 dir = (target - (Vector2)runner.transform.position).normalized;
         if (MaxTurn != null)
