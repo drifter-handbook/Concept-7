@@ -17,6 +17,8 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public float? Dir;
     public float? Interval;
     public string Parent;
+    public bool? MirrorX;
+    public bool? MirrorY;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -31,7 +33,8 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     IEnumerator ShootCoroutine(MonoBehaviour runner)
     {
         // find emitter
-        GameObject em = runner.GetComponent<StageActor>().Emitters[Emitter];
+        StageActor runnerActor = runner.GetComponent<StageActor>();
+        GameObject em = runnerActor.Emitters[Emitter];
         float speed = Speed ?? StageDirector.Instance.Data.Actors[Actor].Speed ?? 1;
         Vector2 toTarget = ((Vector2)PlayerController.Instance.transform.position - (Vector2)em.transform.position).normalized;
         if (Dir != null)
@@ -61,8 +64,12 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
             }
             GameObject shot = StageDirector.Spawn(Actor, em.transform.position, 0f);
             StageActor actor = shot.GetComponent<StageActor>();
+            float mirrorX = MirrorX == null ? runnerActor.Mirror.x : (MirrorX.Value ? -1 : 1);
+            float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);
             actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget;
+            actor.Direction = new Vector2(actor.Direction.x * mirrorX, actor.Direction.y * mirrorY);
             actor.Speed = speed;
+            actor.Mirror = new Vector2(mirrorX, mirrorY);
             if (parent != null)
             {
                 shot.transform.parent = parent.transform;

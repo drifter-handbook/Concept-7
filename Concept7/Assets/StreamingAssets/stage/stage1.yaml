@@ -12,13 +12,14 @@ timeline_stage:
       run: sine
     repeat: 6
     interval: .5
-    
+
   - time: 2
     spawn:
       actor: drone
       x: 15
       y: -1
-      run: negasine
+      run: sine
+      mirror_y: true
     repeat: 6
     interval: .5
 

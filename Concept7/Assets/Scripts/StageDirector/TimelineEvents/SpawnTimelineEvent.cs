@@ -17,6 +17,8 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public string Rel;
     public string Run;
     public string Parent;
+    public bool? MirrorX;
+    public bool? MirrorY;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -29,6 +31,9 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         Vector3 pos = TimelineEventUtils.FindDestPosition(X, Y, Dir, Dist, Rel ?? "abs", runner.transform.position, actor.Direction);
         GameObject go = StageDirector.Spawn(Actor, new Vector3(pos.x, pos.y), 0f);
         StageActor spawned = go.GetComponent<StageActor>();
+        float mirrorX = MirrorX == null ? actor.Mirror.x : (MirrorX.Value ? -1 : 1);
+        float mirrorY = MirrorY == null ? actor.Mirror.y : (MirrorY.Value ? -1 : 1);
+        spawned.Mirror = new Vector2(mirrorX, mirrorY);
         if (Parent != null)
         {
             go.transform.parent = TimelineEventUtils.GetParent(Parent, go.transform.position, runner.gameObject).transform;

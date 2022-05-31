@@ -52,43 +52,7 @@ timeline_sine:
       speed: 4
       actor: basebullet
       emitter: gun0
-
-timeline_negasine:
-  - time: 0
-    move:
-      dest:
-        - x: -3
-          y: -1
-          rel: dir
-          post: {x: -1}
-        - x: -6
-          y: 1
-          rel: dir
-          post: {x: -1}
-        - x: -10
-          y: -1
-          rel: dir
-          post: {x: -1}
-        - x: -14
-          y: 1
-          rel: dir
-          post: {x: -1}
-        - x: -18
-          y: -1
-          rel: dir
-          post: {x: -1}
-        - x: -22
-          y: 1
-          rel: dir
-          post: {x: -1}
-        - x: -26
-          y: -1
-          rel: dir
-          post: {x: -1}
-        - x: -30
-          y: 1
-          rel: dir
-          post: {x: -1}
+      dir: 200
 
   - time: 3
     shoot:
@@ -96,3 +60,4 @@ timeline_negasine:
       speed: 4
       actor: basebullet
       emitter: gun0
+      dir: 200

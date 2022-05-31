@@ -24,6 +24,9 @@ public class StageActor : MonoBehaviour
     public Coroutine speedCoroutine;
     public Coroutine orbitSpeedCoroutine;
 
+    // mirroring X/Y
+    public Vector2 Mirror = Vector2.one;
+
     public void Initialize(string actorType)
     {
         ActorType = actorType;
@@ -164,7 +167,7 @@ public class StageActor : MonoBehaviour
     {
         while (true)
         {
-            transform.localPosition = Quaternion.Euler(0f, 0f, Time.deltaTime * OrbitSpeed) * transform.localPosition;
+            transform.localPosition = Quaternion.Euler(0f, 0f, Time.deltaTime * OrbitSpeed * Mathf.Sign(Mirror.x) * Mathf.Sign(Mirror.y)) * transform.localPosition;
             yield return null;
         }
     }

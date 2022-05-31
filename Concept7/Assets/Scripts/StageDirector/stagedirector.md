@@ -2,12 +2,10 @@
 Everything is YAML
 
 ### TODO
-1. Mirroring move velocities
-2. Spawn actor on death
-3. Timeline tracking
-4. Linked shots
-5. Pause
-6. 180 direction bug
+1. Spawn actor on death
+2. Timeline tracking
+3. Linked shots
+4. Pause
 
 Move command should take a list of "destinations" which include x/y/dir/dist/spd/abs/rel/reldir/controlpts. Then, they are connected using a bezier curve, which the actor then follows.
 

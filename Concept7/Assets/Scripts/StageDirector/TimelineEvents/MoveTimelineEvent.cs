@@ -79,6 +79,13 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
         return deserializer.Deserialize<MoveTimelineEvent>(yaml);
     }
 
+    Vector2 Mirror(Vector2 pt, Vector2 origin, Vector2 mirror, Vector2 dir)
+    {
+        Vector2 v = pt - origin;
+        v = new Vector2(v.x * Mathf.Sign(mirror.x), v.y * Mathf.Sign(mirror.y));
+        return origin + v;
+    }
+
     public void Start(MonoBehaviour runner)
     {
         if (Dest.Count == 0)
@@ -123,6 +130,18 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
                 spline.Add(dests[i - 1].FindControlPoints(pos[i - 1], pos[i], pos[i + 1], actor.Direction));
             }
             spline.Add(dests[dests.Count - 1].FindControlPoints(pos[pos.Count - 2], pos[pos.Count - 1], pos[pos.Count - 1], actor.Direction));
+            // mirror spline if necessary
+            Vector2 startPos = spline[0].Pos;
+            for (int i = 0; i < spline.Count - 1; i++)
+            {
+                StageActor.MoveTarget pt = spline[i + 1];
+                if (dests[i].Rel != "abs")
+                {
+                    pt.Pos = Mirror(pt.Pos, runner.transform.position, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Pre = Mirror(pt.Pre, runner.transform.position, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Post = Mirror(pt.Post, runner.transform.position, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                }
+            }
         }
         // set initial speed
         if (Speed != null)
