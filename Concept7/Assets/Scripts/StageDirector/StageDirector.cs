@@ -118,10 +118,13 @@ public class StageDirector : MonoBehaviour
 
     public static GameObject StartStage(int i)
     {
-        return Spawn(Instance.Data.Stages[i].Actor, Vector2.zero, 0f);
+        StageData.Actor actor = Instance.Data.Actors[Instance.Data.Stages[i].Actor];
+        GameObject go = Spawn(actor.Name, Vector2.zero, 0f);
+        go.GetComponent<StageActor>().RunTimeline(actor.DefaultRun);
+        return go;
     }
 
-    public static GameObject Spawn(string actor, Vector2 position, float rotation, string run=null)
+    public static GameObject Spawn(string actor, Vector2 position, float rotation)
     {
         // create actor
         GameObject actorObj = Instantiate(Instance.Data.Actors[actor].PrefabObj, new Vector3(position.x, position.y, Instance.Data.Actors[actor].Depth ?? 0), Quaternion.Euler(0f, 0f, rotation));
@@ -132,16 +135,6 @@ public class StageDirector : MonoBehaviour
             stActor = actorObj.AddComponent<StageActor>();
         }
         stActor.Initialize(actor);
-        // use default timeline if possible
-        if (run == null)
-        {
-            run = Instance.Data.Actors[actor].DefaultRun;
-        }
-        // run timeline
-        if (run != null)
-        {
-            stActor.RunTimeline(run);
-        }
         return actorObj;
     }
 }

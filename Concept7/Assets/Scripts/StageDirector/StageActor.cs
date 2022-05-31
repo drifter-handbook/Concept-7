@@ -76,6 +76,10 @@ public class StageActor : MonoBehaviour
 
     public void RunTimeline(string name)
     {
+        if (name == null)
+        {
+            return;
+        }
         var timelines = Actor.Timelines;
         if (!timelines.ContainsKey(name))
         {
@@ -250,5 +254,17 @@ public class StageActor : MonoBehaviour
         public Vector2 Pos;
         public Vector2 Pre;
         public Vector2 Post;
+    }
+
+    void DrawDebugDots(List<MoveTarget> spline)
+    {
+        // draw dots on control points
+        DebugDotter.Clear();
+        foreach (MoveTarget mt in spline)
+        {
+            DebugDotter.Dot(mt.Pre, Color.red);
+            DebugDotter.Dot(mt.Pos, Color.magenta);
+            DebugDotter.Dot(mt.Post, Color.blue);
+        }
     }
 }

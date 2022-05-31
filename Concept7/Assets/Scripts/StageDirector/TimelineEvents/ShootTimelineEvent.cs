@@ -16,6 +16,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public float? Speed;
     public float? Dir;
     public float? Interval;
+    public string Parent;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -40,6 +41,12 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         // create Num shots with Angle spread
         int shots = Num ?? 1;
         float time = 0f;
+        // get/create parent
+        GameObject parent = null;
+        if (Parent != null)
+        {
+            parent = TimelineEventUtils.GetParent(Parent, em.transform.position, runner.gameObject, Emitter);
+        }
         for (int i = 0; i < shots; i++)
         {
             while (time < (Interval ?? 0) * i)
@@ -48,10 +55,15 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                 time += Time.deltaTime;
             }
             float angle = Mathf.Lerp(Angle * -0.5f, Angle * 0.5f, (float)i / shots);
-            GameObject shot = StageDirector.Spawn(Actor, em.transform.position, 0f, Run);
+            GameObject shot = StageDirector.Spawn(Actor, em.transform.position, 0f);
             StageActor actor = shot.GetComponent<StageActor>();
             actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget;
             actor.Speed = speed;
+            if (parent != null)
+            {
+                shot.transform.parent = parent.transform;
+            }
+            actor.RunTimeline(Run ?? StageDirector.Instance.Data.Actors[Actor].DefaultRun);
         }
     }
 
@@ -90,6 +102,10 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         if (!actors.ContainsKey(Actor))
         {
             throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} attempts to shoot {Actor} which does not exist.");
+        }
+        if (Parent != null && !SpawnTimelineEvent.ParentValues.Contains(Parent.ToLower()))
+        {
+            throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} has 'parent' field {Parent} where the only allowed values are [null, 'new', 'actor', 'emitter']");
         }
     }
 }

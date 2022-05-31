@@ -2,14 +2,12 @@
 Everything is YAML
 
 ### TODO
-1. Smooth between command speeds, setspeed
-2. Mirroring move velocities
-3. Spawn actor on death
-4. Spawn actor with set parent new/emitter/actor
-5. Timeline tracking
-6. Linked shots
-7. Orbit command
-8. Pause
+1. Mirroring move velocities
+2. Spawn actor on death
+3. Timeline tracking
+4. Linked shots
+5. Pause
+6. 180 direction bug
 
 Move command should take a list of "destinations" which include x/y/dir/dist/spd/abs/rel/reldir/controlpts. Then, they are connected using a bezier curve, which the actor then follows.
 

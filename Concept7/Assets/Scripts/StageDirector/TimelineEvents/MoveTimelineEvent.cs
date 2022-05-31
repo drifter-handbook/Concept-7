@@ -34,49 +34,11 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
 
         public bool IsInfinite => X == null && Y == null && Dist == null;
 
-        // Dist cannot be null.
-        public static Vector2 FindDestPosition(float? X, float? Y, float? Dir, float? Dist, string Rel, Vector2 pos, Vector2 dir)
-        {
-            string rel = Rel ?? "pos";
-            // relative position, absolute rotation
-            if (rel == "pos")
-            {
-                if (X != null || Y != null)
-                {
-                    return new Vector2(pos.x + (X ?? 0), pos.y + (Y ?? 0));
-                }
-                else if (Dir != null)
-                {
-                    return pos + (Vector2)(Quaternion.Euler(0, 0, Dir.Value) * Vector2.right * Dist.Value);
-                }
-            }
-            // set absolute (world) position
-            if (rel == "abs")
-            {
-                return new Vector2(X ?? pos.x, Y ?? pos.y);
-            }
-            // relative to dir when command began
-            if (rel == "dir")
-            {
-                if (X != null || Y != null)
-                {
-                    Vector2 diff = new Vector2(X ?? 0, Y ?? 0);
-                    return pos + (Vector2)(Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)) * diff);
-                }
-                else if (Dir != null)
-                {
-                    Vector2 diff = Quaternion.Euler(0, 0, Dir.Value) * Vector2.right * Dist.Value;
-                    return pos + (Vector2)(Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x)) * diff);
-                }
-            }
-            throw new StageDataException($"Invalid rel value: {rel}, allowed values are ['abs', 'pos', 'dir']");
-        }
-
         public StageActor.MoveTarget FindControlPoints(Vector2 prev, Vector2 cur, Vector2 next, Vector2 dir)
         {
             if (Pre != null && Post == null)
             {
-                Vector2 v = FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel, cur, dir);
+                Vector2 v = TimelineEventUtils.FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel ?? Rel, cur, dir);
                 return new StageActor.MoveTarget()
                 {
                     Pos = cur,
@@ -86,7 +48,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
             }
             if (Pre == null && Post != null)
             {
-                Vector2 v = FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel, cur, dir);
+                Vector2 v = TimelineEventUtils.FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel ?? Rel, cur, dir);
                 return new StageActor.MoveTarget()
                 {
                     Pos = cur,
@@ -99,8 +61,8 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
                 return new StageActor.MoveTarget()
                 {
                     Pos = cur,
-                    Pre = FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel, cur, dir),
-                    Post = FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel, cur, dir)
+                    Pre = TimelineEventUtils.FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel ?? Rel, cur, dir),
+                    Post = TimelineEventUtils.FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel ?? Rel, cur, dir)
                 };
             }
             return new StageActor.MoveTarget()
@@ -150,7 +112,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
             for (int i = 0; i < dests.Count; i++)
             {
                 Destination d = dests[i];
-                current = Destination.FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.position, actor.Direction);
+                current = TimelineEventUtils.FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.position, actor.Direction);
                 pos.Add(current);
             }
             // calculate Move Targets
