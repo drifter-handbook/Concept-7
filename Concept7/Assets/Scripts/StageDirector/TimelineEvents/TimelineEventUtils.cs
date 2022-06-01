@@ -66,4 +66,13 @@ public class TimelineEventUtils
         }
         throw new StageDataException($"Invalid parent value: {parenting}, allowed values are [null, 'new', 'actor', 'emitter']");
     }
+
+    public static float GetVar(StageActor actor, string s)
+    {
+        if (s == null)
+        {
+            return 0f;
+        }
+        return actor.Vars[s];
+    }
 }

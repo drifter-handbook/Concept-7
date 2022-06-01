@@ -21,6 +21,7 @@ public partial class StageData
     const string StagesFile = "stages.yaml";
 
     const string EmitterPrefix = "emitter_";
+    const string VarPrefix = "var_";
     const string TimelinePrefix = "timeline_";
 
     List<Actor.Timeline.IEvent> TimelineEvents = new List<Actor.Timeline.IEvent>()
@@ -32,7 +33,8 @@ public partial class StageData
         new DestroyTimelineEvent(),
         new SetSpeedTimelineEvent(),
         new OrbitTimelineEvent(),
-        new SetOrbitSpeedTimelineEvent()
+        new SetOrbitSpeedTimelineEvent(),
+        new SetVarTimelineEvent()
     };
 
     public StageData()
@@ -96,7 +98,7 @@ public partial class StageData
         foreach (string s in actorData.Keys)
         {
             // load emitters
-            if (s.StartsWith("emitter_"))
+            if (s.StartsWith(EmitterPrefix))
             {
                 string name = s.Remove(s.IndexOf(EmitterPrefix), EmitterPrefix.Length);
                 Actor.Emitter em = deserializer.Deserialize<Actor.Emitter>(serializer.Serialize(actorData[s]));
@@ -107,8 +109,15 @@ public partial class StageData
                 }
                 actor.Emitters[em.Name] = em;
             }
+            // load vars
+            if (s.StartsWith(VarPrefix))
+            {
+                string name = s.Remove(s.IndexOf(VarPrefix), VarPrefix.Length);
+                Actor.Var val = deserializer.Deserialize<Actor.Var>(serializer.Serialize(actorData[s]));
+                actor.Vars[name] = val;
+            }
             // load timelines
-            if (s.StartsWith("timeline_"))
+            if (s.StartsWith(TimelinePrefix))
             {
                 string name = s.Remove(s.IndexOf(TimelinePrefix), TimelinePrefix.Length);
                 Actor.Timeline timeline = new Actor.Timeline() { Name = name };

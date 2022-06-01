@@ -24,6 +24,10 @@ emitter_gun4:
   x: .8
   y: .4
 
+var_hello:
+  value: 0
+var_world:
+  value: 0
 
 timeline_arrive:
   - time: 0
@@ -52,6 +56,29 @@ timeline_arrive:
         - x: 0
           y: 0
           post: {x: 0, y: 1}
+
+  - time: 3
+    shoot:
+      num: 1
+      angle: 0
+      actor: basebullet
+      emitter: gun1
+      num_modifier: hello
+      angle_modifier: world
+    repeat: 4
+    interval: 0.2
+  - time: 3.1
+    setvar:
+      var: hello
+      inc: 2
+    repeat: 4
+    interval: 0.2
+  - time: 3.1
+    setvar:
+      var: world
+      inc: 10
+    repeat: 4
+    interval: 0.2
 
   - time: 5.5
     shoot:

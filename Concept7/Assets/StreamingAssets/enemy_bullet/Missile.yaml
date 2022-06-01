@@ -10,6 +10,10 @@ core:
   hp: 4
   destroy_offscreen: true
   destroy_on_impact: true
+  lifetime: 2
+  on_destroy:
+    event: burst
+    impact: burst
 
 emitter_burst:
   x: 0
@@ -31,13 +35,12 @@ timeline_follow:
     repeat: 200
     interval: 0.03
 
-  - time: 2
+timeline_burst:
+  - time: 0
     shoot:
-      num: 5
+      num: 8
       dir: 180
       angle: 360
       speed: 3
       emitter: burst
-
-  - time: 2
-    destroy: true
+      ring: true

@@ -47,7 +47,7 @@ public class WeaponController : MonoBehaviour
             
             timeStamp = Time.time + actor.PrefabObj.GetComponent<PlayerWeapon>().weaponData.fireRate;
             GameObject go = StageDirector.Spawn(actor.Name, transform.position, 0f);
-            go.GetComponent<StageActor>().RunTimeline(actor.DefaultRun);
+            go.GetComponent<StageActor>().FinishSpawn();
         }
     }
 
@@ -94,7 +94,7 @@ public class WeaponController : MonoBehaviour
         if (actor != null)
         {
             GameObject go = StageDirector.Spawn(actor.Name, transform.position, 0f);
-            go.GetComponent<StageActor>().RunTimeline(actor.DefaultRun);
+            go.GetComponent<StageActor>().FinishSpawn();
         }
         ResetQueue();
 

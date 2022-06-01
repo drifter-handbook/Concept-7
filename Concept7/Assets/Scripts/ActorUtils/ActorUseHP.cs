@@ -28,6 +28,11 @@ public class ActorUseHP : MonoBehaviour
     void Die()
     {
     	//play an animation here maybe?
-    	Destroy(gameObject);
+        StageActor actor = GetComponent<StageActor>();
+        if (gameObject != null && actor != null)
+        {
+            actor.RunTimeline(actor.Actor.OnDestroy?.Impact);
+            Destroy(gameObject);
+        }
     }
 }

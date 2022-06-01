@@ -17,6 +17,11 @@ public class ActorDestroyOnImpact : MonoBehaviour
 
     private IEnumerator DestroyAfterDelay() {
         yield return new WaitForSeconds(Time.fixedDeltaTime);
-        Destroy(gameObject);
+        StageActor actor = GetComponent<StageActor>();
+        if (gameObject != null && actor != null)
+        {
+            actor.RunTimeline(actor.Actor.OnDestroy?.Impact);
+            Destroy(gameObject);
+        }
     }
 }

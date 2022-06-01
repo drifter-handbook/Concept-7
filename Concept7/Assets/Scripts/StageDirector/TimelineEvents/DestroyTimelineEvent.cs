@@ -7,21 +7,26 @@ using YamlDotNet.Serialization;
 public class DestroyTimelineEvent : StageData.Actor.Timeline.IEvent
 {
     public string Action => "destroy";
-    public bool active = true;
+    public bool Active = true;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
         return new DestroyTimelineEvent()
         {
-            active = deserializer.Deserialize<bool>(yaml)
+            Active = deserializer.Deserialize<bool>(yaml)
         };
     }
 
     public void Start(MonoBehaviour runner)
     {
-        if (active)
+        if (Active)
         {
-            UnityEngine.Object.Destroy(runner.gameObject);
+            if (runner.gameObject != null)
+            {
+                StageActor actor = runner.GetComponent<StageActor>();
+                actor.RunTimeline(actor.Actor.OnDestroy?.Event);
+                UnityEngine.Object.Destroy(runner.gameObject);
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YamlDotNet.Serialization;
 
-public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.IActorCheck
+public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
 {
     public string Action => "spawn";
     public static List<string> ParentValues = new List<string>(){ null, "emitter", "actor", "new" };
@@ -19,6 +19,7 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public string Parent;
     public bool? MirrorX;
     public bool? MirrorY;
+    public float? Lifetime;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -38,10 +39,10 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         {
             go.transform.parent = TimelineEventUtils.GetParent(Parent, go.transform.position, runner.gameObject).transform;
         }
-        spawned.RunTimeline(Run ?? StageDirector.Instance.Data.Actors[Actor].DefaultRun);
+        spawned.FinishSpawn(Run, Lifetime);
     }
 
-    public void CheckActors(Dictionary<string, StageData.Actor> actors, StageData.Actor current)
+    public void CompileCheck(Dictionary<string, StageData.Actor> actors, StageData.Actor current)
     {
         if (Actor == null)
         {
