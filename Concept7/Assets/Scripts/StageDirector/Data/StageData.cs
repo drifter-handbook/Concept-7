@@ -180,17 +180,60 @@ public partial class StageData
     // check references to actors
     private void CheckRefs()
     {
-        for (int i = 0; i < 2; i++)
+        foreach (var p in TopoSort())
         {
-            foreach (var p in Actors)
+            Actor actor = Actors[p];
+            if (actor.CopyFrom != null)
             {
-                p.Value.EnsureCopy(Actors);
+                foreach (var c in actor.CopyFrom)
+                {
+                    actor.EnsureCopy(Actors, c);
+                }
             }
         }
         foreach (var p in Actors)
         {
             p.Value.Check(Actors);
         }
+    }
+
+    // Port of https://en.wikipedia.org/wiki/Topological_sorting to C#
+    private List<string> TopoSort()
+    {
+        List<string> order = new List<string>();
+        HashSet<string> noPermMark = new HashSet<string>(Actors.Keys);
+        HashSet<string> tempMark = new HashSet<string>();
+        while (noPermMark.Count > 0)
+        {
+            TopoSortVisit(noPermMark.First(), noPermMark, tempMark, order);
+        }
+        return order;
+    }
+    private void TopoSortVisit(string n, HashSet<string> noPermMark, HashSet<string> tempMark, List<string> order)
+    {
+        if (!noPermMark.Contains(n))
+        {
+            return;
+        }
+        if (tempMark.Contains(n))
+        {
+            throw new StageDataException($"copy_from cycle found on {n}");
+        }
+        tempMark.Add(n);
+        if (Actors[n].CopyFrom != null)
+        {
+            foreach (string m in Actors[n].CopyFrom)
+            {
+                if (!Actors.ContainsKey(m))
+                {
+                    throw new StageDataException($"Actor {Actors[n].Name} in file {Actors[n].File} attempts to copy_from {m} which does not exist.");
+                }
+                TopoSortVisit(m, noPermMark, tempMark, order);
+            }
+        }
+        tempMark.Remove(n);
+        noPermMark.Remove(n);
+        order.Add(n);
     }
 
     class StageList

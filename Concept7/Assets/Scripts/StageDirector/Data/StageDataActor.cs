@@ -12,7 +12,7 @@ public partial class StageData
     {
         public string File;
         public string Name;
-        public string CopyFrom;
+        public List<string> CopyFrom;
         public string Prefab;
         public GameObject PrefabObj;
         public bool? Invuln;
@@ -38,55 +38,52 @@ public partial class StageData
         }
 
         // TODO: DAG copy_from check
-        public void EnsureCopy(Dictionary<string, Actor> actors)
+        public void EnsureCopy(Dictionary<string, Actor> actors, string copySource)
         {
             // handle copy_from
-            if (CopyFrom != null)
+            if (!actors.ContainsKey(copySource))
             {
-                if (!actors.ContainsKey(CopyFrom))
+                throw new StageDataException($"Actor {Name} in file {File} attempts to copy_from {copySource} which does not exist.");
+            }
+            Actor copySrc = actors[copySource];
+            // copy over core fields
+            // The current object's fields take priority
+            if (Prefab == null) { Prefab = copySrc.Prefab; }
+            if (Invuln == null) { Invuln = copySrc.Invuln; }
+            if (Hp == null) { Hp = copySrc.Hp; }
+            if (DefaultRun == null) { DefaultRun = copySrc.DefaultRun; }
+            if (TurnOnMove == null) { TurnOnMove = copySrc.TurnOnMove; }
+            if (Tags == null) { Tags = copySrc.Tags; }
+            if (Speed == null) { Speed = copySrc.Speed; }
+            if (Depth == null) { Depth = copySrc.Depth; }
+            if (DestroyOffscreen == null) { DestroyOffscreen = copySrc.DestroyOffscreen; }
+            if (DestroyOnImpact == null) { DestroyOnImpact = copySrc.DestroyOnImpact; }
+            if (Lifetime == null) { Lifetime = copySrc.Lifetime; }
+            if (OnDestroy == null) { OnDestroy = new OnDestroyTimelines(); }
+            if (OnDestroy.Offscreen == null) { OnDestroy.Offscreen = copySrc.OnDestroy?.Offscreen; }
+            if (OnDestroy.Impact == null) { OnDestroy.Impact = copySrc.OnDestroy?.Impact; }
+            if (OnDestroy.Event == null) { OnDestroy.Event = copySrc.OnDestroy?.Event; }
+            // copy over emitters, vars and timelines
+            // The current object's take priority again
+            foreach (string key in copySrc.Emitters.Keys)
+            {
+                if (!Emitters.ContainsKey(key))
                 {
-                    throw new StageDataException($"Actor {Name} in file {File} attempts to copy_from {CopyFrom} which does not exist.");
+                    Emitters[key] = copySrc.Emitters[key];
                 }
-                Actor copySrc = actors[CopyFrom];
-                // copy over core fields
-                // The current object's fields take priority
-                if (Prefab == null) { Prefab = copySrc.Prefab; }
-                if (Invuln == null) { Invuln = copySrc.Invuln; }
-                if (Hp == null) { Hp = copySrc.Hp; }
-                if (DefaultRun == null) { DefaultRun = copySrc.DefaultRun; }
-                if (TurnOnMove == null) { TurnOnMove = copySrc.TurnOnMove; }
-                if (Tags == null) { Tags = copySrc.Tags; }
-                if (Speed == null) { Speed = copySrc.Speed; }
-                if (Depth == null) { Depth = copySrc.Depth; }
-                if (DestroyOffscreen == null) { DestroyOffscreen = copySrc.DestroyOffscreen; }
-                if (DestroyOnImpact == null) { DestroyOnImpact = copySrc.DestroyOnImpact; }
-                if (Lifetime == null) { Lifetime = copySrc.Lifetime; }
-                if (OnDestroy == null) { OnDestroy = new OnDestroyTimelines(); }
-                if (OnDestroy.Offscreen == null) { OnDestroy.Offscreen = copySrc.OnDestroy?.Offscreen; }
-                if (OnDestroy.Impact == null) { OnDestroy.Impact = copySrc.OnDestroy?.Impact; }
-                if (OnDestroy.Event == null) { OnDestroy.Event = copySrc.OnDestroy?.Event; }
-                // copy over emitters, vars and timelines
-                // The current object's take priority again
-                foreach (string key in copySrc.Emitters.Keys)
+            }
+            foreach (string key in copySrc.Vars.Keys)
+            {
+                if (!Vars.ContainsKey(key))
                 {
-                    if (!Emitters.ContainsKey(key))
-                    {
-                        Emitters[key] = copySrc.Emitters[key];
-                    }
+                    Vars[key] = copySrc.Vars[key];
                 }
-                foreach (string key in copySrc.Vars.Keys)
+            }
+            foreach (string key in copySrc.Timelines.Keys)
+            {
+                if (!Timelines.ContainsKey(key))
                 {
-                    if (!Vars.ContainsKey(key))
-                    {
-                        Vars[key] = copySrc.Vars[key];
-                    }
-                }
-                foreach (string key in copySrc.Timelines.Keys)
-                {
-                    if (!Timelines.ContainsKey(key))
-                    {
-                        Timelines[key] = copySrc.Timelines[key];
-                    }
+                    Timelines[key] = copySrc.Timelines[key];
                 }
             }
         }

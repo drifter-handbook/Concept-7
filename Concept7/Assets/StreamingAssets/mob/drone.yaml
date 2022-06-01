@@ -1,7 +1,7 @@
 # Base mob
 core:
   name: drone
-  copy_from: basemob
+  copy_from: [basemob]
   prefab: Drone
   speed: 2
 

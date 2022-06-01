@@ -1,7 +1,7 @@
 # Stage 1 Sub-director
 core:
   name: stage1
-  copy_from: basestage
+  copy_from: [basestage]
 
 timeline_stage:
   - time: 1
