@@ -9,6 +9,7 @@ core:
   speed: 7
   destroy_offscreen: true
   destroy_on_impact: true
+  default_run: eva
 
 emitter_trail:
   x: 0

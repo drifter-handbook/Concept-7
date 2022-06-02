@@ -1,9 +1,11 @@
 # Base mob
 core:
   name: microdrone
-  copy_from: [basemob]
   prefab: MicroDrone
+  hp: 1
+  tags: ["enemy"]
   speed: 2.5
+  destroy_on_impact: false
 
 emitter_gun0:
   x: 0

@@ -9,7 +9,16 @@ var_pos:
 
 
 timeline_stage:
-  - time: 1
+
+  - time: 0
+    spawn:
+      actor: longboi
+      x: 15
+      y: 0
+      run: path0
+
+ 
+  - time: 5
     spawn:
       actor: drone
       x: 15
@@ -19,7 +28,7 @@ timeline_stage:
     interval: .8
 
 
-  - time: 2
+  - time: 6
     spawn:
       actor: drone
       x: 14

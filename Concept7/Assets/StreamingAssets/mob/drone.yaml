@@ -1,10 +1,12 @@
 # Base mob
 core:
   name: drone
+  hp: 5
   copy_from: [basemob]
   prefab: Drone
   speed: 2
-  hp: 5
+  destroy_on_impact: false
+
 
 emitter_gun0:
   x: -.8

@@ -1,26 +1,30 @@
 # Base mob
 core:
   name: longboi
-  copy_from: [basemob]
+  hp: 40
+  tags: ["enemy"]
   speed: 1
   prefab: LongBoi
-  hp: 40
+  destroy_on_impact: false
 
 emitter_gun0:
-  x: 0
-  y: 0
+  x: -1
+  y: .8
 emitter_gun1:
-  x: 0
-  y: 0
+  x: -1
+  y: -.8
 emitter_gun2:
-  x: 0
-  y: 0
+  x: .1
+  y: .8
 emitter_gun3:
-  x: 0
-  y: 0
+  x: .1
+  y: -.8
 emitter_gun4:
-  x: 0
-  y: 0
+  x: 1.2
+  y: .8
+emitter_gun5:
+  x: 1.2
+  y: -.8
 
 timeline_path0:
   - time: 0
@@ -30,4 +34,58 @@ timeline_path0:
           y: 0
           rel: dir
           post: {x: -6}
+
+  - time: 2
+    shoot:
+      num: 1
+      speed: 4
+      emitter: gun0
+      actor: pellet
+    repeat: 20
+    interval: 3
+
+  - time: 2.5
+    shoot:
+      num: 1
+      speed: 4
+      emitter: gun2
+      actor: pellet
+    repeat: 20
+    interval: 3
+
+  - time: 3
+    shoot:
+      num: 1
+      speed: 4
+      emitter: gun4
+      actor: pellet
+    repeat: 20
+    interval: 3
+
+  - time: 2
+    shoot:
+      num: 1
+      speed: 4
+      emitter: gun1
+      actor: pellet
+    repeat: 20
+    interval: 3
+
+  - time: 2.5
+    shoot:
+      num: 1
+      speed: 4
+      emitter: gun3
+      actor: pellet
+    repeat: 20
+    interval: 3
+
+  - time: 3
+    shoot:
+      num: 1
+      speed: 4
+      emitter: gun5
+      actor: pellet
+    repeat: 20
+    interval: 3
 
