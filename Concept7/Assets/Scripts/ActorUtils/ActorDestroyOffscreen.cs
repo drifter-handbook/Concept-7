@@ -8,7 +8,12 @@ public class ActorDestroyOffscreen : MonoBehaviour
     {
     	if(collider.gameObject.tag == "PlayArea")
         {
-            Destroy(gameObject);
+            StageActor actor = GetComponent<StageActor>();
+            if (gameObject != null && actor != null)
+            {
+                actor.RunTimeline(actor.Actor.OnDestroy?.Offscreen);
+                Destroy(gameObject);
+            }
         }
     }
 }

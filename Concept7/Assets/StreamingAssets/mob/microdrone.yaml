@@ -1,0 +1,81 @@
+# Base mob
+core:
+  name: microdrone
+  copy_from: [basemob]
+  prefab: MicroDrone
+  speed: 2.5
+
+emitter_gun0:
+  x: 0
+  y: 0
+
+timeline_diag:
+  - time: 0
+    move:
+      dest:
+        - x: 0
+          y: 0
+          rel: dir
+          post: {x: -6, y: -8}
+        - x: -6
+          y: -8
+          rel: dir
+          post: {x: 0, y: 0}
+
+
+  - time: 1
+    shoot:
+      num: 4
+      speed: 4
+      angle: 360
+      dir: 45
+      ring: true
+      actor: basebullet
+      mirror_y: false
+      emitter: gun0
+
+  - time: 2
+    shoot:
+      num: 4
+      speed: 4
+      angle: 360
+      dir: 0
+      ring: true
+      actor: basebullet
+      mirror_y: false
+      emitter: gun0
+
+timeline_hook:
+  - time: 0
+    move:
+      dest:
+        - x: 0
+          y: 0
+          rel: dir
+          post: {x: -5, y: 0}
+        - x: -5
+          y: -1
+          rel: dir
+          post: {x: -6, y: 0}
+        - x: -6
+          y: -3
+          rel: dir
+          post: {x: -6, y: -2}
+        - x: -20
+          y: -5
+          rel: dir
+          post: {x: -4, y: -2}
+
+
+
+  - time: 1
+    shoot:
+      num: 1
+      speed: 4
+      ring: true
+      actor: pellet
+      mirror_y: false
+      emitter: gun0
+    repeat: 2
+    interval: 3
+      

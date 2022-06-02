@@ -1,7 +1,7 @@
 core:
   name: blueprimary
   prefab: ProjectilePrimaryBlue
-  copy_from: baseprimary
+  copy_from: [baseprimary]
   speed: 10
 
 # timeline_travel:

@@ -1,0 +1,37 @@
+# Stage 1 Sub-director
+core:
+  name: orbitbullet
+  prefab: BaseBullet
+  invuln: true
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 5
+  destroy_offscreen: true
+  destroy_on_impact: true
+  default_run: orbit
+
+timeline_orbit:
+  - time: 0
+    setspeed:
+      speed: 0
+      dur: 0.25
+  - time: 0.25
+    orbit:
+      speed: 0
+  - time: 0.25
+    setorbitspeed:
+      speed: 1440
+      dur: 0.75
+  - time: 1
+    setorbitradius:
+      radius: 1
+      dur: 1
+    repeat: 4
+    interval: 2
+  - time: 2
+    setorbitradius:
+      radius: 3
+      dur: 1
+    repeat: 4
+    interval: 2

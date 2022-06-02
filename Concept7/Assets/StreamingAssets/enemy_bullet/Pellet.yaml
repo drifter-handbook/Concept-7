@@ -8,84 +8,26 @@ core:
   speed: 2
   destroy_offscreen: true
   destroy_on_impact: true
-  default_run: travel
+  # default_run: travel
 
-timeline_travel:
-  - time: 1
-    orbit:
-      speed: 120
-  - time: 0
-    move:
-      dest:
-        - x: 1
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 2
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 3
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 4
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 5
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 6
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 7
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 8
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 9
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 10
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 11
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 12
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 13
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 14
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 15
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 16
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 17
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 18
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
+# timeline_travel:
+#   - time: 0
+#     move:
+#       loop: true
+#       dest:
+#         - x: 1
+#           y: 0.3
+#           rel: dir
+#           post: {x: 0.5}
+#         - x: 2
+#           y: -0.3
+#           rel: dir
+#           post: {x: 0.5}
+#         - x: 3
+#           y: 0.3
+#           rel: dir
+#           post: {x: 0.5}
+#         - x: 4
+#           y: -0.3
+#           rel: dir
+#           post: {x: 0.5}

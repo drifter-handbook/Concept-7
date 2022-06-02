@@ -1,7 +1,7 @@
 # Base mob
 core:
   name: drone
-  copy_from: basemob
+  copy_from: [basemob]
   prefab: Drone
   speed: 2
 
@@ -45,19 +45,20 @@ timeline_sine:
           y: -1
           rel: dir
           post: {x: -1}
-
   - time: 4
-    shoot:
-      num: 1
-      speed: 4
-      actor: basebullet
-      emitter: gun0
-      dir: 200
+    run:
+      timeline: repeatshoot
 
-  - time: 3
+timeline_repeatshoot:
+  - time: 0
     shoot:
       num: 1
       speed: 4
-      actor: basebullet
+      actor: orbitbullet
       emitter: gun0
       dir: 200
+      parent: actor
+      mirror_y: false
+  - time: 0.19
+    run:
+      timeline: repeatshoot

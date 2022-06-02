@@ -74,6 +74,12 @@ TagManager:
   - name: VFXForeground
     uniqueID: 624998595
     locked: 0
+  - name: ------------
+    uniqueID: 2744618167
+    locked: 0
+  - name: Shaders
+    uniqueID: 2736045305
+    locked: 0
   - name: UIWorld
     uniqueID: 4131639975
     locked: 0
