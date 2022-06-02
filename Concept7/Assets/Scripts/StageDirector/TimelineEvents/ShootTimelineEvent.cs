@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using YamlDotNet.Serialization;
 using static TimelineEventUtils;
@@ -11,7 +12,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
 
     public int? Num;
     public float Angle;
-    public string Emitter;
+    public List<string> Emitters;
     public string Actor;
     public string Run;
     public float? Speed;
@@ -42,21 +43,21 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     {
         // find emitter
         StageActor runnerActor = runner.GetComponent<StageActor>();
-        GameObject em = runnerActor.Emitters[Emitter];
+        List<GameObject> em = Emitters.Select(x => runnerActor.Emitters[x]).ToList();
         float speed = (Speed ?? StageDirector.Instance.Data.Actors[Actor].Speed ?? 1) + GetVar(runnerActor, SpeedModifier);
-        Vector2 toTarget = ((Vector2)PlayerController.Instance.transform.position - (Vector2)em.transform.position).normalized;
+        List<Vector2> toTarget = em.Select(x => ((Vector2)PlayerController.Instance.transform.position - (Vector2)x.transform.position).normalized).ToList();
         if (Dir != null)
         {
-            toTarget = Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier)) * Vector2.right;
+            toTarget = em.Select(x => (Vector2)(Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier)) * Vector2.right)).ToList();
         }
         // create Num shots with Angle spread
         int shots = (Num ?? 1) + (int)GetVar(runnerActor, NumModifier) + (Ring ? 1 : 0);
         float time = 0f;
-        // get/create parent
-        GameObject parent = null;
+        // get/create parents for emitters
+        List<GameObject> parent = null;
         if (Parent != null)
         {
-            parent = GetParent(Parent, em.transform.position, runner.gameObject, Emitter);
+            parent = Enumerable.Range(0, Emitters.Count).Select(i => GetParent(Parent, em[i].transform.position, runner.gameObject, Emitters[i])).ToList();
         }
         float spread = Angle + GetVar(runnerActor, AngleModifier);
         float? lifetime = Lifetime + GetVar(runnerActor, LifetimeModifier);
@@ -76,19 +77,22 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
             {
                 angle = Mathf.Lerp(spread * -0.5f, spread * 0.5f, (float)i / (shots - 1));
             }
-            GameObject shot = StageDirector.Spawn(Actor, em.transform.position, 0f);
-            StageActor actor = shot.GetComponent<StageActor>();
-            float mirrorX = MirrorX == null ? runnerActor.Mirror.x : (MirrorX.Value ? -1 : 1);
-            float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);
-            actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget;
-            actor.Direction = new Vector2(actor.Direction.x * mirrorX, actor.Direction.y * mirrorY);
-            actor.Speed = speed;
-            actor.Mirror = new Vector2(mirrorX, mirrorY);
-            if (parent != null)
+            for (int j = 0; j < Emitters.Count; j++)
             {
-                shot.transform.parent = parent.transform;
+                GameObject shot = StageDirector.Spawn(Actor, em[j].transform.position, 0f);
+                StageActor actor = shot.GetComponent<StageActor>();
+                float mirrorX = MirrorX == null ? runnerActor.Mirror.x : (MirrorX.Value ? -1 : 1);
+                float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);
+                actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget[j];
+                actor.Direction = new Vector2(actor.Direction.x * mirrorX, actor.Direction.y * mirrorY);
+                actor.Speed = speed;
+                actor.Mirror = new Vector2(mirrorX, mirrorY);
+                if (parent != null)
+                {
+                    shot.transform.parent = parent[j].transform;
+                }
+                actor.FinishSpawn(Run, lifetime);
             }
-            actor.FinishSpawn(Run, lifetime);
         }
     }
 
@@ -100,17 +104,20 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         {
             throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} cannot be run on an actor without any emitters.");
         }
-        if (Emitter != null)
+        if (Emitters != null)
         {
-            if (!current.Emitters.ContainsKey(Emitter))
+            foreach (string e in Emitters)
             {
-                throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} uses emitter {Emitter} which does not exist.");
+                if (!current.Emitters.ContainsKey(e))
+                {
+                    throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} uses emitter {e} which does not exist.");
+                }
+                em = current.Emitters[e];
             }
-            em = current.Emitters[Emitter];
         }
         else
         {
-            Emitter = em.Name;
+            Emitters = new List<string>() { em.Name };
         }
         // attempt to use emitter's default actor
         if (Actor == null)

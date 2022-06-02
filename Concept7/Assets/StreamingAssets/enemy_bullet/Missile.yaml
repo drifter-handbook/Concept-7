@@ -42,5 +42,5 @@ timeline_burst:
       dir: 180
       angle: 360
       speed: 3
-      emitter: burst
+      emitters: [burst]
       ring: true

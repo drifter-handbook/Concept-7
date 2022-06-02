@@ -35,7 +35,7 @@ timeline_path0:
   #     angle: 45
   #     speed: 4
   #     run: follow
-  #     emitter: gun1
+  #     emitters: [gun1]
 
   - time: 3.5
     shoot:
@@ -45,14 +45,14 @@ timeline_path0:
       speed: 4
       actor: homingRay
       run: follow
-      emitter: gun2
+      emitters: [gun2]
 
   # - time: 4.5
   #   shoot:
   #     num: 1
   #     dir: 180
   #     run: eva
-  #     emitter: gun3
+  #     emitters: [gun3]
 
 
 
@@ -63,7 +63,7 @@ timeline_path0:
   #     dir: 180
   #     interval: .05
   #     run: follow
-  #     emitter: gun3
+  #     emitters: [gun3]
   #     actor: missile
 
 
@@ -72,7 +72,7 @@ timeline_path0:
   #     num: 21
   #     angle: 360
   #     dir: 45
-  #     emitter: gun3
+  #     emitters: [gun3]
   #     actor: pellet
   #     interval: 0.1
   #   repeat: 3
@@ -83,7 +83,7 @@ timeline_path0:
   #     num: 21
   #     angle: -360
   #     dir: -45
-  #     emitter: gun3
+  #     emitters: [gun3]
   #     actor: pellet
   #     interval: 0.1
   #   repeat: 3
@@ -94,7 +94,7 @@ timeline_path0:
   #     num: 13
   #     angle: 360
   #     dir: 180
-  #     emitter: gun3
+  #     emitters: [gun3]
   #     actor: orb
 
   - time: 8

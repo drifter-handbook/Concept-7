@@ -34,7 +34,7 @@ timeline_diag:
       ring: true
       actor: basebullet
       mirror_y: false
-      emitter: gun0
+      emitters: [gun0]
 
   - time: 2
     shoot:
@@ -45,7 +45,7 @@ timeline_diag:
       ring: true
       actor: basebullet
       mirror_y: false
-      emitter: gun0
+      emitters: [gun0]
 
 timeline_hook:
   - time: 0
@@ -77,7 +77,7 @@ timeline_hook:
       ring: true
       actor: pellet
       mirror_y: false
-      emitter: gun0
+      emitters: [gun0]
     repeat: 2
     interval: 3
       

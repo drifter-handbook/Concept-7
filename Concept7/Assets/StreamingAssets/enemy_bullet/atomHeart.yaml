@@ -30,7 +30,7 @@ timeline_boom:
       dir: 180
       angle: 360
       speed: 4
-      emitter: burst
+      emitters: [burst]
 
   - time: 2.1
     destroy: true
@@ -42,7 +42,7 @@ timeline_ringburst:
       num: 3
       speed: 7
       actor: needle
-      emitter: burst
+      emitters: [burst]
 
   - time: .5
     destroy: true

@@ -30,14 +30,14 @@ timeline_eva:
       dir: 270
       speed: 4
       interval: 0.1
-      emitter: trail
+      emitters: [trail]
   - time: 0
     shoot:
       num: 20
       dir: 90
       speed: 4
       interval: 0.1
-      emitter: trail
+      emitters: [trail]
 
   - time: 5
     destroy: true

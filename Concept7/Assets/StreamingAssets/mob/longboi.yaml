@@ -39,53 +39,7 @@ timeline_path0:
     shoot:
       num: 1
       speed: 4
-      emitter: gun0
+      emitters: [gun0, gun1, gun2, gun3, gun4, gun5]
       actor: pellet
     repeat: 20
     interval: 3
-
-  - time: 2.5
-    shoot:
-      num: 1
-      speed: 4
-      emitter: gun2
-      actor: pellet
-    repeat: 20
-    interval: 3
-
-  - time: 3
-    shoot:
-      num: 1
-      speed: 4
-      emitter: gun4
-      actor: pellet
-    repeat: 20
-    interval: 3
-
-  - time: 2
-    shoot:
-      num: 1
-      speed: 4
-      emitter: gun1
-      actor: pellet
-    repeat: 20
-    interval: 3
-
-  - time: 2.5
-    shoot:
-      num: 1
-      speed: 4
-      emitter: gun3
-      actor: pellet
-    repeat: 20
-    interval: 3
-
-  - time: 3
-    shoot:
-      num: 1
-      speed: 4
-      emitter: gun5
-      actor: pellet
-    repeat: 20
-    interval: 3
-
