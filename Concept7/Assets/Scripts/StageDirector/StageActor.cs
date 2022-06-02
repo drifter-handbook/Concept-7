@@ -13,7 +13,9 @@ public class StageActor : MonoBehaviour
     public Vector2 Direction;
     // angular velocity only used for the orbit command.
     public float OrbitSpeed;
-    public float OrbitRadius;
+    public float? OrbitRadius;
+    public Quaternion OrbitTilt = Quaternion.Euler(Vector3.zero);
+    public float? OrbitAngle;
 
     public string ActorType;
     public Dictionary<string, GameObject> Emitters = new Dictionary<string, GameObject>();
@@ -26,6 +28,8 @@ public class StageActor : MonoBehaviour
     public Coroutine speedCoroutine;
     public Coroutine orbitSpeedCoroutine;
     public Coroutine orbitRadiusCoroutine;
+    public Coroutine orbitTiltCoroutine;
+    public Coroutine rotateCoroutine;
 
     int CurrentTimelineID = 0;
     public List<RunningTimeline> RunningTimelines = new List<RunningTimeline>();
@@ -62,7 +66,7 @@ public class StageActor : MonoBehaviour
         {
             var comp = GetComponent<ActorDestroyOffscreen>() ?? gameObject.AddComponent<ActorDestroyOffscreen>();
         }
-        if (!(Actor.DestroyOnImpact ?? false))
+        if (Actor.DestroyOnImpact ?? false)
         {
             var comp = GetComponent<ActorDestroyOnImpact>() ?? gameObject.AddComponent<ActorDestroyOnImpact>();
         }
@@ -85,6 +89,9 @@ public class StageActor : MonoBehaviour
         if (movementCoroutine == null)
         {
             transform.localPosition += (Vector3)Direction * Speed * Time.deltaTime;
+            OrbitTilt = Quaternion.Euler(Vector3.zero);
+            OrbitAngle = null;
+            OrbitRadius = null;
             RefreshAngle();
         }
     }
@@ -210,6 +217,18 @@ public class StageActor : MonoBehaviour
             crt = StartCoroutine(c);
         }
     }
+    public IEnumerator RotateCoroutine(float angle, float dur)
+    {
+        float time = 0f;
+        float startAngle = transform.localEulerAngles.z;
+        while (time < dur)
+        {
+            transform.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(startAngle, angle, time / dur));
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.localEulerAngles = new Vector3(0f, 0f, angle);
+    }
     public IEnumerator SpeedCoroutine(float speed, float dur)
     {
         float time = 0f;
@@ -237,7 +256,7 @@ public class StageActor : MonoBehaviour
     public IEnumerator OrbitRadiusCoroutine(float radius, float dur)
     {
         float time = 0f;
-        float startRadius = OrbitRadius;
+        float startRadius = OrbitRadius ?? ((Vector2)transform.localPosition).magnitude;
         while (time < dur)
         {
             OrbitRadius = Mathf.Lerp(startRadius, radius, time / dur);
@@ -246,13 +265,30 @@ public class StageActor : MonoBehaviour
         }
         OrbitRadius = radius;
     }
+    public IEnumerator OrbitTiltCoroutine(Vector3 tilt, float dur)
+    {
+        float time = 0f;
+        Quaternion startTilt = OrbitTilt;
+        Quaternion endTilt = Quaternion.Euler(tilt);
+        while (time < dur)
+        {
+            OrbitTilt = Quaternion.Slerp(startTilt, endTilt, time / dur);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        OrbitTilt = endTilt;
+    }
 
     public IEnumerator OrbitCoroutine()
     {
-        OrbitRadius = transform.localPosition.magnitude;
+        OrbitAngle = OrbitAngle ?? Mathf.Rad2Deg * Mathf.Atan2(transform.localPosition.y, transform.localPosition.x);
+        OrbitRadius = OrbitRadius ?? ((Vector2)transform.localPosition).magnitude;
         while (true)
         {
-            transform.localPosition = Quaternion.Euler(0f, 0f, Time.deltaTime * OrbitSpeed * Mathf.Sign(Mirror.x) * Mathf.Sign(Mirror.y)) * transform.localPosition.normalized * OrbitRadius;
+            OrbitAngle += Time.deltaTime * OrbitSpeed * Mathf.Sign(Mirror.x) * Mathf.Sign(Mirror.y);
+            Vector3 v = Quaternion.Euler(0f, 0f, OrbitAngle.Value) * Vector3.right * OrbitRadius.Value;
+            v = OrbitTilt * v;
+            transform.localPosition = new Vector3(v.x, v.y, (Actor.Depth ?? 0) + 2f * Mathf.Sign(-v.normalized.z - 0.1f));
             yield return null;
         }
     }
@@ -262,6 +298,9 @@ public class StageActor : MonoBehaviour
     const float SPLINE_TOOCLOSE = 0.01f;
     public IEnumerator MoveCoroutine(List<MoveTarget> spline, Vector2? finishdir=null, bool loop=false)
     {
+        OrbitTilt = Quaternion.Euler(Vector3.zero);
+        OrbitAngle = null;
+        OrbitRadius = null;
         spline = new List<MoveTarget>(spline);
         // Remove keypoints too close together
         for (int i = 0; i < spline.Count - 1; i++)

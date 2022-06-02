@@ -43,3 +43,73 @@ timeline_path0:
       actor: pellet
     repeat: 20
     interval: 3
+
+timeline_path1:
+  - time: 0
+    move:
+      dest:
+        - x: -10
+          y: 0
+          rel: dir
+          post: {x: -6}
+  - time: 5
+    setspeed:
+      speed: 0
+      dur: 1
+  - time: 5
+    run:
+      timeline: shootspeen
+  - time: 6
+    rotate:
+      inc: 1440
+      dur: 16
+
+timeline_shootspeen:
+  - time: 0
+    shoot:
+      num: 1
+      dir: 150
+      speed: 1
+      emitters: [gun0]
+      actor: orbitpellet
+      parent: actor
+  - time: 0
+    shoot:
+      num: 1
+      dir: -150
+      speed: 1
+      emitters: [gun1]
+      actor: orbitpellet
+      parent: actor
+  - time: 0
+    shoot:
+      num: 1
+      dir: 90
+      speed: 1
+      emitters: [gun2]
+      actor: orbitpellet
+      parent: actor
+  - time: 0
+    shoot:
+      num: 1
+      dir: -90
+      speed: 1
+      emitters: [gun3]
+      actor: orbitpellet
+      parent: actor
+  - time: 0
+    shoot:
+      num: 1
+      dir: 30
+      speed: 1
+      emitters: [gun4]
+      actor: orbitpellet
+      parent: actor
+  - time: 0
+    shoot:
+      num: 1
+      dir: -30
+      speed: 1
+      emitters: [gun5]
+      actor: orbitpellet
+      parent: actor

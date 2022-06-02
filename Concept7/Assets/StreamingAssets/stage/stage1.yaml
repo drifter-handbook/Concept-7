@@ -3,7 +3,6 @@ core:
   name: stage1
   copy_from: [basestage]
 
-
 var_pos:
   value: 7
 
@@ -15,7 +14,7 @@ timeline_stage:
       actor: longboi
       x: 15
       y: 0
-      run: path0
+      run: path1
 
  
   - time: 5
@@ -84,6 +83,12 @@ timeline_stage:
     repeat: 6
     interval: 1
 
+  - time: 22
+    spawn:
+      actor: longboi
+      x: 15
+      y: 0
+      run: path0
 
   # - time: 15
   #   spawn:

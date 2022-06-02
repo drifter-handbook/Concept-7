@@ -58,16 +58,4 @@ timeline_sine:
       mirror_y: false
       emitters: [gun0]
 
-  # - time: 3
-  #   shoot:
-  #     num: 1
-  #     speed: 4
-  #     actor: basebullet
-  #     emitters: [gun0]
-
-      # actor: orbitbullet
-      # emitters: [gun0]
-      # dir: 200
-      # parent: actor
-
 

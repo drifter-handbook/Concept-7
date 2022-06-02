@@ -9,7 +9,7 @@ public class ActorPlayAudioOnSpawn : MonoBehaviour
     void Start()
     {
       Game game = FindObjectOfType<Game>();  
-      game.PlaySFX(AudioName, 0.1f, Random.RandomRange(0.5f, 1));
+      game.PlaySFX(AudioName, 0.1f, Random.Range(0.5f, 1));
     }
 
 }

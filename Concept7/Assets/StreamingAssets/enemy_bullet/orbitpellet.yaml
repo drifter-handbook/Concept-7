@@ -1,0 +1,52 @@
+core:
+  name: orbitpellet
+  prefab: Pellet
+  invuln: true
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 3
+  destroy_offscreen: true
+  destroy_on_impact: true
+  default_run: orbit
+
+timeline_orbit:
+  - time: 0
+    setspeed:
+      speed: 0
+      dur: 0.5
+  - time: 1
+    orbit:
+      speed: 0
+  - time: 1
+    orbit:
+      speed: 180
+      dur: 0.75
+  - time: 2
+    orbit:
+      radius: 2
+      dur: 1
+  - time: 3
+    run:
+      timeline: hyperspeen
+
+timeline_hyperspeen:
+  - time: 0
+    orbit:
+      tilt: {x: 0, y: 0, z: 0}
+      dur: 2
+  - time: 2
+    orbit:
+      tilt: {x: 0, y: 45, z: 45}
+      dur: 2
+  - time: 4
+    orbit:
+      tilt: {x: 225, y: 0, z: 125}
+      dur: 2
+  - time: 6
+    orbit:
+      tilt: {x: 175, y: 280, z: 100}
+      dur: 2
+  - time: 8
+    run:
+      timeline: hyperspeen

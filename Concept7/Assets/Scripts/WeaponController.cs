@@ -48,7 +48,7 @@ public class WeaponController : MonoBehaviour
             timeStamp = Time.time + actor.PrefabObj.GetComponent<PlayerWeapon>().weaponData.fireRate;
             GameObject go = StageDirector.Spawn(actor.Name, transform.position, 0f);
             go.GetComponent<StageActor>().FinishSpawn();
-            screen.Game.PlaySFX("player_pew", 0.1f, Random.RandomRange(0.8f, 1));
+            screen.Game.PlaySFX("player_pew", 0.1f, Random.Range(0.8f, 1));
         }
     }
 
