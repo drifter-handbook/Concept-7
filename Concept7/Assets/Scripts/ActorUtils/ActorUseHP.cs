@@ -6,6 +6,7 @@ using UnityEngine;
 public class ActorUseHP : MonoBehaviour
 {
 	public float health;
+    [SerializeField] private GameObject deathPrefab;
 
     public void Initialize(StageData.Actor actor)
     {
@@ -27,6 +28,8 @@ public class ActorUseHP : MonoBehaviour
 
     void Die()
     {
+        if (deathPrefab != null)
+            Instantiate(deathPrefab, transform.position, Quaternion.identity);
     	//play an animation here maybe?
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)
