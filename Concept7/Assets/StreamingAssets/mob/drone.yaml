@@ -51,13 +51,12 @@ timeline_sine:
       num: 1
       speed: 4
       actor: basebullet
+      mirror_y: false
       emitter: gun0
-      dir: 200
 
-  - time: 3
-    shoot:
-      num: 1
-      speed: 4
-      actor: basebullet
-      emitter: gun0
-      dir: 200
+  # - time: 3
+  #   shoot:
+  #     num: 1
+  #     speed: 4
+  #     actor: basebullet
+  #     emitter: gun0
