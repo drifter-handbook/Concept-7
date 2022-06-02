@@ -114,16 +114,16 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
         if (dests.Count > 0)
         {
             List<Vector2> pos = new List<Vector2>();
-            Vector2 current = runner.transform.position;
+            Vector2 current = runner.transform.localPosition;
             pos.Add(current);
             for (int i = 0; i < dests.Count; i++)
             {
                 Destination d = dests[i];
-                current = TimelineEventUtils.FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.position, actor.Direction);
+                current = TimelineEventUtils.FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.localPosition, actor.Direction);
                 pos.Add(current);
             }
             // calculate Move Targets
-            Destination startDest = new Destination { X = actor.transform.position.x, Y = actor.transform.position.y };
+            Destination startDest = new Destination { X = actor.transform.localPosition.x, Y = actor.transform.localPosition.y };
             spline.Add(startDest.FindControlPoints(pos[0], pos[0], pos[1], actor.Direction));
             for (int i = 1; i < pos.Count - 1; i++)
             {
@@ -137,9 +137,9 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
                 StageActor.MoveTarget pt = spline[i + 1];
                 if (dests[i].Rel != "abs")
                 {
-                    pt.Pos = Mirror(pt.Pos, runner.transform.position, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
-                    pt.Pre = Mirror(pt.Pre, runner.transform.position, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
-                    pt.Post = Mirror(pt.Post, runner.transform.position, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Pos = Mirror(pt.Pos, runner.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Pre = Mirror(pt.Pre, runner.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Post = Mirror(pt.Post, runner.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
                 }
             }
         }
@@ -157,7 +157,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
         // if instant, move to final point
         if (Instant && spline.Count > 0)
         {
-            actor.transform.position = spline[spline.Count - 1].Pos;
+            actor.transform.localPosition = spline[spline.Count - 1].Pos;
             if (finishdir != null)
             {
                 actor.Direction = finishdir.Value;

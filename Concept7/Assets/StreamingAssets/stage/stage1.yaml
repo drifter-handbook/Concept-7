@@ -12,11 +12,13 @@ timeline_stage:
   - time: 1
     spawn:
       actor: drone
-      x: 14
-      y: 2
+
+      x: 15
+      y: 0
       run: sine
-    repeat: 6
-    interval: .8
+    repeat: 1
+    interval: .5
+
 
   - time: 2
     spawn:
@@ -25,9 +27,9 @@ timeline_stage:
       y: -1
       run: sine
       mirror_y: true
+
     repeat: 6
     interval: .8
-
 
   - time: 10
     spawn:
@@ -74,7 +76,6 @@ timeline_stage:
       run: hook
     repeat: 6
     interval: 1
-
 
 
   # - time: 15

@@ -34,6 +34,7 @@ public partial class StageData
         new SetSpeedTimelineEvent(),
         new OrbitTimelineEvent(),
         new SetOrbitSpeedTimelineEvent(),
+        new SetOrbitRadiusTimelineEvent(),
         new SetVarTimelineEvent()
     };
 

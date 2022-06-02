@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YamlDotNet.Serialization;
+using static TimelineEventUtils;
 
 public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
 {
@@ -20,6 +21,8 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public bool? MirrorX;
     public bool? MirrorY;
     public float? Lifetime;
+    public string XModifier;
+    public string YModifier;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
@@ -29,7 +32,7 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public void Start(MonoBehaviour runner)
     {
         StageActor actor = runner.GetComponent<StageActor>();
-        Vector3 pos = TimelineEventUtils.FindDestPosition(X, Y, Dir, Dist, Rel ?? "abs", runner.transform.position, actor.Direction);
+        Vector3 pos = TimelineEventUtils.FindDestPosition(X + GetVar(actor, XModifier), Y + GetVar(actor, YModifier), Dir, Dist, Rel ?? "abs", runner.transform.position, actor.Direction);
         GameObject go = StageDirector.Spawn(Actor, new Vector3(pos.x, pos.y), 0f);
         StageActor spawned = go.GetComponent<StageActor>();
         float mirrorX = MirrorX == null ? actor.Mirror.x : (MirrorX.Value ? -1 : 1);
@@ -55,6 +58,13 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         if (Parent != null && (Parent == "emitter" || !ParentValues.Contains(Parent.ToLower())))
         {
             throw new StageDataException($"Timeline spawn action in actor {current.Name} in file {current.File} has 'parent' field {Parent} where the only allowed values are [null, 'new', 'actor']");
+        }
+        foreach (string v in new List<string> { XModifier, YModifier })
+        {
+            if (v != null && !current.Vars.ContainsKey(v))
+            {
+                throw new StageDataException($"Timeline shoot action in actor {current.Name} in file {current.File} tries to use undefined variable {v}");
+            }
         }
     }
 }
