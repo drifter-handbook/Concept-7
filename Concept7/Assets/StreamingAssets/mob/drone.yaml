@@ -58,6 +58,7 @@ timeline_repeatshoot:
       emitter: gun0
       dir: 200
       parent: actor
+      mirror_y: false
   - time: 0.19
     run:
       timeline: repeatshoot
