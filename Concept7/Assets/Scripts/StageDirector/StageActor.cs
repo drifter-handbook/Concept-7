@@ -27,6 +27,15 @@ public class StageActor : MonoBehaviour
     public Coroutine orbitSpeedCoroutine;
     public Coroutine orbitRadiusCoroutine;
 
+    int CurrentTimelineID = 0;
+    public List<RunningTimeline> RunningTimelines = new List<RunningTimeline>();
+    public class RunningTimeline
+    {
+        public int ID;
+        public string Name;
+        public Coroutine Coroutine;
+    }
+
     // mirroring X/Y
     public Vector2 Mirror = Vector2.one;
 
@@ -129,10 +138,16 @@ public class StageActor : MonoBehaviour
     }
     void RunTimeline(StageData.Actor.Timeline timeline)
     {
-        StartCoroutine(RunTimelineCoroutine(timeline));
+        int timelineID = ++CurrentTimelineID;
+        RunningTimelines.Add(new RunningTimeline()
+        {
+            ID = timelineID,
+            Name = timeline.Name,
+            Coroutine = StartCoroutine(RunTimelineCoroutine(timeline, timelineID))
+        });
     }
 
-    IEnumerator RunTimelineCoroutine(StageData.Actor.Timeline timeline)
+    IEnumerator RunTimelineCoroutine(StageData.Actor.Timeline timeline, int timelineID)
     {
         float time = 0f;
         foreach (var entry in timeline.Entries)
@@ -145,6 +160,26 @@ public class StageActor : MonoBehaviour
             // Debug.Log($"Running entry at time {entry.Time} on actor {ActorType}");
             StartCoroutine(RunEntry(entry));
         }
+        RunningTimelines.RemoveAll(x => x.ID == timelineID);
+    }
+    public void StopTimelinesWithName(string name)
+    {
+        foreach (RunningTimeline rt in RunningTimelines)
+        {
+            if (rt.Name == name)
+            {
+                StopCoroutine(rt.Coroutine);
+            }
+        }
+        RunningTimelines.RemoveAll(x => x.Name == name);
+    }
+    public void StopAllTimelines()
+    {
+        foreach (RunningTimeline rt in RunningTimelines)
+        {
+            StopCoroutine(rt.Coroutine);
+        }
+        RunningTimelines.Clear();
     }
 
     IEnumerator RunEntry(StageData.Actor.Timeline.Entry entry)
