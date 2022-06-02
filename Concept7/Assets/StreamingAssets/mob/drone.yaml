@@ -4,6 +4,7 @@ core:
   copy_from: [basemob]
   prefab: Drone
   speed: 2
+  hp: 5
 
 emitter_gun0:
   x: -.8
@@ -45,20 +46,26 @@ timeline_sine:
           y: -1
           rel: dir
           post: {x: -1}
-  - time: 4
-    run:
-      timeline: repeatshoot
 
-timeline_repeatshoot:
-  - time: 0
+  - time: 4
     shoot:
       num: 1
       speed: 4
-      actor: orbitbullet
-      emitter: gun0
-      dir: 200
-      parent: actor
+
+      actor: basebullet
       mirror_y: false
-  - time: 0.19
-    run:
-      timeline: repeatshoot
+      emitter: gun0
+
+  # - time: 3
+  #   shoot:
+  #     num: 1
+  #     speed: 4
+  #     actor: basebullet
+  #     emitter: gun0
+
+      # actor: orbitbullet
+      # emitter: gun0
+      # dir: 200
+      # parent: actor
+
+
