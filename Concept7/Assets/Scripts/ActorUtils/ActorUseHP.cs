@@ -18,7 +18,6 @@ public class ActorUseHP : MonoBehaviour
     	if(collider.gameObject.tag == "PlayerWeapon")
     	{
     		health -= collider.gameObject.GetComponent<PlayerWeapon>().weaponData.damage;
-    		Debug.Log(health);
     	}
     	if(health <= 0)
         {

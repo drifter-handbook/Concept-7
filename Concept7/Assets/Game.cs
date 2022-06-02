@@ -24,6 +24,10 @@ public class Game : MonoBehaviour
     [Header("UI")]
     public GameScreen GameScreen;
     
+    [Header("SFX")]
+    public SoundLookup SoundLookup;
+    public Transform MusicBox; //BGM, holds the spawned sfx
+    public GameObject SFXPrefab;
 
     private GameState gameState = GameState.PLAYING;
     private PlayerController ClientPlayer; //the user's player
@@ -67,6 +71,33 @@ public class Game : MonoBehaviour
         GameScreen.ShowEndScreen(wasWin);
     }
     
+    public void PlaySFX(string clip){
+        PlaySFX(clip, -1, float.MaxValue);
+    }
+    
+    public void PlaySFX(string clip, float volume){
+        PlaySFX(clip, volume, float.MaxValue);
+    }
+
+    
+    public void PlaySFX(string clip, float volume, float pitch){
+        GameObject obj = Instantiate(SFXPrefab, MusicBox);
+        obj.name = "SFX - " + clip;
+        AudioSource audioSource = obj.GetComponent<AudioSource>();
+        audioSource.clip = SoundLookup.GetSound(clip);
+
+        if(volume > 0){
+            audioSource.volume = volume;
+        }
+
+        if(pitch < float.MaxValue){
+            audioSource.pitch = pitch;
+        }
+
+        audioSource.Play();
+        Destroy(audioSource.gameObject,  audioSource.clip.length * (Time.timeScale < 0.009999999776482582 ? 0.01f : Time.timeScale));
+    }
+
 
     public enum GameState{
         PLAYING,
