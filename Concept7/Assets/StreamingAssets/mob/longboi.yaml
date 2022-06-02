@@ -1,0 +1,33 @@
+# Base mob
+core:
+  name: longboi
+  copy_from: [basemob]
+  speed: 1
+  prefab: LongBoi
+  hp: 40
+
+emitter_gun0:
+  x: 0
+  y: 0
+emitter_gun1:
+  x: 0
+  y: 0
+emitter_gun2:
+  x: 0
+  y: 0
+emitter_gun3:
+  x: 0
+  y: 0
+emitter_gun4:
+  x: 0
+  y: 0
+
+timeline_path0:
+  - time: 0
+    move:
+      dest:
+        - x: -20
+          y: 0
+          rel: dir
+          post: {x: -6}
+
