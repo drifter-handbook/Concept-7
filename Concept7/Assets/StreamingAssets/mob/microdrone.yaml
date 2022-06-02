@@ -6,7 +6,7 @@ core:
   speed: 2.5
 
 emitter_gun0:
-  x: -.8
+  x: 0
   y: 0
 
 timeline_diag:
