@@ -31,6 +31,11 @@ public class GameScreen : MonoBehaviour
     public Sprite YImage;
     public Sprite EmptyImage;
 
+    void Update()
+    {
+        Time.timeScale = (PauseScreen.activeSelf || PauseScreen.activeInHierarchy) ? 0f : 1f;
+    }
+
 
     public void AddQueueElement(WeaponType queueElement){
        Sprite newElem;
