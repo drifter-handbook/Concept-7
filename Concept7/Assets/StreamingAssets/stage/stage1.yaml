@@ -8,9 +8,9 @@ timeline_stage:
     spawn:
       actor: drone
       x: 15
-      y: 2
+      y: 0
       run: sine
-    repeat: 6
+    repeat: 1
     interval: .5
 
   - time: 2
@@ -20,7 +20,7 @@ timeline_stage:
       y: -1
       run: sine
       mirror_y: true
-    repeat: 6
+    repeat: 0
     interval: .5
 
 

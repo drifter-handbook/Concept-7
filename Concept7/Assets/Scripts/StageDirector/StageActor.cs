@@ -13,6 +13,7 @@ public class StageActor : MonoBehaviour
     public Vector2 Direction;
     // angular velocity only used for the orbit command.
     public float OrbitSpeed;
+    public float OrbitRadius;
 
     public string ActorType;
     public Dictionary<string, GameObject> Emitters = new Dictionary<string, GameObject>();
@@ -24,6 +25,7 @@ public class StageActor : MonoBehaviour
     public Coroutine movementCoroutine;
     public Coroutine speedCoroutine;
     public Coroutine orbitSpeedCoroutine;
+    public Coroutine orbitRadiusCoroutine;
 
     // mirroring X/Y
     public Vector2 Mirror = Vector2.one;
@@ -73,7 +75,7 @@ public class StageActor : MonoBehaviour
     {
         if (movementCoroutine == null)
         {
-            transform.position += (Vector3)Direction * Speed * Time.deltaTime;
+            transform.localPosition += (Vector3)Direction * Speed * Time.deltaTime;
             RefreshAngle();
         }
     }
@@ -197,12 +199,25 @@ public class StageActor : MonoBehaviour
         }
         OrbitSpeed = orbitspeed;
     }
+    public IEnumerator OrbitRadiusCoroutine(float radius, float dur)
+    {
+        float time = 0f;
+        float startRadius = OrbitRadius;
+        while (time < dur)
+        {
+            OrbitRadius = Mathf.Lerp(startRadius, radius, time / dur);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        OrbitRadius = radius;
+    }
 
     public IEnumerator OrbitCoroutine()
     {
+        OrbitRadius = transform.localPosition.magnitude;
         while (true)
         {
-            transform.localPosition = Quaternion.Euler(0f, 0f, Time.deltaTime * OrbitSpeed * Mathf.Sign(Mirror.x) * Mathf.Sign(Mirror.y)) * transform.localPosition;
+            transform.localPosition = Quaternion.Euler(0f, 0f, Time.deltaTime * OrbitSpeed * Mathf.Sign(Mirror.x) * Mathf.Sign(Mirror.y)) * transform.localPosition.normalized * OrbitRadius;
             yield return null;
         }
     }
@@ -263,7 +278,7 @@ public class StageActor : MonoBehaviour
                 dist += Speed * Time.deltaTime;
                 t = SpeedLerp(curveSpd, dist);
                 Vector2 pos = CubicBezier(spline[i], spline[i + 1], t);
-                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+                transform.localPosition = new Vector3(pos.x, pos.y, transform.localPosition.z);
                 Direction = (CubicBezier(spline[i], spline[i + 1], t + 0.01f) - pos).normalized;
                 yield return null;
             }
