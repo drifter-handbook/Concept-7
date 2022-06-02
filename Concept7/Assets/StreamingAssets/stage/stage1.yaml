@@ -3,25 +3,77 @@ core:
   name: stage1
   copy_from: [basestage]
 
+
+var_pos:
+  value: 7
+
+
 timeline_stage:
   - time: 1
     spawn:
       actor: drone
       x: 15
-      y: 0
+      y: 2
       run: sine
-    repeat: 1
-    interval: .5
+    repeat: 6
+    interval: .8
+
 
   - time: 2
     spawn:
       actor: drone
-      x: 15
+      x: 14
       y: -1
       run: sine
       mirror_y: true
-    repeat: 0
-    interval: .5
+    repeat: 6
+    interval: .8
+
+  - time: 11
+    spawn:
+      actor: microdrone
+      x: 10
+      y: -4
+      run: diag
+      mirror_y: true
+    repeat: 6
+    interval: .4
+
+  - time: 10
+    spawn:
+      actor: microdrone
+      x: 10
+      y: 4
+      run: diag
+    repeat: 6
+    interval: .4
+
+  - time: 10
+    setvar:
+      var: pos
+      inc: .3
+    repeat: 6
+    interval: 0.4
+
+
+  - time: 15
+    spawn:
+      actor: microdrone
+      x: 14
+      y: -2
+      run: hook
+      mirror_y: true
+    repeat: 6
+    interval: 1
+
+  - time: 20
+    spawn:
+      actor: microdrone
+      x: 14
+      y: 2
+      run: hook
+    repeat: 6
+    interval: 1
 
 
   # - time: 15
@@ -33,9 +85,9 @@ timeline_stage:
   #   repeat: 3
   #   interval: 1
 
-  - time: 8
-    spawn:
-      actor: boss1
-      x: 15
-      y: 1
-      run: arrive
+  # - time: 8
+  #   spawn:
+  #     actor: boss1
+  #     x: 15
+  #     y: 1
+  #     run: arrive

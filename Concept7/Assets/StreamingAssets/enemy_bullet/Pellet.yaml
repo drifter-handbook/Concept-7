@@ -8,26 +8,26 @@ core:
   speed: 2
   destroy_offscreen: true
   destroy_on_impact: true
-  default_run: travel
+  # default_run: travel
 
-timeline_travel:
-  - time: 0
-    move:
-      loop: true
-      dest:
-        - x: 1
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 2
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 3
-          y: 0.3
-          rel: dir
-          post: {x: 0.5}
-        - x: 4
-          y: -0.3
-          rel: dir
-          post: {x: 0.5}
+# timeline_travel:
+#   - time: 0
+#     move:
+#       loop: true
+#       dest:
+#         - x: 1
+#           y: 0.3
+#           rel: dir
+#           post: {x: 0.5}
+#         - x: 2
+#           y: -0.3
+#           rel: dir
+#           post: {x: 0.5}
+#         - x: 3
+#           y: 0.3
+#           rel: dir
+#           post: {x: 0.5}
+#         - x: 4
+#           y: -0.3
+#           rel: dir
+#           post: {x: 0.5}
