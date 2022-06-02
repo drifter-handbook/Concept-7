@@ -2,9 +2,10 @@
 Everything is YAML
 
 ### TODO
-1. Timeline tracking
-2. Pause
-3. Linked shots
+1. Pause
+2. Ellipse
+3. Rotate
+4. Linked shots
 
 Move command should take a list of "destinations" which include x/y/dir/dist/spd/abs/rel/reldir/controlpts. Then, they are connected using a bezier curve, which the actor then follows.
 
