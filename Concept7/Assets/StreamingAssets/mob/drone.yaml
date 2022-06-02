@@ -45,8 +45,12 @@ timeline_sine:
           y: -1
           rel: dir
           post: {x: -1}
-
   - time: 4
+    run:
+      timeline: repeatshoot
+
+timeline_repeatshoot:
+  - time: 0
     shoot:
       num: 1
       speed: 4
@@ -54,4 +58,6 @@ timeline_sine:
       emitter: gun0
       dir: 200
       parent: actor
-
+  - time: 0.19
+    run:
+      timeline: repeatshoot
