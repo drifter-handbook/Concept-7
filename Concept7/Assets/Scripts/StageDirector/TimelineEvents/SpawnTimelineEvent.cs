@@ -26,13 +26,14 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
 
     public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
     {
+        Debug.Log(yaml);
         return deserializer.Deserialize<SpawnTimelineEvent>(yaml);
     }
 
     public void Start(MonoBehaviour runner)
     {
         StageActor actor = runner.GetComponent<StageActor>();
-        Vector3 pos = TimelineEventUtils.FindDestPosition(X + GetVar(actor, XModifier), Y + GetVar(actor, YModifier), Dir, Dist, Rel ?? "abs", runner.transform.position, actor.Direction);
+        Vector3 pos = FindDestPosition((X ?? 0) + GetVar(actor, XModifier), (Y ?? 0) + GetVar(actor, YModifier), Dir, Dist, Rel ?? "abs", runner.transform.position, actor.Direction);
         GameObject go = StageDirector.Spawn(Actor, new Vector3(pos.x, pos.y), 0f);
         StageActor spawned = go.GetComponent<StageActor>();
         float mirrorX = MirrorX == null ? actor.Mirror.x : (MirrorX.Value ? -1 : 1);
