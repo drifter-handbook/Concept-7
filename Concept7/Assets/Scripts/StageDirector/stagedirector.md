@@ -1,9 +1,6 @@
 # Concept 7 Stage Director
 Everything is YAML
 
-### TODO
-1. Linked shots
-
 ## Overview
 The Concept 7 Stage Director (aka "The Director") allows developers to write easy-to-use YAML files which create things like bullets, bullet patterns, enemies and bosses. These files are human-readable, and are loaded during runtime. This allows us to easily test bullet patterns and modify sprites without recompiling.
 
