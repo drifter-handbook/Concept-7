@@ -53,9 +53,37 @@ timeline_sine:
     shoot:
       num: 1
       speed: 4
-
       actor: basebullet
       mirror_y: false
       emitters: [gun0]
 
-
+timeline_testlink:
+  - time: 0
+    move:
+      dest:
+        - x: -6
+          y: 0
+          rel: dir
+          post: {x: -1}
+  - time: 2.5
+    setspeed:
+      speed: 0
+      dur: 1
+  - time: 3.5
+    shoot:
+      num: 1
+      speed: 2
+      actor: linkedpellet
+      mirror_y: false
+      emitters: [gun0]
+  - time: 3.5
+    setspeed:
+      speed: 2
+      dur: 1
+  - time: 3.5
+    move:
+      dest:
+        - x: 6
+          y: 0
+          rel: dir
+          post: {x: 1}

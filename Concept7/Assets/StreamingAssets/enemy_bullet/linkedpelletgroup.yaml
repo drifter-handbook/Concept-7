@@ -1,0 +1,15 @@
+core:
+  name: linkedpelletgroup
+  prefab: ActorGroup
+  invuln: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 3
+  destroy_offscreen: true
+  destroy_on_impact: true
+  default_run: move
+
+timeline_move:
+  - time: 0
+    move_at_player:
+      speed: 3

@@ -129,6 +129,18 @@ public class StageActor : MonoBehaviour
         }
     }
 
+    public bool IsRunningTimeline(string timeline)
+    {
+        foreach (RunningTimeline rt in RunningTimelines)
+        {
+            if (rt.Name == timeline)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void RunTimeline(string name)
     {
         if (name == null)

@@ -35,7 +35,8 @@ public partial class StageData
         new OrbitTimelineEvent(),
         new SetVarTimelineEvent(),
         new RunTimelineTimelineEvent(),
-        new RotateTimelineEvent()
+        new RotateTimelineEvent(),
+        new LinkTimelineEvent()
     };
 
     public StageData()

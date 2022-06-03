@@ -12,6 +12,7 @@ public class StageDirector : MonoBehaviour
     public StageData Data;
     public GameObject DefaultActorPrefab;
     public Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
+    public List<StageActor> CurrentActors = new List<StageActor>();
     // used in FindWeapon
     Dictionary<string, string> Weapons = new Dictionary<string, string>();
     Dictionary<string, StageData.Actor> WeaponsActor = new Dictionary<string, StageData.Actor>();
@@ -68,7 +69,15 @@ public class StageDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // remove destroyed actors
+        for (int i = 0; i < CurrentActors.Count; i++)
+        {
+            if (CurrentActors[i] == null)
+            {
+                CurrentActors.RemoveAt(i);
+                i--;
+            }
+        }
     }
 
     public static StageData.Actor FindWeapon(int r, int y, int b)
@@ -124,6 +133,18 @@ public class StageDirector : MonoBehaviour
         return go;
     }
 
+    public static GameObject FindCurrentActor(string actorType)
+    {
+        foreach (StageActor actor in Instance.CurrentActors)
+        {
+            if (actor != null && actor.ActorType == actorType)
+            {
+                return actor.gameObject;
+            }
+        }
+        return null;
+    }
+
     public static GameObject Spawn(string actor, Vector2 position, float rotation)
     {
         // create actor
@@ -134,6 +155,7 @@ public class StageDirector : MonoBehaviour
         {
             stActor = actorObj.AddComponent<StageActor>();
         }
+        Instance.CurrentActors.Add(stActor);
         stActor.Initialize(actor);
         return actorObj;
     }

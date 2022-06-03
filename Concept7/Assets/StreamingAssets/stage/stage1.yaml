@@ -11,6 +11,37 @@ timeline_stage:
 
   - time: 0
     spawn:
+      actor: drone
+      x: 15
+      y: 2
+      run: testlink
+  - time: 0
+    spawn:
+      actor: drone
+      x: 15
+      y: 1
+      run: testlink
+  - time: 0
+    spawn:
+      actor: drone
+      x: 15
+      y: 0
+      run: testlink
+  - time: 0
+    spawn:
+      actor: drone
+      x: 15
+      y: -1
+      run: testlink
+  - time: 0
+    spawn:
+      actor: drone
+      x: 15
+      y: -2
+      run: testlink
+
+  - time: 0
+    spawn:
       actor: longboi
       x: 15
       y: 0
