@@ -4,9 +4,9 @@ core:
   copy_from: [basestage]
 
 var_pos0:
-  value: 3
+  value: 0
 var_pos1:
-  value: -2
+  value: 0
 
 
 
@@ -24,13 +24,36 @@ timeline_stage:
     run:
       timeline: microdroneLineright
 
-  - time: 4.5
-    run: 
+  - time: 3.5
+    run:
       timeline: microdroneLineleft
 
   - time: 6.5
     run: 
       timeline: twinsine
+
+  - time: 11
+    spawn:
+      actor: longboi
+      x: 15
+      y: 0
+      run: path0
+
+  - time: 14
+    run:
+      timeline: microdronechevronright
+
+  - time: 15.5
+    run: 
+      timeline: microdronechevronleft
+
+  - time: 19
+    run:
+      timeline: microdronechevronleft
+
+  - time: 20.5
+    run: 
+      timeline: microdronechevronright 
 
   # - time: 0
   #   spawn:
@@ -42,58 +65,53 @@ timeline_stage:
  
   
 
-  - time: 14
-    spawn:
-      actor: microdrone
-      x: 10
-      y: -4
-      run: diag
-      mirror_y: true
-    repeat: 6
-    interval: .4
+  # - time: 14
+  #   spawn:
+  #     actor: microdrone
+  #     x: 10
+  #     y: -4
+  #     run: diag
+  #     mirror_y: true
+  #   repeat: 6
+  #   interval: .4
 
-  - time: 13
-    spawn:
-      actor: microdrone
-      x: 10
-      y: 4
-      run: diag
-    repeat: 6
-    interval: .4
+  # - time: 13
+  #   spawn:
+  #     actor: microdrone
+  #     x: 10
+  #     y: 4
+  #     run: diag
+  #   repeat: 6
+  #   interval: .4
 
-  - time: 13
-    setvar:
-      var: pos0
-      inc: .3
-    repeat: 6
-    interval: 0.4
+  # - time: 13
+  #   setvar:
+  #     var: pos0
+  #     inc: .3
+  #   repeat: 6
+  #   interval: 0.4
 
 
-  - time: 15
-    spawn:
-      actor: microdrone
-      x: 14
-      y: -2
-      run: hook
-      mirror_y: true
-    repeat: 6
-    interval: 1
+  # - time: 15
+  #   spawn:
+  #     actor: microdrone
+  #     x: 14
+  #     y: -2
+  #     run: hook
+  #     mirror_y: true
+  #   repeat: 6
+  #   interval: 1
 
-  - time: 20
-    spawn:
-      actor: microdrone
-      x: 14
-      y: 2
-      run: hook
-    repeat: 6
-    interval: 1
+  # - time: 20
+  #   spawn:
+  #     actor: microdrone
+  #     x: 14
+  #     y: 2
+  #     run: hook
+  #   repeat: 6
+  #   interval: 1
 
-  - time: 22
-    spawn:
-      actor: longboi
-      x: 15
-      y: 0
-      run: path0
+  
 
   # - time: 15
   #   spawn:
@@ -111,12 +129,13 @@ timeline_stage:
   #     y: 1
   #     run: arrive
 
-timeline_microdroneLineright:
+timeline_microdronechevronright:
   - time: 0
     spawn:
       actor: microdrone
       x: 15
-      y: pos0
+      y: 3
+      y_modifier: pos0
       run: basicline
     repeat: 5
     interval: .2
@@ -130,6 +149,29 @@ timeline_microdroneLineright:
     setvar:
       var: pos0
       inc: 2
+
+timeline_microdronechevronleft:
+  - time: 0
+    spawn:
+      actor: microdrone
+      x: 15
+      y: -1.5
+      y_modifier: pos0
+      run: basicline
+    repeat: 5
+    interval: .2
+  - time: .1
+    setvar:
+      var: pos0
+      inc: .5
+    repeat: 5
+    interval: .2
+  - time: 1.1
+    setvar:
+      var: pos0
+      inc: -2
+
+
 
 
   # - time: 0
@@ -156,6 +198,39 @@ timeline_microdroneLineright:
   #     x: 15
   #     y: 1
   #     run: basicline
+
+timeline_microdroneLineright:
+  - time: 0
+    spawn:
+      actor: microdrone
+      x: 15
+      y: 3
+      run: basicline
+  - time: 0
+    spawn:
+      actor: microdrone
+      x: 15
+      y: 2.5
+      run: basicline
+  - time: 0
+    spawn:
+      actor: microdrone
+      x: 15
+      y: 2
+      run: basicline
+  - time: 0
+    spawn:
+      actor: microdrone
+      x: 15
+      y: 1.5
+      run: basicline
+  - time: 0
+    spawn:
+      actor: microdrone
+      x: 15
+      y: 1
+      run: basicline
+
 
 timeline_microdroneLineleft:
   - time: 0
@@ -204,7 +279,7 @@ timeline_twinsine:
     spawn:
       actor: drone
       x: 14
-      y: -1.5
+      y: -1
       run: sine
       mirror_y: true
     repeat: 6

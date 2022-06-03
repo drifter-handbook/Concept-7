@@ -1,7 +1,7 @@
 # Base mob
 core:
   name: longboi
-  hp: 40
+  hp: 55
   tags: ["enemy"]
   speed: 1
   prefab: LongBoi
