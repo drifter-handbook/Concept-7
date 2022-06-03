@@ -174,7 +174,7 @@ MonoBehaviour:
   mainScrollingSpeed: 0.02
   secondaryScrollingSpeed: 0.2
   scrollingBackgrounds:
-  - mainBackground: {fileID: 21300000, guid: b9fbff8350fe9234ca2f52babe6d247f, type: 3}
+  - mainBackground: {fileID: 21300000, guid: b531bd1ef9772b34383ab871aca6f740, type: 3}
     secondaryBackground: {fileID: 0}
     repeatCount: 0
     shouldrepeatNonstop: 1
@@ -1144,6 +1144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultActorPrefab: {fileID: 8303589307971982775, guid: e1a90e5d44747c340b49ccfa28b7d8bd, type: 3}
+  CurrentActors: []
 --- !u!1 &273561802
 GameObject:
   m_ObjectHideFlags: 0
