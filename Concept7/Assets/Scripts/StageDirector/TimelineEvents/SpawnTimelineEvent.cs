@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
-using static TimelineEventUtils;
+using static StageDataUtils;
 
 public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
 {
@@ -24,10 +23,9 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public string XModifier;
     public string YModifier;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
-        Debug.Log(yaml);
-        return deserializer.Deserialize<SpawnTimelineEvent>(yaml);
+        return Deserialize<SpawnTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
     public void Start(MonoBehaviour runner)
@@ -41,7 +39,7 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         spawned.Mirror = new Vector2(mirrorX, mirrorY);
         if (Parent != null)
         {
-            go.transform.parent = TimelineEventUtils.GetParent(Parent, go.transform.position, runner.gameObject).transform;
+            go.transform.parent = StageDataUtils.GetParent(Parent, go.transform.position, runner.gameObject).transform;
         }
         spawned.FinishSpawn(Run, Lifetime);
     }

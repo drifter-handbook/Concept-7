@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
+using static StageDataUtils;
 
 public class LinkTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
 {
@@ -12,9 +12,9 @@ public class LinkTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Acto
     public string FromActor;
     public string FromTimeline;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
-        return deserializer.Deserialize<LinkTimelineEvent>(yaml);
+        return Deserialize<LinkTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
     public void Start(MonoBehaviour runner)

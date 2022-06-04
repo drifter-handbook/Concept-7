@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
+using static StageDataUtils;
 
 public class SetSpeedTimelineEvent : StageData.Actor.Timeline.IEvent
 {
@@ -11,9 +11,9 @@ public class SetSpeedTimelineEvent : StageData.Actor.Timeline.IEvent
     public float Speed;
     public float Dur;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
-        return deserializer.Deserialize<SetSpeedTimelineEvent>(yaml);
+        return Deserialize<SetSpeedTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
     public void Start(MonoBehaviour runner)

@@ -160,7 +160,7 @@ public partial class StageData
             public interface IEvent
             {
                 string Action { get; }
-                IEvent CloneFrom(string yaml, IDeserializer deserializer);
+                IEvent CloneFrom(Actor actor, string yaml);
                 void Start(MonoBehaviour runner);
             }
         }

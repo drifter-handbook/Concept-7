@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
+using static StageDataUtils;
 
 public class OrbitTimelineEvent : StageData.Actor.Timeline.IEvent
 {
@@ -13,9 +13,9 @@ public class OrbitTimelineEvent : StageData.Actor.Timeline.IEvent
     public float? Dur;
     public Vector3? Tilt;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
-        return deserializer.Deserialize<OrbitTimelineEvent>(yaml);
+        return Deserialize<OrbitTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
     public void Start(MonoBehaviour runner)

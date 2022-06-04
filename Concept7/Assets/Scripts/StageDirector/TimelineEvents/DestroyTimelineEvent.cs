@@ -2,18 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
+using static StageDataUtils;
 
 public class DestroyTimelineEvent : StageData.Actor.Timeline.IEvent
 {
     public string Action => "destroy";
     public bool Active = true;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
         return new DestroyTimelineEvent()
         {
-            Active = deserializer.Deserialize<bool>(yaml)
+            Active = Deserialize<bool>(actor, $"Timeline event {Action}", yaml)
         };
     }
 

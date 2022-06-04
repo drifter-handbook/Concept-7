@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using YamlDotNet.Serialization;
-using static TimelineEventUtils;
+using static StageDataUtils;
 
 public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
 {
@@ -29,9 +28,9 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public string SpeedModifier;
     public bool Ring;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
-        return deserializer.Deserialize<ShootTimelineEvent>(yaml);
+        return Deserialize<ShootTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
     public void Start(MonoBehaviour runner)

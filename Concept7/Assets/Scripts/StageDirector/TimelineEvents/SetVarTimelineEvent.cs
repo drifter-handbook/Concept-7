@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
+using static StageDataUtils;
 
 public class SetVarTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
 {
@@ -12,9 +12,9 @@ public class SetVarTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Ac
     public float? Set;
     public float? Inc;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
-        return deserializer.Deserialize<SetVarTimelineEvent>(yaml);
+        return Deserialize<SetVarTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
     public void Start(MonoBehaviour runner)

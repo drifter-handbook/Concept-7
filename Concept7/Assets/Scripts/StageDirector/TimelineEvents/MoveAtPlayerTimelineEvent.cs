@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
+using static StageDataUtils;
 
 public class MoveAtPlayerTimelineEvent : StageData.Actor.Timeline.IEvent
 {
@@ -12,9 +12,9 @@ public class MoveAtPlayerTimelineEvent : StageData.Actor.Timeline.IEvent
     public float? Speed;
     public bool? Instant;
 
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
-        return deserializer.Deserialize<MoveAtPlayerTimelineEvent>(yaml);
+        return Deserialize<MoveAtPlayerTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
     public void Start(MonoBehaviour runner)

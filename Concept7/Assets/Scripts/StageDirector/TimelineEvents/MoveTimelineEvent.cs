@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YamlDotNet.Serialization;
+using static StageDataUtils;
 
 public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
 {
@@ -12,6 +12,11 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
     public bool Instant;
     public bool Loop;
     public List<Destination> Dest;
+
+    public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
+    {
+        return Deserialize<MoveTimelineEvent>(actor, $"Timeline event {Action}", yaml);
+    }
 
     public class ControlPt
     {
@@ -38,7 +43,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
         {
             if (Pre != null && Post == null)
             {
-                Vector2 v = TimelineEventUtils.FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel ?? Rel, cur, dir);
+                Vector2 v = FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel ?? Rel, cur, dir);
                 return new StageActor.MoveTarget()
                 {
                     Pos = cur,
@@ -48,7 +53,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
             }
             if (Pre == null && Post != null)
             {
-                Vector2 v = TimelineEventUtils.FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel ?? Rel, cur, dir);
+                Vector2 v = FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel ?? Rel, cur, dir);
                 return new StageActor.MoveTarget()
                 {
                     Pos = cur,
@@ -61,8 +66,8 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
                 return new StageActor.MoveTarget()
                 {
                     Pos = cur,
-                    Pre = TimelineEventUtils.FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel ?? Rel, cur, dir),
-                    Post = TimelineEventUtils.FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel ?? Rel, cur, dir)
+                    Pre = FindDestPosition(Pre.X, Pre.Y, Pre.Dir, Pre.Dist, Pre.Rel ?? Rel, cur, dir),
+                    Post = FindDestPosition(Post.X, Post.Y, Post.Dir, Post.Dist, Post.Rel ?? Rel, cur, dir)
                 };
             }
             return new StageActor.MoveTarget()
@@ -72,11 +77,6 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
                 Post = Vector2.Lerp(cur, next, 0.5f)
             };
         }
-    }
-
-    public StageData.Actor.Timeline.IEvent CloneFrom(string yaml, IDeserializer deserializer)
-    {
-        return deserializer.Deserialize<MoveTimelineEvent>(yaml);
     }
 
     Vector2 Mirror(Vector2 pt, Vector2 origin, Vector2 mirror, Vector2 dir)
@@ -119,7 +119,7 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
             for (int i = 0; i < dests.Count; i++)
             {
                 Destination d = dests[i];
-                current = TimelineEventUtils.FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.localPosition, actor.Direction);
+                current = FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.localPosition, actor.Direction);
                 pos.Add(current);
             }
             // calculate Move Targets

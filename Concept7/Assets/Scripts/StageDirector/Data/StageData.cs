@@ -7,6 +7,7 @@ using UnityEngine;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+using static StageDataUtils;
 
 // Loads and stores all data loaded from the StreamingAssets YAML files.
 public partial class StageData
@@ -39,6 +40,18 @@ public partial class StageData
         new LinkTimelineEvent()
     };
 
+    public static IDeserializer Deserializer;
+    public static ISerializer Serializer;
+    static StageData()
+    {
+        Deserializer = new DeserializerBuilder()
+            .WithNamingConvention(UnderscoredNamingConvention.Instance)
+            .Build();
+        Serializer = new SerializerBuilder()
+            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+            .Build();
+    }
+
     public StageData()
     {
         Load();
@@ -46,15 +59,10 @@ public partial class StageData
 
     public void Load()
     {
-        var deserializer = new DeserializerBuilder()
-            .WithNamingConvention(UnderscoredNamingConvention.Instance)
-            .Build();
-        var serializer = new SerializerBuilder()
-            .WithNamingConvention(CamelCaseNamingConvention.Instance)
-            .Build();
+
         // parse stages file
         string stagesPath = Path.Combine(WorkingDir, StagesFile);
-        Stages = ToStages(stagesPath, deserializer);
+        Stages = ToStages(stagesPath);
         // parse all actor files
         foreach (string p in Directory.GetFiles(WorkingDir, "*.yaml", SearchOption.AllDirectories))
         {
@@ -62,7 +70,7 @@ public partial class StageData
             {
                 continue;
             }
-            Actor actor = ToActor(p, deserializer, serializer);
+            Actor actor = ToActor(p);
             if (Actors.ContainsKey(actor.Name))
             {
                 throw new StageDataException($"Duplicate actor {actor.Name} in both {actor.File} and {Actors[actor.Name].File}");
@@ -72,25 +80,17 @@ public partial class StageData
         CheckRefs();
     }
 
-    private List<Stage> ToStages(string path, IDeserializer deserializer)
+    private List<Stage> ToStages(string path)
     {
-        StageList stages = deserializer.Deserialize<StageList>(File.ReadAllText(path));
+        StageList stages = Deserialize<StageList>(null, path, File.ReadAllText(path));
         return stages.Stages;
     }
-    private Actor ToActor(string path, IDeserializer deserializer, ISerializer serializer)
+    private Actor ToActor(string path)
     {
         // load actor core fields
-        Dictionary<string, object> actorData = null;
-        try
-        {
-            actorData = deserializer.Deserialize<Dictionary<string, object>>(File.ReadAllText(path));
-        }
-        catch (YamlException e)
-        {
-            throw new StageDataException($"Failed to parse {path} as YAML: {e.Message}");
-        }
+        Dictionary<string, object> actorData = Deserialize<Dictionary<string, object>>(null, path, File.ReadAllText(path));
         Debug.Log($"Parsing {path}");
-        Actor actor = deserializer.Deserialize<Actor>(serializer.Serialize(actorData["core"]));
+        Actor actor = Deserialize<Actor>(null, $"{path} core section", Serializer.Serialize(actorData["core"]));
         actor.File = path;
         if (string.IsNullOrEmpty(actor.Name))
         {
@@ -103,7 +103,7 @@ public partial class StageData
             if (s.StartsWith(EmitterPrefix))
             {
                 string name = s.Remove(s.IndexOf(EmitterPrefix), EmitterPrefix.Length);
-                Actor.Emitter em = deserializer.Deserialize<Actor.Emitter>(serializer.Serialize(actorData[s]));
+                Actor.Emitter em = Deserialize<Actor.Emitter>(actor, s, Serializer.Serialize(actorData[s]));
                 em.Name = name;
                 if (actor.Emitters.ContainsKey(em.Name))
                 {
@@ -115,7 +115,7 @@ public partial class StageData
             if (s.StartsWith(VarPrefix))
             {
                 string name = s.Remove(s.IndexOf(VarPrefix), VarPrefix.Length);
-                Actor.Var val = deserializer.Deserialize<Actor.Var>(serializer.Serialize(actorData[s]));
+                Actor.Var val = Deserialize<Actor.Var>(actor, s, Serializer.Serialize(actorData[s]));
                 actor.Vars[name] = val;
             }
             // load timelines
@@ -128,7 +128,8 @@ public partial class StageData
                     throw new StageDataException($"Duplicate timeline {name} in {actor.File}");
                 }
                 actor.Timelines[name] = timeline;
-                foreach (Dictionary<object, object> evdata in (List<object>)actorData[s])
+                List<object> timelineData = Deserialize<List<object>>(actor, s, Serializer.Serialize(actorData[s]));
+                foreach (Dictionary<object, object> evdata in timelineData)
                 {
                     // every event in the timeline must have exactly one "action" field, such as "move" or "shoot_at_player"
                     Dictionary<string, object> evconv = evdata.ToDictionary(x => (string)x.Key, x => x.Value);
@@ -156,7 +157,7 @@ public partial class StageData
                     }
                     // parse action field
                     ev = ev.Where(x => Actor.Timeline.Entry.Fields.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Value);
-                    Actor.Timeline.Entry ste = deserializer.Deserialize<Actor.Timeline.Entry>(serializer.Serialize(ev));
+                    Actor.Timeline.Entry ste = Deserialize<Actor.Timeline.Entry>(actor, "Timeline entry", Serializer.Serialize(ev));
                     string action = ev2.Keys.First();
                     foreach (Actor.Timeline.IEvent evt in TimelineEvents)
                     {
@@ -166,7 +167,7 @@ public partial class StageData
                             {
                                 throw new StageDataException($"Action {action} matches more than one action in StageData.TimelineEvents!");
                             }
-                            ste.Event = evt.CloneFrom(serializer.Serialize(ev2[action]), deserializer);
+                            ste.Event = evt.CloneFrom(actor, Serializer.Serialize(ev2[action]));
                         }
                     }
                     if (ste.Event == null)
