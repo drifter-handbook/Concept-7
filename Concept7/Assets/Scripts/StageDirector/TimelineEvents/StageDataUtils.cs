@@ -8,6 +8,7 @@ using YamlDotNet.Serialization;
 
 public static class StageDataUtils
 {
+    // deserialize YAML, and generate a useful error if it fails.
     public static T Deserialize<T>(StageData.Actor actor, string section, string yaml)
     {
         try
@@ -24,6 +25,8 @@ public static class StageDataUtils
             throw e;
         }
     }
+    // recursively check the YAML against the type we're trying to deserialize.
+    // I wish YamlDotNet supported this instead of just erroring.
     static IStageDataErrorThrower CheckSchema(Type t, string yaml, IDeserializer deserializer, ISerializer serializer, string field)
     {
         // primitive type
@@ -41,7 +44,6 @@ public static class StageDataUtils
             {
                 return new StageDataTypeError() { Field = field, Type = t.Name.ToLower(), Yaml = yaml };
             }
-            return null;
         }
         // check this nullable, if it is one
         else if (t.IsGenericType && t.GetGenericTypeDefinition().IsAssignableFrom(typeof(Nullable<>)))
@@ -52,7 +54,6 @@ public static class StageDataUtils
             {
                 return r;
             }
-            return null;
         }
         // recursively check this list, if it is one
         else if (t.IsGenericType && t.GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>)))
@@ -79,7 +80,6 @@ public static class StageDataUtils
                     return r;
                 }
             }
-            return null;
         }
         // recursively check this dict, if it is one
         else if (t.IsGenericType && t.GetGenericTypeDefinition().IsAssignableFrom(typeof(Dictionary<,>)))
@@ -106,7 +106,6 @@ public static class StageDataUtils
                     return r;
                 }
             }
-            return null;
         }
         // recursively check this object/struct
         else if (!t.IsGenericType)
@@ -147,8 +146,10 @@ public static class StageDataUtils
         {
             throw new StageDataException($"Unrecognized generic {t}");
         }
+        // no error
         return null;
     }
+    // convert between camel case fields (C#) and underscore case fields (YAML)
     public static string ToCamelCase(string str)
     {
         return str.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries).Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1)).Aggregate(string.Empty, (s1, s2) => s1 + s2);
@@ -197,6 +198,7 @@ public static class StageDataUtils
         }
     }
 
+    // Convert X/Y/Dir/Dist/Rel and a current pos/dir into a final position.
     // Dist cannot be null.
     public static Vector2 FindDestPosition(float? X, float? Y, float? Dir, float? Dist, string Rel, Vector2 pos, Vector2 dir)
     {
@@ -237,6 +239,7 @@ public static class StageDataUtils
         throw new StageDataException($"Invalid rel value: {rel}, allowed values are ['abs', 'pos', 'dir']");
     }
 
+    // Get or create a parent for an actor.
     public static GameObject GetParent(string parenting, Vector2 pos, GameObject actor, string emitter=null)
     {
         // if set no parent
@@ -261,6 +264,7 @@ public static class StageDataUtils
         throw new StageDataException($"Invalid parent value: {parenting}, allowed values are [null, 'new', 'actor', 'emitter']");
     }
 
+    // get variable, defaulting to zero if it doesn't exist.
     public static float GetVar(StageActor actor, string s)
     {
         if (s == null)
