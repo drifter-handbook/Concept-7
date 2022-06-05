@@ -8,7 +8,7 @@ core:
   depth: -1
   speed: 2
   destroy_offscreen: true
-  destroy_on_impact: true
+  destroy_on_impact: false
 
 emitter_burst:
   x: 0

@@ -1,7 +1,7 @@
 # Base mob
 core:
   name: longboi
-  hp: 55
+  hp: 50
   tags: ["enemy"]
   speed: 1
   prefab: LongBoi
@@ -25,6 +25,9 @@ emitter_gun4:
 emitter_gun5:
   x: 1.2
   y: -.8
+emitter_gun6:
+  x: -1.5
+  y: 0
 
 timeline_path0:
   - time: 0
@@ -42,7 +45,17 @@ timeline_path0:
       emitters: [gun0, gun1, gun2, gun3, gun4, gun5]
       actor: pellet
     repeat: 20
-    interval: 3
+    interval: 4
+
+  - time: 4
+    shoot:
+      num: 1
+      speed: 4
+      dir: 180
+      emitters: [gun0, gun1]
+      actor: wave
+    repeat: 20
+    interval: 4
 
 timeline_path1:
   - time: 0

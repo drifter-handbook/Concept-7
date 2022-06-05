@@ -49,7 +49,7 @@ timeline_sine:
           rel: dir
           post: {x: -1}
 
-  - time: 4
+  - time: 2
     shoot:
       num: 1
       speed: 4
@@ -61,7 +61,7 @@ timeline_testlink:
   - time: 0
     move:
       dest:
-        - x: -6
+        - x: -10
           y: 0
           rel: dir
           post: {x: -1}

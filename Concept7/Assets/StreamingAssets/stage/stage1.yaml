@@ -12,25 +12,50 @@ var_pos1:
 
 timeline_stage:
 
-  - time: 0
-    run:
-      timeline: microdroneLineright
+  - time: 2
+    spawn:
+      actor: drone2
+      x: 13
+      y: 3
+      run: slowspread
 
-  - time: 1.5
-    run:
-      timeline: microdroneLineleft
+  - time: 5
+    spawn:
+      actor: drone2
+      x: 14
+      y: -2
+      run: slowspread
 
-  - time: 3
-    run:
-      timeline: microdroneLineright
-
-  - time: 3.5
-    run:
-      timeline: microdroneLineleft
+  - time: 6
+    spawn:
+      actor: drone2
+      x: 13.5
+      y: 2
+      run: slowspread
 
   - time: 6.5
+    spawn:
+      actor: drone2
+      x: 14.5
+      y: 0
+      run: slowspread
+
+
+  # - time: 0
+  #   run:
+  #     timeline: microdroneLineright
+
+  # - time: 1.5
+  #   run:
+  #     timeline: microdroneLineleft
+
+  - time: 9
     run: 
-      timeline: twinsine
+      timeline: twinsine 
+
+  # - time: 6.5
+  #   run: 
+  #     timeline: twinsine
 
   - time: 11
     spawn:
@@ -55,11 +80,38 @@ timeline_stage:
     run: 
       timeline: microdronechevronright 
 
-  - time: 20.5
+
+  - time: 22
+    spawn:
+      actor: longboi
+      x: 15
+      y: 2.5
+      run: path0
+
+  - time: 22
+    spawn:
+      actor: longboi
+      x: 15
+      y: -1.5
+      run: path0
+
+  - time: 28
+    run:
+      timeline: microdroneLineright
+
+  - time: 30.5
+    run:
+      timeline: microdroneLineleft
+
+  - time: 31.5
+    run:
+      timeline: spreadsquad
+
+  - time: 38
     spawn:
       actor: boss1
       x: 15
-      y: 0
+      y: 1
 
   # - time: 0
   #   spawn:
@@ -275,7 +327,7 @@ timeline_twinsine:
     spawn:
       actor: drone
       x: 15
-      y: 2
+      y: 1.5
       run: sine
     repeat: 6
     interval: .8
@@ -285,8 +337,34 @@ timeline_twinsine:
     spawn:
       actor: drone
       x: 14
-      y: -1
+      y: -.5
       run: sine
       mirror_y: true
     repeat: 6
     interval: .8
+
+timeline_spreadsquad:
+  - time: 0
+    spawn:
+      actor: drone2
+      x: 13
+      y: 1
+      run: slowspread
+    repeat: 3
+    interval: 3
+  - time: .5
+    spawn:
+      actor: drone2
+      x: 13
+      y: 2
+      run: slowspread
+    repeat: 3
+    interval: 1.5
+  - time: .5
+    spawn:
+      actor: drone2
+      x: 13
+      y: 0
+      run: slowspread
+    repeat: 3
+    interval: 1.5

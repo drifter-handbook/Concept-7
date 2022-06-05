@@ -23,17 +23,17 @@ emitter_burst:
 timeline_follow:
   - time: .6
     move_at_player:
-      max_turn: 5
+      max_turn: 15
       speed: .01
     repeat: 9
-    interval: 0.03
+    interval: 0.01
 
   - time: .9
     move_at_player:
-      max_turn: 15
+      max_turn: 2
       speed: 10
     repeat: 200
-    interval: 0.03
+    interval: 0.1
 
 timeline_burst:
   - time: 0
