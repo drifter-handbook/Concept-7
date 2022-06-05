@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8989959059681717049
 Transform:
   m_ObjectHideFlags: 0
@@ -106,6 +106,10 @@ PrefabInstance:
     - target: {fileID: 8303589307971982775, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_Name
       value: AtomHeart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900832013474112186, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9184540977691960104, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_Size.x

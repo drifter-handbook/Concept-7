@@ -27,6 +27,8 @@ emitter_gun4:
 
 var_hello:
   value: 0
+var_fan:
+  value: 0
 var_world:
   value: 0
 
@@ -262,13 +264,13 @@ timeline_fan:
       angle: 0
       actor: basebullet
       emitters: [gun0]
-      num_modifier: hello
+      num_modifier: fan
       angle_modifier: world
     repeat: 4
     interval: 0.2
   - time: 0.1
     setvar:
-      var: hello
+      var: fan
       inc: 2
     repeat: 4
     interval: 0.2
@@ -280,7 +282,7 @@ timeline_fan:
     interval: 0.2
   - time: 1
     setvar:
-      var: hello
+      var: fan
       inc: -8
   - time: 1
     setvar:
