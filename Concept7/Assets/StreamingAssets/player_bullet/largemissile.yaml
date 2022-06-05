@@ -6,7 +6,7 @@ core:
   turn_on_move: true
   tags: ["playerbullet"]
   depth: -2
-  speed: 10
+  speed: 6
   destroy_offscreen: true
   destroy_on_impact: false
   default_run: travel
