@@ -1,7 +1,7 @@
 ﻿# A forward line splattering of paint that on kill creates a piercing bullet
 core:
-  name: redPaintSplat
-  prefab: RedPaintSplatter
+  name: bluePaintSplat
+  prefab: BluePaintSplatter
   invuln: true
   tags: ["playerbullet"]
   depth: -2
