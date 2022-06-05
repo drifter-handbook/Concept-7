@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    public static Game Instance;
+
     [Header("Debug Cheats")]
     public bool Invulnerable = false;
     public bool ContinueWithNoLives = true;
+    public bool Shield = true;
 
     [Header("Game Info")]
     public int CurrentLives;
@@ -31,7 +34,20 @@ public class Game : MonoBehaviour
 
     private GameState gameState = GameState.PLAYING;
     private PlayerController ClientPlayer; //the user's player
-    
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     public void Start(){
         CurrentLives = StartingLives;
         TimeElapsed = 0;

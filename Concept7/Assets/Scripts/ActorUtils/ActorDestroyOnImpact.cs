@@ -7,7 +7,7 @@ public class ActorDestroyOnImpact : MonoBehaviour
     [SerializeField] private GameObject impactPrefab;
     private void OnTriggerEnter2D(Collider2D other)
     {
-    	if(other.gameObject.tag != "PlayArea")
+    	if(other.gameObject.tag != "PlayArea" && other.gameObject.tag != "PlayerReflect")
         {
             StartCoroutine(DestroyAfterDelay());
             if (impactPrefab != null)
