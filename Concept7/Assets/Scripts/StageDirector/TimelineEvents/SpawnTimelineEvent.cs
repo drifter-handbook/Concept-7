@@ -42,6 +42,10 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
             go.transform.parent = StageDataUtils.GetParent(Parent, go.transform.position, runner.gameObject).transform;
         }
         spawned.FinishSpawn(Run, Lifetime);
+        if (runner.gameObject.tag == "PlayerWeapon")
+        {
+            PlayerShieldTest.SetToPlayerBullet(spawned);
+        }
     }
 
     public void CompileCheck(Dictionary<string, StageData.Actor> actors, StageData.Actor current)

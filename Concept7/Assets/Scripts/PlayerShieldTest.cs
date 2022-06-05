@@ -6,8 +6,12 @@ using UnityEngine;
 // This *better* not make into the final release, or else
 // I'm going to have some choice words to say to, uh, myself I guess
 
+// because this is a singleton, this does NOT support multiplayer.
+
 public class PlayerShieldTest : MonoBehaviour
 {
+    public static PlayerShieldTest Instance;
+
     public GameObject PlayerObj;
 
     SpriteRenderer shieldSr;
@@ -15,6 +19,19 @@ public class PlayerShieldTest : MonoBehaviour
     Collider2D playerCol;
 
     public WeaponData ReflectWeaponData;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -64,9 +81,14 @@ public class PlayerShieldTest : MonoBehaviour
         }
         // DebugDotter.Dot((Vector2)actor.transform.position + (actor.Direction * 2f), Color.blue);
         actor.Speed = Mathf.Max(actor.Speed, 4f);
+        SetToPlayerBullet(actor);
+    }
+
+    public static void SetToPlayerBullet(StageActor actor)
+    {
         actor.gameObject.tag = "PlayerWeapon";
         actor.gameObject.layer = LayerMask.NameToLayer("PlayerHitbox");
-        actor.gameObject.AddComponent<PlayerWeapon>().weaponData = ReflectWeaponData;
+        actor.gameObject.AddComponent<PlayerWeapon>().weaponData = Instance.ReflectWeaponData;
     }
 
     void OnTriggerEnter2D(Collider2D other)

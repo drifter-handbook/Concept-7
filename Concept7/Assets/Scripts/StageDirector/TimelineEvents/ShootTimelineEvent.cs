@@ -91,6 +91,10 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                     shot.transform.parent = parent[j].transform;
                 }
                 actor.FinishSpawn(Run, lifetime);
+                if (runner.gameObject.tag == "PlayerWeapon")
+                {
+                    PlayerShieldTest.SetToPlayerBullet(actor);
+                }
             }
         }
     }

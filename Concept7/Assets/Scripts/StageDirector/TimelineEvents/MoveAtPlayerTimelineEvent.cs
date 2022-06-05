@@ -23,6 +23,21 @@ public class MoveAtPlayerTimelineEvent : StageData.Actor.Timeline.IEvent
         // stop currently running move coroutine
         actor.RunCoroutine(ref actor.movementCoroutine, null);
         Vector2 target = PlayerController.Instance.transform.position;
+        // TODO: this is not performant at all
+        if (runner.tag == "PlayerWeapon")
+        {
+            target = (Vector2)actor.transform.position + actor.Direction * 100f;
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                if (go.GetComponent<ActorUseHP>() != null && !go.name.ToLower().Contains("missile"))
+                {
+                    if (((Vector2)(go.transform.position - actor.transform.position)).magnitude < ((Vector2)go.transform.position - target).magnitude)
+                    {
+                        target = go.transform.position;
+                    }
+                }
+            }
+        }
         Vector2 dir = (target - (Vector2)runner.transform.position).normalized;
         if (MaxTurn != null)
         {

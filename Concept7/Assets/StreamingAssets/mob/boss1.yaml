@@ -5,6 +5,7 @@ core:
   hp: 500
   tags: ["enemy"]
   speed: 1.5
+  default_run: arrive
 
 emitter_gun0:
   x: -1.9
@@ -56,8 +57,11 @@ timeline_arrive:
         - x: 0
           y: 0
           post: {x: 0, y: 1}
-
   - time: 3
+    run:
+      timeline: shoot
+timeline_shoot:
+  - time: 0
     shoot:
       num: 1
       angle: 0
@@ -67,20 +71,20 @@ timeline_arrive:
       angle_modifier: world
     repeat: 4
     interval: 0.2
-  - time: 3.1
+  - time: 0.1
     setvar:
       var: hello
       inc: 2
     repeat: 4
     interval: 0.2
-  - time: 3.1
+  - time: 0.1
     setvar:
       var: world
       inc: 10
     repeat: 4
     interval: 0.2
 
-  - time: 5.5
+  - time: 2.5
     shoot:
       num: 10
       # dir: 120
@@ -93,7 +97,7 @@ timeline_arrive:
     repeat: 4
     interval: 2
 
-  - time: 6.5
+  - time: 3.5
     shoot:
       num: 10
       # dir: 120
@@ -106,7 +110,7 @@ timeline_arrive:
     repeat: 4
     interval: 2
 
-  - time: 15
+  - time: 12
     shoot:
       num: 3
       angle: 90
@@ -118,7 +122,7 @@ timeline_arrive:
     repeat: 3
     interval: 5
 
-  - time: 17.5
+  - time: 14.5
     shoot:
       num: 3
       angle: 90
@@ -130,7 +134,7 @@ timeline_arrive:
     repeat: 3
     interval: 5
 
-  - time: 17
+  - time: 14
     shoot:
       num: 3
       angle: 90
@@ -141,7 +145,7 @@ timeline_arrive:
     repeat: 7
     interval: 2
     
-  - time: 18
+  - time: 15
     shoot:
       num: 4
       angle: 100
@@ -152,7 +156,7 @@ timeline_arrive:
     repeat: 7
     interval: 2
 
-  - time: 32
+  - time: 29
     shoot:
       num: 16
       angle: 360
@@ -165,7 +169,7 @@ timeline_arrive:
     repeat: 3
     interval: 3
 
-  - time: 32
+  - time: 29
     shoot:
       num: 16
       angle: -360
@@ -177,7 +181,9 @@ timeline_arrive:
       actor: atomHeart
     repeat: 3
     interval: 3
-
+  - time: 35
+    run:
+      timeline: shoot
 
   # - time: 3.5
   #   shoot:

@@ -196,7 +196,10 @@ public class StageActor : MonoBehaviour
     {
         foreach (RunningTimeline rt in RunningTimelines)
         {
-            StopCoroutine(rt.Coroutine);
+            if (rt?.Coroutine != null)
+            {
+                StopCoroutine(rt.Coroutine);
+            }
         }
         RunningTimelines.Clear();
     }

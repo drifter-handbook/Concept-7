@@ -55,6 +55,12 @@ timeline_stage:
     run: 
       timeline: microdronechevronright 
 
+  - time: 20.5
+    spawn:
+      actor: boss1
+      x: 15
+      y: 0
+
   # - time: 0
   #   spawn:
   #     actor: longboi
