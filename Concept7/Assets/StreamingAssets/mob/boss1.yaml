@@ -27,6 +27,8 @@ emitter_gun4:
 
 var_hello:
   value: 0
+var_world:
+  value: 0
 
 timeline_arrive:
   - time: 0
