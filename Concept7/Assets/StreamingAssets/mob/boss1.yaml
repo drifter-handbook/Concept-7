@@ -43,14 +43,14 @@ timeline_arrive:
         - x: 0
           y: 0
           post: {x: 0, y: 1}
-        - x: -1
-          y: 3.5
+        - x: -.5
+          y: 1.5
           post: {x: -1, y: 0}
-        - x: -2
+        - x: -1
           y: 0
           post: {x: 0, y: -1}
-        - x: -1
-          y: -3.5
+        - x: -.5
+          y: -1.5
           post: {x: 1, y: 0}
         - x: 0
           y: 0
@@ -92,19 +92,24 @@ timeline_shoot:
     interval: 2
 
   - time: 3.5
-    shoot:
-      num: 10
-      # dir: 120
-      angle: -120
-      speed: 3
-      interval: .1
-      actor: pellet
-      emitters: [gun2]
-      parent: actor
-    repeat: 4
-    interval: 2
+    run:
+      timeline: phase1
 
-  - time: 12
+timeline_phase1:
+  
+  - time: 0
+    run:
+      timeline: fan
+
+  - time: 2
+    run:
+      timeline: fan
+
+  - time: 4
+    run:
+      timeline: pelletwave
+
+  - time: 14
     shoot:
       num: 3
       angle: 90
@@ -116,7 +121,7 @@ timeline_shoot:
     repeat: 3
     interval: 5
 
-  - time: 14.5
+  - time: 16.5
     shoot:
       num: 3
       angle: 90
@@ -128,7 +133,7 @@ timeline_shoot:
     repeat: 3
     interval: 5
 
-  - time: 14
+  - time: 16
     shoot:
       num: 3
       angle: 90
@@ -139,7 +144,7 @@ timeline_shoot:
     repeat: 7
     interval: 2
     
-  - time: 15
+  - time: 17
     shoot:
       num: 4
       angle: 100
@@ -150,7 +155,7 @@ timeline_shoot:
     repeat: 7
     interval: 2
 
-  - time: 29
+  - time: 31
     shoot:
       num: 16
       angle: 360
@@ -163,7 +168,7 @@ timeline_shoot:
     repeat: 3
     interval: 3
 
-  - time: 29
+  - time: 31
     shoot:
       num: 16
       angle: -360
@@ -175,9 +180,9 @@ timeline_shoot:
       actor: atomHeart
     repeat: 3
     interval: 3
-  - time: 35
+  - time: 40
     run:
-      timeline: shoot
+      timeline: phase1
 
   # - time: 3.5
   #   shoot:
@@ -248,4 +253,63 @@ timeline_shoot:
   #     emitters: [gun3]
   #     actor: orb
 
+timeline_fan:
+  - time: 0
+    shoot:
+      num: 1
+      angle: 0
+      actor: basebullet
+      emitters: [gun0]
+      num_modifier: hello
+      angle_modifier: world
+    repeat: 4
+    interval: 0.2
+  - time: 0.1
+    setvar:
+      var: hello
+      inc: 2
+    repeat: 4
+    interval: 0.2
+  - time: 0.1
+    setvar:
+      var: world
+      inc: 10
+    repeat: 4
+    interval: 0.2
+  - time: 1
+    setvar:
+      var: hello
+      inc: -8
+  - time: 1
+    setvar:
+      var: world
+      inc: -40
+
+
+timeline_pelletwave:
+  - time: 0
+    shoot:
+      num: 10
+      # dir: 120
+      angle: 120
+      speed: 3
+      interval: .1
+      actor: pellet
+      emitters: [gun1]
+      #parent: actor
+    repeat: 4
+    interval: 2
+
+  - time: 1
+    shoot:
+      num: 10
+      # dir: 120
+      angle: -120
+      speed: 3
+      interval: .1
+      actor: pellet
+      emitters: [gun2]
+      #parent: actor
+    repeat: 4
+    interval: 2
 

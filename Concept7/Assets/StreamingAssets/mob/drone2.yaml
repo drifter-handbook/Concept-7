@@ -1,0 +1,54 @@
+# Base mob
+core:
+  name: drone2
+  hp: 10
+  copy_from: [basemob]
+  prefab: Drone2
+  speed: 2
+  destroy_on_impact: false
+
+
+emitter_gun0:
+  x: .3
+  y: 0
+
+
+timeline_slowspread:
+  - time: 0
+    move:
+      dest:
+        - x: -6
+          y: 0
+          rel: dir
+          post: {x: -1}
+  - time: 1
+    setspeed:
+      speed: 0
+      dur: 1
+  - time: 1.5
+    shoot:
+      num: 3
+      speed: 2
+      angle: 45
+      actor: pellet
+      mirror_y: false
+      emitters: [gun0]
+  - time: 1.9
+    shoot:
+      num: 2
+      speed: 2
+      angle: 25
+      actor: pellet
+      mirror_y: false
+      emitters: [gun0]
+  - time: 2.5
+    setspeed:
+      speed: 2.5
+      dur: 1
+  - time: 2.5
+    move:
+      dest:
+        - x: 15
+          y: 0
+          rel: dir
+          post: {x: 1}
