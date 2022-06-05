@@ -31,7 +31,7 @@ timeline_follow:
   - time: .9
     move_at_player:
       max_turn: 2
-      speed: 10
+      speed: 8
     repeat: 200
     interval: 0.1
 

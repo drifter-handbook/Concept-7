@@ -61,7 +61,7 @@ timeline_arrive:
           post: {x: 0, y: 1}
   - time: 3
     run:
-      timeline: shoot
+      timeline: phase1
 timeline_shoot:
   - time: 0
     setvar:
@@ -97,7 +97,7 @@ timeline_shoot:
 
   - time: 3.5
     run:
-      timeline: phase1
+      timeline: shoot
 
 timeline_phase1:
   
@@ -166,9 +166,10 @@ timeline_phase1:
       dir: 270
       interval: .1
       speed: 3
-      run: ringburst
+      run: orbit
       emitters: [gun1]
       actor: atomHeart
+      parent: actor
     repeat: 3
     interval: 3
 
@@ -179,12 +180,25 @@ timeline_phase1:
       dir: 90
       interval: .1
       speed: 3
-      run: ringburst
+      run: orbit
       emitters: [gun2]
       actor: atomHeart
+      parent: actor
     repeat: 3
     interval: 3
-  - time: 40
+
+  - time: 31
+    shoot:
+      num: 16
+      angle: -360
+      dir: 180
+      speed: 2.5
+      emitters: [gun0]
+      actor: orb
+    repeat: 3
+    interval: 3
+
+  - time: 45
     run:
       timeline: phase1
 
@@ -317,3 +331,13 @@ timeline_pelletwave:
     repeat: 4
     interval: 2
 
+  - time: 2
+    shoot:
+      dir: 0
+      num: 36
+      angle: 360
+      ring: true
+      actor: basebullet
+      emitters: [gun0]
+    repeat: 4
+    interval: 2

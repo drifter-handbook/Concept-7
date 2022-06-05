@@ -49,10 +49,19 @@ timeline_sine:
           rel: dir
           post: {x: -1}
 
+  - time: 1.5
+    shoot:
+      num: 3
+      speed: 2
+      angle: 45
+      actor: basebullet
+      mirror_y: false
+      emitters: [gun0]
   - time: 2
     shoot:
-      num: 1
-      speed: 4
+      num: 2
+      speed: 2
+      angle: 25
       actor: basebullet
       mirror_y: false
       emitters: [gun0]

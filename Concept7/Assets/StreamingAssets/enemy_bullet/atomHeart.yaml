@@ -46,3 +46,24 @@ timeline_ringburst:
 
   - time: .5
     destroy: true
+
+
+timeline_orbit:
+  - time: 0
+    setspeed:
+      speed: 0
+      dur: 0.5
+  - time: 1
+    orbit:
+      speed: 0
+  - time: 1
+    orbit:
+      speed: 180
+      dur: 0.75
+  - time: 2
+    orbit:
+      radius: 2
+      dur: 1
+  - time: 3
+    run:
+      timeline: ringburst
