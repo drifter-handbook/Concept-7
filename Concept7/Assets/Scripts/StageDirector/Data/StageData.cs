@@ -37,7 +37,8 @@ public partial class StageData
         new SetVarTimelineEvent(),
         new RunTimelineTimelineEvent(),
         new RotateTimelineEvent(),
-        new LinkTimelineEvent()
+        new LinkTimelineEvent(),
+        new DestroyProjectilesEvent()
     };
 
     public static IDeserializer Deserializer;
