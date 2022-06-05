@@ -66,6 +66,8 @@ public class WeaponController : MonoBehaviour
 
     public void TryFireAlchemy() {
 
+        // TODO: This is where we would add the ammo system
+
         int r = 0;
         int y = 0;
         int b = 0;
