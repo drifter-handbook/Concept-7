@@ -32,12 +32,33 @@ public class StageActor : MonoBehaviour
     public Coroutine rotateCoroutine;
 
     int CurrentTimelineID = 0;
+    int EventID = 0;
     public List<RunningTimeline> RunningTimelines = new List<RunningTimeline>();
     public class RunningTimeline
     {
         public int ID;
         public string Name;
         public Coroutine Coroutine;
+    }
+    public class RunningEvent : IComparable<RunningEvent>
+    {
+        public float Time;
+        public int EventID;
+        public int RepeatIndex;
+        public int CompareTo(RunningEvent other)
+        {
+            int timeCmp = Time.CompareTo(other.Time);
+            if (timeCmp == 0)
+            {
+                int rpCmp = RepeatIndex.CompareTo(other.RepeatIndex);
+                if (rpCmp == 0)
+                {
+                    return EventID.CompareTo(other.EventID);
+                }
+                return rpCmp;
+            }
+            return timeCmp;
+        }
     }
 
     // mirroring X/Y
@@ -165,21 +186,40 @@ public class StageActor : MonoBehaviour
             Coroutine = StartCoroutine(RunTimelineCoroutine(timeline, timelineID))
         });
     }
-
     IEnumerator RunTimelineCoroutine(StageData.Actor.Timeline timeline, int timelineID)
     {
         float time = 0f;
-        foreach (var entry in timeline.Entries)
+        SortedList<RunningEvent, StageData.Actor.Timeline.IEvent> evSchedule = new SortedList<RunningEvent, StageData.Actor.Timeline.IEvent>();
+        for (int i = 0; i < timeline.Entries.Count; i++)
         {
-            while (time < entry.Time)
+            var entry = timeline.Entries[i];
+;           while (time < entry.Time)
             {
+                FlushSchedule(evSchedule, time);
                 yield return null;
                 time += Time.deltaTime;
             }
             // Debug.Log($"Running entry at time {entry.Time} on actor {ActorType}");
-            StartCoroutine(RunEntry(entry));
+            ScheduleEntry(evSchedule, entry);
+        }
+        // finish running scheduled events
+        while (evSchedule.Count > 0)
+        {
+            FlushSchedule(evSchedule, time);
+            yield return null;
+            time += Time.deltaTime;
         }
         RunningTimelines.RemoveAll(x => x.ID == timelineID);
+    }
+    // call this when you add entries that run at the current time zero.
+    public void FlushSchedule(SortedList<RunningEvent, StageData.Actor.Timeline.IEvent> evSchedule, float time)
+    {
+        while (evSchedule.Count > 0 && evSchedule.Keys.Min().Time <= time)
+        {
+            var entry = evSchedule.Keys.Min();
+            evSchedule[entry].Start(this);
+            evSchedule.Remove(entry);
+        }
     }
     public void StopTimelinesWithName(string name)
     {
@@ -204,19 +244,21 @@ public class StageActor : MonoBehaviour
         RunningTimelines.Clear();
     }
 
-    IEnumerator RunEntry(StageData.Actor.Timeline.Entry entry)
+    void ScheduleEntry(SortedList<RunningEvent, StageData.Actor.Timeline.IEvent> evSchedule, StageData.Actor.Timeline.Entry entry)
     {
+        int evID = ++EventID;
         int repeat = entry.Repeat ?? 1;
         float interval = entry.Interval ?? 0;
         float time = 0f;
         for (int i = 0; i < repeat; i++)
         {
-            while (time < interval * i)
+            evSchedule.Add(new RunningEvent()
             {
-                yield return null;
-                time += Time.deltaTime;
-            }
-            entry.Event.Start(this);
+                Time = entry.Time + (interval * i),
+                EventID = evID,
+                RepeatIndex = i
+            }, entry.Event);
+            time += interval;
         }
     }
 
