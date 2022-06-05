@@ -1,0 +1,19 @@
+# Homing bullet
+core:
+  name: largemissile
+  prefab: LargeMissile
+  invuln: true
+  turn_on_move: true
+  tags: ["playerbullet"]
+  depth: -2
+  speed: 10
+  destroy_offscreen: true
+  destroy_on_impact: false
+  default_run: travel
+  lifetime: -1
+
+timeline_travel:
+- time: 0
+  move:
+    dest:
+      - dir: 0
