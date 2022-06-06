@@ -18,7 +18,7 @@ core:
 emitter_burst:
   x: 0
   y: 0
-  actor: basebullet
+  actor: smallbullet
 
 timeline_follow:
   - time: .6

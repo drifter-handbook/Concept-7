@@ -7,7 +7,7 @@ core:
 emitter_gun:
   x: 0
   y: 0
-  actor: basebullet
+  actor: smallbullet
 
 timeline_path0:
   - time: 0

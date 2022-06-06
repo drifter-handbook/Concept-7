@@ -32,7 +32,7 @@ timeline_diag:
       angle: 360
       dir: 45
       ring: true
-      actor: basebullet
+      actor: smallbullet
       mirror_y: false
       emitters: [gun0]
 
@@ -43,7 +43,7 @@ timeline_diag:
       angle: 360
       dir: 0
       ring: true
-      actor: basebullet
+      actor: smallbullet
       mirror_y: false
       emitters: [gun0]
 
@@ -101,7 +101,7 @@ timeline_basicline:
       num: 1
       speed: 4
       dir: 180
-      actor: basebullet
+      actor: smallbullet
       mirror_y: false
       emitters: [gun0]
       

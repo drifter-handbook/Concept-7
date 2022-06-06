@@ -2,7 +2,7 @@ core:
   name: pellet
   prefab: Pellet
   invuln: true
-  turn_on_move: true
+  turn_on_move: false
   tags: ["bullet"]
   depth: -1
   speed: 2

@@ -70,7 +70,7 @@ timeline_shoot:
   - time: 0
     shoot:
       dir: 0
-      actor: basebullet
+      actor: smallbullet
       emitters: [gun1]
       dir_modifier: hello
     repeat: 36
@@ -241,7 +241,7 @@ timeline_fan:
     shoot:
       num: 1
       angle: 0
-      actor: basebullet
+      actor: smallbullet
       emitters: [gun0]
       num_modifier: fan
       angle_modifier: world
@@ -302,7 +302,7 @@ timeline_pelletwave:
       num: 36
       angle: 360
       ring: true
-      actor: basebullet
+      actor: smallbullet
       emitters: [gun0]
     repeat: 4
     interval: 2

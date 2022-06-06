@@ -1,10 +1,11 @@
+# Stage 1 Sub-director
 core:
-  name: orb
-  prefab: Orb
+  name: smallbullet
+  prefab: SmallBullet
   invuln: true
-  turn_on_move: false
+  turn_on_move: true
   tags: ["bullet"]
   depth: -1
-  speed: 2
+  speed: 5
   destroy_offscreen: true
   destroy_on_impact: true
