@@ -10,5 +10,6 @@ core:
   destroy_offscreen: true
   destroy_on_impact: false
   lifetime: 0.5
+  attach_on_impact: yellowonhit
 
 #TODO: Need to have a debuff system so we know what enemies are hit so we can create a burst of bullets

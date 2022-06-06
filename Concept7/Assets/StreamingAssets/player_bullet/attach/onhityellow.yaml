@@ -1,0 +1,20 @@
+core:
+  name: yellowonhit
+  prefab: ActorAttachOnHitOnly
+  speed: 0
+  on_destroy:
+    event: burst
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_burst:
+  - time: 0
+    shoot:
+      actor: yellowprimary
+      num: 20
+      dir: 180
+      angle: 360
+      speed: 4
+      ring: true

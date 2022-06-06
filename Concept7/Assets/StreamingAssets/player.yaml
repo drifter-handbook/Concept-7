@@ -15,18 +15,21 @@ timeline_r:
     shoot:
       actor: redprimary
       emitters: [default]
+      dir: 0
 
 timeline_y:
   - time: 0
     shoot:
       actor: yellowprimary
       emitters: [default]
+      dir: 0
 
 timeline_b:
   - time: 0
     shoot:
       actor: blueprimary
       emitters: [default]
+      dir: 0
 
 timeline_R:
   - time: 0

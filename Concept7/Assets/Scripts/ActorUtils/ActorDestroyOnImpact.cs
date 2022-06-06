@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ActorDestroyOnImpact : MonoBehaviour
 {
+    public HashSet<GameObject> Exempt = new HashSet<GameObject>();
+
     [SerializeField] private GameObject impactPrefab;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "PlayArea")
+        if (other.gameObject.tag == "PlayArea" || Exempt.Contains(other.gameObject))
         {
             return;
         }

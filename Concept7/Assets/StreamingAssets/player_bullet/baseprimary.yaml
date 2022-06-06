@@ -7,10 +7,3 @@ core:
   speed: 15
   destroy_offscreen: true
   destroy_on_impact: true
-  default_run: travel
-
-timeline_travel:
-  - time: 0
-    move:
-      dest:
-        - dir: 0

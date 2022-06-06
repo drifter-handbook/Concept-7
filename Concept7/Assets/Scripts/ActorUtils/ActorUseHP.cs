@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class ActorUseHP : MonoBehaviour
 {
-	public float health;
+    public HashSet<GameObject> Exempt = new HashSet<GameObject>();
+
+    public float health;
     [SerializeField] private GameObject deathPrefab;
 
     public void Initialize(StageData.Actor actor)
@@ -15,6 +17,10 @@ public class ActorUseHP : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "PlayArea" || Exempt.Contains(other.gameObject))
+        {
+            return;
+        }
         ActorSuppressOtherUseHP suppress = other.GetComponent<ActorSuppressOtherUseHP>();
         StageActor actor = GetComponent<StageActor>();
         if (suppress == null || actor == null || !suppress.Classifications.Contains(actor.Classification))
@@ -22,6 +28,7 @@ public class ActorUseHP : MonoBehaviour
             if (other.gameObject.tag == "PlayerWeapon")
             {
                 health -= (float?)other.gameObject.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
+                Exempt.Add(gameObject);
             }
             if (health <= 0)
             {

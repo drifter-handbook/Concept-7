@@ -17,10 +17,16 @@ public class ActorAttachOnImpact : MonoBehaviour
                 if (target != null)
                 {
                     GameObject go = StageDirector.Spawn(AttachActor, new Vector3(target.transform.position.x, target.transform.position.y), 0f);
-                    go.GetComponent<StageActor>().FinishSpawn();
                     foreach (var handler in go.GetComponentsInChildren<IActorAttachment>())
                     {
-                        handler.Attach(target, GetComponent<StageActor>());
+                        if (go != null)
+                        {
+                            handler.Attach(target, GetComponent<StageActor>());
+                        }
+                    }
+                    if (go != null)
+                    {
+                        go.GetComponent<StageActor>().FinishSpawn();
                     }
                 }
                 hits.Add(other.gameObject);

@@ -3,3 +3,4 @@ core:
   prefab: ProjectilePrimaryYellow
   copy_from: [baseprimary]
   speed: 25
+  turn_on_move: true

@@ -13,20 +13,6 @@ public class ActorReflectAttach : MonoBehaviour, IActorAttachment, IActorSpawnHa
         // reflect target if actor is correct classification
         if (Classifications.Contains(target.Classification))
         {
-            // remove other reflects
-            foreach (Transform child in target.transform)
-            {
-                var rf = child.GetComponent<ActorReflectAttach>();
-                if (rf != null)
-                {
-                    foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
-                    {
-                        handler.HandleDestroy(ActorDestroyReason.Event);
-                    }
-                    Destroy(child.gameObject);
-                }
-            }
-            transform.parent = target.transform;
             // set to be owned by the player
             target.gameObject.tag = "PlayerWeapon";
             target.gameObject.layer = LayerMask.NameToLayer("PlayerHitbox");

@@ -3,8 +3,11 @@ core:
   prefab: ProjectilePrimaryRed
   copy_from: [baseprimary]
   speed: 15
+  turn_on_move: true
+  default_run: seek
 
-timeline_travel:
+# TECH DEMO OF SEEKING ENEMIES, DO NOT SHIP THIS
+timeline_seek:
   - time: 0
     move:
       dest:
