@@ -8,6 +8,8 @@ public class TitleScreenUI : MonoBehaviour
    public Animator tapTextAnim;
    private Animator anim;
 
+   public GameObject SettingsPanel;
+
    void Start(){
        anim = GetComponent<Animator>();
    }
@@ -26,5 +28,10 @@ public class TitleScreenUI : MonoBehaviour
      //continue game, new game, multiplayer, etc.
      //but for now, just load the game
     SceneManager.LoadScene("GameScene");
+   }
+
+
+   public void ToggleSettings(){
+       SettingsPanel.SetActive(!SettingsPanel.activeSelf);
    }
 }
