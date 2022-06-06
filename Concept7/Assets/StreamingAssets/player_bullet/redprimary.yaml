@@ -9,10 +9,6 @@ core:
 # TECH DEMO OF SEEKING ENEMIES, DO NOT SHIP THIS
 timeline_seek:
   - time: 0
-    move:
-      dest:
-        - dir: 0
-  - time: 0
     move_at:
       game_tag: Enemy
       classification: [Actor, Missile]
