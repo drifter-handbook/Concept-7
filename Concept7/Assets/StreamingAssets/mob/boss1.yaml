@@ -163,7 +163,7 @@ timeline_phase1:
     run:
       timeline: atomring
 
-  - time: 45
+  - time: 42
     run:
       timeline: phase1
 
@@ -318,7 +318,7 @@ timeline_atomring:
       emitters: [gun1]
       actor: atomHeart
       parent: actor
-    repeat: 12
+    repeat: 18
     interval: .5
 
   - time: 0
@@ -331,17 +331,17 @@ timeline_atomring:
       emitters: [gun2]
       actor: atomHeart
       parent: actor
-    repeat: 12
+    repeat: 18
     interval: .5
 
-  - time: 1
-    shoot:
-      num: 10
-      angle: 360
-      dir: 180
-      ring: true
-      speed: 2.5
-      emitters: [gun0]
-      actor: orb
-    repeat: 3
-    interval: 4
+  # - time: 1
+  #   shoot:
+  #     num: 10
+  #     angle: 360
+  #     dir: 180
+  #     ring: true
+  #     speed: 2.5
+  #     emitters: [gun0]
+  #     actor: orb
+  #   repeat: 3
+  #   interval: 4
