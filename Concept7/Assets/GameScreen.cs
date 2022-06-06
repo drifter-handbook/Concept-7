@@ -31,6 +31,8 @@ public class GameScreen : MonoBehaviour
     public Sprite YImage;
     public Sprite EmptyImage;
 
+    public GameObject SettingsPanel;
+
     void Update()
     {
         Time.timeScale = (PauseScreen.activeSelf || PauseScreen.activeInHierarchy) ? 0f : 1f;
@@ -81,6 +83,10 @@ public class GameScreen : MonoBehaviour
                 Destroy(LifebarParent.GetChild(0).gameObject);
             }
         }
+    }
+
+    public void ToggleSettings(){
+        SettingsPanel.SetActive(!SettingsPanel.activeSelf);
     }
 
     public void ShowEndScreen(bool wasWin){
