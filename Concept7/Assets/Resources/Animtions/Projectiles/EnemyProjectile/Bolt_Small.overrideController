@@ -7,5 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bolt_Small
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 540595330912ca54299f649fca106a76, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2ffb31cc6b6009c4a8639ca54704c339, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 589586434b0059547bcad518edf06d3c, type: 2}
