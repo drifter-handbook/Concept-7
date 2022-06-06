@@ -39,7 +39,7 @@ timeline_ringburst:
 
   - time: .5
     shoot:
-      num: 3
+      num: 1
       speed: 7
       actor: needle
       emitters: [burst]
@@ -51,19 +51,49 @@ timeline_ringburst:
 timeline_orbit:
   - time: 0
     setspeed:
-      speed: 0
+      speed: 1
       dur: 0.5
-  - time: 1
-    orbit:
-      speed: 0
-  - time: 1
+  - time: .5
     orbit:
       speed: 180
-      dur: 0.75
-  - time: 2
+  # - time: 1s
+  #   orbit:
+  #     speed: 180
+  #     dur: 0.75
+  - time: .5
     orbit:
       radius: 2
       dur: 1
-  - time: 3
-    run:
-      timeline: ringburst
+  - time: 2
+    shoot:
+      num: 1
+      speed: 7
+      actor: needle
+      emitters: [burst]
+  - time: 2
+    destroy: true
+
+timeline_orbitreverse:
+  - time: 0
+    setspeed:
+      speed: 1
+      dur: 0.5
+  - time: .5
+    orbit:
+      speed: -180
+  # - time: 1s
+  #   orbit:
+  #     speed: 180
+  #     dur: 0.75
+  - time: .5
+    orbit:
+      radius: 2
+      dur: 1
+  - time: 2
+    shoot:
+      num: 1
+      speed: 7
+      actor: needle
+      emitters: [burst]
+  - time: 2
+    destroy: true

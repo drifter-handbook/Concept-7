@@ -64,50 +64,50 @@ timeline_stage:
       y: 0
       run: path0
 
-  - time: 14
+  - time: 19
     run:
       timeline: microdronechevronright
 
-  - time: 15.5
+  - time: 20.5
     run: 
       timeline: microdronechevronleft
 
-  - time: 19
+  - time: 24
     run:
       timeline: microdronechevronleft
 
-  - time: 20.5
+  - time: 25.5
     run: 
       timeline: microdronechevronright 
 
 
-  - time: 22
+  - time: 25
     spawn:
       actor: longboi
       x: 15
       y: 2.5
       run: path0
 
-  - time: 22
+  - time: 25
     spawn:
       actor: longboi
       x: 15
       y: -1.5
       run: path0
 
-  - time: 28
+  - time: 30
     run:
       timeline: microdroneLineright
 
-  - time: 30.5
+  - time: 32.5
     run:
       timeline: microdroneLineleft
 
-  - time: 31.5
+  - time: 33.5
     run:
       timeline: spreadsquad
 
-  - time: 38
+  - time: 40
     spawn:
       actor: boss1
       x: 15

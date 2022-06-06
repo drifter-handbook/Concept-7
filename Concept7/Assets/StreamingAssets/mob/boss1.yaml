@@ -160,43 +160,8 @@ timeline_phase1:
     interval: 2
 
   - time: 31
-    shoot:
-      num: 16
-      angle: 360
-      dir: 270
-      interval: .1
-      speed: 3
-      run: orbit
-      emitters: [gun1]
-      actor: atomHeart
-      parent: actor
-    repeat: 3
-    interval: 3
-
-  - time: 31
-    shoot:
-      num: 16
-      angle: -360
-      dir: 90
-      interval: .1
-      speed: 3
-      run: orbit
-      emitters: [gun2]
-      actor: atomHeart
-      parent: actor
-    repeat: 3
-    interval: 3
-
-  - time: 31
-    shoot:
-      num: 16
-      angle: -360
-      dir: 180
-      speed: 2.5
-      emitters: [gun0]
-      actor: orb
-    repeat: 3
-    interval: 3
+    run:
+      timeline: atomring
 
   - time: 45
     run:
@@ -341,3 +306,40 @@ timeline_pelletwave:
       emitters: [gun0]
     repeat: 4
     interval: 2
+
+timeline_atomring:
+  - time: 0
+    shoot:
+      num: 1
+      dir: 90
+      speed: 3
+      run: orbit
+      emitters: [gun1]
+      actor: atomHeart
+      parent: actor
+    repeat: 12
+    interval: .5
+
+  - time: 0
+    shoot:
+      num: 1
+      dir: 270
+      speed: 3
+      run: orbitreverse
+      emitters: [gun2]
+      actor: atomHeart
+      parent: actor
+    repeat: 12
+    interval: .5
+
+  - time: 1
+    shoot:
+      num: 10
+      angle: 360
+      dir: 180
+      ring: true
+      speed: 2.5
+      emitters: [gun0]
+      actor: orb
+    repeat: 3
+    interval: 4

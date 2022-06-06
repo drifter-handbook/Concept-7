@@ -34,11 +34,11 @@ timeline_slowspread:
       actor: pellet
       mirror_y: false
       emitters: [gun0]
-  - time: 2.5
+  - time: 2
     setspeed:
       speed: 2.5
       dur: 1
-  - time: 2.5
+  - time: 2
     move:
       dest:
         - x: 15

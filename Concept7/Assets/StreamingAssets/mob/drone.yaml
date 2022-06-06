@@ -51,18 +51,9 @@ timeline_sine:
 
   - time: 1.5
     shoot:
-      num: 3
+      num: 1
       speed: 2
-      angle: 45
-      actor: basebullet
-      mirror_y: false
-      emitters: [gun0]
-  - time: 2
-    shoot:
-      num: 2
-      speed: 2
-      angle: 25
-      actor: basebullet
+      actor: pellet
       mirror_y: false
       emitters: [gun0]
 
