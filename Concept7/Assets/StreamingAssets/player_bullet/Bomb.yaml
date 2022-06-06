@@ -11,7 +11,7 @@ core:
   destroy_offscreen: true
   destroy_on_impact: false
   default_run: travel
-  lifetime: 0.5
+  lifetime: 0
   on_destroy:
     event: destroy_projectiles
 

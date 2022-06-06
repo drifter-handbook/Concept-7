@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3010781896562639256, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: impactPrefab
+      value: 
+      objectReference: {fileID: 1024442076046084089, guid: dcd95b8a15766634d848a82e970d4749, type: 3}
     - target: {fileID: 3427190698317749836, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
       propertyPath: m_Controller
       value: 
@@ -63,18 +67,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1193623584, guid: 68836c3bc122cad439cb31c0345f61bb, type: 3}
-    - target: {fileID: 5012352336466682233, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5012352336466682233, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5012352336466682233, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5012352336466682233, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
