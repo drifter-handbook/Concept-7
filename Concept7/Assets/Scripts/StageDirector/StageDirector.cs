@@ -80,16 +80,15 @@ public class StageDirector : MonoBehaviour
         }
     }
 
-    public static StageData.Actor FindWeapon(int r, int y, int b)
+    public static StageData.Actor FindWeapon(string ryb)
     {
-        string k = RYBStr(r, y, b);
-        if (!Instance.Weapons.ContainsKey(k))
+        if (!Instance.Weapons.ContainsKey(ryb))
         {
-            Debug.Log($"Warning! No weapon exists with combo R{r}Y{y}B{b} ({k})");
+            Debug.Log($"Warning! No weapon exists with combo {ryb}");
             return null;
         }
         // find prefab for actor type
-        string prefabname = Instance.Weapons[k];
+        string prefabname = Instance.Weapons[ryb];
         // find actor for prefab
         if (Instance.WeaponsActor.ContainsKey(prefabname))
         {
@@ -104,13 +103,13 @@ public class StageDirector : MonoBehaviour
         }
         if (!Instance.WeaponsActor.ContainsKey(prefabname))
         {
-            throw new StageDataException($"Prefab exists but actor for combo combo R{r}Y{y}B{b} ({k}) does not exist.");
+            throw new StageDataException($"Prefab exists but actor for combo {ryb} does not exist.");
         }
         return Instance.WeaponsActor[prefabname];
     }
 
     static string[] rybOrder = { "R", "Y", "B" };
-    static string RYBStr(int r, int y, int b)
+    public static string RYBStr(int r, int y, int b)
     {
         string s = "";
         int[] ryb = {r, y, b};

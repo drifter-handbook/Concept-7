@@ -17,9 +17,8 @@ public class LinkTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Acto
         return Deserialize<LinkTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
-        StageActor actor = runner.GetComponent<StageActor>();
         GameObject link = StageDirector.FindCurrentActor(Actor);
         // if link actor doesn't exist, create it
         if (link == null)

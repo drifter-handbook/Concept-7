@@ -11,7 +11,10 @@ public class ActorDestroyOffscreen : MonoBehaviour
             StageActor actor = GetComponent<StageActor>();
             if (gameObject != null && actor != null)
             {
-                actor.RunTimeline(actor.Actor.OnDestroy?.Offscreen);
+                foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
+                {
+                    handler.HandleDestroy(ActorDestroyReason.Offscreen);
+                }
                 Destroy(gameObject);
             }
         }

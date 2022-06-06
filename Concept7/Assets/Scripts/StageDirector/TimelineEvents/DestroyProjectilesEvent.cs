@@ -18,7 +18,7 @@ public class DestroyProjectilesEvent : StageData.Actor.Timeline.IEvent
         };
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         Debug.Log(allEnemies.Length);
@@ -30,5 +30,4 @@ public class DestroyProjectilesEvent : StageData.Actor.Timeline.IEvent
             }
         }
     }
-
 }

@@ -9,7 +9,8 @@ public class AttachToPlayer : MonoBehaviour
     
     void Start()
     {
-        GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        GameObject player = StageDirector.Spawn("player", Vector2.zero, 0f);
+        player.GetComponent<StageActor>().FinishSpawn();
         PlayerController controller = player.GetComponent<PlayerController>();
         controller.SetInput(input);
         StageDirector.StartStage(0);

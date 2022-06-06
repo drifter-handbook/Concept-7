@@ -6,7 +6,7 @@ using UnityEngine;
 
 // MonoBehaviour which controls spawned Actor GameObjects.
 // Controlled by running timelines via RunTimeline(name).
-public class StageActor : MonoBehaviour
+public class StageActor : MonoBehaviour, IActorDestroyHandler
 {
     public float Speed;
     // normalized last nonzero velocity
@@ -105,6 +105,11 @@ public class StageActor : MonoBehaviour
             comp.Initialize(Actor);
         }
         Classification = Actor.Classification ?? Classification;
+        if (Actor.AttachOnImpact != null)
+        {
+            var comp = GetComponent<ActorAttachOnImpact>() ?? gameObject.AddComponent<ActorAttachOnImpact>();
+            comp.AttachActor = Actor.AttachOnImpact;
+        }
     }
 
     // Start is called before the first frame update
@@ -473,6 +478,25 @@ public class StageActor : MonoBehaviour
             DebugDotter.Dot(mt.Pre, Color.red);
             DebugDotter.Dot(mt.Pos, Color.magenta);
             DebugDotter.Dot(mt.Post, Color.blue);
+        }
+    }
+
+    public void HandleDestroy(ActorDestroyReason reason)
+    {
+        switch (reason)
+        {
+            case ActorDestroyReason.Offscreen:
+                RunTimeline(Actor?.OnDestroy?.Offscreen);
+                break;
+            case ActorDestroyReason.Impact:
+                RunTimeline(Actor?.OnDestroy?.Impact);
+                break;
+            case ActorDestroyReason.Health:
+                RunTimeline(Actor?.OnDestroy?.Impact);
+                break;
+            case ActorDestroyReason.Event:
+                RunTimeline(Actor?.OnDestroy?.Event);
+                break;
         }
     }
 }

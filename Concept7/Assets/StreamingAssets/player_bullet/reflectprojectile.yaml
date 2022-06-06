@@ -1,0 +1,4 @@
+core:
+  name: reflectprojectile
+  prefab: ActorAttachReflector
+  speed: 0

@@ -28,10 +28,9 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         return Deserialize<SpawnTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
-        StageActor actor = runner.GetComponent<StageActor>();
-        Vector3 pos = FindDestPosition((X ?? 0) + GetVar(actor, XModifier), (Y ?? 0) + GetVar(actor, YModifier), Dir, Dist, Rel ?? "abs", runner.transform.position, actor.Direction);
+        Vector3 pos = FindDestPosition((X ?? 0) + GetVar(actor, XModifier), (Y ?? 0) + GetVar(actor, YModifier), Dir, Dist, Rel ?? "abs", actor.transform.position, actor.Direction);
         GameObject go = StageDirector.Spawn(Actor, new Vector3(pos.x, pos.y), 0f);
         StageActor spawned = go.GetComponent<StageActor>();
         float mirrorX = MirrorX == null ? actor.Mirror.x : (MirrorX.Value ? -1 : 1);
@@ -39,12 +38,12 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         spawned.Mirror = new Vector2(mirrorX, mirrorY);
         if (Parent != null)
         {
-            go.transform.parent = StageDataUtils.GetParent(Parent, go.transform.position, runner.gameObject).transform;
+            go.transform.parent = StageDataUtils.GetParent(Parent, go.transform.position, actor.gameObject).transform;
         }
         spawned.FinishSpawn(Run, Lifetime);
-        if (runner.gameObject.tag == "PlayerWeapon")
+        foreach (var handler in actor.gameObject.GetComponentsInChildren<IActorSpawnHandler>())
         {
-            PlayerShieldTest.SetToPlayerBullet(spawned);
+            handler.HandleSpawn(spawned);
         }
     }
 

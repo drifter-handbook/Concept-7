@@ -86,14 +86,13 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
         return origin + v;
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
         if (Dest.Count == 0)
         {
             return;
         }
         List<Destination> dests = new List<Destination>(Dest);
-        StageActor actor = runner.GetComponent<StageActor>();
         // filter out 'move infinitely' command
         Destination infinite = null;
         for (int i = 0; i < dests.Count; i++)
@@ -114,12 +113,12 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
         if (dests.Count > 0)
         {
             List<Vector2> pos = new List<Vector2>();
-            Vector2 current = runner.transform.localPosition;
+            Vector2 current = actor.transform.localPosition;
             pos.Add(current);
             for (int i = 0; i < dests.Count; i++)
             {
                 Destination d = dests[i];
-                current = FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, runner.transform.localPosition, actor.Direction);
+                current = FindDestPosition(d.X, d.Y, d.Dir, d.Dist, d.Rel, actor.transform.localPosition, actor.Direction);
                 pos.Add(current);
             }
             // calculate Move Targets
@@ -137,9 +136,9 @@ public class MoveTimelineEvent : StageData.Actor.Timeline.IEvent
                 StageActor.MoveTarget pt = spline[i + 1];
                 if (dests[i].Rel != "abs")
                 {
-                    pt.Pos = Mirror(pt.Pos, runner.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
-                    pt.Pre = Mirror(pt.Pre, runner.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
-                    pt.Post = Mirror(pt.Post, runner.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Pos = Mirror(pt.Pos, actor.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Pre = Mirror(pt.Pre, actor.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
+                    pt.Post = Mirror(pt.Post, actor.transform.localPosition, actor.Mirror, dests[i].Rel == "dir" ? actor.Direction : Vector2.right);
                 }
             }
         }

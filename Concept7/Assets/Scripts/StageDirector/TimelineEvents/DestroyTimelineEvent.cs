@@ -17,15 +17,17 @@ public class DestroyTimelineEvent : StageData.Actor.Timeline.IEvent
         };
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
         if (Active)
         {
-            if (runner.gameObject != null)
+            if (actor != null)
             {
-                StageActor actor = runner.GetComponent<StageActor>();
-                actor.RunTimeline(actor.Actor.OnDestroy?.Event);
-                UnityEngine.Object.Destroy(runner.gameObject);
+                foreach (var handler in actor.gameObject.GetComponentsInChildren<IActorDestroyHandler>())
+                {
+                    handler.HandleDestroy(ActorDestroyReason.Event);
+                }
+                UnityEngine.Object.Destroy(actor.gameObject);
             }
         }
     }

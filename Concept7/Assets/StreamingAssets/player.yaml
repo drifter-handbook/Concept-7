@@ -1,0 +1,50 @@
+# Base mob
+core:
+  name: player
+  prefab: Player
+  tags: ["player"]
+  # HP not managed by actor system
+  invuln: true
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_r:
+  - time: 0
+    shoot:
+      actor: redprimary
+      emitters: [default]
+
+timeline_y:
+  - time: 0
+    shoot:
+      actor: yellowprimary
+      emitters: [default]
+
+timeline_b:
+  - time: 0
+    shoot:
+      actor: blueprimary
+      emitters: [default]
+
+timeline_R:
+  - time: 0
+    shoot:
+      actor: redPaintSplat
+      parent: actor
+      emitters: [default]
+
+timeline_Y:
+  - time: 0
+    shoot:
+      actor: yellowPaintSplat
+      parent: actor
+      emitters: [default]
+
+timeline_B:
+  - time: 0
+    shoot:
+      actor: bluePaintSplat
+      parent: actor
+      emitters: [default]

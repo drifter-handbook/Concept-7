@@ -7,7 +7,13 @@ public class ActorDestroyOnImpact : MonoBehaviour
     [SerializeField] private GameObject impactPrefab;
     private void OnTriggerEnter2D(Collider2D other)
     {
-    	if(other.gameObject.tag != "PlayArea" && other.gameObject.tag != "PlayerReflect")
+        if (other.gameObject.tag == "PlayArea")
+        {
+            return;
+        }
+        ActorSuppressOtherDestroyOnImpact suppress = other.GetComponent<ActorSuppressOtherDestroyOnImpact>();
+        StageActor actor = GetComponent<StageActor>();
+        if (suppress == null || actor == null || !suppress.Classifications.Contains(actor.Classification))
         {
             StartCoroutine(DestroyAfterDelay());
             if (impactPrefab != null)
@@ -20,7 +26,10 @@ public class ActorDestroyOnImpact : MonoBehaviour
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)
         {
-            actor.RunTimeline(actor.Actor.OnDestroy?.Impact);
+            foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
+            {
+                handler.HandleDestroy(ActorDestroyReason.Impact);
+            }
             Destroy(gameObject);
         }
     }

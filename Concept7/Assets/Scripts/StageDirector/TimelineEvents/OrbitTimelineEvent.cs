@@ -18,9 +18,8 @@ public class OrbitTimelineEvent : StageData.Actor.Timeline.IEvent
         return Deserialize<OrbitTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
-        StageActor actor = runner.GetComponent<StageActor>();
         if (actor.transform.parent == null)
         {
             Debug.Log($"Warning: Cannot run 'orbit' on actor {actor.ActorType} because it has no parent.");

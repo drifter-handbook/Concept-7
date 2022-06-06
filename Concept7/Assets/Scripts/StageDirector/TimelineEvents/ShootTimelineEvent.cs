@@ -33,15 +33,14 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         return Deserialize<ShootTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
-        runner.StartCoroutine(ShootCoroutine(runner));
+        actor.StartCoroutine(ShootCoroutine(actor));
     }
 
-    IEnumerator ShootCoroutine(MonoBehaviour runner)
+    IEnumerator ShootCoroutine(StageActor runnerActor)
     {
         // find emitter
-        StageActor runnerActor = runner.GetComponent<StageActor>();
         List<GameObject> em = Emitters.Select(x => runnerActor.Emitters[x]).ToList();
         float speed = (Speed ?? StageDirector.Instance.Data.Actors[Actor].Speed ?? 1) + GetVar(runnerActor, SpeedModifier);
         List<Vector2> toTarget = em.Select(x => ((Vector2)PlayerController.Instance.transform.position - (Vector2)x.transform.position).normalized).ToList();
@@ -56,7 +55,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         List<GameObject> parent = null;
         if (Parent != null)
         {
-            parent = Enumerable.Range(0, Emitters.Count).Select(i => GetParent(Parent, em[i].transform.position, runner.gameObject, Emitters[i])).ToList();
+            parent = Enumerable.Range(0, Emitters.Count).Select(i => GetParent(Parent, em[i].transform.position, runnerActor.gameObject, Emitters[i])).ToList();
         }
         float spread = Angle + GetVar(runnerActor, AngleModifier);
         float? lifetime = Lifetime + GetVar(runnerActor, LifetimeModifier);
@@ -91,9 +90,9 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                     shot.transform.parent = parent[j].transform;
                 }
                 actor.FinishSpawn(Run, lifetime);
-                if (runner.gameObject.tag == "PlayerWeapon")
+                foreach (var handler in runnerActor.gameObject.GetComponentsInChildren<IActorSpawnHandler>())
                 {
-                    PlayerShieldTest.SetToPlayerBullet(actor);
+                    handler.HandleSpawn(actor);
                 }
             }
         }

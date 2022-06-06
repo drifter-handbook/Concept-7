@@ -17,9 +17,8 @@ public class SetVarTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Ac
         return Deserialize<SetVarTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
-        StageActor actor = runner.GetComponent<StageActor>();
         if (Set != null)
         {
             actor.Vars[Var] = Set.Value;

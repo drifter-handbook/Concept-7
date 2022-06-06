@@ -29,25 +29,31 @@ public class WeaponController : MonoBehaviour
             return;
         }
         if (Time.time >= timeStamp) {
-            StageData.Actor actor = null;
+            string ryb = null;
             switch(type)
             {
                 case WeaponType.PRIMARYRED:
-                    actor = StageDirector.FindWeapon(-1, 0, 0);
+                    ryb = StageDirector.RYBStr(-1, 0, 0);
                     break;
                 case WeaponType.PRIMARYYELLOW:
-                    actor = StageDirector.FindWeapon(0, -1, 0);
+                    ryb = StageDirector.RYBStr(0, -1, 0);
                     break;
                 case WeaponType.PRIMARYBLUE:
-                    actor = StageDirector.FindWeapon(0, 0, -1);
+                    ryb = StageDirector.RYBStr(0, 0, -1);
                     break;
                 default:
                     break;
-            }       
-            
-            timeStamp = Time.time + actor.PrefabObj.GetComponent<PlayerWeapon>().weaponData.fireRate;
-            GameObject go = StageDirector.Spawn(actor.Name, transform.position, 0f);
-            go.GetComponent<StageActor>().FinishSpawn();
+            }
+            WeaponData weaponData = StageDirector.FindWeapon(ryb)?.PrefabObj?.GetComponent<PlayerWeapon>()?.weaponData;
+            if (weaponData != null)
+            {
+                timeStamp = Time.time + weaponData.fireRate;
+            }
+            StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
+            if (actor != null && actor.Actor.Timelines.ContainsKey(ryb))
+            {
+                actor.RunTimeline(ryb);
+            }
             screen.Game.PlaySFX("player_pew", 0.1f, Random.Range(0.8f, 1));
         }
     }
@@ -91,13 +97,13 @@ public class WeaponController : MonoBehaviour
                     break;
             }
             
-        } 
+        }
 
-        StageData.Actor actor = StageDirector.FindWeapon(r, y, b);
-        if (actor != null)
+        StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
+        string timeline = StageDirector.RYBStr(r, y, b);
+        if (actor != null && actor.Actor.Timelines.ContainsKey(timeline))
         {
-            GameObject go = StageDirector.Spawn(actor.Name, transform.position, 0f);
-            go.GetComponent<StageActor>().FinishSpawn();
+            actor.RunTimeline(timeline);
         }
         ResetQueue();
 

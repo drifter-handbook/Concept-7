@@ -13,15 +13,20 @@ public class ActorUseHP : MonoBehaviour
         health = actor.Hp ?? 1;
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D other)
     {
-    	if(collider.gameObject.tag == "PlayerWeapon")
-    	{
-    		health -= collider.gameObject.GetComponent<PlayerWeapon>().weaponData.damage;
-    	}
-        if (health <= 0)
+        ActorSuppressOtherUseHP suppress = other.GetComponent<ActorSuppressOtherUseHP>();
+        StageActor actor = GetComponent<StageActor>();
+        if (suppress == null || actor == null || !suppress.Classifications.Contains(actor.Classification))
         {
-            Die();
+            if (other.gameObject.tag == "PlayerWeapon")
+            {
+                health -= (float?)other.gameObject.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
+            }
+            if (health <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -33,7 +38,10 @@ public class ActorUseHP : MonoBehaviour
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)
         {
-            actor.RunTimeline(actor.Actor.OnDestroy?.Impact);
+            foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
+            {
+                handler.HandleDestroy(ActorDestroyReason.Health);
+            }
             Destroy(gameObject);
         }
     }

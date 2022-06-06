@@ -15,9 +15,9 @@ public class RunTimelineTimelineEvent : StageData.Actor.Timeline.IEvent, StageDa
         return Deserialize<RunTimelineTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
-        runner.GetComponent<StageActor>().RunTimeline(Timeline);
+        actor.RunTimeline(Timeline);
     }
 
     public void CompileCheck(Dictionary<string, StageData.Actor> actors, StageData.Actor current)

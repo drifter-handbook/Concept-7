@@ -23,7 +23,7 @@ public class MoveAtTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Ac
         return Deserialize<MoveAtTimelineEvent>(actor, $"Timeline event {Action}", yaml);
     }
 
-    public void Start(MonoBehaviour runner)
+    public void Start(StageActor actor)
     {
         List<StageActor> actorList = GameObject.FindGameObjectsWithTag(GameTag).Select(x => x.GetComponent<StageActor>()).Where(x => x != null).ToList();
         if (Actor != null)
@@ -34,17 +34,16 @@ public class MoveAtTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Ac
         {
             actorList = actorList.Where(x => ClassificationEnums.Contains(x.Classification)).ToList();
         }
-        StageActor actor = runner.GetComponent<StageActor>();
         StageActor targetActor = NearestActor(actorList, actor);
         if (targetActor == null)
         {
-            Debug.Log($"No GameObjects found with Tag '{GameTag}'{(Actor != null ? ", Actor=" + Actor : "")}{(Classification != null && Classification.Count > 0 ? ", Classification=[" + string.Join(", ", Classification) + "]" : "")}");
+            // Debug.Log($"No GameObjects found with Tag '{GameTag}'{(Actor != null ? ", Actor=" + Actor : "")}{(Classification != null && Classification.Count > 0 ? ", Classification=[" + string.Join(", ", Classification) + "]" : "")}");
             return;
         }
         // stop currently running move coroutine
         actor.RunCoroutine(ref actor.movementCoroutine, null);
         Vector2 target = targetActor.transform.position;
-        Vector2 dir = (target - (Vector2)runner.transform.position).normalized;
+        Vector2 dir = (target - (Vector2)actor.transform.position).normalized;
         if (MaxTurn != null)
         {
             float turn = Mathf.Clamp(Vector2.SignedAngle(actor.Direction, dir), -MaxTurn.Value, MaxTurn.Value);

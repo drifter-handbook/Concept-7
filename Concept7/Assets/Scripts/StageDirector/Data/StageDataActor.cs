@@ -25,6 +25,7 @@ public partial class StageData
         public bool? DestroyOffscreen;
         public bool? DestroyOnImpact;
         public float? Lifetime;
+        public string AttachOnImpact;
         public OnDestroyTimelines OnDestroy;
         public StageActor.ActorClassification? Classification;
         public Dictionary<string, Emitter> Emitters = new Dictionary<string, Emitter>();
@@ -61,6 +62,7 @@ public partial class StageData
             if (DestroyOnImpact == null) { DestroyOnImpact = copySrc.DestroyOnImpact; }
             if (Lifetime == null) { Lifetime = copySrc.Lifetime; }
             if (Classification == null) { Classification = copySrc.Classification; }
+            if (AttachOnImpact == null) { AttachOnImpact = copySrc.AttachOnImpact; }
             if (OnDestroy == null) { OnDestroy = new OnDestroyTimelines(); }
             if (OnDestroy.Offscreen == null) { OnDestroy.Offscreen = copySrc.OnDestroy?.Offscreen; }
             if (OnDestroy.Impact == null) { OnDestroy.Impact = copySrc.OnDestroy?.Impact; }
@@ -103,6 +105,11 @@ public partial class StageData
             else
             {
                 PrefabObj = StageDirector.Instance.DefaultActorPrefab;
+            }
+            // check attach exists
+            if (AttachOnImpact != null && !actors.ContainsKey(AttachOnImpact))
+            {
+                throw new StageDataException($"Field 'attach_on_impact' {Name} in actor {Name} in file {File} attempts to use actor {AttachOnImpact} which does not exist.");
             }
             // check emitters and timelines for nonexistent actor types
             foreach (Emitter em in Emitters.Values)
@@ -163,7 +170,7 @@ public partial class StageData
             {
                 string Action { get; }
                 IEvent CloneFrom(Actor actor, string yaml);
-                void Start(MonoBehaviour runner);
+                void Start(StageActor actor);
             }
         }
         // Checkable for actor references within actually existing
