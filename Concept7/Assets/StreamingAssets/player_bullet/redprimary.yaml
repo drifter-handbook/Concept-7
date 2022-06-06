@@ -4,6 +4,19 @@ core:
   copy_from: [baseprimary]
   speed: 15
 
+timeline_travel:
+  - time: 0
+    move:
+      dest:
+        - dir: 0
+  - time: 0
+    move_at:
+      game_tag: Enemy
+      classification: [Actor, Missile]
+      max_turn: 3
+    repeat: 100
+    interval: 0.03
+
 # timeline_travel:
 #   - time: 0
 #     move:

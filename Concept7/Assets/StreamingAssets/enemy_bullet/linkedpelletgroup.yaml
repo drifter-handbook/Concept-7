@@ -11,5 +11,7 @@ core:
 
 timeline_move:
   - time: 0
-    move_at_player:
+    move_at:
+      game_tag: Player
+      actor: player
       speed: 3

@@ -8,7 +8,7 @@ core:
   depth: -2
   speed: 2
   hp: 4
-  destroy_offscreen: true
+  destroy_offscreen: false
   destroy_on_impact: true
   lifetime: 2
   on_destroy:
@@ -22,14 +22,18 @@ emitter_burst:
 
 timeline_follow:
   - time: .6
-    move_at_player:
+    move_at:
+      game_tag: Player
+      actor: player
       max_turn: 15
       speed: .01
     repeat: 9
     interval: 0.01
 
   - time: .9
-    move_at_player:
+    move_at:
+      game_tag: Player
+      actor: player
       max_turn: 2
       speed: 8
     repeat: 200

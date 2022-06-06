@@ -11,7 +11,9 @@ core:
 
 timeline_decay:
   - time: 0.01
-    move_at_player:
+    move_at:
+      game_tag: Player
+      actor: player
       max_turn: 3
   - time: 0.3
     destroy: true

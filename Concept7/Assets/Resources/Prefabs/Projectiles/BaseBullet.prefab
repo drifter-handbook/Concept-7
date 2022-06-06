@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6426032967167557824}
   - component: {fileID: 9063038443216893512}
   - component: {fileID: 1282109815438260146}
+  - component: {fileID: 2607184207226580892}
   m_Layer: 8
   m_Name: BaseBullet
   m_TagString: Enemy
@@ -109,6 +110,7 @@ MonoBehaviour:
   OrbitSpeed: 0
   OrbitTilt: {x: 0, y: 0, z: 0, w: 1}
   ActorType: 
+  Classification: 0
   Mirror: {x: 1, y: 1}
 --- !u!61 &9184540977691960104
 BoxCollider2D:
@@ -215,6 +217,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2607184207226580892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303589307971982775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21628def42d163448b7464061433d737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0
+  Direction: {x: 0, y: 0}
+  OrbitSpeed: 0
+  OrbitTilt: {x: 0, y: 0, z: 0, w: 1}
+  ActorType: 
+  Classification: 1
+  Mirror: {x: 1, y: 1}
 --- !u!1 &8501248647076289920
 GameObject:
   m_ObjectHideFlags: 0

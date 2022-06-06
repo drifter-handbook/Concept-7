@@ -30,7 +30,7 @@ public partial class StageData
         new SpawnTimelineEvent(),
         new ShootTimelineEvent(),
         new MoveTimelineEvent(),
-        new MoveAtPlayerTimelineEvent(),
+        new MoveAtTimelineEvent(),
         new DestroyTimelineEvent(),
         new SetSpeedTimelineEvent(),
         new OrbitTimelineEvent(),

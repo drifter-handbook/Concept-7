@@ -26,6 +26,7 @@ public partial class StageData
         public bool? DestroyOnImpact;
         public float? Lifetime;
         public OnDestroyTimelines OnDestroy;
+        public StageActor.ActorClassification? Classification;
         public Dictionary<string, Emitter> Emitters = new Dictionary<string, Emitter>();
         public Dictionary<string, Var> Vars = new Dictionary<string, Var>();
         public Dictionary<string, Timeline> Timelines = new Dictionary<string, Timeline>();
@@ -59,6 +60,7 @@ public partial class StageData
             if (DestroyOffscreen == null) { DestroyOffscreen = copySrc.DestroyOffscreen; }
             if (DestroyOnImpact == null) { DestroyOnImpact = copySrc.DestroyOnImpact; }
             if (Lifetime == null) { Lifetime = copySrc.Lifetime; }
+            if (Classification == null) { Classification = copySrc.Classification; }
             if (OnDestroy == null) { OnDestroy = new OnDestroyTimelines(); }
             if (OnDestroy.Offscreen == null) { OnDestroy.Offscreen = copySrc.OnDestroy?.Offscreen; }
             if (OnDestroy.Impact == null) { OnDestroy.Impact = copySrc.OnDestroy?.Impact; }

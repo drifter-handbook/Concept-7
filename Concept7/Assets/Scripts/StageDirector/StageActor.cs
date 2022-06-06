@@ -22,6 +22,14 @@ public class StageActor : MonoBehaviour
     public Dictionary<string, float> Vars = new Dictionary<string, float>();
     public StageData.Actor Actor;
 
+    public ActorClassification Classification = ActorClassification.Actor;
+    // how should this actor be treated by things that intercept/reflect projectiles?
+    [Serializable]
+    public enum ActorClassification
+    {
+        Actor, Bullet, Beam, Missile
+    }
+
     // Only one movement coroutine allowed at a time.
     // Otherwise, they will fight and weird stuff will happen
     public Coroutine movementCoroutine;
@@ -96,6 +104,7 @@ public class StageActor : MonoBehaviour
             var comp = GetComponent<ActorUseHP>() ?? gameObject.AddComponent<ActorUseHP>();
             comp.Initialize(Actor);
         }
+        Classification = Actor.Classification ?? Classification;
     }
 
     // Start is called before the first frame update

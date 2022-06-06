@@ -17,7 +17,9 @@ emitter_trail:
 
 timeline_follow:
   - time: 0
-    move_at_player:
+    move_at:
+      game_tag: Player
+      actor: player
       max_turn: 3
     repeat: 100
     interval: 0.03

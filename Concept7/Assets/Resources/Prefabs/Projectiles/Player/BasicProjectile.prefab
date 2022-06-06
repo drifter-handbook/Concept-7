@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 9095937952439631880}
   - component: {fileID: 3010781896562639256}
   - component: {fileID: -2414006439892431610}
+  - component: {fileID: 7511731029098243823}
   m_Layer: 6
   m_Name: BasicProjectile
   m_TagString: PlayerWeapon
@@ -296,3 +297,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3114cffddf95440bd4d989b1490818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7511731029098243823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858225846118643195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21628def42d163448b7464061433d737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0
+  Direction: {x: 0, y: 0}
+  OrbitSpeed: 0
+  OrbitTilt: {x: 0, y: 0, z: 0, w: 1}
+  ActorType: 
+  Classification: 1
+  Mirror: {x: 1, y: 1}
