@@ -1,0 +1,11 @@
+# Basic bullet similar to enemy type
+core:
+  name: playerbasicbullet
+  prefab: BasicPlayerBullet
+  invuln: true
+  turn_on_move: true
+  tags: ["playerbullet"]
+  depth: -1
+  speed: 5
+  destroy_offscreen: true
+  destroy_on_impact: true
