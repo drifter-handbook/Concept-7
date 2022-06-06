@@ -1,0 +1,37 @@
+# Homing bullet
+core:
+  name: firework
+  prefab: Firework
+  invuln: true
+  turn_on_move: true
+  tags: ["playerbullet"]
+  depth: -2
+  speed: 4
+  hp: 1
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: travel
+  lifetime: 2
+  on_destroy:
+    event: burst
+    impact: burst
+
+timeline_travel:
+- time: 0
+  move:
+    dest:
+      - dir: 0
+
+emitter_bursting:
+  x: 0
+  y: 0
+  actor: playerbasicbullet
+
+timeline_burst:
+  - time: 0
+    shoot:
+      num: 8
+      angle: 360
+      speed: 3
+      emitters: [bursting]
+      ring: true

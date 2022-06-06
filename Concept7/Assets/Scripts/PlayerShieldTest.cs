@@ -88,7 +88,12 @@ public class PlayerShieldTest : MonoBehaviour
     {
         actor.gameObject.tag = "PlayerWeapon";
         actor.gameObject.layer = LayerMask.NameToLayer("PlayerHitbox");
-        actor.gameObject.AddComponent<PlayerWeapon>().weaponData = Instance.ReflectWeaponData;
+
+        //So this was breaking the fireworks combo because instance is null. Adding check fixed it
+        if(Instance != null)
+        {
+            actor.gameObject.AddComponent<PlayerWeapon>().weaponData = Instance.ReflectWeaponData;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
