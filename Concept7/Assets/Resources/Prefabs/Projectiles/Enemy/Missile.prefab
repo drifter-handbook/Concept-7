@@ -68,7 +68,11 @@ PrefabInstance:
     - target: {fileID: 1084138616676472025, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f365d2af0f8b2524eab2976695d1d279, type: 3}
+      objectReference: {fileID: 155417742, guid: a61e73a0ecec68f4e850408b160c961d, type: 3}
+    - target: {fileID: 1282109815438260146, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: d8c30058bf7221743818b430f7d147f7, type: 2}
     - target: {fileID: 8303589307971982768, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -116,6 +120,10 @@ PrefabInstance:
     - target: {fileID: 8303589307971982775, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_Name
       value: Missile
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900832013474112186, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9184540977691960104, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x

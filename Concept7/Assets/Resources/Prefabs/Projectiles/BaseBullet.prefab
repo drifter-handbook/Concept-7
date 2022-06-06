@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -7487229389730319655}
   - component: {fileID: 6426032967167557824}
   - component: {fileID: 9063038443216893512}
+  - component: {fileID: 1282109815438260146}
   m_Layer: 8
   m_Name: BaseBullet
   m_TagString: Enemy
@@ -106,7 +107,7 @@ MonoBehaviour:
   Speed: 0
   Direction: {x: 0, y: 0}
   OrbitSpeed: 0
-  OrbitRadius: 0
+  OrbitTilt: {x: 0, y: 0, z: 0, w: 1}
   ActorType: 
   Mirror: {x: 1, y: 1}
 --- !u!61 &9184540977691960104
@@ -194,6 +195,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioName: enemy_pew
+--- !u!95 &1282109815438260146
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303589307971982775}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8501248647076289920
 GameObject:
   m_ObjectHideFlags: 0
