@@ -310,9 +310,10 @@ timeline_pelletwave:
 timeline_atomring:
   - time: 0
     shoot:
-      num: 1
+      num: 2
       dir: 90
       speed: 3
+      angle: 180
       run: orbit
       emitters: [gun1]
       actor: atomHeart
@@ -322,9 +323,10 @@ timeline_atomring:
 
   - time: 0
     shoot:
-      num: 1
+      num: 2
       dir: 270
       speed: 3
+      angle: 180
       run: orbitreverse
       emitters: [gun2]
       actor: atomHeart
