@@ -11,17 +11,21 @@ public class Laser : MonoBehaviour
     public GameObject Tail;
 
     LineRenderer lineRenderer;
+    PolygonCollider2D polygonCollider;
     Vector2 prev;
 
     float UPDATE_DIST = 0.05f;
     float SEGMENT_DIST = 0.02f;
     int ARCLEN_SEGMENTS = 6;
     float MAX_LEN = 3f;
+    float POLY_SEGMENT_DIST = 0.2f;
+    float POLY_SEGMENT_WIDTH = 0.2f;
 
     // Start is called before the first frame update
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        polygonCollider = GetComponent<PolygonCollider2D>();
         prev = transform.position;
     }
 
@@ -109,6 +113,30 @@ public class Laser : MonoBehaviour
             Tail.SetActive(true);
             Tail.transform.position = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
             Tail.transform.eulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, lineRenderer.GetPosition(lineRenderer.positionCount - 1) - lineRenderer.GetPosition(lineRenderer.positionCount - 2)));
+            // set polygon collider
+            List<Vector2> polygonPointsTop = new List<Vector2>();
+            List<Vector2> polygonPointsBottom = new List<Vector2>();
+            float polydist = 0f;
+            Vector2 curPos = lineRenderer.GetPosition(0);
+            for (int i = 1; i < lineRenderer.positionCount - 1; i++)
+            {
+                Vector2 polydiff = (Vector2)lineRenderer.GetPosition(i) - (Vector2)lineRenderer.GetPosition(i - 1);
+                polydist += polydiff.magnitude;
+                if (polydist > POLY_SEGMENT_DIST)
+                {
+                    // add polygon segment
+                    Vector2 v = lineRenderer.GetPosition(i);
+                    Vector2 dir = (v - curPos).normalized;
+                    polygonPointsTop.Add(v + new Vector2(-dir.y, dir.x) * 0.5f * POLY_SEGMENT_WIDTH - (Vector2)transform.position);
+                    polygonPointsBottom.Add(v + new Vector2(dir.y, -dir.x) * 0.5f * POLY_SEGMENT_WIDTH - (Vector2)transform.position);
+                    // reset
+                    curPos = lineRenderer.GetPosition(0);
+                    polydist = 0f;
+                }
+            }
+            polygonPointsBottom.Reverse();
+            polygonPointsTop.AddRange(polygonPointsBottom);
+            polygonCollider.points = polygonPointsTop.ToArray();
         }
         prev = transform.position;
     }
