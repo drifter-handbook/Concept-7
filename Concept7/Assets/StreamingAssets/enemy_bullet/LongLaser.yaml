@@ -1,6 +1,6 @@
 core:
-  name: curvelaser
-  prefab: ShortLaser
+  name: curvelaserlong
+  prefab: LongLaser
   invuln: true
   turn_on_move: false
   tags: ["bullet"]
@@ -9,6 +9,7 @@ core:
   destroy_offscreen: false
   destroy_on_impact: false
   default_run: travel
+  classification: Beam
 
 timeline_travel:
   - time: 0

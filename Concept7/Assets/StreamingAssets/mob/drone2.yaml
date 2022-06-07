@@ -6,10 +6,11 @@ core:
   prefab: Drone2
   speed: 2
   destroy_on_impact: false
+  lifetime: 10
 
 
 emitter_gun0:
-  x: .3
+  x: -.3
   y: 0
 
 
@@ -34,6 +35,7 @@ timeline_slowspread:
       actor: curvelaser
       mirror_y: false
       emitters: [gun0]
+      run: seek
   - time: 2
     setspeed:
       speed: 2.5

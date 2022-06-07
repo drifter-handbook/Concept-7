@@ -1,0 +1,40 @@
+core:
+  name: lasercross
+  prefab: ActorGroup
+  invuln: true
+  turn_on_move: false
+  tags: ["bullet"]
+  depth: -1
+  speed: 0
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: cross
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_cross:
+  - time: 0
+    shoot:
+      num: 4
+      angle: 360
+      actor: curvelaserlong
+      run: travel
+      ring: true
+      parent: actor
+      speed: 12
+  - time: 5
+    rotate:
+      inc: 30
+      dur: 5
+  - time: 10
+    rotate:
+      inc: -60
+      dur: 10
+  - time: 20
+    rotate:
+      inc: 30
+      dur: 5
+  - time: 30
+    destroy: true

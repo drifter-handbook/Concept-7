@@ -10,23 +10,48 @@ public class Laser : MonoBehaviour
     public GameObject Head;
     public GameObject Tail;
 
+    List<Vector3> points = new List<Vector3>();
+
     LineRenderer lineRenderer;
     PolygonCollider2D polygonCollider;
     Vector2 prev;
 
-    float UPDATE_DIST = 0.05f;
-    float SEGMENT_DIST = 0.02f;
+    float UPDATE_DIST = 0.06f;
+    float SEGMENT_DIST = 0.03f;
     int ARCLEN_SEGMENTS = 6;
-    float MAX_LEN = 3f;
+    public float MAX_LEN = 15f;
     float POLY_SEGMENT_DIST = 0.2f;
     float POLY_SEGMENT_WIDTH = 0.2f;
+
+    public float Lifetime;
+    public float DecayTime;
+    float LaserLength;
 
     // Start is called before the first frame update
     void Start()
     {
+        LaserLength = MAX_LEN;
         lineRenderer = GetComponent<LineRenderer>();
         polygonCollider = GetComponent<PolygonCollider2D>();
-        prev = transform.position;
+        prev = transform.localPosition;
+        StartCoroutine(LifetimeCoroutine());
+    }
+    IEnumerator LifetimeCoroutine()
+    {
+        float time = 0f;
+        while (time < Lifetime - DecayTime)
+        {
+            yield return null;
+            time += Time.deltaTime;
+        }
+        while (time < Lifetime)
+        {
+            float t = Mathf.InverseLerp(Lifetime - DecayTime, Lifetime, time);
+            LaserLength = Mathf.Lerp(MAX_LEN, 0, t);
+            yield return null;
+            time += Time.deltaTime;
+        }
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
@@ -35,54 +60,13 @@ public class Laser : MonoBehaviour
         
     }
 
-    void LateUpdate()
+    public void SyncToPoints()
     {
-        if (lineRenderer.positionCount == 0)
-        {
-            lineRenderer.positionCount = 1;
-            lineRenderer.SetPositions(new Vector3[1] { transform.position });
-            return;
-        }
-        // first two points to get initial direction
-        if (lineRenderer.positionCount == 1)
-        {
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPositions(new Vector3[2] { lineRenderer.GetPosition(0), transform.position });
-            return;
-        }
-        Vector2 current = lineRenderer.GetPosition(lineRenderer.positionCount - 2);
-        Vector2 diff = (Vector2)transform.position - current;
-        // pull points from line renderer
-        Vector3[] lrpoints = new Vector3[lineRenderer.positionCount];
-        lineRenderer.GetPositions(lrpoints);
-        List<Vector3> points = new List<Vector3>(lrpoints);
-        if (diff.magnitude >= UPDATE_DIST)
-        {
-            Vector2 dir = diff.normalized;
-            int segments = Mathf.RoundToInt(diff.magnitude / SEGMENT_DIST);
-            Vector2 cur = points[points.Count - 1];
-            Vector2 curPost = cur + (cur - (Vector2)points[points.Count - 2]).normalized * 0.5f * diff.magnitude;
-            Vector2 next = transform.position;
-            Vector2 nextPre = next - ((Vector2)transform.position - prev).normalized * 0.5f * diff.magnitude;
-            List<float> curveSpd = CurveSpeed(cur, curPost, nextPre, next);
-            float totalDist = curveSpd.Sum();
-            for (int i = 0; i < segments; i++)
-            {
-                float t = (float)i / (segments - 1);
-                // add points
-                points.Add(CubicBezier(cur, curPost, nextPre, next, SpeedLerp(curveSpd, t * totalDist)));
-            }
-        }
-        else
-        {
-            // move final point to current pos
-            lineRenderer.SetPosition(lineRenderer.positionCount - 1, transform.position);
-        }
         // filter points too close, and remove old segments
         float dist = 0f;
         for (int i = points.Count - 1; i >= 0; i--)
         {
-            if (dist > MAX_LEN)
+            if (dist > LaserLength)
             {
                 points.RemoveAt(i);
                 continue;
@@ -101,36 +85,33 @@ public class Laser : MonoBehaviour
             }
             dist += dp.magnitude;
         }
-        // push to line renderer
-        lineRenderer.positionCount = points.Count;
-        lineRenderer.SetPositions(points.ToArray());
         // set head and tail
-        if (lineRenderer.positionCount >= 2)
+        if (points.Count >= 2)
         {
             Head.SetActive(true);
-            Head.transform.position = lineRenderer.GetPosition(0);
-            Head.transform.eulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, lineRenderer.GetPosition(1) - lineRenderer.GetPosition(0)));
+            Head.transform.localPosition = points[0] - transform.localPosition;
+            Head.transform.localEulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, points[1] - points[0]));
             Tail.SetActive(true);
-            Tail.transform.position = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
-            Tail.transform.eulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, lineRenderer.GetPosition(lineRenderer.positionCount - 1) - lineRenderer.GetPosition(lineRenderer.positionCount - 2)));
+            Tail.transform.localPosition = points[points.Count - 1] - transform.localPosition;
+            Tail.transform.localEulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, points[points.Count - 1] - points[points.Count - 2]));
             // set polygon collider
             List<Vector2> polygonPointsTop = new List<Vector2>();
             List<Vector2> polygonPointsBottom = new List<Vector2>();
             float polydist = 0f;
-            Vector2 curPos = lineRenderer.GetPosition(0);
-            for (int i = 1; i < lineRenderer.positionCount - 1; i++)
+            Vector2 curPos = points[0];
+            for (int i = 1; i < points.Count - 1; i++)
             {
-                Vector2 polydiff = (Vector2)lineRenderer.GetPosition(i) - (Vector2)lineRenderer.GetPosition(i - 1);
+                Vector2 polydiff = (Vector2)points[i] - (Vector2)points[i - 1];
                 polydist += polydiff.magnitude;
                 if (polydist > POLY_SEGMENT_DIST)
                 {
                     // add polygon segment
-                    Vector2 v = lineRenderer.GetPosition(i);
+                    Vector2 v = points[i];
                     Vector2 dir = (v - curPos).normalized;
-                    polygonPointsTop.Add(v + new Vector2(-dir.y, dir.x) * 0.5f * POLY_SEGMENT_WIDTH - (Vector2)transform.position);
-                    polygonPointsBottom.Add(v + new Vector2(dir.y, -dir.x) * 0.5f * POLY_SEGMENT_WIDTH - (Vector2)transform.position);
+                    polygonPointsTop.Add(v + new Vector2(-dir.y, dir.x) * 0.5f * POLY_SEGMENT_WIDTH - (Vector2)transform.localPosition);
+                    polygonPointsBottom.Add(v + new Vector2(dir.y, -dir.x) * 0.5f * POLY_SEGMENT_WIDTH - (Vector2)transform.localPosition);
                     // reset
-                    curPos = lineRenderer.GetPosition(0);
+                    curPos = points[i];
                     polydist = 0f;
                 }
             }
@@ -138,7 +119,54 @@ public class Laser : MonoBehaviour
             polygonPointsTop.AddRange(polygonPointsBottom);
             polygonCollider.points = polygonPointsTop.ToArray();
         }
-        prev = transform.position;
+        // push to line renderer
+        lineRenderer.positionCount = points.Count;
+        lineRenderer.SetPositions(points.Select(x => x - transform.localPosition).ToArray());
+    }
+    void LateUpdate()
+    {
+        if (points.Count == 0)
+        {
+            points.Add(transform.localPosition);
+            SyncToPoints();
+            return;
+        }
+        // first two points to get initial direction
+        if (points.Count == 1)
+        {
+            if (points[0] != transform.localPosition)
+            {
+                points.Add(transform.localPosition);
+                SyncToPoints();
+            }
+            return;
+        }
+        Vector2 current = points[points.Count - 2];
+        Vector2 diff = (Vector2)transform.localPosition - current;
+        if (diff.magnitude >= UPDATE_DIST)
+        {
+            Vector2 dir = diff.normalized;
+            int segments = Mathf.RoundToInt(diff.magnitude / SEGMENT_DIST);
+            Vector2 cur = points[points.Count - 1];
+            Vector2 curPost = cur + (cur - (Vector2)points[points.Count - 2]).normalized * 0.5f * diff.magnitude;
+            Vector2 next = transform.localPosition;
+            Vector2 nextPre = next - ((Vector2)transform.localPosition - prev).normalized * 0.5f * diff.magnitude;
+            List<float> curveSpd = CurveSpeed(cur, curPost, nextPre, next);
+            float totalDist = curveSpd.Sum();
+            for (int i = 0; i < segments; i++)
+            {
+                float t = (float)i / (segments - 1);
+                // add points
+                points.Add(CubicBezier(cur, curPost, nextPre, next, SpeedLerp(curveSpd, t * totalDist)));
+            }
+        }
+        else
+        {
+            // move final point to current pos
+            points[points.Count - 1] = transform.localPosition;
+        }
+        SyncToPoints();
+        prev = transform.localPosition;
     }
 
     List<float> CurveSpeed(Vector2 cur, Vector2 curPost, Vector2 nextPre, Vector2 next)

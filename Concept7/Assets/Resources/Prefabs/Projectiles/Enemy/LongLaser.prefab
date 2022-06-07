@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 1369336657167704516}
   - component: {fileID: 5469978771837239233}
   m_Layer: 8
-  m_Name: Laser
+  m_Name: LongLaser
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!114 &-61188398413625775
 MonoBehaviour:
@@ -182,6 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 118819249147778462}
   Tail: {fileID: 4396994195177895548}
+  MAX_LEN: 15
+  Lifetime: 26
+  DecayTime: 4
 --- !u!114 &-6714589861980667235
 MonoBehaviour:
   m_ObjectHideFlags: 0
