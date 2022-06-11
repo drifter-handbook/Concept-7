@@ -53,9 +53,11 @@ timeline_sine:
     shoot:
       num: 1
       speed: 2
-      actor: pellet
+      actor: detachpellet
+      mirror_x: false
       mirror_y: false
       emitters: [gun0]
+      run: detach
 
 timeline_testlink:
   - time: 0

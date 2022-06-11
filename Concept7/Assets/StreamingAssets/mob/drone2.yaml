@@ -29,7 +29,7 @@ timeline_slowspread:
   - time: 1.5
     shoot:
       num: 2
-      speed: 8
+      speed: 4
       angle: 30
       dir: 180
       actor: curvelaser

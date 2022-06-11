@@ -1,0 +1,57 @@
+core:
+  name: detachpellet
+  prefab: Pellet
+  invuln: true
+  turn_on_move: false
+  tags: ["bullet"]
+  depth: -1
+  speed: 8
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: detach
+
+timeline_travel:
+  - time: 0
+    move:
+      dest:
+        - x: 2
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 4
+          y: -0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 6
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 8
+          y: -0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 10
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+
+timeline_detach:
+  - time: 0
+    link:
+      actor: linkedpelletgroup
+      from_actor: drone
+      from_timeline: sine
+  - time: 0
+    detach: true
+  - time: 1
+    setspeed:
+      speed: 0
+      dur: 0
+  - time: 1
+    reattach: true
+    repeat: 20
+    interval: 1
+  - time: 1.5
+    detach: true
+    repeat: 20
+    interval: 1
