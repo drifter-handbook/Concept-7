@@ -43,8 +43,10 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         // find emitter
         List<GameObject> em = Emitters.Select(x => runnerActor.Emitters[x]).ToList();
         float speed = (Speed ?? StageDirector.Instance.Data.Actors[Actor].Speed ?? 1) + GetVar(runnerActor, SpeedModifier);
-        // TODO: find closest player
-        List<Vector2> toTarget = em.Select(x => ((Vector2)PlayerController.Instance.transform.position - (Vector2)x.transform.position).normalized).ToList();
+        // find closest player
+        List<StageActor> actorList = GameObject.FindGameObjectsWithTag("Player").Select(x => x.GetComponent<StageActor>()).Where(x => x != null).ToList();
+        StageActor targetActor = NearestActor(actorList, runnerActor);
+        List<Vector2> toTarget = em.Select(x => ((Vector2)targetActor.transform.position - (Vector2)x.transform.position).normalized).ToList();
         if (Dir != null)
         {
             toTarget = em.Select(x => (Vector2)(Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier)) * Vector2.right)).ToList();
