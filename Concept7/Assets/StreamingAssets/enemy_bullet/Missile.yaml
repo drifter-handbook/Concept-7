@@ -25,7 +25,7 @@ timeline_follow:
     move_at:
       game_tag: Player
       actor: player
-      max_turn: 15
+      max_turn: 17
       speed: .01
     repeat: 9
     interval: 0.01
@@ -34,7 +34,7 @@ timeline_follow:
     move_at:
       game_tag: Player
       actor: player
-      max_turn: 2
+      max_turn: 3
       speed: 8
     repeat: 200
     interval: 0.1

@@ -82,6 +82,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             GameObject go = new GameObject();
             go.transform.parent = gameObject.transform;
             go.transform.localPosition = new Vector2(em.Value.X, em.Value.Y);
+            go.name = $"emitter_{em.Key}";
             Emitters[em.Key] = go;
         }
         // copy vars
@@ -110,6 +111,8 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             var comp = GetComponent<ActorAttachOnImpact>() ?? gameObject.AddComponent<ActorAttachOnImpact>();
             comp.AttachActor = Actor.AttachOnImpact;
         }
+        // stage editor stuff
+        HandleStageEditorSpawn();
     }
 
     // Start is called before the first frame update
@@ -497,6 +500,18 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             case ActorDestroyReason.Event:
                 RunTimeline(Actor?.OnDestroy?.Event);
                 break;
+        }
+    }
+
+    // stage editor options on create
+    void HandleStageEditorSpawn()
+    {
+        if (StageEditor.Instance != null)
+        {
+            if (StageEditor.Instance.DrawMovementPath && ActorType != "player")
+            {
+                gameObject.AddComponent<StageActorDrawMovementPath>();
+            }
         }
     }
 }
