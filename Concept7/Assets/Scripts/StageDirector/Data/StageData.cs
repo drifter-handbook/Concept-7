@@ -38,7 +38,6 @@ public partial class StageData
         new RunTimelineTimelineEvent(),
         new RotateTimelineEvent(),
         new LinkTimelineEvent(),
-        new DestroyProjectilesEvent(),
         new DetachTimelineEvent(),
         new ReattachTimelineEvent()
     };

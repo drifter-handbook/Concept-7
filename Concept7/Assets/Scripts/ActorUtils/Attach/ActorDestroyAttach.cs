@@ -17,10 +17,7 @@ public class ActorDestroyAttach : MonoBehaviour, IActorAttachment
             }
             Destroy(target.gameObject);
         }
-        // otherwise, destroy self
-        else
-        {
-            Destroy(gameObject);
-        }
+        // cleanup self
+        Destroy(gameObject);
     }
 }

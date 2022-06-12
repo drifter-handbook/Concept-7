@@ -1,17 +1,16 @@
 # Bomb that clears Screen
 core:
-  name: bomb
+  name: playerbomb
   prefab: Bomb
   invuln: true
   turn_on_move: true
   tags: ["playerbullet"]
   depth: -2
   speed: 1
-  hp: 1
-  destroy_offscreen: true
+  destroy_offscreen: false
   destroy_on_impact: false
   default_run: travel
-  lifetime: 0
+  lifetime: 1
   on_destroy:
     event: destroy_projectiles
 
@@ -23,4 +22,5 @@ timeline_travel:
 
 timeline_destroy_projectiles:
   - time: 0
-    destroy_projectiles: true
+    spawn:
+      actor: screenwide_destroy_proj

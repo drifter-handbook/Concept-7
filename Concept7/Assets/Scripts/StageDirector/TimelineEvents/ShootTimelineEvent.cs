@@ -48,7 +48,6 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         if (Dir != null)
         {
             toTarget = em.Select(x => (Vector2)(Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier)) * Vector2.right)).ToList();
-            Debug.Log(toTarget[0]);
         }
         // create Num shots with Angle spread
         int shots = (Num ?? 1) + (int)GetVar(runnerActor, NumModifier) + (Ring ? 1 : 0);
@@ -84,7 +83,6 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                 float mirrorX = MirrorX == null ? runnerActor.Mirror.x : (MirrorX.Value ? -1 : 1);
                 float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);
                 actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget[j];
-                Debug.Log(toTarget[j]);
                 actor.Direction = new Vector2(actor.Direction.x * mirrorX, actor.Direction.y * mirrorY);
                 actor.Speed = speed;
                 actor.Mirror = new Vector2(mirrorX, mirrorY);

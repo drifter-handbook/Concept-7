@@ -51,3 +51,21 @@ timeline_B:
       actor: bluePaintSplat
       parent: actor
       emitters: [default]
+
+timeline_RBB:
+  - time: 0
+    shoot:
+      actor: playerlargemissile
+      emitters: [default]
+
+timeline_YYY:
+  - time: 0
+    shoot:
+      actor: playerfirework
+      emitters: [default]
+
+timeline_RYB:
+  - time: 0
+    shoot:
+      actor: playerbomb
+      emitters: [default]
