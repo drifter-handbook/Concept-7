@@ -32,22 +32,24 @@ A `Variable` is a floating-point value with a string name. They can be set or ad
 
 ### core
 
-| Field             | Type   | Description                                                                          |
-|-------------------|--------|--------------------------------------------------------------------------------------|
-| name              | string | Required. Unique name for this actor type.                                           |
-| copy_from         | string | Inherit fields from other actor.                                                     |
-| prefab            | string | Name of prefab in Resources/Prefabs to use for this actor. Defaults to DefaultActor. |
-| invuln            | bool   | Whether or not the actor can be hit. Defaults to false.                              |
-| hp                | int    | How much HP the actor should have. Defaults to 1.                                    |
-| default_run       | string | What timeline to run when the actor spawns.                                          |
-| turn_on_move      | bool   | Whether the actor should rotate when moving in a direction. Defaults to false.       |
-| tags              | list   | List of string tags. Empty list by default.                                          |
-| speed             | float  | Default speed for movement events. 1 by default.                                     |
-| depth             | float  | Render depth (Z position). 0 by default.                                             |
-| destroy_offscreen | bool   | Destroy actor when it leaves the play area. Defaults to true.                        |
-| destroy_on_impact | bool   | Destroy actor when it impacts another actor. Defaults to false.                      |
-| lifetime          | float  | Destroy actor after this number of seconds. Negative values disable this behavior.   |
-| on_destroy        | dict   | When destroyed for the specified reason, run the given timeline.                     |
+| Field             | Type         | Description                                                                          |
+|-------------------|--------------|--------------------------------------------------------------------------------------|
+| name              | string       | Required. Unique name for this actor type.                                           |
+| copy_from         | string       | Inherit fields from other actor.                                                     |
+| prefab            | string       | Name of prefab in Resources/Prefabs to use for this actor. Defaults to DefaultActor. |
+| invuln            | bool         | Whether or not the actor can be hit. Defaults to false.                              |
+| hp                | int          | How much HP the actor should have. Defaults to 1.                                    |
+| default_run       | string       | What timeline to run when the actor spawns.                                          |
+| turn_on_move      | bool         | Whether the actor should rotate when moving in a direction. Defaults to false.       |
+| tags              | list         | List of string tags. Empty list by default.                                          |
+| speed             | float        | Default speed for movement events. 1 by default.                                     |
+| depth             | float        | Render depth (Z position). 0 by default.                                             |
+| destroy_offscreen | bool         | Destroy actor when it leaves the play area. Defaults to true.                        |
+| destroy_on_impact | bool         | Destroy actor when it impacts another actor. Defaults to false.                      |
+| lifetime          | float        | Destroy actor after this number of seconds. Negative values disable this behavior.   |
+| on_destroy        | dict         | When destroyed for the specified reason, run the given timeline.                     |
+| classification    | list[string] | Whether this actor is a ship or bullet. See `Classifications` section.               |
+| attach_on_impact  | string       | An actor to attach (as a child object) to the target when it impacts another actor.  |
 
 Within the `on_destroy` dict, the following fields can be supplied:
 | Field     | Type   | Description                                                                                          |
@@ -55,6 +57,25 @@ Within the `on_destroy` dict, the following fields can be supplied:
 | offscreen | string | Run the timeline when destroyed due to going offscreen. Only events at time 0 are run.               |
 | impact    | string | Run the timeline when destroyed due to impacting another actor. Only events at time 0 are run.       |
 | event     | string | Run the timeline when destroyed due to lifetime or the destroy event. Only events at time 0 are run. |
+
+The possible values in the `classification` field are:
+| Value   | Description                                                                                                          |
+|---------|----------------------------------------------------------------------------------------------------------------------|
+| actor   | An actor that can't be destroyed by projectile-reflecting or projectile-intercepting objects, such as an enemy ship. |
+| bullet  | A projectile that moves and cannot be shot down.                                                                     |
+| missile | A projectile that moves and can be shot down.                                                                        |
+| beam    | A projectile that cannot be shot down and damages a continuous area.                                                 |
+
+Possible useful values for the `prefab` field include:
+| Value                | Description                                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------|
+| DefaultActor         | Empty actor with no extra Monobehaviours attached.                                                                    |
+| ActorGroup           | Actor that destroys itself if it has no children attached.                                                            |
+| Screenwide           | Actor that immediately impacts all enemy projectiles onscreen.                                                        |
+| ActorAttachDestroy   | Used in `attach_on_impact` to destroy the impacted projectile.                                                        |
+| ActorAttachReflector | Used in `attach_on_impact` to reflect the impacted projectile.                                                        |
+| ActorAttachOnHit     | Used in `attach_on_impact`. Creates an attached actor that lasts for one frame on the target.                         |
+| ActorAttachOnHitOnly | Used in `attach_on_impact`. Same as ActorAttachOnHit but calls `on_destroy.event` if the actor is hit but not killed. |
 
 ### emitter_NAME
 
@@ -76,19 +97,21 @@ Each timeline is made up of a list of events. Each event has the following field
 
 The list of actions is as follows:
 
-| Field          | Type   | Description                                                      |
-|----------------|--------|------------------------------------------------------------------|
-| destroy        | bool   | Destroy the actor if true.                                       |
-| move           | object | Move the actor relative to its current position.                 |
-| move_at_player | object | Move the actor towards the player.                               |
-| orbit          | object | Orbit the actor's parent position, or change the current orbit.  |
-| rotate         | object | Rotate the actor.                                                |
-| run            | object | Run a timeline.                                                  |
-| setspeed       | object | Set the actor's speed.                                           |
-| setvar         | object | Set or increment a variable.                                     |
-| spawn          | object | Spawn another actor at a position.                               |
-| shoot          | object | Shoot out an actor, giving it an initial direction and position. |
-| link           | object | Set actor's parent to be another actor.                          |
+| Field    | Type   | Description                                                      |
+|----------|--------|------------------------------------------------------------------|
+| destroy  | bool   | Destroy the actor if true.                                       |
+| move     | object | Move the actor relative to its current position.                 |
+| move_at  | object | Move the actor towards the player or another actor type.         |
+| orbit    | object | Orbit the actor's parent position, or change the current orbit.  |
+| rotate   | object | Rotate the actor.                                                |
+| run      | object | Run a timeline.                                                  |
+| setspeed | object | Set the actor's speed.                                           |
+| setvar   | object | Set or increment a variable.                                     |
+| spawn    | object | Spawn another actor at a position.                               |
+| shoot    | object | Shoot out an actor, giving it an initial direction and position. |
+| link     | object | Set actor's parent to be another actor.                          |
+| detach   | bool   | Set actor to be an independent entity, unattached to any parent. |
+| reattach | bool   | Set actor to be a child of the parent it was detached from.      |
 
 #### spawn
 
@@ -190,13 +213,18 @@ The objects `pre` and `post` can have the following fields:
 | dust  | float | Distance of the position of the control point compared to the keyframe.  |
 | rel   | float | What coords to use. Defaults to `pos`. See the `Rel` section above.      |
 
-#### move_at_player
+#### move_at
 
-| Field      | Type  | Description                                                                     |
-|------------|-------|---------------------------------------------------------------------------------|
-| max_turn   | float | Maximum amount the unit can turn towards the player. Useful for homing bullets. |
-| speed      | float | Speed to move. Defaults to using the actor's speed.                             |
-| instant    | bool  | If true, instantly moves to the player. Defaults to false.                      |
+Moves toward the closest actor found to match the game_tag, actor, and classification fields.
+
+| Field          | Type   | Description                                                                     |
+|----------------|--------|---------------------------------------------------------------------------------|
+| max_turn       | float  | Maximum amount the unit can turn towards the player. Useful for homing bullets. |
+| speed          | float  | Speed to move. Defaults to using the actor's speed.                             |
+| instant        | bool   | If true, instantly moves to the specified actor. Defaults to false.             |
+| game_tag       | string | Unity game tag to filter for.                                                   |
+| actor          | string | Actor type to filter for.                                                       |
+| classification | string | Classification to filter for.                                                   |
 
 #### orbit
 
@@ -245,3 +273,4 @@ A niche timeline event used for firing bullets which maintain their formation. T
 | actor         | string | Actor type to become a child of. Spawns one if it does not already exist.                      |
 | from_actor    | string | Spawn parent actor in the average positions of the matching actor type.                        |
 | from_timeline | string | Spawn parent actor in the average positions of the matching actor types running this timeline. |
+
