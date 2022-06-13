@@ -58,6 +58,13 @@ timeline_RBB:
       actor: playerlargemissile
       emitters: [default]
 
+timeline_RRR:
+  - time: 0
+    shoot:
+      actor: playerlonglaser
+      parent: actor
+      emitters: [default]
+
 timeline_YYY:
   - time: 0
     shoot:
