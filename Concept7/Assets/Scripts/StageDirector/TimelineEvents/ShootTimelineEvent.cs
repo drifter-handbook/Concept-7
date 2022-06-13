@@ -51,6 +51,10 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         {
             toTarget = em.Select(x => ((Vector2)targetActor.transform.position - (Vector2)x.transform.position).normalized).ToList();
         }
+        else
+        {
+            Dir = Dir ?? 0;
+        }
         if (Dir != null)
         {
             toTarget = em.Select(x => (Vector2)(Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier)) * Vector2.right)).ToList();
