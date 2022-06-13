@@ -496,6 +496,10 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
                 break;
             case ActorDestroyReason.Health:
                 RunTimeline(Actor?.OnDestroy?.Impact);
+                if (gameObject.tag == "Enemy" && Classification == ActorClassification.Actor)
+                {
+                    SaveData.Instance.EnemiesKilled++;
+                }
                 break;
             case ActorDestroyReason.Event:
                 RunTimeline(Actor?.OnDestroy?.Event);

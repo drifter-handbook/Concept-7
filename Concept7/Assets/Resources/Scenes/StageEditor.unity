@@ -633,6 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DrawMovementPath: 1
   DrawMovementPathPrefab: {fileID: 708396262347998709, guid: 14c54718cdfe7a940a4ea5e8617125c1, type: 3}
+  Pause: 0
 --- !u!1 &255283737
 GameObject:
   m_ObjectHideFlags: 0
@@ -7336,6 +7337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1735036017}
   - component: {fileID: 1735036016}
+  - component: {fileID: 1735036018}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -7385,6 +7387,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1735036018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735036015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d148fb4d96d38e4d967845ae2562e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemiesKilled: 0
+  StagesPlayed: 0
 --- !u!1 &1753763563
 GameObject:
   m_ObjectHideFlags: 0

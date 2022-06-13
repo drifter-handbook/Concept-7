@@ -9098,6 +9098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109804104}
   - component: {fileID: 2109804103}
+  - component: {fileID: 2109804105}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -9119,7 +9120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invulnerable: 0
   ContinueWithNoLives: 1
-  Shield: 1
+  StartStage: 1
   CurrentLives: 3
   StartingLives: 3
   NumPlayers: 0
@@ -9147,6 +9148,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2109804105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109804102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d148fb4d96d38e4d967845ae2562e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemiesKilled: 0
+  StagesPlayed: 0
 --- !u!1001 &727056277059088745
 PrefabInstance:
   m_ObjectHideFlags: 0

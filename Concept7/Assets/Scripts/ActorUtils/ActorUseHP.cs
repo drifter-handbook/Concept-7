@@ -21,18 +21,21 @@ public class ActorUseHP : MonoBehaviour
         {
             return;
         }
-        ActorSuppressOtherUseHP suppress = other.GetComponent<ActorSuppressOtherUseHP>();
         StageActor actor = GetComponent<StageActor>();
-        if (suppress == null || actor == null || !suppress.Classifications.Contains(actor.Classification))
+        if (actor != null)
         {
-            if (other.gameObject.tag == "PlayerWeapon")
+            ActorSuppressOtherUseHP suppress = other.GetComponent<ActorSuppressOtherUseHP>();
+            if (suppress == null || !suppress.Classifications.Contains(actor.Classification))
             {
-                health -= (float?)other.gameObject.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
-                Exempt.Add(gameObject);
-            }
-            if (health <= 0)
-            {
-                Die();
+                if (other.gameObject.tag == "PlayerWeapon")
+                {
+                    health -= (float?)other.gameObject.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
+                    Exempt.Add(gameObject);
+                }
+                if (health <= 0)
+                {
+                    Die();
+                }
             }
         }
     }

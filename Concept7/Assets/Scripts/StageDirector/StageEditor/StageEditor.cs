@@ -8,6 +8,7 @@ public class StageEditor : StageEditorBehaviour
 
     public bool DrawMovementPath;
     public GameObject DrawMovementPathPrefab;
+    public bool Pause;
 
     void Awake()
     {
@@ -30,7 +31,7 @@ public class StageEditor : StageEditorBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Game.Instance.GameScreen.PauseScreen.SetActive(Pause);
     }
 
     public void StageEditorReload()
