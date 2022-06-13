@@ -510,7 +510,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
         {
             if (StageEditor.Instance.DrawMovementPath && ActorType != "player")
             {
-                gameObject.AddComponent<StageActorDrawMovementPath>();
+                Instantiate(StageEditor.Instance.DrawMovementPathPrefab, transform);
             }
         }
     }

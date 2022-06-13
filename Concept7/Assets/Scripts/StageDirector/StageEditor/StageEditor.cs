@@ -7,7 +7,7 @@ public class StageEditor : StageEditorBehaviour
     public static StageEditor Instance;
 
     public bool DrawMovementPath;
-    public Material MovementPathMaterial;
+    public GameObject DrawMovementPathPrefab;
 
     void Awake()
     {
