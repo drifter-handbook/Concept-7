@@ -17,9 +17,11 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph
     float FinishAlphaMult = 1f;
     float PulseAlpha = 0.5f;
 
+    public Vector2 Size;
+
     void Start()
     {
-        Initialize(transform.position, 45f, new Vector2(8f, 0.5f));
+        Initialize(transform.position, 0f, Size);
     }
 
     public void Initialize(Vector2 position, float rotation, Vector2 size)
@@ -30,7 +32,7 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph
         Vector3 scale = new Vector3(size.x, size.y, transform.localScale.z);
         Fill.transform.localScale = scale;
         SetRectPos(Fill, rotation, size);
-        Border.GetComponent<SpriteRenderer>().size = scale;
+        Border.GetComponent<SpriteRenderer>().size = new Vector2(Mathf.Abs(size.x), Mathf.Abs(size.y));
         SetRectPos(Border, rotation, size);
         // start pulsing coroutine
         StartCoroutine(PulseCoroutine());

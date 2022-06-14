@@ -16,9 +16,11 @@ public class EngineTestTelegraphCircle : MonoBehaviour, IEngineTestTelegraph
     float FinishAlphaMult = 1f;
     float PulseAlpha = 0.5f;
 
+    public float Size;
+
     void Start()
     {
-        Initialize(transform.position, 45f, new Vector2(3f, 3f));
+        Initialize(transform.position, 45f, new Vector2(Size, Size));
     }
 
     public void Initialize(Vector2 position, float rotation, Vector2 size)
