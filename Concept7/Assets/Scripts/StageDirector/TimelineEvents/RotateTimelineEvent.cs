@@ -11,6 +11,7 @@ public class RotateTimelineEvent : StageData.Actor.Timeline.IEvent
     public float? Set;
     public float? Inc;
     public float? Dur;
+    public float? Speed;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
@@ -19,11 +20,15 @@ public class RotateTimelineEvent : StageData.Actor.Timeline.IEvent
 
     public void Start(StageActor actor)
     {
-        float angle = actor.transform.position.z + Inc.Value;
+        float? angle = null;
         if (Set != null)
         {
             angle = actor.transform.position.z + Vector2.SignedAngle(Quaternion.Euler(0f, 0f, actor.transform.position.z) * Vector2.right, Quaternion.Euler(0f, 0f, Set ?? 0) * Vector2.right);
         }
-        actor.RunCoroutine(ref actor.rotateCoroutine, actor.RotateCoroutine(angle, Dur ?? 0));
+        if (Inc != null)
+        {
+            angle = actor.transform.position.z + Inc.Value;
+        }
+        actor.RunCoroutine(ref actor.rotateCoroutine, actor.RotateCoroutine(angle, Dur, Speed));
     }
 }

@@ -8,8 +8,6 @@ public class ActorPlayAudioOnSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      Game game = FindObjectOfType<Game>();  
-      game.PlaySFX(AudioName, 0.1f, Random.Range(0.5f, 1));
+        Game.Instance.PlaySFX(AudioName, 0.1f, Random.Range(0.5f, 1));
     }
-
 }

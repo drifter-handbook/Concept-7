@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph
+public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph, IActorLifetimeHandler
 {
     public GameObject Pulse;
     public GameObject Fill;
@@ -16,6 +16,8 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph
 
     float FinishAlphaMult = 1f;
     float PulseAlpha = 0.5f;
+
+    float LifetimeFinishDur = 0.5f;
 
     public Vector2 Size;
 
@@ -90,5 +92,15 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph
     public void SetRectPos(GameObject go, float rotation, Vector2 size)
     {
         go.transform.localPosition = new Vector3(size.x * 0.5f, go.transform.localPosition.y, go.transform.localPosition.z);
+    }
+
+    public void HandleLifetime(float dur)
+    {
+        StartCoroutine(HandleLifetimeCoroutine(dur));
+    }
+    IEnumerator HandleLifetimeCoroutine(float dur)
+    {
+        yield return new WaitForSeconds(Mathf.Max(dur - LifetimeFinishDur, 0f));
+        Finish(LifetimeFinishDur);
     }
 }

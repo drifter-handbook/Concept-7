@@ -21,3 +21,8 @@ public interface IActorDestroyHandler
 {
     void HandleDestroy(ActorDestroyReason reason);
 }
+
+public interface IActorLifetimeHandler
+{
+    void HandleLifetime(float dur);
+}

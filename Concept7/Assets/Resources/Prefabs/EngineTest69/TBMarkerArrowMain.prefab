@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7646728339987942875}
   - component: {fileID: 7646728339987942874}
   m_Layer: 0
-  m_Name: ArrowMain
+  m_Name: TBMarkerArrowMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
