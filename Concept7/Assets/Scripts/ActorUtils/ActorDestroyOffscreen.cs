@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class ActorDestroyOffscreen : MonoBehaviour
 {
+    void Update()
+    {
+        if (!PlayArea.WithinBounds(transform.position))
+        {
+            Cleanup();
+        }
+    }
+
     void OnTriggerExit2D(Collider2D collider)
     {
-    	if(collider.gameObject.tag == "PlayArea")
+        if (collider.gameObject.tag != "PlayArea")
         {
-            StageActor actor = GetComponent<StageActor>();
-            if (gameObject != null && actor != null)
+            return;
+        }
+        Cleanup();
+    }
+
+    void Cleanup()
+    {
+        StageActor actor = GetComponent<StageActor>();
+        if (gameObject != null && actor != null)
+        {
+            foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
             {
-                foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
-                {
-                    handler.HandleDestroy(ActorDestroyReason.Offscreen);
-                }
-                Destroy(gameObject);
+                handler.HandleDestroy(ActorDestroyReason.Offscreen);
             }
+            Destroy(gameObject);
         }
     }
 }

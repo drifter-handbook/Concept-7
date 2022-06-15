@@ -148,8 +148,16 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
         }
     }
 
-    public void FinishSpawn(string run=null, float? lifetime=null)
+    public void FinishSpawn(StageActor spawner, string run=null, float? lifetime=null)
     {
+        // call spawn handlers
+        if (spawner != null)
+        {
+            foreach (IActorSpawnHandler handler in spawner.GetComponentsInChildren<IActorSpawnHandler>())
+            {
+                handler.HandleSpawn(this);
+            }
+        }
         // run default timeline
         run = run ?? Actor.DefaultRun;
         RunTimeline(run);
@@ -220,7 +228,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
         for (int i = 0; i < timeline.Entries.Count; i++)
         {
             var entry = timeline.Entries[i];
-;           while (time < entry.Time)
+            while (time < entry.Time)
             {
                 FlushSchedule(evSchedule, time);
                 yield return null;
@@ -550,6 +558,14 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             {
                 Instantiate(StageEditor.Instance.DrawMovementPathPrefab, transform);
             }
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (StageDirector.Instance.ActorCount.ContainsKey(ActorType))
+        {
+            StageDirector.Instance.ActorCount[ActorType]--;
         }
     }
 }

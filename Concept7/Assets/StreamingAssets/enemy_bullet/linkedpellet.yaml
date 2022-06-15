@@ -6,7 +6,7 @@ core:
   tags: ["bullet"]
   depth: -1
   speed: 3
-  destroy_offscreen: true
+  destroy_offscreen: false
   destroy_on_impact: true
   default_run: link
 

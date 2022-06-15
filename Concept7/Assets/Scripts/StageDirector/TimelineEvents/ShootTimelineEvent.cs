@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 using static StageDataUtils;
 
 public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
@@ -49,7 +50,9 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         List<Vector2> toTarget = null;
         if (targetActor != null)
         {
-            toTarget = em.Select(x => ((Vector2)targetActor.transform.position - (Vector2)x.transform.position).normalized).ToList();
+            toTarget = em.Select(x => ((Vector2)targetActor.transform.position - (Vector2)x.transform.position).normalized)
+                // if we ARE the player, and the distance is zero, default to dir=0
+                .Select(x => (x == Vector2.zero) ? Vector2.right : x).ToList();
         }
         else
         {
@@ -89,6 +92,10 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
             for (int j = 0; j < Emitters.Count; j++)
             {
                 GameObject shot = StageDirector.Spawn(Actor, em[j].transform.position, 0f);
+                if (shot == null)
+                {
+                    break;
+                }
                 StageActor actor = shot.GetComponent<StageActor>();
                 float mirrorX = MirrorX == null ? runnerActor.Mirror.x : (MirrorX.Value ? -1 : 1);
                 float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);
@@ -100,11 +107,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                 {
                     shot.transform.parent = parent[j].transform;
                 }
-                actor.FinishSpawn(Run, lifetime);
-                foreach (var handler in runnerActor.gameObject.GetComponentsInChildren<IActorSpawnHandler>())
-                {
-                    handler.HandleSpawn(actor);
-                }
+                actor.FinishSpawn(runnerActor, Run, lifetime);
             }
         }
     }

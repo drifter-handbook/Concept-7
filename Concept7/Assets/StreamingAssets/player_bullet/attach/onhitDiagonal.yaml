@@ -1,0 +1,18 @@
+core:
+  name: diagonalonhit
+  prefab: ActorAttachOnHitProjectile
+  speed: 0
+  default_run: split
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_split:
+  - time: 0
+    shoot:
+      actor: diagonalBullet
+      num: 2
+      dir: 0
+      angle: 50
+      speed: 4
