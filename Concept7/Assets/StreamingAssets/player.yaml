@@ -76,3 +76,12 @@ timeline_RYB:
     shoot:
       actor: playerbomb
       emitters: [default]
+
+
+timeline_RB:
+  - time: 0
+    shoot:
+      actor: playerbuzzsaw
+      emitters: [default]
+      dir: 0
+      parent: emitter
