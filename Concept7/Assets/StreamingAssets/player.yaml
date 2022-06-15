@@ -85,3 +85,12 @@ timeline_RB:
       emitters: [default]
       dir: 0
       parent: emitter
+
+timeline_BY:
+  - time: 0
+    shoot:
+      actor: diagonalBullet
+      num: 2
+      dir: 180
+      angle: 70
+      speed: 4

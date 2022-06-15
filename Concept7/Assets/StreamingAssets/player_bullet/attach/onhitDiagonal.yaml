@@ -1,0 +1,19 @@
+core:
+  name: diagonalonhit
+  prefab: ActorAttachOnHitOnly
+  speed: 0
+  on_destroy:
+    event: split
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_split:
+  - time: 0
+    shoot:
+      actor: diagonalBullet
+      num: 2
+      dir: 180
+      angle: 70
+      speed: 4
