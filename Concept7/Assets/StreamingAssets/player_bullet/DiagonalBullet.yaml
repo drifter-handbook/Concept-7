@@ -11,3 +11,5 @@ core:
   destroy_offscreen: true
   destroy_on_impact: false
   attach_on_impact: diagonalonhit
+  actor_limit: 40
+  lifetime: 8

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 // See stagedirector.md
 // Singleton data store which loads YAML from StreamingAssets,
@@ -16,6 +17,8 @@ public class StageDirector : MonoBehaviour
     // used in FindWeapon
     Dictionary<string, string> Weapons = new Dictionary<string, string>();
     Dictionary<string, StageData.Actor> WeaponsActor = new Dictionary<string, StageData.Actor>();
+
+    public Dictionary<string, int> ActorCount = new Dictionary<string, int>();
 
     // Singleton is a good design pattern, I swear
     public static StageDirector Instance { get; private set; }
@@ -147,6 +150,19 @@ public class StageDirector : MonoBehaviour
 
     public static GameObject Spawn(string actor, Vector2 position, float rotation)
     {
+        // check actor limit
+        int limit = Instance.Data.Actors[actor].ActorLimit ?? 0;
+        if (limit > 0)
+        {
+            if (!Instance.ActorCount.ContainsKey(actor))
+            {
+                Instance.ActorCount[actor] = 0;
+            }
+            else if (Instance.ActorCount[actor] > limit)
+            {
+                return null;
+            }
+        }
         // create actor
         GameObject actorObj = Instantiate(Instance.Data.Actors[actor].PrefabObj, new Vector3(position.x, position.y, Instance.Data.Actors[actor].Depth ?? 0), Quaternion.Euler(0f, 0f, rotation));
         // ensure StageActor component exists

@@ -526,4 +526,12 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             }
         }
     }
+
+    void OnDestroy()
+    {
+        if (StageDirector.Instance.ActorCount.ContainsKey(ActorType))
+        {
+            StageDirector.Instance.ActorCount[ActorType]--;
+        }
+    }
 }

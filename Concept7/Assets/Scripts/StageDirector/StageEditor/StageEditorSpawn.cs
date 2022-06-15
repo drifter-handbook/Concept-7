@@ -30,6 +30,10 @@ public class StageEditorSpawn : StageEditorBehaviour
             Debug.Log($"Warning: ActorType {ActorType} does not exist.");
         }
         GameObject go = StageDirector.Spawn(ActorType, new Vector3(transform.position.x, transform.position.y), 0f);
+        if (go == null)
+        {
+            return;
+        }
         StageActor spawned = go.GetComponent<StageActor>();
         float mirrorX = Mirror.x < 0 ? -1 : 1;
         float mirrorY = Mirror.y < 0 ? -1 : 1;

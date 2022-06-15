@@ -32,6 +32,10 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     {
         Vector3 pos = FindDestPosition((X ?? 0) + GetVar(actor, XModifier), (Y ?? 0) + GetVar(actor, YModifier), Dir, Dist, Rel ?? "abs", actor.transform.position, actor.Direction);
         GameObject go = StageDirector.Spawn(Actor, new Vector3(pos.x, pos.y), 0f);
+        if (go == null)
+        {
+            return;
+        }
         StageActor spawned = go.GetComponent<StageActor>();
         float mirrorX = MirrorX == null ? actor.Mirror.x : (MirrorX.Value ? -1 : 1);
         float mirrorY = MirrorY == null ? actor.Mirror.y : (MirrorY.Value ? -1 : 1);

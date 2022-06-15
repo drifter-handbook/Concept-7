@@ -25,4 +25,5 @@ public interface IActorDestroyHandler
 public interface IActorCollisionHandler
 {
     void HandleCollision(GameObject other);
+    int Order { get; }
 }

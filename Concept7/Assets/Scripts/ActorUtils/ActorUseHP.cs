@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(ActorCollisionCaller))]
 public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 {
+    public int Order => 2;
+
     public float health;
 
     public void Initialize(StageData.Actor actor)

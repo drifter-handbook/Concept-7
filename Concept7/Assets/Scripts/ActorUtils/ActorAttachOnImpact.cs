@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ActorCollisionCaller))]
 public class ActorAttachOnImpact : MonoBehaviour, IActorCollisionHandler
 {
+    public int Order => 1;
     public string AttachActor;
 
     public void HandleCollision(GameObject other)
@@ -24,10 +25,6 @@ public class ActorAttachOnImpact : MonoBehaviour, IActorCollisionHandler
             StageActor spawner = GetComponent<StageActor>();
             if (go != null)
             {
-                go.GetComponent<StageActor>().FinishSpawn(spawner);
-            }
-            if (go != null)
-            {
                 foreach (var handler in go.GetComponentsInChildren<IActorAttachment>())
                 {
                     if (go == null)
@@ -36,6 +33,10 @@ public class ActorAttachOnImpact : MonoBehaviour, IActorCollisionHandler
                     }
                     handler.Attach(target, spawner);
                 }
+            }
+            if (go != null)
+            {
+                go.GetComponent<StageActor>().FinishSpawn(spawner);
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 using static StageDataUtils;
 
 public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
@@ -91,6 +92,10 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
             for (int j = 0; j < Emitters.Count; j++)
             {
                 GameObject shot = StageDirector.Spawn(Actor, em[j].transform.position, 0f);
+                if (shot == null)
+                {
+                    break;
+                }
                 StageActor actor = shot.GetComponent<StageActor>();
                 float mirrorX = MirrorX == null ? runnerActor.Mirror.x : (MirrorX.Value ? -1 : 1);
                 float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);

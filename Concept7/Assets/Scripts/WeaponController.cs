@@ -101,9 +101,16 @@ public class WeaponController : MonoBehaviour
 
         StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
         string timeline = StageDirector.RYBStr(r, y, b);
-        if (actor != null && actor.Actor.Timelines.ContainsKey(timeline))
+        if (actor != null && !string.IsNullOrWhiteSpace(timeline))
         {
-            actor.RunTimeline(timeline);
+            if (actor.Actor.Timelines.ContainsKey(timeline))
+            {
+                actor.RunTimeline(timeline);
+            }
+            else
+            {
+                Debug.Log($"Warning: No weapon with timeline {timeline} found on player.");
+            }
         }
         ResetQueue();
 

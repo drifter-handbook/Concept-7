@@ -8,8 +8,8 @@ using UnityEngine;
 public class ActorCollisionCaller : MonoBehaviour
 {
     public HashSet<GameObject> Exempt = new HashSet<GameObject>();
-    HashSet<GameObject> NoLoopQueue = new HashSet<GameObject>();
-    bool Ready;
+    HashSet<GameObject> CollisionQueue = new HashSet<GameObject>();
+    public bool Ready;
 
     public List<StageActor.ActorClassification> Classifications = new List<StageActor.ActorClassification>();
 
@@ -25,14 +25,31 @@ public class ActorCollisionCaller : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        foreach (GameObject go in CollisionQueue)
+        {
+            if (gameObject == null)
+            {
+                break;
+            }
+            if (go == null)
+            {
+                continue;
+            }
+            HandleCollide(go);
+        }
+        CollisionQueue.Clear();
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!Ready)
+        // only handle each collision once
+        if (Exempt.Contains(other.gameObject))
         {
-            NoLoopQueue.Add(other.gameObject);
             return;
         }
-        HandleCollide(other.gameObject);
+        CollisionQueue.Add(other.gameObject);
     }
 
     void HandleCollide(GameObject other)
@@ -65,17 +82,11 @@ public class ActorCollisionCaller : MonoBehaviour
     {
         Exempt.Add(target);
     }
-    
+
     IEnumerator SetAsReady()
     {
         yield return null;
-        foreach (GameObject go in NoLoopQueue)
-        {
-            HandleCollide(go);
-        }
-        NoLoopQueue.Clear();
         Ready = true;
-        yield break;
     }
 
     public static void SetExempt(GameObject a, GameObject b)

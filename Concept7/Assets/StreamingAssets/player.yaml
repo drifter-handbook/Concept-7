@@ -5,6 +5,7 @@ core:
   tags: ["player"]
   # HP not managed by actor system
   invuln: true
+  destroy_offscreen: false
 
 emitter_default:
   x: 0
