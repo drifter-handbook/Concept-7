@@ -86,7 +86,7 @@ timeline_RB:
       dir: 0
       parent: emitter
 
-timeline_BY:
+timeline_YB:
   - time: 0
     shoot:
       actor: diagonalBullet

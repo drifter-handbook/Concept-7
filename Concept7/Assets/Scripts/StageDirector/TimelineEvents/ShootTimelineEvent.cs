@@ -96,14 +96,13 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                 float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);
                 actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget[j];
                 actor.Direction = new Vector2(actor.Direction.x * mirrorX, actor.Direction.y * mirrorY);
-                Debug.Log($"{Actor} {actor.Direction} {j} {angle} {toTarget[j]}");
                 actor.Speed = speed;
                 actor.Mirror = new Vector2(mirrorX, mirrorY);
                 if (parent != null)
                 {
                     shot.transform.parent = parent[j].transform;
                 }
-                actor.FinishSpawn(Run, lifetime);
+                actor.FinishSpawn(runnerActor, Run, lifetime);
                 foreach (var handler in runnerActor.gameObject.GetComponentsInChildren<IActorSpawnHandler>())
                 {
                     handler.HandleSpawn(actor);

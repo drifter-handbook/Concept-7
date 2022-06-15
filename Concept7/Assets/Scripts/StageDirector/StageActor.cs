@@ -142,7 +142,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
         }
     }
 
-    public void FinishSpawn(string run=null, float? lifetime=null)
+    public void FinishSpawn(StageActor spawner, string run=null, float? lifetime=null)
     {
         // run default timeline
         run = run ?? Actor.DefaultRun;
@@ -164,6 +164,20 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
                     }
                 }
             });
+        }
+        // call spawn handlers
+        if (spawner != null)
+        {
+            foreach (IActorSpawnHandler handler in spawner.GetComponentsInChildren<IActorSpawnHandler>())
+            {
+                handler.HandleSpawn(this);
+            }
+        }
+        // allow collision caller to handle new collision
+        ActorCollisionCaller caller = GetComponent<ActorCollisionCaller>();
+        if (caller != null)
+        {
+            caller.SetAsReady();
         }
     }
 

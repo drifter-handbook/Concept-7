@@ -1,9 +1,11 @@
 core:
   name: diagonalonhit
-  prefab: ActorAttachOnHitOnly
+  prefab: ActorAttachOnHitProjectile
   speed: 0
   on_destroy:
+    impact: split
     event: split
+  default_run: split
 
 emitter_default:
   x: 0

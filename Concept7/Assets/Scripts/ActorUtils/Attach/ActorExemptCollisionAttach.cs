@@ -10,40 +10,20 @@ public class ActorExemptCollisionAttach : MonoBehaviour, IActorAttachment, IActo
     public void Attach(StageActor target, StageActor source)
     {
         this.target = target;
+        ActorCollisionCaller.SetExempt(gameObject, target.gameObject);
     }
 
     public void HandleSpawn(StageActor newActor)
     {
+        ActorCollisionCaller caller = GetComponent<ActorCollisionCaller>();
         // exempt new actor from colliding with parent
-        if (target != null)
+        if (target != null && caller != null)
         {
-            Exempt(newActor.gameObject, target.gameObject);
-        }
-    }
-
-    void Exempt(GameObject a, GameObject b)
-    {
-        // exempt a from colliding with b
-        var imp = a.GetComponent<ActorDestroyOnImpact>();
-        if (imp != null)
-        {
-            imp.Exempt.Add(b);
-        }
-        var hp = a.GetComponent<ActorUseHP>();
-        if (hp != null)
-        {
-            hp.Exempt.Add(b);
-        }
-        // exempt b from colliding with a
-        imp = b.GetComponent<ActorDestroyOnImpact>();
-        if (imp != null)
-        {
-            imp.Exempt.Add(a);
-        }
-        hp = b.GetComponent<ActorUseHP>();
-        if (hp != null)
-        {
-            hp.Exempt.Add(a);
+            // copy exemptions to spawned child
+            foreach (GameObject go in caller.Exempt)
+            {
+                ActorCollisionCaller.SetExempt(go, newActor.gameObject);
+            }
         }
     }
 }

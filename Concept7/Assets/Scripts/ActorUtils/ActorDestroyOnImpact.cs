@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActorDestroyOnImpact : MonoBehaviour
+[RequireComponent(typeof(ActorCollisionCaller))]
+public class ActorDestroyOnImpact : MonoBehaviour, IActorCollisionHandler
 {
-    public HashSet<GameObject> Exempt = new HashSet<GameObject>();
-
-    [SerializeField] private GameObject impactPrefab;
-    private void OnTriggerEnter2D(Collider2D other)
+    public void HandleCollision(GameObject other)
     {
-        if (other.gameObject.tag == "PlayArea" || Exempt.Contains(other.gameObject))
+        if (other.tag == "PlayArea")
         {
             return;
         }
@@ -18,12 +16,11 @@ public class ActorDestroyOnImpact : MonoBehaviour
         if (suppress == null || actor == null || !suppress.Classifications.Contains(actor.Classification))
         {
             StartCoroutine(DestroyAfterDelay());
-            if (impactPrefab != null)
-                Instantiate(impactPrefab, transform.position, Quaternion.identity);
         }
     }
 
-    private IEnumerator DestroyAfterDelay() {
+    private IEnumerator DestroyAfterDelay()
+    {
         yield return new WaitForSeconds(Time.fixedDeltaTime);
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)

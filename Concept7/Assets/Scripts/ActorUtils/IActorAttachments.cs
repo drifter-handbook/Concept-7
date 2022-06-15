@@ -21,3 +21,8 @@ public interface IActorDestroyHandler
 {
     void HandleDestroy(ActorDestroyReason reason);
 }
+
+public interface IActorCollisionHandler
+{
+    void HandleCollision(GameObject other);
+}

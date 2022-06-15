@@ -47,7 +47,7 @@ public class StageEditorSpawn : StageEditorBehaviour
         {
             spawned.Speed = Speed;
         }
-        spawned.FinishSpawn(string.IsNullOrWhiteSpace(Timeline) ? null : Timeline, Lifetime);
+        spawned.FinishSpawn(null, string.IsNullOrWhiteSpace(Timeline) ? null : Timeline, Lifetime);
     }
 
     // Update is called once per frame

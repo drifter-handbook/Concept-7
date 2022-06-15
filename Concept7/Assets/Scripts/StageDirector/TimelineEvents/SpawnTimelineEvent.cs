@@ -40,7 +40,7 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         {
             go.transform.parent = StageDataUtils.GetParent(Parent, go.transform.position, actor.gameObject).transform;
         }
-        spawned.FinishSpawn(Run, Lifetime);
+        spawned.FinishSpawn(actor, Run, Lifetime);
         foreach (var handler in actor.gameObject.GetComponentsInChildren<IActorSpawnHandler>())
         {
             handler.HandleSpawn(spawned);
