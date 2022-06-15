@@ -49,7 +49,9 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         List<Vector2> toTarget = null;
         if (targetActor != null)
         {
-            toTarget = em.Select(x => ((Vector2)targetActor.transform.position - (Vector2)x.transform.position).normalized).ToList();
+            toTarget = em.Select(x => ((Vector2)targetActor.transform.position - (Vector2)x.transform.position).normalized)
+                // if we ARE the player, and the distance is zero, default to dir=0
+                .Select(x => (x == Vector2.zero) ? Vector2.right : x).ToList();
         }
         else
         {
@@ -94,6 +96,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                 float mirrorY = MirrorY == null ? runnerActor.Mirror.y : (MirrorY.Value ? -1 : 1);
                 actor.Direction = Quaternion.Euler(0, 0, angle) * toTarget[j];
                 actor.Direction = new Vector2(actor.Direction.x * mirrorX, actor.Direction.y * mirrorY);
+                Debug.Log($"{Actor} {actor.Direction} {j} {angle} {toTarget[j]}");
                 actor.Speed = speed;
                 actor.Mirror = new Vector2(mirrorX, mirrorY);
                 if (parent != null)
