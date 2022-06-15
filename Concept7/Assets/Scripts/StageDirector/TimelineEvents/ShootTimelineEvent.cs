@@ -103,10 +103,6 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                     shot.transform.parent = parent[j].transform;
                 }
                 actor.FinishSpawn(runnerActor, Run, lifetime);
-                foreach (var handler in runnerActor.gameObject.GetComponentsInChildren<IActorSpawnHandler>())
-                {
-                    handler.HandleSpawn(actor);
-                }
             }
         }
     }

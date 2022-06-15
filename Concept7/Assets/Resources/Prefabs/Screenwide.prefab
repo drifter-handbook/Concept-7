@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2738247453095128089}
   - component: {fileID: 2738247453095128088}
   - component: {fileID: 3381424432124496197}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Screenwide
   m_TagString: PlayerWeapon
   m_Icon: {fileID: 0}

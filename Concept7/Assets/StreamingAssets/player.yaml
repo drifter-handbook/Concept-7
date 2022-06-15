@@ -91,6 +91,6 @@ timeline_YB:
     shoot:
       actor: diagonalBullet
       num: 2
-      dir: 180
-      angle: 70
+      dir: 0
+      angle: 50
       speed: 4

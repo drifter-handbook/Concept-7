@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // calls all other collision handlers
@@ -10,9 +11,23 @@ public class ActorCollisionCaller : MonoBehaviour
     HashSet<GameObject> NoLoopQueue = new HashSet<GameObject>();
     bool Ready;
 
+    public List<StageActor.ActorClassification> Classifications = new List<StageActor.ActorClassification>();
+
+    void Start()
+    {
+        StartCoroutine(SetAsReady());
+        if (Classifications.Count == 0)
+        {
+            foreach (StageActor.ActorClassification cl in Enum.GetValues(typeof(StageActor.ActorClassification)))
+            {
+                Classifications.Add(cl);
+            }
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!Ready && !NoLoopQueue.Contains(other.gameObject))
+        if (!Ready)
         {
             NoLoopQueue.Add(other.gameObject);
             return;
@@ -22,35 +37,45 @@ public class ActorCollisionCaller : MonoBehaviour
 
     void HandleCollide(GameObject other)
     {
+        if (gameObject == null || other == null)
+        {
+            return;
+        }
         // only handle each collision once
         if (Exempt.Contains(other))
         {
             return;
         }
+        StageActor otherActor = other.GetComponent<StageActor>();
+        if (otherActor == null || !Classifications.Contains(otherActor.Classification))
+        {
+            return;
+        }
         foreach (IActorCollisionHandler handler in GetComponents<IActorCollisionHandler>())
         {
-            if ((object)handler != this)
+            if ((object)handler != this || other == null)
             {
                 handler.HandleCollision(other);
             }
         }
-        ExemptCollision(other);
+        Exempt.Add(other);
     }
 
     public void ExemptCollision(GameObject target)
     {
         Exempt.Add(target);
     }
-
-    // all exemptions copied over, and ready to handle new collisions
-    public void SetAsReady()
+    
+    IEnumerator SetAsReady()
     {
-        Ready = true;
+        yield return null;
         foreach (GameObject go in NoLoopQueue)
         {
             HandleCollide(go);
         }
         NoLoopQueue.Clear();
+        Ready = true;
+        yield break;
     }
 
     public static void SetExempt(GameObject a, GameObject b)

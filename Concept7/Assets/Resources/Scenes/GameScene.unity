@@ -3411,7 +3411,7 @@ GameObject:
   - component: {fileID: 577863019}
   - component: {fileID: 577863018}
   - component: {fileID: 577863020}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: RelativeBoundingBox
   m_TagString: PlayArea
   m_Icon: {fileID: 0}
@@ -9141,7 +9141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109804102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7520968, y: -1.7696044, z: 81.10843}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

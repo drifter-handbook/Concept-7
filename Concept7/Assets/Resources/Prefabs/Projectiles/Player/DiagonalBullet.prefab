@@ -51,6 +51,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2885539992794217060, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: Classifications.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885539992794217060, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: Classifications.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885539992794217060, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: Classifications.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885539992794217060, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
+      propertyPath: Classifications.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3010781896562639256, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
       propertyPath: impactPrefab
       value: 
@@ -97,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6858225846118643195, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9095937952439631880, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
       propertyPath: weaponData
@@ -110,6 +126,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6858225846118643195, guid: 431a3e03dc434534c93155c4246d9ebe, type: 3}
   m_PrefabInstance: {fileID: 933524528631549119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-4905675308264469440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042101781473753412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3282284d9f60d954f82ca6c7544525e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5516210853227680953
 MonoBehaviour:
   m_ObjectHideFlags: 0

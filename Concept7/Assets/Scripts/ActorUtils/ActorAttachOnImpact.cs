@@ -22,17 +22,20 @@ public class ActorAttachOnImpact : MonoBehaviour, IActorCollisionHandler
         {
             GameObject go = StageDirector.Spawn(AttachActor, new Vector3(target.transform.position.x, target.transform.position.y), 0f);
             StageActor spawner = GetComponent<StageActor>();
-            foreach (var handler in go.GetComponentsInChildren<IActorAttachment>())
-            {
-                if (go == null)
-                {
-                    break;
-                }
-                handler.Attach(target, spawner);
-            }
             if (go != null)
             {
                 go.GetComponent<StageActor>().FinishSpawn(spawner);
+            }
+            if (go != null)
+            {
+                foreach (var handler in go.GetComponentsInChildren<IActorAttachment>())
+                {
+                    if (go == null)
+                    {
+                        break;
+                    }
+                    handler.Attach(target, spawner);
+                }
             }
         }
     }
