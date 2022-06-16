@@ -6,7 +6,7 @@ core:
   destroy_on_impact: false
   default_run: marker
   speed: 0
-  lifetime: 10
+  lifetime: 4
 
 emitter_default:
   x: 0

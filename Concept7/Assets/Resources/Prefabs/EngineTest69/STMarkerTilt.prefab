@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1077150221002423169}
   m_Layer: 0
-  m_Name: STMarkerArrowParent
+  m_Name: STMarkerTilt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

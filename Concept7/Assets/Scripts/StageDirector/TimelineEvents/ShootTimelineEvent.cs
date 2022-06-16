@@ -110,6 +110,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                     SetParentPreserve(shot.transform, parent[j].transform);
                 }
                 actor.FinishSpawn(runnerActor, Run, lifetime);
+                actor.RefreshAngle();
             }
         }
     }

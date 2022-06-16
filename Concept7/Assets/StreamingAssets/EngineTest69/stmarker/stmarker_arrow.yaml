@@ -1,0 +1,56 @@
+core:
+  name: stmarker_arrow
+  prefab: STMarkerArrow
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  speed: 0
+  lifetime: 10
+
+timeline_up:
+  - time: 0
+    run:
+      timeline: move
+  - time: 0
+    rotate:
+      set: 0
+
+timeline_down:
+  - time: 0
+    run:
+      timeline: move
+  - time: 0
+    rotate:
+      set: 180
+
+timeline_left:
+  - time: 0
+    run:
+      timeline: move
+  - time: 0
+    rotate:
+      set: 270
+
+timeline_right:
+  - time: 0
+    run:
+      timeline: move
+  - time: 0
+    rotate:
+      set: 90
+
+timeline_move:
+  - time: 0
+    move:
+      speed: 2
+      loop: true
+      dest:
+        - y: 0.75
+          post: {y: 0.5}
+          rel: dir
+        - y: .25
+          post: {y: -0.5}
+          rel: dir
+        - y: 0.75
+          post: {y: 0.5}
+          rel: dir

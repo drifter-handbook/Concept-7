@@ -141,6 +141,7 @@ public class BackgroundScroller : MonoBehaviour
 
             GameObject initialObject = Instantiate(prefab, startingPosition, Quaternion.identity);
             initialObject.GetComponent<SpriteRenderer>().sprite = sprite;
+            initialObject.transform.position = new Vector3(initialObject.transform.position.x, initialObject.transform.position.y, transform.position.z);
 
             //add newly instantiated gameobject to currentBackgrounds list
             ActiveBackground background = new ActiveBackground();
