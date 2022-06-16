@@ -34,10 +34,13 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
         Vector3 scale = new Vector3(size.x, size.y, transform.localScale.z);
         Fill.transform.localScale = scale;
         SetRectPos(Fill, rotation, size);
-        Border.GetComponent<SpriteRenderer>().size = new Vector2(Mathf.Abs(size.x), Mathf.Abs(size.y));
+        Border.GetComponent<SpriteRenderer>().size *= new Vector2(Mathf.Abs(size.x), Mathf.Abs(size.y));
         SetRectPos(Border, rotation, size);
         // start pulsing coroutine
-        StartCoroutine(PulseCoroutine());
+        if (Pulse.activeSelf)
+        {
+            StartCoroutine(PulseCoroutine());
+        }
     }
 
     public void Finish(float dur)
