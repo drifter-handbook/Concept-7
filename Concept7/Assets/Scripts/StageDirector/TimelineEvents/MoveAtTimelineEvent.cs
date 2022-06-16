@@ -54,6 +54,10 @@ public class MoveAtTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Ac
         {
             actor.Speed = Speed.Value;
         }
+        if (Instant ?? false)
+        {
+            actor.transform.position = target;
+        }
     }
 
     public void CompileCheck(Dictionary<string, StageData.Actor> actors, StageData.Actor current)

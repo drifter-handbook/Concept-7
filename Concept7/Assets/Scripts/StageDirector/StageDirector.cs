@@ -165,7 +165,9 @@ public class StageDirector : MonoBehaviour
             Instance.ActorCount[actor]++;
         }
         // create actor
-        GameObject actorObj = Instantiate(Instance.Data.Actors[actor].PrefabObj, new Vector3(position.x, position.y, Instance.Data.Actors[actor].Depth ?? 0), Quaternion.Euler(0f, 0f, rotation));
+        GameObject actorObj = Instantiate(Instance.Data.Actors[actor].PrefabObj);
+        actorObj.transform.localPosition = new Vector3(position.x, position.y, Instance.Data.Actors[actor].Depth ?? 0);
+        actorObj.transform.localEulerAngles = new Vector3(actorObj.transform.localEulerAngles.x, actorObj.transform.localEulerAngles.y, rotation);
         // ensure StageActor component exists
         StageActor stActor = actorObj.GetComponent<StageActor>();
         if (stActor == null)

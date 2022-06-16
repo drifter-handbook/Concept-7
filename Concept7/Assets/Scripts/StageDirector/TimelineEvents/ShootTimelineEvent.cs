@@ -17,6 +17,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
     public string Run;
     public float? Speed;
     public float? Dir;
+    public bool Facing;
     public float? Interval;
     public string Parent;
     public bool? MirrorX;
@@ -60,7 +61,8 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         }
         if (Dir != null)
         {
-            toTarget = em.Select(x => (Vector2)(Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier)) * Vector2.right)).ToList();
+            float facingDir = Vector2.SignedAngle(Vector2.right, runnerActor.Direction);
+            toTarget = em.Select(x => (Vector2)(Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier) + (Facing ? facingDir : 0)) * Vector2.right)).ToList();
         }
         // create Num shots with Angle spread
         int shots = (Num ?? 1) + (int)GetVar(runnerActor, NumModifier) + (Ring ? 1 : 0);
@@ -105,7 +107,7 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
                 actor.Mirror = new Vector2(mirrorX, mirrorY);
                 if (parent != null)
                 {
-                    shot.transform.parent = parent[j].transform;
+                    SetParentPreserve(shot.transform, parent[j].transform);
                 }
                 actor.FinishSpawn(runnerActor, Run, lifetime);
             }

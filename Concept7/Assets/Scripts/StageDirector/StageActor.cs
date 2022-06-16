@@ -113,6 +113,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             var comp = GetComponent<ActorAttachOnImpact>() ?? gameObject.AddComponent<ActorAttachOnImpact>();
             comp.AttachActor = Actor.AttachOnImpact;
         }
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Actor.Depth ?? 0);
         // stage editor stuff
         HandleStageEditorSpawn();
     }
@@ -140,7 +141,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
     {
         if (Actor?.TurnOnMove ?? false && rotateCoroutine == null)
         {
-            transform.localEulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, Direction));
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Vector2.SignedAngle(Vector2.right, Direction));
         }
         if (Actor?.AutoFlipSprite ?? false && sr != null)
         {
@@ -326,19 +327,19 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             }
             while (time < dur)
             {
-                transform.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(startAngle, angle.Value, time / dur.Value));
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Mathf.Lerp(startAngle, angle.Value, time / dur.Value));
                 time += Time.deltaTime;
                 RefreshAngle();
                 yield return null;
             }
-            transform.localEulerAngles = new Vector3(0f, 0f, angle.Value);
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle.Value);
             RefreshAngle();
         }
         if (speed != null)
         {
             while (true)
             {
-                transform.localEulerAngles = new Vector3(0f, 0f, transform.eulerAngles.z + speed.Value * Time.deltaTime);
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.eulerAngles.z + speed.Value * Time.deltaTime);
                 RefreshAngle();
                 yield return null;
             }

@@ -295,4 +295,15 @@ public static class StageDataUtils
         }
         return closest;
     }
+
+    public static void SetParentPreserve(Transform child, Transform parent)
+    {
+        float depth = child.localPosition.z;
+        Quaternion localRotation = child.rotation;
+        Vector3 localScale = child.localScale;
+        child.parent = parent;
+        child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, depth);
+        child.localRotation = localRotation;
+        child.localScale = localScale;
+    }
 }
