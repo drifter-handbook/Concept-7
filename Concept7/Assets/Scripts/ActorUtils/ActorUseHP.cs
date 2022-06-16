@@ -9,10 +9,19 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
     public int Order => 2;
 
     public float health;
+    bool ReadyToDie = false;
 
     public void Initialize(StageData.Actor actor)
     {
         health = actor.Hp ?? 1;
+    }
+
+    void Update()
+    {
+        if (ReadyToDie)
+        {
+            Die();
+        }
     }
 
     public void HandleCollision(GameObject other)
@@ -33,15 +42,19 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
                 }
                 if (health <= 0)
                 {
-                    Die();
+                    PrepareToDie();
                 }
             }
         }
     }
 
+    void PrepareToDie()
+    {
+        ReadyToDie = true;
+    }
+
     void Die()
     {
-        //play an animation here maybe?
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)
         {

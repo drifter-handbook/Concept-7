@@ -162,6 +162,7 @@ public class StageDirector : MonoBehaviour
             {
                 return null;
             }
+            Instance.ActorCount[actor]++;
         }
         // create actor
         GameObject actorObj = Instantiate(Instance.Data.Actors[actor].PrefabObj, new Vector3(position.x, position.y, Instance.Data.Actors[actor].Depth ?? 0), Quaternion.Euler(0f, 0f, rotation));

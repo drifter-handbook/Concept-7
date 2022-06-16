@@ -31,5 +31,9 @@ public class ActorShareCollisionExemption : MonoBehaviour, IActorAttachment, IAc
             }
             newActorCaller.Exempt = caller.Exempt;
         }
+        if (target != null)
+        {
+            ActorCollisionCaller.SetExempt(newActor.gameObject, target.gameObject);
+        }
     }
 }
