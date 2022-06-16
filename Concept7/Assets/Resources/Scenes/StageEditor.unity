@@ -2732,23 +2732,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: Dir.x
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
+      propertyPath: Speed
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: Lifetime
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: Mirror.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
+      propertyPath: SetSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: Timeline
-      value: follow
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: ActorType
-      value: missile
+      value: longboi
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: PointAtPlayer
