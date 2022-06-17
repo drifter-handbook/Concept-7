@@ -30,13 +30,11 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
             }
         }
         StartCoroutine(GrowNodeCoroutine());
-        Debug.Log($"pre handle lifetime {gameObject}");
         HandleLifetime(2f);
     }
 
     public void HandleLifetime(float dur)
     {
-        Debug.Log($"handle lifetime {gameObject}");
         StartCoroutine(FadeEdgeCoroutine(dur));
     }
 
@@ -55,7 +53,6 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
 
     IEnumerator FadeEdgeCoroutine(float dur)
     {
-        Debug.Log($"Fade edge coroutine {gameObject}");
         while (connected == null)
         {
             yield return null;
@@ -74,7 +71,10 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
             lr.endColor = c;
             lr.widthMultiplier = t;
             lr.positionCount = 2;
-            lr.SetPosition(0, connected.transform.position);
+            if (connected != null)
+            {
+                lr.SetPosition(0, connected.transform.position);
+            }
             lr.SetPosition(1, transform.position);
             yield return null;
             time += Time.deltaTime;

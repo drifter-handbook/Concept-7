@@ -59,8 +59,9 @@ public class ShootTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         {
             Dir = Dir ?? 0;
         }
-        if (Dir != null)
+        if (Dir != null || Facing)
         {
+            Dir = Dir ?? 0;
             float facingDir = Vector2.SignedAngle(Vector2.right, runnerActor.Direction);
             toTarget = em.Select(x => (Vector2)(Quaternion.Euler(0f, 0f, Dir.Value + GetVar(runnerActor, DirModifier) + (Facing ? facingDir : 0)) * Vector2.right)).ToList();
         }

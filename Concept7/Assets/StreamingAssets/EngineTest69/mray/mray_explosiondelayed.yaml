@@ -1,0 +1,20 @@
+core:
+  name: mray_explosiondelayed
+  prefab: ActorGroup
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  speed: 0
+  lifetime: 2
+  on_destroy:
+    event: explode
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_explode:
+  - time: 0
+    shoot:
+      actor: mray_explosion
+      dir: 0

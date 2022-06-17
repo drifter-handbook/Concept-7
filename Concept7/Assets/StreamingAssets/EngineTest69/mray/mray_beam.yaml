@@ -1,0 +1,22 @@
+core:
+  name: mray_beam
+  prefab: LaserNodeEnd
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+  lifetime: 1.9
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    setspeed:
+      speed: 12
+  - time: 0
+    shoot:
+      actor: mray_explosionmaker
+      facing: true

@@ -18,6 +18,9 @@ emitter_upper:
 
 timeline_marker:
   - time: 0
+    playsound:
+      sound: stmarker
+  - time: 0
     shoot:
       actor: stmarker_arrowtop
       parent: actor

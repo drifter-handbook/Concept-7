@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3571351770786243104, guid: a968d9c611801434f9ec5ff8ca0df64a, type: 3}
+      propertyPath: Index
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3571351770786243108, guid: a968d9c611801434f9ec5ff8ca0df64a, type: 3}
       propertyPath: m_Name
       value: LaserNodeEnd

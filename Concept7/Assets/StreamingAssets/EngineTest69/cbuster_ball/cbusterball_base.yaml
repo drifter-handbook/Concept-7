@@ -14,6 +14,9 @@ emitter_default:
 
 timeline_grow:
   - time: 0
+    playsound:
+      sound: cbuster0
+  - time: 0
     shoot:
       actor: cbusterball_effect
       parent: actor

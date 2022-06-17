@@ -18,6 +18,9 @@ emitter_upper:
 
 timeline_marker:
   - time: 0
+    playsound:
+      sound: tbmarker
+  - time: 0
     shoot:
       actor: tbmarker_ring
       parent: actor

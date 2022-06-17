@@ -23,9 +23,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 62b2627402887f248812a0a7643ab83b, type: 2}
+    - target: {fileID: 3349966188087353142, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3349966188115547938, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
       propertyPath: m_Name
       value: RayTelegraph
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349966188115547964, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
+      propertyPath: Size.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349966188115547964, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
+      propertyPath: Size.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3349966188115547965, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
       propertyPath: m_RootOrder
@@ -73,11 +85,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3349966188903774960, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3349966188903774963, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
       propertyPath: m_Size.x
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3349966188903774963, guid: bb0dbea1089a84346af9b95e1a8eadd3, type: 3}
       propertyPath: m_Sprite

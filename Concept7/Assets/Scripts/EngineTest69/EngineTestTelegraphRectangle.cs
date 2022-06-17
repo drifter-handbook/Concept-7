@@ -21,6 +21,15 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
 
     public Vector2 Size;
 
+    float borderAlpha;
+    float fillAlpha;
+
+    void Awake()
+    {
+        borderAlpha = Border.GetComponent<SpriteRenderer>().color.a;
+        fillAlpha = Fill.GetComponent<SpriteRenderer>().color.a;
+    }
+
     void Start()
     {
         Initialize(transform.position, 0f, Size);
@@ -34,7 +43,8 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
         Vector3 scale = new Vector3(size.x, size.y, transform.localScale.z);
         Fill.transform.localScale = scale;
         SetRectPos(Fill, rotation, size);
-        Border.GetComponent<SpriteRenderer>().size *= new Vector2(Mathf.Abs(size.x), Mathf.Abs(size.y));
+        Border.GetComponent<SpriteRenderer>().size *= new Vector2(Mathf.Abs(size.x), 1f);
+        Border.transform.localScale = new Vector3(Border.transform.localScale.x, Mathf.Abs(size.y), Border.transform.localScale.y);
         SetRectPos(Border, rotation, size);
         // start pulsing coroutine
         if (Pulse.activeSelf)
@@ -47,24 +57,35 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
     {
         finishCoroutine = StartCoroutine(FinishCoroutine(dur));
     }
+    IEnumerator FadeInCoroutine(float dur)
+    {
+        SpriteRenderer borderSr = Border.GetComponent<SpriteRenderer>();
+        SpriteRenderer fillSr = Fill.GetComponent<SpriteRenderer>();
+        float time = 0f;
+        while (time < dur)
+        {
+            FinishAlphaMult = Mathf.Lerp(0f, 1f, time / dur);
+            borderSr.color = new Color(borderSr.color.r, borderSr.color.b, borderSr.color.b, FinishAlphaMult * borderAlpha);
+            fillSr.color = new Color(fillSr.color.r, fillSr.color.g, fillSr.color.b, FinishAlphaMult * fillAlpha);
+            yield return null;
+            time += Time.deltaTime;
+        }
+    }
     IEnumerator FinishCoroutine(float dur)
     {
         SpriteRenderer borderSr = Border.GetComponent<SpriteRenderer>();
         SpriteRenderer fillSr = Fill.GetComponent<SpriteRenderer>();
         float time = 0f;
-        while (true)
+        while (time < dur)
         {
-            if (time > dur)
-            {
-                Destroy(gameObject);
-                yield break;
-            }
             FinishAlphaMult = Mathf.Lerp(1f, 0f, time / dur);
-            borderSr.color = new Color(borderSr.color.r, borderSr.color.b, borderSr.color.b, FinishAlphaMult);
-            fillSr.color = new Color(fillSr.color.r, fillSr.color.g, fillSr.color.b, FinishAlphaMult);
+            borderSr.color = new Color(borderSr.color.r, borderSr.color.b, borderSr.color.b, FinishAlphaMult * borderAlpha);
+            fillSr.color = new Color(fillSr.color.r, fillSr.color.g, fillSr.color.b, FinishAlphaMult * fillAlpha);
             yield return null;
             time += Time.deltaTime;
         }
+        Destroy(gameObject);
+        yield break;
     }
 
     IEnumerator PulseCoroutine()
@@ -103,7 +124,8 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
     }
     IEnumerator HandleLifetimeCoroutine(float dur)
     {
-        yield return new WaitForSeconds(Mathf.Max(dur - LifetimeFinishDur, 0f));
-        Finish(LifetimeFinishDur);
+        yield return FadeInCoroutine(LifetimeFinishDur);
+        yield return new WaitForSeconds(Mathf.Max(dur - LifetimeFinishDur * 2, 0f));
+        yield return FinishCoroutine(LifetimeFinishDur);
     }
 }
