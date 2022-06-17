@@ -35,6 +35,9 @@ timeline_shoot:
     shoot:
       actor: hray
   - time: 30
+    shoot:
+      actor: cbuster
+  - time: 33
     run:
       timeline: shoot
 
@@ -45,7 +48,7 @@ timeline_auto:
       num: 3
       angle: 45
       speed: 3
-    repeat: 10
+    repeat: 11
     interval: 3
   - time: 0.5
     shoot:
@@ -53,5 +56,5 @@ timeline_auto:
       num: 4
       angle: 60
       speed: 4
-    repeat: 10
+    repeat: 11
     interval: 3

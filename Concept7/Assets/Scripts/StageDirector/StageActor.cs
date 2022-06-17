@@ -96,7 +96,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             Vars[v.Key] = v.Value.Value;
         }
         // init core fields
-        Speed = Actor.Speed ?? 1f;
+        Speed = Actor.Speed ?? 0f;
         if (Actor.DestroyOffscreen ?? true)
         {
             var comp = GetComponent<ActorDestroyOffscreen>() ?? gameObject.AddComponent<ActorDestroyOffscreen>();

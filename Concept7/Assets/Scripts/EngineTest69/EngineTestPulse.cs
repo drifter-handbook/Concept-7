@@ -27,7 +27,6 @@ public class EngineTestPulse : MonoBehaviour, IEngineTestTelegraph, IActorLifeti
         transform.localScale = new Vector3(size.x * transform.localScale.x, size.y * transform.localScale.y, transform.localScale.z);
         transform.localPosition = new Vector3(position.x, position.y, transform.localPosition.z);
         transform.localEulerAngles = new Vector3(0f, 0f, rotation);
-        HandleLifetime(0.75f);
     }
 
     public void Finish(float dur)
@@ -45,7 +44,7 @@ public class EngineTestPulse : MonoBehaviour, IEngineTestTelegraph, IActorLifeti
             float a = PulseAlpha;
             if (PulseFade > 0.02)
             {
-                a *= Mathf.Min(Mathf.Lerp(0f, 1 / PulseFade, t), Mathf.Lerp(1 / PulseFade, 0f, t));
+                a *= Mathf.Min(Mathf.Lerp(0f, 2 / PulseFade, t), Mathf.Lerp(2 / PulseFade, 0f, t));
             }
             srPulse.color = LerpHSV(PulseStartColor, PulseEndColor, t);
             srPulse.color = new Color(srPulse.color.r, srPulse.color.g, srPulse.color.b, Mathf.Clamp01(a));

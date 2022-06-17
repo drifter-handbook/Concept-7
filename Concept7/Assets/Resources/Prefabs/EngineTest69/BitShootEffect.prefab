@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c8470684505ec4c44b3d77f5fdfa7a19, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1799239455
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 04e018042d0983b46b54fac77ff1e84e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -130,6 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pulse: {fileID: 428141192972064748}
-  Size: 2
-  PulseStartColor: {r: 0.48757946, g: 0.3160377, b: 1, a: 1}
-  PulseEndColor: {r: 0.6271772, g: 0.3537736, b: 1, a: 1}
+  Size: 3
+  PulseStartColor: {r: 0.6555249, g: 0.5424528, b: 1, a: 1}
+  PulseEndColor: {r: 0.74199545, g: 0.5518868, b: 1, a: 1}
