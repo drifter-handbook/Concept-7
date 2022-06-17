@@ -2756,7 +2756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: ActorType
-      value: hray
+      value: enginetestboss
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: PointAtPlayer

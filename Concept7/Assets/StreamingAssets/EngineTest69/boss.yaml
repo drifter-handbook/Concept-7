@@ -21,7 +21,20 @@ timeline_shoot:
   - time: 10
     shoot:
       actor: hlaser
-  - time: 15
+  - time: 16
+    spawn:
+      actor: prox
+      x: 0
+      y: -2
+  - time: 16
+    spawn:
+      actor: prox
+      x: 12
+      y: -2
+  - time: 22
+    shoot:
+      actor: hray
+  - time: 30
     run:
       timeline: shoot
 
@@ -32,7 +45,7 @@ timeline_auto:
       num: 3
       angle: 45
       speed: 3
-    repeat: 5
+    repeat: 10
     interval: 3
   - time: 0.5
     shoot:
@@ -40,5 +53,5 @@ timeline_auto:
       num: 4
       angle: 60
       speed: 4
-    repeat: 5
+    repeat: 10
     interval: 3

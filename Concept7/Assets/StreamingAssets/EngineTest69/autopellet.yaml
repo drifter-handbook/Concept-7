@@ -8,3 +8,10 @@ core:
   speed: 2
   destroy_offscreen: true
   destroy_on_impact: true
+  default_run: sfx
+
+timeline_sfx:
+  - time: 0
+    playsound:
+      sound: enemy_pew
+      volume: 0.25

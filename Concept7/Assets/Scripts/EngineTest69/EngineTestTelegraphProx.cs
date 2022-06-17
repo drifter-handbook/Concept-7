@@ -14,7 +14,7 @@ public class EngineTestTelegraphProx : MonoBehaviour, IEngineTestTelegraph, IAct
     float PulseFade = 0.5f;
 
     float FinishAlphaMult = 1f;
-    float PulseAlpha = 0.5f;
+    float PulseAlpha = 0.8f;
 
     float LifetimeFinishDur = 0.5f;
 
@@ -115,7 +115,7 @@ public class EngineTestTelegraphProx : MonoBehaviour, IEngineTestTelegraph, IAct
         }
         vend.x = vstart.x + hdiff;
         Vector3 outhsv = Vector3.Lerp(vstart, vend, t);
-        outhsv.x = outhsv.x % 1f;
+        outhsv.x = (outhsv.x + 1f) % 1f;
         Color c = Color.HSVToRGB(outhsv.x, outhsv.y, outhsv.z);
         c.a = Mathf.Lerp(start.a, end.a, t);
         return c;
