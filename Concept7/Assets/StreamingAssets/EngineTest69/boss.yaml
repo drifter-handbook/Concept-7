@@ -1,0 +1,44 @@
+# Base mob
+core:
+  name: enginetestboss
+  prefab: EngineTestBoss
+  hp: 500
+  tags: ["enemy"]
+  speed: 0
+  default_run: shoot
+
+emitter_gun0:
+  x: 0
+  y: 0
+
+timeline_shoot:
+  - time: 3
+    run:
+      timeline: auto
+  - time: 2
+    shoot:
+      actor: mray
+  - time: 10
+    shoot:
+      actor: hlaser
+  - time: 15
+    run:
+      timeline: shoot
+
+timeline_auto:
+  - time: 0
+    shoot:
+      actor: autopellet
+      num: 3
+      angle: 45
+      speed: 3
+    repeat: 5
+    interval: 3
+  - time: 0.5
+    shoot:
+      actor: autopellet
+      num: 4
+      angle: 60
+      speed: 4
+    repeat: 5
+    interval: 3

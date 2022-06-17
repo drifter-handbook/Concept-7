@@ -2756,7 +2756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: ActorType
-      value: mray
+      value: enginetestboss
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: PointAtPlayer
@@ -9280,7 +9280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5327792998362964843, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5327792998892998752, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
       propertyPath: pixelCamera

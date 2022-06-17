@@ -23,18 +23,6 @@ timeline_spawn:
   - time: 0
     shoot:
       actor: mray_single
-      facing: true
-      dir: 0
       emitters: [center]
-  - time: 2.25
-    shoot:
-      actor: mray_single
-      facing: true
-      dir: 30
-      emitters: [center]
-  - time: 4.5
-    shoot:
-      actor: mray_single
-      facing: true
-      dir: -30
-      emitters: [center]
+    repeat: 5
+    interval: 1.5
