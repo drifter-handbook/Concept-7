@@ -1,0 +1,16 @@
+core:
+  name: hray_carrier2
+  copy_from: [hray_carrier1]
+
+timeline_carry:
+  - time: 2
+    move_at:
+      game_tag: Player
+      actor: player
+      instant: true
+  - time: 2
+    spawn:
+      actor: hray_target2
+      x: 0
+      y: 0
+      rel: pos

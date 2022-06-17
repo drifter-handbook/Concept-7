@@ -27,7 +27,7 @@ public class EngineTestTelegraphProx : MonoBehaviour, IEngineTestTelegraph, IAct
 
     void Start()
     {
-        Initialize(transform.position, 45f, new Vector2(Size, Size));
+        Initialize(transform.localPosition, 45f, new Vector2(Size, Size));
     }
 
     public void Initialize(Vector2 position, float rotation, Vector2 size)

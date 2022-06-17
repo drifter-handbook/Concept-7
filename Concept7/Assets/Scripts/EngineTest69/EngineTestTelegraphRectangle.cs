@@ -32,7 +32,7 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
 
     void Start()
     {
-        Initialize(transform.position, 0f, Size);
+        Initialize(transform.localPosition, 0f, Size);
     }
 
     public void Initialize(Vector2 position, float rotation, Vector2 size)

@@ -18,7 +18,7 @@ public class EngineTestPulse : MonoBehaviour, IEngineTestTelegraph, IActorLifeti
 
     void Start()
     {
-        Initialize(transform.position, 0f, new Vector2(Size, Size));
+        Initialize(transform.localPosition, 0f, new Vector2(Size, Size));
     }
 
     public void Initialize(Vector2 position, float rotation, Vector2 size)

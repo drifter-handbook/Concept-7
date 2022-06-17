@@ -1,0 +1,16 @@
+core:
+  name: hray_missile2
+  copy_from: [hray_missile1]
+
+timeline_follow:
+  - time: 0
+    playsound:
+      sound: hray
+  - time: 0
+    move_at:
+      game_tag: Target
+      actor: hray_target2
+      max_turn: 5
+      speed: 12
+    repeat: 200
+    interval: 0.01

@@ -1,0 +1,49 @@
+core:
+  name: hray_missile1
+  prefab: hraymissile
+  invuln: false
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -2
+  speed: 2
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: true
+  lifetime: 5
+  on_destroy:
+    event: burst
+    impact: burst
+  default_run: follow
+
+emitter_burst:
+  x: 0
+  y: 0
+  actor: explosionbullet
+
+timeline_follow:
+  - time: 0
+    playsound:
+      sound: hray
+  - time: 0
+    move_at:
+      game_tag: Target
+      actor: hray_target1
+      max_turn: 5
+      speed: 12
+    repeat: 200
+    interval: 0.01
+
+timeline_burst:
+  - time: 0
+    playsound:
+      sound: hlaser1
+  - time: 0
+    shoot:
+      actor: hray_explosion
+  - time: 0
+    shoot:
+      num: 8
+      dir: 180
+      angle: 360
+      speed: 3
+      ring: true

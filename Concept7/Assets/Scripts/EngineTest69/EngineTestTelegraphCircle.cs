@@ -20,15 +20,24 @@ public class EngineTestTelegraphCircle : MonoBehaviour, IEngineTestTelegraph, IA
 
     public float Size;
 
+    float borderAlpha;
+    float fillAlpha;
+
+    void Awake()
+    {
+        borderAlpha = Border.GetComponent<SpriteRenderer>().color.a;
+        fillAlpha = Fill.GetComponent<SpriteRenderer>().color.a;
+    }
+
     void Start()
     {
-        Initialize(transform.position, 45f, new Vector2(Size, Size));
+        Initialize(transform.localPosition, 0f, new Vector2(Size, Size));
     }
 
     public void Initialize(Vector2 position, float rotation, Vector2 size)
     {
         // starting local position starting point of rectangle at position
-        Vector3 scale = new Vector3(size.x, size.y, transform.localScale.z);
+        Vector3 scale = new Vector3(transform.localScale.x * size.x, transform.localScale.y * size.y, transform.localScale.z);
         transform.localScale = scale;
         transform.localPosition = new Vector3(position.x, position.y, transform.localPosition.z);
         transform.localEulerAngles = new Vector3(0f, 0f, rotation);
@@ -53,8 +62,8 @@ public class EngineTestTelegraphCircle : MonoBehaviour, IEngineTestTelegraph, IA
                 yield break;
             }
             FinishAlphaMult = Mathf.Lerp(1f, 0f, time / dur);
-            borderSr.color = new Color(borderSr.color.r, borderSr.color.b, borderSr.color.b, FinishAlphaMult);
-            fillSr.color = new Color(fillSr.color.r, fillSr.color.b, fillSr.color.b, FinishAlphaMult);
+            borderSr.color = new Color(borderSr.color.r, borderSr.color.b, borderSr.color.b, FinishAlphaMult * borderAlpha);
+            fillSr.color = new Color(fillSr.color.r, fillSr.color.b, fillSr.color.b, FinishAlphaMult * fillAlpha);
             yield return null;
             time += Time.deltaTime;
         }
