@@ -1,0 +1,17 @@
+core:
+  name: shrapnel
+  prefab: Shrapnel
+  invuln: true
+  turn_on_move: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 12
+  destroy_offscreen: true
+  destroy_on_impact: true
+  default_run: move
+
+timeline_move:
+  - time: 0.225
+    setspeed:
+      speed: 2
+      dur: 0.3

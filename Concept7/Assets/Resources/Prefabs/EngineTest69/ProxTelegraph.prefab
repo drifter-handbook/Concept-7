@@ -387,6 +387,6 @@ MonoBehaviour:
   Pulse: {fileID: 3857249996011654359}
   Fill: {fileID: 3857249996226729453}
   Border: {fileID: 3857249995867149405}
-  Size: 1
+  Size: 1.75
   PulseStartColor: {r: 1, g: 0.59355277, b: 0.13679248, a: 0}
   PulseEndColor: {r: 0.5659275, g: 0, b: 1, a: 0}

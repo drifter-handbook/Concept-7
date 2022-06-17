@@ -1,0 +1,35 @@
+core:
+  name: prox
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+  lifetime: 6
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    shoot:
+      actor: prox_telegraph
+  - time: 3
+    spawn:
+      actor: prox_ship
+      x: 0
+      y: 32
+      rel: pos
+  - time: 4
+    playsound:
+      sound: prox
+  - time: 5
+    shoot:
+      actor: prox_explosion
+  - time: 5
+    shoot:
+      actor: shrapnel
+      num: 30
+      angle: 360
+      ring: true
