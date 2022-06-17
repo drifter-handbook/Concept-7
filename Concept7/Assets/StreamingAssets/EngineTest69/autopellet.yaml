@@ -15,3 +15,5 @@ timeline_sfx:
     playsound:
       sound: enemy_pew
       volume: 0.25
+
+timeline_nosfx: []

@@ -1,0 +1,35 @@
+core:
+  name: cbusterlaser
+  prefab: CBusterBeam
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: grow
+  speed: 0
+  lifetime: 6
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_grow:
+  - time: 0
+    playsound:
+      sound: cbuster1
+  - time: 0
+    move:
+      dest:
+        - x: 9.5
+          rel: dir
+      instant: true
+  - time: 0
+    scale:
+      y: 0
+  - time: 0
+    scale:
+      y: 2
+      dur: 0.1
+  - time: 0.6
+    scale:
+      y: 0
+      dur: 0.2
