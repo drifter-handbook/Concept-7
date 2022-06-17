@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static StageDataUtils;
+using System.Linq;
 
-public class RotateTimelineEvent : StageData.Actor.Timeline.IEvent
+public class RotateTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Actor.ICompileCheck
 {
     public string Action => "rotate";
     
@@ -12,6 +13,7 @@ public class RotateTimelineEvent : StageData.Actor.Timeline.IEvent
     public float? Inc;
     public float? Dur;
     public float? Speed;
+    public string Axis;
 
     public StageData.Actor.Timeline.IEvent CloneFrom(StageData.Actor actor, string yaml)
     {
@@ -29,6 +31,21 @@ public class RotateTimelineEvent : StageData.Actor.Timeline.IEvent
         {
             angle = actor.transform.position.z + Inc.Value;
         }
-        actor.RunCoroutine(ref actor.rotateCoroutine, actor.RotateCoroutine(angle, Dur, Speed));
+
+        StageActor.Axis ax = StageActor.Axis.z;
+        if (Axis != null)
+        {
+            ax = Enum.Parse<StageActor.Axis>(Axis);
+        }
+        actor.RunCoroutine(ref actor.rotateCoroutine, actor.RotateCoroutine(angle, Dur, Speed, ax));
+    }
+
+    public void CompileCheck(Dictionary<string, StageData.Actor> actors, StageData.Actor current)
+    {
+        List<string> axes = ((StageActor.Axis[])Enum.GetValues(typeof(StageActor.Axis))).Select(x => x.ToString()).ToList();
+        if (Axis != null && !axes.Contains(Axis))
+        {
+            throw new StageDataException($"Timeline {Action} action contains field 'axis' with value {Axis}, but the value must be one of [{string.Join(", ", axes)}]");
+        }
     }
 }

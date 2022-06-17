@@ -61,7 +61,7 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
             }
             FinishAlphaMult = Mathf.Lerp(1f, 0f, time / dur);
             borderSr.color = new Color(borderSr.color.r, borderSr.color.b, borderSr.color.b, FinishAlphaMult);
-            fillSr.color = new Color(fillSr.color.r, fillSr.color.b, fillSr.color.b, FinishAlphaMult);
+            fillSr.color = new Color(fillSr.color.r, fillSr.color.g, fillSr.color.b, FinishAlphaMult);
             yield return null;
             time += Time.deltaTime;
         }

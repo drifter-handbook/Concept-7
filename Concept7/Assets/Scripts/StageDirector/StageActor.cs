@@ -38,6 +38,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
     public Coroutine orbitRadiusCoroutine;
     public Coroutine orbitTiltCoroutine;
     public Coroutine rotateCoroutine;
+    public Coroutine scaleCoroutine;
 
     SpriteRenderer sr;
 
@@ -310,12 +311,18 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             crt = StartCoroutine(c);
         }
     }
-    public IEnumerator RotateCoroutine(float? angle, float? dur, float? speed=null)
+
+    public enum Axis
     {
+        x, y, z
+    }
+    public IEnumerator RotateCoroutine(float? angle, float? dur, float? speed=null, Axis axis=Axis.z)
+    {
+        Vector3 startRotation = transform.localEulerAngles;
         if (angle != null)
         {
             float time = 0f;
-            float startAngle = transform.localEulerAngles.z;
+            float startAngle = GetVector3Val(startRotation, axis);
             float totalDur = 0f;
             if (dur != null)
             {
@@ -327,23 +334,64 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             }
             while (time < dur)
             {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Mathf.Lerp(startAngle, angle.Value, time / dur.Value));
+                transform.localEulerAngles = ToVector3WithVal(startRotation, Mathf.Lerp(startAngle, angle.Value, time / dur.Value), axis);
                 time += Time.deltaTime;
                 RefreshAngle();
                 yield return null;
             }
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle.Value);
+            transform.localEulerAngles = ToVector3WithVal(startRotation, angle.Value, axis);
             RefreshAngle();
         }
         if (speed != null)
         {
+            float additional = angle ?? GetVector3Val(transform.localEulerAngles, axis);
             while (true)
             {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.eulerAngles.z + speed.Value * Time.deltaTime);
+                additional += speed.Value * Time.deltaTime;
+                transform.localEulerAngles = ToVector3WithVal(startRotation, additional, axis);
                 RefreshAngle();
                 yield return null;
             }
         }
+    }
+    float GetVector3Val(Vector3 v, Axis ax)
+    {
+        switch (ax)
+        {
+            case Axis.x:
+                return v.x;
+            case Axis.y:
+                return v.y;
+            case Axis.z:
+                return v.z;
+        }
+        return 0f;
+    }
+    Vector3 ToVector3WithVal(Vector3 v, float val, Axis ax)
+    {
+        switch (ax)
+        {
+            case Axis.x:
+                return new Vector3(val, v.y, v.z);
+            case Axis.y:
+                return new Vector3(v.x, val, v.z);
+            case Axis.z:
+                return new Vector3(v.x, v.y, val);
+        }
+        return Vector3.zero;
+    }
+
+    public IEnumerator ScaleCoroutine(Vector3 scale, float dur)
+    {
+        float time = 0f;
+        Vector2 startScale = transform.localScale;
+        while (time < dur)
+        {
+            transform.localScale = Vector3.Lerp(startScale, scale, time / dur);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = scale;
     }
 
     public IEnumerator SpeedCoroutine(float speed, float dur)

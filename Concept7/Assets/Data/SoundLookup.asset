@@ -67,3 +67,6 @@ MonoBehaviour:
   - name: tpurge
     volume: 1
     clip: {fileID: 8300000, guid: 4deb2c235d9058b47af225cc7818b460, type: 3}
+  - name: mbit
+    volume: 1
+    clip: {fileID: 8300000, guid: dbd332ede47d25e46b0712c48573824e, type: 3}

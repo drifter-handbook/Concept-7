@@ -39,7 +39,8 @@ public partial class StageData
         new RotateTimelineEvent(),
         new LinkTimelineEvent(),
         new DetachTimelineEvent(),
-        new ReattachTimelineEvent()
+        new ReattachTimelineEvent(),
+        new ScaleTimelineEvent()
     };
 
     public static IDeserializer Deserializer;

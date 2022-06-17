@@ -77,7 +77,7 @@ public class EngineTestTelegraphCircle : MonoBehaviour, IEngineTestTelegraph, IA
             {
                 a *= Mathf.Min(Mathf.Lerp(0f, 1 / PulseFade, t), Mathf.Lerp(1 / PulseFade, 0f, t));
             }
-            sr.color = new Color(sr.color.r, sr.color.b, sr.color.b, Mathf.Clamp01(a));
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, Mathf.Clamp01(a));
             yield return null;
             time += Time.deltaTime;
         }
