@@ -40,7 +40,8 @@ public class MoveAtTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Ac
             // Debug.Log($"No GameObjects found with Tag '{GameTag}'{(Actor != null ? ", Actor=" + Actor : "")}{(Classification != null && Classification.Count > 0 ? ", Classification=[" + string.Join(", ", Classification) + "]" : "")}");
             return;
         }
-        // stop currently running move coroutine
+        // stop currently running move/rotate coroutine
+        actor.RunCoroutine(ref actor.rotateCoroutine, null);
         actor.RunCoroutine(ref actor.movementCoroutine, null);
         Vector2 target = targetActor.transform.position;
         Vector2 dir = (target - (Vector2)actor.transform.position).normalized;

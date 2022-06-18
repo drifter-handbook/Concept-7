@@ -15,3 +15,8 @@ timeline_move:
     setspeed:
       speed: 2
       dur: 0.3
+
+timeline_slowmove:
+  - time: 0
+    setspeed:
+      speed: 3

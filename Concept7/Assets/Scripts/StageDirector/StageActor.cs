@@ -142,11 +142,18 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
 
     public void RefreshAngle()
     {
-        if (Actor?.TurnOnMove ?? false && rotateCoroutine == null)
+        if (rotateCoroutine == null)
         {
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Vector2.SignedAngle(Vector2.right, Direction));
+            if ((Actor?.TurnOnMove ?? false) && Direction != Vector2.zero)
+            {
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Vector2.SignedAngle(Vector2.right, Direction));
+            }
         }
-        if (Actor?.AutoFlipSprite ?? false && sr != null)
+        else if (Actor?.TurnOnMove ?? false)
+        {
+            Direction = Quaternion.Euler(0f, 0f, transform.localEulerAngles.z) * Vector2.right;
+        }
+        if ((Actor?.AutoFlipSprite ?? false) && sr != null)
         {
             sr.flipY = Mathf.DeltaAngle(transform.localEulerAngles.z, 180f) < 90f;
         }
@@ -302,17 +309,24 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
     }
 
     // enforce only one coroutine of this type allowed at once
-    public void RunCoroutine(ref Coroutine crt, IEnumerator c)
+    public Coroutine RunCoroutine(ref Coroutine crt, IEnumerator c)
     {
         if (crt != null)
         {
             StopCoroutine(crt);
+            crt = null;
         }
         if (c != null)
         {
+            crt = StartCoroutine(DummyCoroutine());
             crt = StartCoroutine(c);
         }
+        return crt;
     }
+
+    // set as running some coroutine during first frame of coroutine
+    // for checks such as (rotateCoroutine == null)
+    IEnumerator DummyCoroutine() { yield return null; }
 
     public enum Axis
     {
@@ -355,6 +369,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
                 yield return null;
             }
         }
+        rotateCoroutine = null;
     }
     float GetVector3Val(Vector3 v, Axis ax)
     {
@@ -394,6 +409,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             yield return null;
         }
         transform.localScale = scale;
+        scaleCoroutine = null;
     }
 
     public IEnumerator SpeedCoroutine(float speed, float dur)
@@ -407,6 +423,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             yield return null;
         }
         Speed = speed;
+        speedCoroutine = null;
     }
     public IEnumerator OrbitSpeedCoroutine(float orbitspeed, float dur)
     {
@@ -419,6 +436,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             yield return null;
         }
         OrbitSpeed = orbitspeed;
+        orbitSpeedCoroutine = null;
     }
     public IEnumerator OrbitRadiusCoroutine(float radius, float dur)
     {
@@ -431,6 +449,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             yield return null;
         }
         OrbitRadius = radius;
+        orbitRadiusCoroutine = null;
     }
     public IEnumerator OrbitTiltCoroutine(Vector3 tilt, float dur)
     {
@@ -444,6 +463,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             yield return null;
         }
         OrbitTilt = endTilt;
+        orbitTiltCoroutine = null;
     }
 
     public IEnumerator OrbitCoroutine()
@@ -520,7 +540,12 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
                 t = SpeedLerp(curveSpd, dist);
                 Vector2 pos = CubicBezier(spline[i], spline[i + 1], t);
                 transform.localPosition = new Vector3(pos.x, pos.y, transform.localPosition.z);
-                Direction = (CubicBezier(spline[i], spline[i + 1], t + 0.01f) - pos).normalized;
+                Vector2 dirdiff = (CubicBezier(spline[i], spline[i + 1], t + 0.01f) - pos).normalized;
+                if (dirdiff != Vector2.zero)
+                {
+                    Direction = dirdiff;
+                }
+                RefreshAngle();
                 yield return null;
             }
             dist -= totalDist;
@@ -533,8 +558,10 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
         // set finishdir if needed, for "move infinitely in direction"
         if (finishdir != null)
         {
-            Direction = finishdir.Value;
+            Direction = finishdir.Value.normalized;
+            RefreshAngle();
         }
+        Direction = Vector2.zero;
         movementCoroutine = null;
     }
     Vector2 CubicBezier(MoveTarget cur, MoveTarget next, float t)

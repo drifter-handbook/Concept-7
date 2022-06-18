@@ -12,12 +12,17 @@ emitter_default:
   x: 0
   y: 0
 
+emitter_forward:
+  x: 0.25
+  y: 0
+
 timeline_spawn:
   - time: 0
     shoot:
       actor: mbit_telegraph
       facing: true
       lifetime: 4
+      emitters: [default]
   - time: 4
     run:
       timeline: pulse
@@ -30,17 +35,21 @@ timeline_pulse:
     shoot:
       actor: mbitpulse_effect
       facing: true
+      emitters: [forward]
   - time: 0
     shoot:
       actor: mbitpulse_laser
       facing: true
+      emitters: [forward]
   - time: 0
     shoot:
       actor: mbitpulse_laser
       facing: true
+      emitters: [forward]
       run: up
   - time: 0
     shoot:
       actor: mbitpulse_laser
       facing: true
+      emitters: [forward]
       run: down

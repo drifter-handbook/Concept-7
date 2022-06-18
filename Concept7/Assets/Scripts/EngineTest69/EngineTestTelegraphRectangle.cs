@@ -100,7 +100,7 @@ public class EngineTestTelegraphRectangle : MonoBehaviour, IEngineTestTelegraph,
             }
             float t = time / PulseTime;
             float x = Mathf.Lerp(0, 1f - PulseWidth, t);
-            Pulse.transform.localPosition = new Vector3(x, transform.localPosition.y, transform.localPosition.z);
+            Pulse.transform.localPosition = new Vector3(x, Pulse.transform.localPosition.y, Pulse.transform.localPosition.z);
             float a = FinishAlphaMult * PulseAlpha;
             if (PulseFade > 0.02)
             {

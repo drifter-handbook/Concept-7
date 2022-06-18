@@ -6,7 +6,7 @@ core:
   destroy_on_impact: false
   default_run: grow
   speed: 0
-  lifetime: 6
+  lifetime: 2
   turn_on_move: true
 
 emitter_default:
