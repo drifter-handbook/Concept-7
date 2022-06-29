@@ -6,16 +6,14 @@ public class BackgroundScroller : MonoBehaviour
 {
     public UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera pixelCamera;
     public Camera standardCamera;
-    public GameObject mainBackgroundPrefab;
-    public GameObject secondaryBackgroundPrefab;
     public float mainScrollingSpeed = 2;
     public float secondaryScrollingSpeed = 2;
 
     [System.Serializable]
     public class ScrollingBackgroundData        //Stores the sprite used and repeat data.
     {
-        public Sprite mainBackground;
-        public Sprite secondaryBackground;
+        public GameObject mainBackground;
+        public GameObject secondaryBackground;
         public int repeatCount;
         public bool shouldrepeatNonstop;
         public bool shouldStopScrolling;
@@ -44,8 +42,8 @@ public class BackgroundScroller : MonoBehaviour
         leftSide = standardCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, standardCamera.nearClipPlane)).x;
         rightSide = standardCamera.ViewportToWorldPoint(new Vector3(1, 0.5f, standardCamera.nearClipPlane)).x;
         cameraWidth = standardCamera.orthographicSize * standardCamera.aspect;
-        CreateNewBackground(scrollingBackgrounds[currentListEntry].mainBackground, currentMainBackgrounds, mainBackgroundPrefab);
-        CreateNewBackground(scrollingBackgrounds[currentListEntry].secondaryBackground, currentSecondaryBackgrounds, secondaryBackgroundPrefab);
+        CreateNewBackground(scrollingBackgrounds[currentListEntry].mainBackground, currentMainBackgrounds);
+        CreateNewBackground(scrollingBackgrounds[currentListEntry].secondaryBackground, currentSecondaryBackgrounds);
     }
 
     void FixedUpdate()
@@ -108,8 +106,8 @@ public class BackgroundScroller : MonoBehaviour
         if(currentListEntry < scrollingBackgrounds.Length && !stopScrollingAnim)
         {
             activeBackground.isNewBackground = false;
-            CreateNewBackground(scrollingBackgrounds[currentListEntry].mainBackground, currentMainBackgrounds, mainBackgroundPrefab);
-            CreateNewBackground(scrollingBackgrounds[currentListEntry].secondaryBackground, currentSecondaryBackgrounds, secondaryBackgroundPrefab);
+            CreateNewBackground(scrollingBackgrounds[currentListEntry].mainBackground, currentMainBackgrounds);
+            CreateNewBackground(scrollingBackgrounds[currentListEntry].secondaryBackground, currentSecondaryBackgrounds);
         }
     }
 
@@ -129,18 +127,17 @@ public class BackgroundScroller : MonoBehaviour
         }
     }
 
-    void CreateNewBackground(Sprite sprite, List<ActiveBackground> backgrounds, GameObject prefab)
+    void CreateNewBackground(GameObject newBackground, List<ActiveBackground> backgrounds)
     {
-        if(sprite != null)
+        if(newBackground != null)
         {
-            float spriteWidth = sprite.bounds.size.x;
+            float backgroundWidth = newBackground.GetComponent<Renderer>().bounds.size.x;
 
             //Instantiate background game object and assign current list entry data to it
             Vector3 startingPosition = standardCamera.ViewportToWorldPoint(new Vector3(backgrounds.Count > 0 ? 1 : 0, 0.5f, standardCamera.farClipPlane));
-            startingPosition.x = startingPosition.x + (spriteWidth / 2);
+            startingPosition.x = startingPosition.x + (backgroundWidth / 2);
 
-            GameObject initialObject = Instantiate(prefab, startingPosition, Quaternion.identity);
-            initialObject.GetComponent<SpriteRenderer>().sprite = sprite;
+            GameObject initialObject = Instantiate(newBackground, startingPosition, Quaternion.identity);
 
             //add newly instantiated gameobject to currentBackgrounds list
             ActiveBackground background = new ActiveBackground();
