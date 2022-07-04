@@ -5,6 +5,7 @@ core:
   tags: ["player"]
   # HP not managed by actor system
   invuln: true
+  destroy_offscreen: false
 
 emitter_default:
   x: 0
@@ -51,3 +52,46 @@ timeline_B:
       actor: bluePaintSplat
       parent: actor
       emitters: [default]
+
+timeline_RBB:
+  - time: 0
+    shoot:
+      actor: playerlargemissile
+      emitters: [default]
+
+timeline_RRR:
+  - time: 0
+    shoot:
+      actor: playerlonglaser
+      parent: actor
+      emitters: [default]
+
+timeline_YYY:
+  - time: 0
+    shoot:
+      actor: playerfirework
+      emitters: [default]
+
+timeline_RYB:
+  - time: 0
+    shoot:
+      actor: playerbomb
+      emitters: [default]
+
+
+timeline_RB:
+  - time: 0
+    shoot:
+      actor: playerbuzzsaw
+      emitters: [default]
+      dir: 0
+      parent: emitter
+
+timeline_YB:
+  - time: 0
+    shoot:
+      actor: diagonalBullet
+      num: 2
+      dir: 0
+      angle: 50
+      speed: 4

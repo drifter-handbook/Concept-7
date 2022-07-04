@@ -17,11 +17,11 @@ TagManager:
   - UI
   - PlayerHitbox
   - PlayerHurtbox
+  - PlayerProjectileHurtbox
   - EnemyHitbox
   - EnemyHurtbox
+  - EnemyProjectileHurtbox
   - BoundingBox
-  - 
-  - 
   - 
   - 
   - 

@@ -273,4 +273,26 @@ public static class StageDataUtils
         }
         return actor.Vars[s];
     }
+
+    public static StageActor NearestActor(List<StageActor> actors, StageActor current)
+    {
+        StageActor closest = null;
+        foreach (StageActor actor in actors)
+        {
+            if (actor == current)
+            {
+                continue;
+            }
+            if (closest == null)
+            {
+                closest = actor;
+            }
+            // if actor is closer than closest
+            if (((Vector2)(actor.transform.position - current.transform.position)).magnitude < ((Vector2)(closest.transform.position - current.transform.position)).magnitude)
+            {
+                closest = actor;
+            }
+        }
+        return closest;
+    }
 }

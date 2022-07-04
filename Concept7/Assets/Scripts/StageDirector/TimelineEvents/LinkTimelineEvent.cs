@@ -36,7 +36,7 @@ public class LinkTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Acto
             }
             count = Math.Max(count, 1);
             link = StageDirector.Spawn(Actor, sum / count, 0f);
-            link.GetComponent<StageActor>().FinishSpawn();
+            link.GetComponent<StageActor>().FinishSpawn(actor);
         }
         // parent to link actors to
         actor.transform.parent = link.transform;

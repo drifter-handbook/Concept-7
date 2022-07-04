@@ -1,6 +1,6 @@
 # Homing bullet
 core:
-  name: firework
+  name: playerfirework
   prefab: Firework
   invuln: true
   turn_on_move: true
@@ -30,8 +30,9 @@ emitter_bursting:
 timeline_burst:
   - time: 0
     shoot:
-      num: 8
+      actor: yellowprimary
+      num: 20
+      dir: 180
       angle: 360
-      speed: 3
-      emitters: [bursting]
+      speed: 4
       ring: true

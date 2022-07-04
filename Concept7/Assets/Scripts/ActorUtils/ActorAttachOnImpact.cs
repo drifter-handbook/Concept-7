@@ -2,34 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActorAttachOnImpact : MonoBehaviour
+[RequireComponent(typeof(ActorCollisionCaller))]
+public class ActorAttachOnImpact : MonoBehaviour, IActorCollisionHandler
 {
-    HashSet<GameObject> hits = new HashSet<GameObject>();
+    public int Order => 1;
     public string AttachActor;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void HandleCollision(GameObject other)
     {
-    	if(other.gameObject.tag != "PlayArea")
+        if (gameObject.tag == "PlayArea")
         {
-            if (AttachActor != null && !hits.Contains(other.gameObject))
+            return;
+        }
+        if (AttachActor == null)
+        {
+            return;
+        }
+        StageActor target = other.GetComponent<StageActor>();
+        if (target != null)
+        {
+            GameObject go = StageDirector.Spawn(AttachActor, new Vector3(target.transform.position.x, target.transform.position.y), 0f);
+            StageActor spawner = GetComponent<StageActor>();
+            if (go != null)
             {
-                StageActor target = other.gameObject.GetComponent<StageActor>();
-                if (target != null)
+                foreach (var handler in go.GetComponentsInChildren<IActorAttachment>())
                 {
-                    GameObject go = StageDirector.Spawn(AttachActor, new Vector3(target.transform.position.x, target.transform.position.y), 0f);
-                    foreach (var handler in go.GetComponentsInChildren<IActorAttachment>())
+                    if (go == null)
                     {
-                        if (go != null)
-                        {
-                            handler.Attach(target, GetComponent<StageActor>());
-                        }
+                        break;
                     }
-                    if (go != null)
-                    {
-                        go.GetComponent<StageActor>().FinishSpawn();
-                    }
+                    handler.Attach(target, spawner);
                 }
-                hits.Add(other.gameObject);
+            }
+            if (go != null)
+            {
+                go.GetComponent<StageActor>().FinishSpawn(spawner);
             }
         }
     }

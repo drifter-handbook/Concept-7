@@ -19,9 +19,12 @@ public class ActorReattachTracker : MonoBehaviour
 
     public void Reattach()
     {
-        transform.parent = Parent.transform;
-        Destroy(Filler);
-        Destroy(this);
+        if (Parent != null)
+        {
+            transform.parent = Parent.transform;
+            Destroy(Filler);
+            Destroy(this);
+        }
     }
 
     void OnDestroy()

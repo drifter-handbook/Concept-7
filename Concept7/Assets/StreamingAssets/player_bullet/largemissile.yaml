@@ -1,6 +1,6 @@
 # Homing bullet
 core:
-  name: largemissile
+  name: playerlargemissile
   prefab: LargeMissile
   invuln: true
   turn_on_move: true
@@ -10,7 +10,8 @@ core:
   destroy_offscreen: true
   destroy_on_impact: false
   default_run: travel
-  lifetime: -1
+  lifetime: 8
+  attach_on_impact: destroyprojectile
 
 timeline_travel:
 - time: 0

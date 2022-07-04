@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LineBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 8303589307971982775, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9184540977691960104, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_Size.x
       value: 1

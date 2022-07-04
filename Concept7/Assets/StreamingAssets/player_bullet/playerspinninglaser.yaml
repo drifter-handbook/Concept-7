@@ -1,0 +1,123 @@
+core:
+  name: playerspinninglaser
+  prefab: PlayerSpinningLaser
+  invuln: true
+  turn_on_move: false
+  tags: ["playerbeam"]
+  depth: -1
+  speed: 8
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: travel
+  classification: Beam
+
+timeline_travel:
+  - time: 0
+    move:
+      dest:
+        - x: 2
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 4
+          y: -0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 6
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 8
+          y: -0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 10
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+
+# timeline_cross:
+#   - time: 0
+#     shoot:
+#       num: 4
+#       angle: 360
+#       actor: curvelaserlong
+#       run: travel
+#       ring: true
+#       parent: actor
+#       speed: 12
+#   - time: 5
+#     rotate:
+#       inc: 30
+#       dur: 5
+#   - time: 10
+#     rotate:
+#       inc: -60
+#       dur: 10
+#   - time: 20
+#     rotate:
+#       inc: 30
+#       dur: 5
+#   - time: 30
+#     destroy: true
+
+# emitter_gun0:
+#   x: 0
+#   y: 0
+
+# timeline_cross:
+#   - time: 2
+#     shoot:
+#       actor: lasercross
+#       dir: 0
+
+
+# timeline_cross:
+#   - time: 0
+#     shoot:
+#       num: 4
+#       angle: 360
+#       actor: PlayerSpinningLaser
+#       run: travel
+#       ring: true
+#       parent: actor
+#       speed: 12
+#   - time: 5
+#     rotate:
+#       inc: 30
+#       dur: 5
+#   - time: 10
+#     rotate:
+#       inc: -60
+#       dur: 10
+#   - time: 20
+#     rotate:
+#       inc: 30
+#       dur: 5
+#   - time: 30
+#     destroy: true
+
+timeline_travel:
+  - time: 0
+    move:
+      dest:
+        - x: 2
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 4
+          y: -0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 6
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 8
+          y: -0.3
+          rel: dir
+          post: {x: 0.5}
+        - x: 10
+          y: 0.3
+          rel: dir
+          post: {x: 0.5}

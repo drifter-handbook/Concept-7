@@ -342,6 +342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MicroDrone
       objectReference: {fileID: 0}
+    - target: {fileID: 7055567995567791160, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9218619194962831828, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
       propertyPath: m_Size.x
       value: 0.5

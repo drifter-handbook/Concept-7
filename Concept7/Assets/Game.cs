@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
     [Header("Debug Cheats")]
     public bool Invulnerable = false;
     public bool ContinueWithNoLives = true;
-    public bool Shield = true;
+    public bool StartStage = true;
 
     [Header("Game Info")]
     public int CurrentLives;

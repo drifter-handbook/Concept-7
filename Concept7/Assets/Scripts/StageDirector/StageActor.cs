@@ -82,6 +82,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             GameObject go = new GameObject();
             go.transform.parent = gameObject.transform;
             go.transform.localPosition = new Vector2(em.Value.X, em.Value.Y);
+            go.name = $"emitter_{em.Key}";
             Emitters[em.Key] = go;
         }
         // copy vars
@@ -110,6 +111,8 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
             var comp = GetComponent<ActorAttachOnImpact>() ?? gameObject.AddComponent<ActorAttachOnImpact>();
             comp.AttachActor = Actor.AttachOnImpact;
         }
+        // stage editor stuff
+        HandleStageEditorSpawn();
     }
 
     // Start is called before the first frame update
@@ -139,8 +142,16 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
         }
     }
 
-    public void FinishSpawn(string run=null, float? lifetime=null)
+    public void FinishSpawn(StageActor spawner, string run=null, float? lifetime=null)
     {
+        // call spawn handlers
+        if (spawner != null)
+        {
+            foreach (IActorSpawnHandler handler in spawner.GetComponentsInChildren<IActorSpawnHandler>())
+            {
+                handler.HandleSpawn(this);
+            }
+        }
         // run default timeline
         run = run ?? Actor.DefaultRun;
         RunTimeline(run);
@@ -207,7 +218,7 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
         for (int i = 0; i < timeline.Entries.Count; i++)
         {
             var entry = timeline.Entries[i];
-;           while (time < entry.Time)
+            while (time < entry.Time)
             {
                 FlushSchedule(evSchedule, time);
                 yield return null;
@@ -493,10 +504,34 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
                 break;
             case ActorDestroyReason.Health:
                 RunTimeline(Actor?.OnDestroy?.Impact);
+                if (gameObject.tag == "Enemy" && Classification == ActorClassification.Actor)
+                {
+                    SaveData.Instance.EnemiesKilled++;
+                }
                 break;
             case ActorDestroyReason.Event:
                 RunTimeline(Actor?.OnDestroy?.Event);
                 break;
+        }
+    }
+
+    // stage editor options on create
+    void HandleStageEditorSpawn()
+    {
+        if (StageEditor.Instance != null)
+        {
+            if (StageEditor.Instance.DrawMovementPath && ActorType != "player")
+            {
+                Instantiate(StageEditor.Instance.DrawMovementPathPrefab, transform);
+            }
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (StageDirector.Instance.ActorCount.ContainsKey(ActorType))
+        {
+            StageDirector.Instance.ActorCount[ActorType]--;
         }
     }
 }

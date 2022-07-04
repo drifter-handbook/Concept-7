@@ -10,9 +10,12 @@ public class AttachToPlayer : MonoBehaviour
     void Start()
     {
         GameObject player = StageDirector.Spawn("player", Vector2.zero, 0f);
-        player.GetComponent<StageActor>().FinishSpawn();
+        player.GetComponent<StageActor>().FinishSpawn(null);
         PlayerController controller = player.GetComponent<PlayerController>();
         controller.SetInput(input);
-        StageDirector.StartStage(0);
+        if (Game.Instance.StartStage)
+        {
+            StageDirector.StartStage(0);
+        }
     }
 }

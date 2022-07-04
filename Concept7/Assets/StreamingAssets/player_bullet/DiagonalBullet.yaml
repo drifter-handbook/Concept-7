@@ -1,0 +1,15 @@
+﻿# A forward line splattering of paint that on kill creates a piercing bullet
+core:
+  name: diagonalBullet
+  prefab: DiagonalBullet
+  invuln: true
+  tags: ["bullet"]
+  depth: -2
+  speed: 10
+  hp: 1
+  turn_on_move: true
+  destroy_offscreen: true
+  destroy_on_impact: false
+  attach_on_impact: diagonalonhit
+  actor_limit: 40
+  lifetime: 8

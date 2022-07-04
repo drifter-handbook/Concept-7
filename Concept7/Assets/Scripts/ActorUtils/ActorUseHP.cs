@@ -3,45 +3,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActorUseHP : MonoBehaviour
+[RequireComponent(typeof(ActorCollisionCaller))]
+public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 {
-    public HashSet<GameObject> Exempt = new HashSet<GameObject>();
+    public int Order => 2;
 
     public float health;
-    [SerializeField] private GameObject deathPrefab;
+    bool ReadyToDie = false;
 
     public void Initialize(StageData.Actor actor)
     {
         health = actor.Hp ?? 1;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void Update()
     {
-        if (other.gameObject.tag == "PlayArea" || Exempt.Contains(other.gameObject))
+        if (ReadyToDie)
+        {
+            Die();
+        }
+    }
+
+    public void HandleCollision(GameObject other)
+    {
+        if (other.tag == "PlayArea")
         {
             return;
         }
-        ActorSuppressOtherUseHP suppress = other.GetComponent<ActorSuppressOtherUseHP>();
         StageActor actor = GetComponent<StageActor>();
-        if (suppress == null || actor == null || !suppress.Classifications.Contains(actor.Classification))
+        if (actor != null)
         {
-            if (other.gameObject.tag == "PlayerWeapon")
+            ActorSuppressOtherUseHP suppress = other.GetComponent<ActorSuppressOtherUseHP>();
+            if (suppress == null || !suppress.Classifications.Contains(actor.Classification))
             {
-                health -= (float?)other.gameObject.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
-                Exempt.Add(gameObject);
-            }
-            if (health <= 0)
-            {
-                Die();
+                if (other.tag == "PlayerWeapon")
+                {
+                    health -= (float?)other.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
+                }
+                if (health <= 0)
+                {
+                    PrepareToDie();
+                }
             }
         }
     }
 
+    void PrepareToDie()
+    {
+        ReadyToDie = true;
+    }
+
     void Die()
     {
-        if (deathPrefab != null)
-            Instantiate(deathPrefab, transform.position, Quaternion.identity);
-    	//play an animation here maybe?
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)
         {
