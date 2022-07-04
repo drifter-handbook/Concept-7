@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using static LevelSelectGridPanel;
 
 
@@ -11,9 +12,14 @@ public class TitleScreenUI : MonoBehaviour
    private Animator anim;
 
    public GameObject SettingsPanel;
+   public GameObject TitleImagePanel;
    public LevelSelectGridPanel LevelSelectGridPanel;
 
-     
+   public TextMeshProUGUI ChapterStoryText;
+   public List<ChapterNode> ChapterNodes;
+    
+   private List<LevelUIInfo> allLevels;
+   
 
 
    void Start(){
@@ -22,16 +28,16 @@ public class TitleScreenUI : MonoBehaviour
         //Initialize level select Grid Panel
         if(LevelSelectGridPanel != null){
             //fake
-            List<LevelUIInfo> levels = new List<LevelUIInfo>();
+             allLevels = new List<LevelUIInfo>();
             for(int i = 0; i< 20; i++){
                 LevelUIInfo lv = new LevelUIInfo();
                 lv.levelIndex = i;
                 lv.chapterIndex = i/5;
                 lv.boss = i%5 == 0;
                 lv.points = Random.Range(1,99999);
-                levels.Add(lv);
+                allLevels.Add(lv);
             }
-            LevelSelectGridPanel.Initialize(levels);
+            LevelSelectGridPanel.Initialize(allLevels);
         }
 
 
@@ -50,7 +56,7 @@ public class TitleScreenUI : MonoBehaviour
    public void ToGame(int gameMode){
      //continue game, new game, multiplayer, etc.
      //but for now, just load the game
-    SceneManager.LoadScene("GameScene");
+    
    }
 
     public void ToGrid(){
@@ -64,5 +70,24 @@ public class TitleScreenUI : MonoBehaviour
 
    public void PopulateLevelGrid(){
         LevelSelectGridPanel.SetupUI();
+   }
+
+   public void ToChapter(int chapterNum){
+        List<LevelUIInfo> levels = new List<LevelUIInfo>();
+        foreach(LevelUIInfo level in allLevels){
+            if(level.chapterIndex == chapterNum){
+                levels.Add(level);
+            }
+        }
+
+        //Setup chapter text
+        ChapterStoryText.text = "Chapter "+ chapterNum + ": " + "And here's where the story would go";
+
+        //Setup chapter nodes
+        for(int i = 0; i < 5; i++){
+            ChapterNodes[i].Initialize(levels[i]);
+        }
+
+        TitleImagePanel.SetActive(false);
    }
 }
