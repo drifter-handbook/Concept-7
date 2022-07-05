@@ -27,6 +27,10 @@ public class LevelSelectGridPanel : MonoBehaviour
 
     IEnumerator SetupUICoroutine()
     {
+        foreach (Transform child in Grid.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+
         foreach(LevelUIInfo level in levelInfos){
             LevelButton levelBtn = Instantiate(LevelSelectPrefab, Grid).GetComponent<LevelButton>();
             levelBtn.Initialize(level);

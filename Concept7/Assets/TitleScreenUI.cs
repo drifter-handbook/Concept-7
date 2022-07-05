@@ -11,6 +11,10 @@ public class TitleScreenUI : MonoBehaviour
    public Animator tapTextAnim;
    private Animator anim;
 
+   public GameObject SettingsButton;
+   public GameObject BackButton;
+   public GameObject ExitButton;
+
    public GameObject SettingsPanel;
    public GameObject TitleImagePanel;
    public LevelSelectGridPanel LevelSelectGridPanel;
@@ -19,8 +23,14 @@ public class TitleScreenUI : MonoBehaviour
    public List<ChapterNode> ChapterNodes;
     
    private List<LevelUIInfo> allLevels;
-   
+   private TitleScreenState state = TitleScreenState.INTRO;
 
+    public enum TitleScreenState{
+        INTRO,
+        TITLE_SCREEN,
+        GRID,
+        CHAPTER_LAYOUT,
+    }
 
    void Start(){
        anim = GetComponent<Animator>();
@@ -44,13 +54,21 @@ public class TitleScreenUI : MonoBehaviour
    }
 
    public void TapToStart(){
-       anim.SetTrigger("ToTitleOptions");
-       tapTextAnim.SetTrigger("End");
+       if(state == TitleScreenState.INTRO){
+            
+            tapTextAnim.SetTrigger("End");
+            ToTitle();
+       }
+   }
 
-        /*
-        If save file exists, show continue button
-        */
-
+   public void ToTitle(){
+    
+     state = TitleScreenState.TITLE_SCREEN;
+     anim.SetTrigger("ToTitleOptions");
+     SettingsButton.SetActive(true);
+     ExitButton.SetActive(true);
+     BackButton.SetActive(false);
+     TitleImagePanel.SetActive(true);
    }
 
    public void ToGame(int gameMode){
@@ -61,8 +79,11 @@ public class TitleScreenUI : MonoBehaviour
 
     public void ToGrid(){
         anim.SetTrigger("ToGrid");
+        SettingsButton.SetActive(true);
+        ExitButton.SetActive(true);
+        BackButton.SetActive(true);
+        state = TitleScreenState.GRID;
     }
-
 
    public void ToggleSettings(){
        SettingsPanel.SetActive(!SettingsPanel.activeSelf);
@@ -73,6 +94,8 @@ public class TitleScreenUI : MonoBehaviour
    }
 
    public void ToChapter(int chapterNum){
+        state = TitleScreenState.CHAPTER_LAYOUT;
+        anim.SetTrigger("ToChapterScreen");
         List<LevelUIInfo> levels = new List<LevelUIInfo>();
         foreach(LevelUIInfo level in allLevels){
             if(level.chapterIndex == chapterNum){
@@ -88,6 +111,24 @@ public class TitleScreenUI : MonoBehaviour
             ChapterNodes[i].Initialize(levels[i]);
         }
 
+        SettingsButton.SetActive(true);
+        ExitButton.SetActive(true);
+        BackButton.SetActive(true);
         TitleImagePanel.SetActive(false);
+   }
+
+
+   public void BackButtonPressed(){
+        switch(state){
+            case TitleScreenState.CHAPTER_LAYOUT:
+            case TitleScreenState.GRID:
+                ToTitle();
+            break;
+            default: break;
+        }
+   }
+
+   public void ExitButtonPressed(){
+      Application.Quit();
    }
 }
