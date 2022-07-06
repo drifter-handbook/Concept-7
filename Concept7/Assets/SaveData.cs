@@ -8,17 +8,17 @@ public class SaveData : MonoBehaviour
     public static SaveData Instance;
 
     public int EnemiesKilled;
-    public int StagesPlayed;
+    public int FurthestCompletedLevel;
 
     public void Load()
     {
         EnemiesKilled = GetKey("EnemiesKilled", 0);
-        StagesPlayed = GetKey("StagesPlayed", 0);
+        FurthestCompletedLevel = GetKey("FurthestCompletedLevel", 0);
     }
     public void Save()
     {
         SetKey("EnemiesKilled", EnemiesKilled);
-        SetKey("StagesPlayed", StagesPlayed);
+        SetKey("FurthestCompletedLevel", FurthestCompletedLevel);
     }
 
     void Awake()

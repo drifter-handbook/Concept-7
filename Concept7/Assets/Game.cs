@@ -10,6 +10,7 @@ public class Game : MonoBehaviour
     public bool Invulnerable = false;
     public bool ContinueWithNoLives = true;
     public bool StartStage = true;
+    public bool OverrideLevelID = false;
 
     [Header("Game Info")]
     public int CurrentLives;
@@ -34,6 +35,8 @@ public class Game : MonoBehaviour
 
     private GameState gameState = GameState.PLAYING;
     private PlayerController ClientPlayer; //the user's player
+   
+    public int LevelID = 0;
 
     void Awake()
     {
@@ -53,9 +56,18 @@ public class Game : MonoBehaviour
         TimeElapsed = 0;
         GameScreen.Game = this;
         GameScreen.UpdateLives();
+        Load();
+    }
 
-        //
-
+    public void Load(){
+        if (OverrideLevelID)
+        {
+            StageDirector.StartStage(LevelID);
+        } else {
+            //loading in from title screen (the actual proper way)
+            LevelID = PlayerPrefs.GetInt("CurrentLevel");
+            StageDirector.StartStage(LevelID);
+        }
     }
 
     public void Update(){
@@ -82,7 +94,17 @@ public class Game : MonoBehaviour
     public void EndGame(bool wasWin){
         gameState = GameState.ENDED;
         if(wasWin){
-             Points = Points += (MaxTimePoints -= TimeElapsed);
+            Points = Points += (MaxTimePoints -= TimeElapsed);
+            //Save level progress
+            if(SaveData.Instance.FurthestCompletedLevel < LevelID){
+                SaveData.Instance.FurthestCompletedLevel = LevelID;
+            }
+            SaveData.Instance.Save();
+
+            //Save points
+            if(!PlayerPrefs.HasKey("Level"+LevelID+"Points") || PlayerPrefs.GetFloat("Level"+LevelID+"Points") < Points){
+                PlayerPrefs.SetFloat("Level"+LevelID+"Points", Points);
+            }
         }
         GameScreen.ShowEndScreen(wasWin);
     }

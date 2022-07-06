@@ -13,9 +13,5 @@ public class AttachToPlayer : MonoBehaviour
         player.GetComponent<StageActor>().FinishSpawn(null);
         PlayerController controller = player.GetComponent<PlayerController>();
         controller.SetInput(input);
-        if (Game.Instance.StartStage)
-        {
-            StageDirector.StartStage(0);
-        }
     }
 }

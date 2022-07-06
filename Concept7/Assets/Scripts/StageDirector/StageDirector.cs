@@ -132,9 +132,9 @@ public class StageDirector : MonoBehaviour
         StageData.Actor actor = Instance.Data.Actors[Instance.Data.Stages[i].Actor];
         GameObject go = Spawn(actor.Name, Vector2.zero, 0f);
         go.GetComponent<StageActor>().FinishSpawn(null);
-        SaveData.Instance.StagesPlayed++;
         return go;
     }
+
 
     public static GameObject FindCurrentActor(string actorType)
     {
