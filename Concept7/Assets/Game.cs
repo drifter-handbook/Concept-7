@@ -56,7 +56,10 @@ public class Game : MonoBehaviour
         TimeElapsed = 0;
         GameScreen.Game = this;
         GameScreen.UpdateLives();
-        Load();
+        if (StageEditor.Instance == null)
+        {
+            Load();
+        }
     }
 
     public void Load(){

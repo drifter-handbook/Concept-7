@@ -7382,6 +7382,7 @@ MonoBehaviour:
   Invulnerable: 0
   ContinueWithNoLives: 1
   StartStage: 0
+  OverrideLevelID: 0
   CurrentLives: 3
   StartingLives: 3
   NumPlayers: 0
@@ -7394,6 +7395,7 @@ MonoBehaviour:
   SoundLookup: {fileID: 11400000, guid: afe4cf7fa2d354444a00933f27c1ad15, type: 2}
   MusicBox: {fileID: 0}
   SFXPrefab: {fileID: 6635459006954566471, guid: 3878528ebd2ce1a489d19833e9759a89, type: 3}
+  LevelID: 0
 --- !u!4 &1735036017
 Transform:
   m_ObjectHideFlags: 0
@@ -7422,7 +7424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemiesKilled: 0
-  StagesPlayed: 0
+  FurthestCompletedLevel: 0
 --- !u!1 &1753763563
 GameObject:
   m_ObjectHideFlags: 0
@@ -9222,6 +9224,10 @@ PrefabInstance:
       propertyPath: standardCamera
       value: 
       objectReference: {fileID: 1508662036}
+    - target: {fileID: 5327792998095105258, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
+      propertyPath: scrollingBackgrounds.Array.data[0].mainBackground
+      value: 
+      objectReference: {fileID: 2014015838335774885, guid: ab2440aafd7815c418aa5d5447f8f54e, type: 3}
     - target: {fileID: 5327792998150471963, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
       propertyPath: pixelCamera
       value: 
@@ -9230,6 +9236,10 @@ PrefabInstance:
       propertyPath: standardCamera
       value: 
       objectReference: {fileID: 1508662036}
+    - target: {fileID: 5327792998150471963, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
+      propertyPath: scrollingBackgrounds.Array.data[0].mainBackground
+      value: 
+      objectReference: {fileID: 4984319148794767942, guid: 6d6b74789bf7b564b9abb8ff4c979cec, type: 3}
     - target: {fileID: 5327792998362964842, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -9290,6 +9300,10 @@ PrefabInstance:
       propertyPath: standardCamera
       value: 
       objectReference: {fileID: 1508662036}
+    - target: {fileID: 5327792998892998752, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
+      propertyPath: scrollingBackgrounds.Array.data[0].mainBackground
+      value: 
+      objectReference: {fileID: 2224466393890938705, guid: a8873b4334ccfab4092020acad291932, type: 3}
     - target: {fileID: 5327792998952321309, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
       propertyPath: pixelCamera
       value: 
@@ -9298,6 +9312,10 @@ PrefabInstance:
       propertyPath: standardCamera
       value: 
       objectReference: {fileID: 1508662036}
+    - target: {fileID: 5327792998952321309, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
+      propertyPath: scrollingBackgrounds.Array.data[0].mainBackground
+      value: 
+      objectReference: {fileID: 165653591868370847, guid: 1bd62c33ddd31344a8445194b9dd2271, type: 3}
     - target: {fileID: 5327792999243151570, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
       propertyPath: pixelCamera
       value: 
@@ -9306,6 +9324,10 @@ PrefabInstance:
       propertyPath: standardCamera
       value: 
       objectReference: {fileID: 1508662036}
+    - target: {fileID: 5327792999243151570, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
+      propertyPath: scrollingBackgrounds.Array.data[0].mainBackground
+      value: 
+      objectReference: {fileID: 7517629311925458312, guid: 21ff5ae32ef54804dad73fe053fdcc9e, type: 3}
     - target: {fileID: 5327792999405365500, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
       propertyPath: pixelCamera
       value: 
@@ -9314,5 +9336,9 @@ PrefabInstance:
       propertyPath: standardCamera
       value: 
       objectReference: {fileID: 1508662036}
+    - target: {fileID: 5327792999405365500, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
+      propertyPath: scrollingBackgrounds.Array.data[0].mainBackground
+      value: 
+      objectReference: {fileID: 7715553803909096266, guid: d97f804404bf30146834d72925a0fcfe, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0f92ca91fa01244388c276b9cbda0f9, type: 3}
