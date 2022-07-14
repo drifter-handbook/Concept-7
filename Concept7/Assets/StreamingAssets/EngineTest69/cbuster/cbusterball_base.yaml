@@ -1,0 +1,40 @@
+core:
+  name: cbusterball
+  prefab: ChargeBallBase
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: grow
+  speed: 0
+  lifetime: 6
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_grow:
+  - time: 0
+    playsound:
+      sound: cbuster0
+  - time: 0
+    shoot:
+      actor: cbusterball_effect
+      parent: actor
+      dir: 0
+  - time: 0
+    scale:
+      x: 0
+      y: 0
+      z: 0
+  - time: 0
+    scale:
+      x: 1.5
+      y: 1.5
+      z: 1.5
+      dur: 4
+  - time: 4.5
+    scale:
+      x: 0
+      y: 0
+      z: 0
+      dur: 0.3

@@ -1,0 +1,289 @@
+# Base mob
+core:
+  name: enginetestboss
+  prefab: EngineTestBoss
+  hp: 500
+  tags: ["enemy"]
+  speed: 0
+  default_run: shoot
+
+emitter_default:
+  x: 0
+  y: 0
+
+emitter_forward:
+  x: -1
+  y: 0
+
+timeline_shoot:
+  - time: 0
+    run:
+      timeline: moveloop
+  - time: 3
+    run:
+      timeline: auto
+  - time: 2
+    shoot:
+      actor: mray
+      emitters: [default]
+  - time: 10
+    shoot:
+      actor: hlaser
+  - time: 16
+    spawn:
+      actor: prox
+      x: 0
+      y: -2
+  - time: 16
+    spawn:
+      actor: prox
+      x: 12
+      y: -2
+  - time: 22
+    shoot:
+      actor: hray
+      emitters: [default]
+  - time: 30
+    shoot:
+      actor: cbuster
+      emitters: [forward]
+  - time: 35
+    run:
+      timeline: mbitcross
+  - time: 42
+    run:
+      timeline: tpurge
+  - time: 48
+    run:
+      timeline: shoot
+
+timeline_auto:
+  - time: 0
+    shoot:
+      actor: autopellet
+      num: 3
+      angle: 45
+      speed: 3
+      emitters: [default]
+    repeat: 13
+    interval: 3
+  - time: 0.5
+    shoot:
+      actor: autopellet
+      num: 4
+      angle: 60
+      speed: 4
+      emitters: [default]
+    repeat: 13
+    interval: 3
+
+timeline_movecenter:
+  - time: 0
+    setspeed:
+      speed: 4
+      dur: 0.5
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 0
+          rel: abs
+
+timeline_moveback:
+  - time: 0
+    setspeed:
+      speed: 4
+      dur: 0.5
+  - time: 0
+    move:
+      dest:
+        - x: 11
+          y: 0
+          rel: abs
+
+timeline_moveloop:
+  - time: 0
+    setspeed:
+      speed: 0.12
+      dur: 0
+  - time: 0
+    move:
+      loop: true
+      dest:
+        - x: 11
+          y: 0
+          rel: abs
+        - x: 11
+          y: 0.2
+          rel: abs
+        - x: 11
+          y: 0
+          rel: abs
+
+timeline_tpurge:
+  - time: 0
+    run:
+      timeline: movecenter
+  - time: 1.4
+    playsound:
+      sound: tpurge
+  - time: 2
+    shoot:
+      actor: explosionbullet
+      num: 15
+      angle: 360
+      ring: true
+      speed: 3.5
+  - time: 2
+    shoot:
+      actor: shrapnel
+      num: 10
+      angle: 360
+      ring: true
+      run: slowmove
+      speed: 2.5
+  - time: 3
+    run:
+      timeline: moveback
+
+timeline_mbitsq1:
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc0
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc1
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc2
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc4
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc5
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc6
+
+timeline_mbitsq2:
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc0
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc1
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc2
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc4
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc5
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc6
+
+timeline_mbitcross:
+  - time: 0
+    shoot:
+      actor: mbit
+      run: u5
+  - time: 0
+    shoot:
+      actor: mbit
+      run: u6
+  - time: 0
+    shoot:
+      actor: mbit
+      run: u7
+  - time: 0
+    shoot:
+      actor: mbit
+      run: u8
+  - time: 0
+    shoot:
+      actor: mbit
+      run: r2
+  - time: 0
+    shoot:
+      actor: mbit
+      run: r3
+  - time: 0
+    shoot:
+      actor: mbit
+      run: r4
+
+timeline_mbitchecker1:
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc0
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc1
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc2
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc3
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc4
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc5
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc6
+
+timeline_mbitchecker2:
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc0
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc1
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc2
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc3
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc4
+  - time: 0
+    shoot:
+      actor: mbit
+      run: rc5
+  - time: 0
+    shoot:
+      actor: mbit
+      run: lc6

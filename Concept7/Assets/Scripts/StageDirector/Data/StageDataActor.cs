@@ -19,6 +19,7 @@ public partial class StageData
         public int? Hp;
         public string DefaultRun;
         public bool? TurnOnMove;
+        public bool? AutoFlipSprite;
         public List<string> Tags;
         public float? Speed;
         public float? Depth;
@@ -56,6 +57,7 @@ public partial class StageData
             if (Hp == null) { Hp = copySrc.Hp; }
             if (DefaultRun == null) { DefaultRun = copySrc.DefaultRun; }
             if (TurnOnMove == null) { TurnOnMove = copySrc.TurnOnMove; }
+            if (AutoFlipSprite == null) { AutoFlipSprite = copySrc.AutoFlipSprite; }
             if (Tags == null) { Tags = copySrc.Tags; }
             if (Speed == null) { Speed = copySrc.Speed; }
             if (Depth == null) { Depth = copySrc.Depth; }

@@ -1,0 +1,499 @@
+core:
+  name: mbit
+  prefab: MBit
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  speed: 12
+  turn_on_move: true
+  lifetime: 7.5
+  auto_flip_sprite: true
+  default_run: u0
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_finish:
+  - time: 0
+    rotate:
+      speed: 0
+      dur: 2
+  - time: 0
+    setspeed:
+      speed: 0
+  - time: 0
+    shoot:
+      actor: mbitpulse
+      facing: true
+  - time: 5
+    move_at:
+      game_tag: Enemy
+      actor: enginetestboss
+      speed: 14
+    repeat: 200
+    interval: 0.01
+
+timeline_l0:
+  - time: 0
+    move:
+      dest:
+        - x: -0.3
+          y: 3.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_l1:
+  - time: 0
+    move:
+      dest:
+        - x: -0.3
+          y: 2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_l2:
+  - time: 0
+    move:
+      dest:
+        - x: -0.3
+          y: 1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_l3:
+  - time: 0
+    move:
+      dest:
+        - x: -0.3
+          y: 0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_l4:
+  - time: 0
+    move:
+      dest:
+        - x: -0.3
+          y: -0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_l5:
+  - time: 0
+    move:
+      dest:
+        - x: -0.3
+          y: -1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_l6:
+  - time: 0
+    move:
+      dest:
+        - x: -0.3
+          y: -2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_r0:
+  - time: 0
+    move:
+      dest:
+        - x: 12.3
+          y: 3.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_r1:
+  - time: 0
+    move:
+      dest:
+        - x: 12.3
+          y: 2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_r2:
+  - time: 0
+    move:
+      dest:
+        - x: 12.3
+          y: 1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_r3:
+  - time: 0
+    move:
+      dest:
+        - x: 12.3
+          y: 0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_r4:
+  - time: 0
+    move:
+      dest:
+        - x: 12.3
+          y: -0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_r5:
+  - time: 0
+    move:
+      dest:
+        - x: 12.3
+          y: -1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_r6:
+  - time: 0
+    move:
+      dest:
+        - x: 12.3
+          y: -2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_lc0:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 3.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_lc1:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_lc2:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_lc3:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_lc4:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: -0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_lc5:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: -1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_lc6:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: -2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 0
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_rc0:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 3.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_rc1:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_rc2:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_rc3:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: 0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_rc4:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: -0.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_rc5:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: -1.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_rc6:
+  - time: 0
+    move:
+      dest:
+        - x: 6
+          y: -2.5
+          rel: abs
+  - time: 2
+    rotate:
+      set: 180
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_u0:
+  - time: 0
+    move:
+      dest:
+        - x: -0.5
+          y: 3.35
+          rel: abs
+  - time: 2
+    rotate:
+      set: 270
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_u5:
+  - time: 0
+    move:
+      dest:
+        - x: 4.5
+          y: 3.35
+          rel: abs
+  - time: 2
+    rotate:
+      set: 270
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_u6:
+  - time: 0
+    move:
+      dest:
+        - x: 5.5
+          y: 3.35
+          rel: abs
+  - time: 2
+    rotate:
+      set: 270
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_u7:
+  - time: 0
+    move:
+      dest:
+        - x: 6.5
+          y: 3.35
+          rel: abs
+  - time: 2
+    rotate:
+      set: 270
+  - time: 2
+    run:
+      timeline: finish
+
+timeline_u8:
+  - time: 0
+    move:
+      dest:
+        - x: 7.5
+          y: 3.35
+          rel: abs
+  - time: 2
+    rotate:
+      set: 270
+  - time: 2
+    run:
+      timeline: finish
+
+

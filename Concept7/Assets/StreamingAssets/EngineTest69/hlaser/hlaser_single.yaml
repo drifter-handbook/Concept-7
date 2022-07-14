@@ -1,0 +1,32 @@
+core:
+  name: hlaser_single
+  prefab: BlueLaser
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: seek
+  lifetime: 1.65
+  on_destroy:
+    event: explode
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_seek:
+  - time: 0
+    move_at:
+      game_tag: Player
+      actor: player
+      max_turn: 3
+      speed: 9
+    repeat: 90
+    interval: 0.01
+  - time: .9
+    setspeed:
+      speed: 11
+
+timeline_explode:
+  - time: 0
+    shoot:
+      actor: energy_explosion

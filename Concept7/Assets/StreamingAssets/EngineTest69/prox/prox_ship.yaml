@@ -1,0 +1,19 @@
+core:
+  name: prox_ship
+  prefab: ProxShip
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 16
+  lifetime: 2.25
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    move:
+      dest:
+        - y: -32

@@ -1,0 +1,21 @@
+core:
+  name: hray_carrier1
+  prefab: AttachCarrier
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: carry
+  speed: 0
+
+timeline_carry:
+  - time: 2
+    move_at:
+      game_tag: Player
+      actor: player
+      instant: true
+  - time: 2
+    spawn:
+      actor: hray_target1
+      x: 0
+      y: 0
+      rel: pos

@@ -1,0 +1,13 @@
+core:
+  name: mbit_telegraph
+  prefab: RectangleTelegraph
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  speed: 0
+  turn_on_move: true
+  lifetime: 3
+
+emitter_default:
+  x: 0
+  y: 0

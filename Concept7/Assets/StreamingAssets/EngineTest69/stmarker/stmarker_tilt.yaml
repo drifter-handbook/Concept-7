@@ -1,0 +1,55 @@
+core:
+  name: stmarker_tilt
+  prefab: STMarkerTilt
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: marker
+  speed: 0
+  lifetime: 10
+
+emitter_up:
+  x: 0
+  y: 8
+
+emitter_down:
+  x: 0
+  y: -8
+
+emitter_left:
+  x: 1.5
+  y: 0
+
+emitter_right:
+  x: -1.5
+  y: 0
+
+timeline_marker:
+  - time: 0
+    shoot:
+      actor: stmarker_arrow
+      parent: actor
+      emitters: [up]
+      run: up
+      dir: 180
+  - time: 0
+    shoot:
+      actor: stmarker_arrow
+      parent: actor
+      emitters: [down]
+      run: down
+      dir: 0
+  - time: 0
+    shoot:
+      actor: stmarker_arrow
+      parent: actor
+      emitters: [left]
+      run: left
+      dir: 90
+  - time: 0
+    shoot:
+      actor: stmarker_arrow
+      parent: actor
+      emitters: [right]
+      run: right
+      dir: 270

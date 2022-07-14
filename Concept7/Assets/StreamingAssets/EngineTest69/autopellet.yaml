@@ -1,0 +1,19 @@
+core:
+  name: autopellet
+  prefab: BluePellet
+  invuln: true
+  turn_on_move: false
+  tags: ["bullet"]
+  depth: -1
+  speed: 2
+  destroy_offscreen: true
+  destroy_on_impact: true
+  default_run: sfx
+
+timeline_sfx:
+  - time: 0
+    playsound:
+      sound: enemy_pew
+      volume: 0.25
+
+timeline_nosfx: []

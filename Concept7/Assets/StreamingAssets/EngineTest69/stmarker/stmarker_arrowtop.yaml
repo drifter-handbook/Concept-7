@@ -1,0 +1,28 @@
+core:
+  name: stmarker_arrowtop
+  prefab: STMarkerArrowTop
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: move
+  speed: 0
+  lifetime: 10
+
+timeline_move:
+  - time: 0
+    rotate:
+      speed: 90
+  - time: 0
+    move:
+      speed: 2
+      loop: true
+      dest:
+        - x: -0.75
+          post: {x: 0.5}
+          rel: dir
+        - x: -0.25
+          post: {x: -0.5}
+          rel: dir
+        - x: -0.75
+          post: {x: 0.5}
+          rel: dir

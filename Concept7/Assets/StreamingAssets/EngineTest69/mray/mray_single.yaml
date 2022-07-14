@@ -1,0 +1,29 @@
+core:
+  name: mray_single
+  prefab: ActorGroup
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: seek
+  lifetime: 5
+  default_run: createray
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_createray:
+  - time: 0
+    playsound:
+      sound: mray0
+  - time: 0
+    shoot:
+      actor: mray_telegraph
+      facing: true
+  - time: 0
+    shoot:
+      actor: mray_beam
+      facing: true
+  - time: 2
+    playsound:
+      sound: mray1

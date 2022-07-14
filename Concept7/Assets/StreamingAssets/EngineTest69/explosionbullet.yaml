@@ -1,0 +1,11 @@
+core:
+  name: explosionbullet
+  prefab: YellowBullet
+  invuln: true
+  turn_on_move: false
+  tags: ["bullet"]
+  depth: -1
+  speed: 2
+  destroy_offscreen: true
+  destroy_on_impact: true
+  turn_on_move: true
