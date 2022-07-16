@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using static LevelSelectGridPanel;
+using UnityEngine.SceneManagement;
 
 public class LevelButton : MonoBehaviour
 {
@@ -21,5 +22,9 @@ public class LevelButton : MonoBehaviour
             Score.gameObject.SetActive(info.points >= 0);
             Score.text = info.points +"";
         }
+    }
+
+    public void Pressed(){
+        SceneManager.LoadScene("GameScene");
     }
 }

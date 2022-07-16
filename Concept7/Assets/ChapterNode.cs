@@ -26,6 +26,12 @@ public class ChapterNode : MonoBehaviour
         COMPLETED
     }
 
+    public void InitializeLocked(){
+        state = LevelState.LOCKED;
+        NodeImage.color = LockedColor;
+        Score.gameObject.SetActive(false);
+        CurrentVFX.SetActive(true);
+    }
 
     public void Initialize(LevelUIInfo levelInfo){
 

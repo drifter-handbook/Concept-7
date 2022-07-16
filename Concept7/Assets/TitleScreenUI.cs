@@ -39,7 +39,7 @@ public class TitleScreenUI : MonoBehaviour
         if(LevelSelectGridPanel != null){
             //fake
              allLevels = new List<LevelUIInfo>();
-            for(int i = 0; i< 20; i++){
+            for(int i = 0; i< 1; i++){ //no way to check for levels yet
                 LevelUIInfo lv = new LevelUIInfo();
                 lv.levelIndex = i;
                 lv.chapterIndex = i/5;
@@ -108,7 +108,11 @@ public class TitleScreenUI : MonoBehaviour
 
         //Setup chapter nodes
         for(int i = 0; i < 5; i++){
-            ChapterNodes[i].Initialize(levels[i]);
+            if(i < levels.Count){
+                ChapterNodes[i].Initialize(levels[i]);
+            } else {
+                ChapterNodes[i].InitializeLocked();
+            }
         }
 
         SettingsButton.SetActive(true);
