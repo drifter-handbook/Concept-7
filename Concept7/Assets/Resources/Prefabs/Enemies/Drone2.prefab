@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1704577728554370480, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
+      propertyPath: JitterTime
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4043143386004853838, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
       propertyPath: m_FlipX
       value: 1

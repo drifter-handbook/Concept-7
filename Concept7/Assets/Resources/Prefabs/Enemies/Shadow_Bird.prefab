@@ -150,3 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4468bd420e7f4b44090fe702c3351d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ready: 0
+  Jitter: 1
+  JitterAmt: 5
+  JitterTime: 0.05
+  Classifications: 

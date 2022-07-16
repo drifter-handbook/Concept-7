@@ -823,6 +823,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 118871059715360405, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
+      propertyPath: Jitter
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3322972130955761515, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
       propertyPath: m_Sprite
       value: 

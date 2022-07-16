@@ -10,6 +10,9 @@ public class ActorCollisionCaller : MonoBehaviour
     public HashSet<GameObject> Exempt = new HashSet<GameObject>();
     HashSet<GameObject> CollisionQueue = new HashSet<GameObject>();
     public bool Ready;
+    public bool Jitter;
+    public float JitterAmt = 5;
+    public float JitterTime = 0.2f;
 
     public List<StageActor.ActorClassification> Classifications = new List<StageActor.ActorClassification>();
 
@@ -76,6 +79,10 @@ public class ActorCollisionCaller : MonoBehaviour
             }
         }
         Exempt.Add(other);
+        
+        if(Jitter){
+            StartCoroutine(JitterSprite());
+        }
     }
 
     public void ExemptCollision(GameObject target)
@@ -103,5 +110,14 @@ public class ActorCollisionCaller : MonoBehaviour
         {
             caller.ExemptCollision(a);
         }
+    }
+
+    IEnumerator JitterSprite(){
+        //Jostle the sprite a little when hit
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z-JitterAmt);
+        yield return new WaitForSeconds(JitterTime);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z+(JitterAmt*2));
+         yield return new WaitForSeconds(JitterTime);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z-JitterAmt);
     }
 }
