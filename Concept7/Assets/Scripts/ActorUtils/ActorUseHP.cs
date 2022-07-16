@@ -10,6 +10,8 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 
     public float health;
     bool ReadyToDie = false;
+    private bool dyingAnim = false;
+    private float dyingAnimTimer = 0;
 
     public void Initialize(StageData.Actor actor)
     {
@@ -18,9 +20,26 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 
     void Update()
     {
-        if (ReadyToDie)
+        if (ReadyToDie && !dyingAnim)
         {
-            Die();
+            ParticleSystem deathJuice = transform.GetComponentInChildren<ParticleSystem>();
+            if(deathJuice != null){
+                deathJuice.Play();
+            }
+
+            dyingAnim = true;
+            dyingAnimTimer=0;
+        }
+
+        if(dyingAnim){
+            dyingAnimTimer += Time.deltaTime*15;
+            Material mat = GetComponent<SpriteRenderer>().material;
+            mat.SetFloat("_FadeOut", dyingAnimTimer);
+
+            if(dyingAnimTimer > 5){
+                 Die();
+                 dyingAnim = false;
+            }
         }
     }
 
