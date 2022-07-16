@@ -1,0 +1,30 @@
+core:
+  name: hlaser
+  prefab: ActorGroup
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    shoot:
+      actor: tbmarker_carrier
+  - time: 3
+    playsound:
+      sound: hlaser0
+  - time: 3
+    shoot:
+      actor: hlaser_single
+      num: 4
+      dir: 180
+      angle: 70
+      facing: true
+  - time: 4.65
+    playsound:
+      sound: hlaser1 

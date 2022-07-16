@@ -1,0 +1,32 @@
+core:
+  name: stmarker_attach
+  prefab: AttachGroup
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: marker
+  speed: 0
+  lifetime: 4
+
+emitter_default:
+  x: 0
+  y: 0
+
+emitter_upper:
+  x: 0
+  y: 0.65
+
+timeline_marker:
+  - time: 0
+    playsound:
+      sound: stmarker
+  - time: 0
+    shoot:
+      actor: stmarker_arrowtop
+      parent: actor
+      emitters: [upper]
+  - time: 0
+    shoot:
+      actor: stmarker_tilt
+      parent: actor
+      emitters: [default]

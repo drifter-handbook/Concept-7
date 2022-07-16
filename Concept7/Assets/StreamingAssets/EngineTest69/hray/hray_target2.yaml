@@ -1,0 +1,3 @@
+core:
+  name: hray_target2
+  copy_from: [hray_target1]

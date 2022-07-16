@@ -1,0 +1,24 @@
+core:
+  name: hray_single1
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: run
+  lifetime: 5
+  speed: 0
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_run:
+  - time: 0
+    shoot:
+      actor: hray_carrier1
+  - time: 0
+    shoot:
+      actor: aoemarker_carrier
+  - time: 2.5
+    shoot:
+      dir: 30
+      actor: hray_missile1

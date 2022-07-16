@@ -1,0 +1,32 @@
+core:
+  name: cbuster
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+  lifetime: 8
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    shoot:
+      actor: cbusterball
+      parent: actor
+      dir: 180
+  - time: 4
+    shoot:
+      actor: cbusterlaser
+      parent: actor
+      dir: 180
+  - time: 4
+    shoot:
+      actor: autopellet
+      num: 24
+      angle: 360
+      ring: true
+      run: nosfx
+      speed: 4

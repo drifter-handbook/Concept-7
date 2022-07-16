@@ -1,0 +1,17 @@
+core:
+  name: tbmarker_arrow1
+  prefab: TBMarkerArrowSub
+  copy_from: [tbmarker_arrow0]
+
+timeline_move:
+  - time: 0
+    move:
+      speed: 2
+      loop: true
+      dest:
+        - y: 0.75
+          post: {y: 0.5}
+        - y: .25
+          post: {y: -0.5}
+        - y: 0.75
+          post: {y: 0.5}

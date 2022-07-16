@@ -1,0 +1,22 @@
+core:
+  name: tbmarker_arrow0
+  prefab: TBMarkerArrowMain
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: move
+  speed: 0
+  lifetime: 10
+
+timeline_move:
+  - time: 0.05
+    move:
+      speed: 2
+      loop: true
+      dest:
+        - y: 0.5
+          post: {y: 0.5}
+        - y: 0
+          post: {y: -0.5}
+        - y: 0.5
+          post: {y: 0.5}

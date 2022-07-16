@@ -17,6 +17,10 @@ public class ActorDestroyOnImpact : MonoBehaviour, IActorCollisionHandler
         StageActor actor = GetComponent<StageActor>();
         if (suppress == null || actor == null || !suppress.Classifications.Contains(actor.Classification))
         {
+            foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
+            {
+                handler.HandleDestroy(ActorDestroyReason.Impact);
+            }
             Destroy(gameObject);
         }
     }

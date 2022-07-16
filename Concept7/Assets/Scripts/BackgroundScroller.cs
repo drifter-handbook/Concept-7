@@ -138,6 +138,7 @@ public class BackgroundScroller : MonoBehaviour
             startingPosition.x = startingPosition.x + (backgroundWidth / 2);
 
             GameObject initialObject = Instantiate(newBackground, startingPosition, Quaternion.identity);
+            initialObject.transform.position = new Vector3(initialObject.transform.position.x, initialObject.transform.position.y, transform.position.z);
 
             //add newly instantiated gameobject to currentBackgrounds list
             ActiveBackground background = new ActiveBackground();

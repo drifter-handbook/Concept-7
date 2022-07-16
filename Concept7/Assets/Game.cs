@@ -56,7 +56,10 @@ public class Game : MonoBehaviour
         TimeElapsed = 0;
         GameScreen.Game = this;
         GameScreen.UpdateLives();
-        Load();
+        if (StageEditor.Instance == null)
+        {
+            Load();
+        }
     }
 
     public void Load(){
@@ -122,10 +125,11 @@ public class Game : MonoBehaviour
         GameObject obj = Instantiate(SFXPrefab, MusicBox);
         obj.name = "SFX - " + clip;
         AudioSource audioSource = obj.GetComponent<AudioSource>();
-        audioSource.clip = SoundLookup.GetSound(clip);
+        SoundLookup.Sound snd = SoundLookup.GetSound(clip);
+        audioSource.clip = snd.clip;
 
         if(volume > 0){
-            audioSource.volume = volume;
+            audioSource.volume = volume * snd.volume;
         }
 
         if(pitch < float.MaxValue){

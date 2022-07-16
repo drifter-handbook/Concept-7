@@ -1,0 +1,28 @@
+core:
+  name: mray
+  prefab: ActorGroup
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+
+emitter_center:
+  x: 0
+  y: 0
+
+emitter_upper:
+  x: 0
+  y: 1
+
+timeline_spawn:
+  - time: 0
+    shoot:
+      actor: mray_beamstart
+      emitters: [upper]
+  - time: 0
+    shoot:
+      actor: mray_single
+      emitters: [center]
+    repeat: 5
+    interval: 1.5

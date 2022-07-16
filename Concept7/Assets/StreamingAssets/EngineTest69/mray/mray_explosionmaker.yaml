@@ -1,0 +1,23 @@
+core:
+  name: mray_explosionmaker
+  invuln: true
+  destroy_offscreen: true
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+  lifetime: 2
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    setspeed:
+      speed: 25
+  - time: 0
+    shoot:
+      actor: mray_explosiondelayed
+      facing: true
+    repeat: 15
+    interval: 0.05

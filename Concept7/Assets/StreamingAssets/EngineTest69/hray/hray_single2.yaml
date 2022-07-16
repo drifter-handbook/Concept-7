@@ -1,0 +1,15 @@
+core:
+  name: hray_single2
+  copy_from: [hray_single1]
+
+timeline_run:
+  - time: 0
+    shoot:
+      actor: hray_carrier2
+  - time: 0
+    shoot:
+      actor: aoemarker_carrier
+  - time: 2.5
+    shoot:
+      dir: -30
+      actor: hray_missile2

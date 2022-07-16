@@ -1,0 +1,24 @@
+core:
+  name: aoemarker
+  prefab: CircleTelegraph
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: run
+  lifetime: 4
+  speed: 0
+
+emitter_upper:
+  x: 0
+  y: 0.65
+
+timeline_run:
+  - time: 0
+    shoot:
+      actor: aoemarker_arrow
+      parent: actor
+  - time: 0
+    playsound:
+      sound: aoemarker
+  - time: 2
+    detach: true

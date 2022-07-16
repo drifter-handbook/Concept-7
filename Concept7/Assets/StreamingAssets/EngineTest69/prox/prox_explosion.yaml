@@ -1,0 +1,8 @@
+core:
+  name: prox_explosion
+  prefab: BigExplosion
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  speed: 0
+  lifetime: 3

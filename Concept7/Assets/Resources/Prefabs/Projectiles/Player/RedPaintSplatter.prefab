@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 9063038443216893512, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
+      propertyPath: RandomizePitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9184540977691960104, guid: b6a6951c427b260409035301bf50b5a0, type: 3}
       propertyPath: m_Size.x
       value: 2

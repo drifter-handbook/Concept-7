@@ -1,0 +1,55 @@
+core:
+  name: mbitpulse
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+  lifetime: 6
+  turn_on_move: true
+
+emitter_default:
+  x: 0
+  y: 0
+
+emitter_forward:
+  x: 0.25
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    shoot:
+      actor: mbit_telegraph
+      facing: true
+      lifetime: 4
+      emitters: [default]
+  - time: 4
+    run:
+      timeline: pulse
+
+timeline_pulse:
+  - time: 0
+    playsound:
+      sound: mbit
+  - time: 0
+    shoot:
+      actor: mbitpulse_effect
+      facing: true
+      emitters: [forward]
+  - time: 0
+    shoot:
+      actor: mbitpulse_laser
+      facing: true
+      emitters: [forward]
+  - time: 0
+    shoot:
+      actor: mbitpulse_laser
+      facing: true
+      emitters: [forward]
+      run: up
+  - time: 0
+    shoot:
+      actor: mbitpulse_laser
+      facing: true
+      emitters: [forward]
+      run: down

@@ -8,14 +8,15 @@ public class SoundLookup : ScriptableObject
     public List<Sound> sounds = new List<Sound>();
 
     [System.Serializable]
-    public struct Sound{
+    public class Sound{
         [SerializeField] public string name;
+        [SerializeField] public float volume = 1f;
         [SerializeField] public AudioClip clip;
     }
    
-    public AudioClip GetSound(string name){
+    public Sound GetSound(string name){
         foreach(Sound sound in sounds){
-            if(sound.name == name) return sound.clip;
+            if(sound.name == name) return sound;
         }
         return null;
     }

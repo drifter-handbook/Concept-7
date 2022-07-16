@@ -1,0 +1,23 @@
+core:
+  name: hray
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: shoot
+  lifetime: 10
+  speed: 0
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_shoot:
+  - time: 0
+    shoot:
+      actor: hray_single1
+  - time: 2.5
+    shoot:
+      actor: hray_single2
+  - time: 5
+    shoot:
+      actor: hray_single1

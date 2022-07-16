@@ -1,0 +1,22 @@
+core:
+  name: aoemarker_arrow
+  prefab: AoEMarker
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: move
+  speed: 0
+  lifetime: 10
+
+timeline_move:
+  - time: 0.05
+    move:
+      speed: 1
+      loop: true
+      dest:
+        - y: 0.05
+          post: {y: 0.25}
+        - y: -0.1
+          post: {y: -0.25}
+        - y: 0.05
+          post: {y: 0.25}

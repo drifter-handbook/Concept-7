@@ -42,7 +42,7 @@ public class SpawnTimelineEvent : StageData.Actor.Timeline.IEvent, StageData.Act
         spawned.Mirror = new Vector2(mirrorX, mirrorY);
         if (Parent != null)
         {
-            go.transform.parent = StageDataUtils.GetParent(Parent, go.transform.position, actor.gameObject).transform;
+            SetParentPreserve(go.transform, GetParent(Parent, go.transform.position, actor.gameObject).transform);
         }
         spawned.FinishSpawn(actor, Run, Lifetime);
     }
