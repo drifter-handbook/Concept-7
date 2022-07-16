@@ -56,13 +56,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1704577728554370480, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
+      propertyPath: JitterAmt
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704577728554370480, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
       propertyPath: JitterTime
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704577728554370480, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
+      propertyPath: ColorJitter
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4043143386004853838, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4043143386004853838, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a20bb3c5418915640b7b62714b40b754, type: 2}
     - target: {fileID: 8641239201129488157, guid: 3d25dc919e97e284d9f744baa055bf74, type: 3}
       propertyPath: m_Name
       value: Drone2

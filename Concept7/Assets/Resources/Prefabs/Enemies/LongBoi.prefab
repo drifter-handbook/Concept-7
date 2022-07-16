@@ -544,7 +544,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 118871059715360405, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
       propertyPath: JitterAmt
-      value: 2
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 118871059715360405, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
+      propertyPath: ColorJitter
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3322972130955761515, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
       propertyPath: m_Sprite
@@ -553,7 +557,7 @@ PrefabInstance:
     - target: {fileID: 3322972130955761515, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+      objectReference: {fileID: 2100000, guid: a20bb3c5418915640b7b62714b40b754, type: 2}
     - target: {fileID: 7055567995567791160, guid: bbb0d13e410ac074bbaf89cf7a3bfd74, type: 3}
       propertyPath: m_Name
       value: LongBoi

@@ -10,7 +10,8 @@ public class ActorCollisionCaller : MonoBehaviour
     public HashSet<GameObject> Exempt = new HashSet<GameObject>();
     HashSet<GameObject> CollisionQueue = new HashSet<GameObject>();
     public bool Ready;
-    public bool Jitter;
+    public bool Jitter = false;
+    public bool ColorJitter = false;
     public float JitterAmt = 5;
     public float JitterTime = 0.2f;
 
@@ -114,10 +115,15 @@ public class ActorCollisionCaller : MonoBehaviour
 
     IEnumerator JitterSprite(){
         //Jostle the sprite a little when hit
+        Material hitMaterial = GetComponent<SpriteRenderer>().material;
+        if(ColorJitter){
+             hitMaterial.SetColor("_HitColor", Color.red/2 + Color.yellow/8);
+        }
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z-JitterAmt);
         yield return new WaitForSeconds(JitterTime);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z+(JitterAmt*2));
          yield return new WaitForSeconds(JitterTime);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z-JitterAmt);
+        hitMaterial.SetColor("_HitColor", Color.black);
     }
 }
