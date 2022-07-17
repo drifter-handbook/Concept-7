@@ -10,8 +10,10 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 
     public float health;
     bool ReadyToDie = false;
+    public string DeathNoise = "enemy_death_med";
     private bool dyingAnim = false;
     private float dyingAnimTimer = 0;
+    
 
     public void Initialize(StageData.Actor actor)
     {
@@ -22,6 +24,7 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
     {
         if (ReadyToDie && !dyingAnim)
         {
+            Game.Instance.PlaySFX(DeathNoise, 1f, UnityEngine.Random.Range(0.5f, 1));
             ParticleSystem deathJuice = transform.GetComponentInChildren<ParticleSystem>();
             if(deathJuice != null){
                 deathJuice.Play();
@@ -58,10 +61,12 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
                 if (other.tag == "PlayerWeapon")
                 {
                     health -= (float?)other.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
+                    Game.Instance.PlaySFX("impact", 0.1f, UnityEngine.Random.Range(0.5f, 1));
                 }
                 if (health <= 0)
                 {
                     PrepareToDie();
+                    
                 }
             }
         }

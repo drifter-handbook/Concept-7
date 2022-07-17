@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: player_pew
-    volume: 0.5
-    clip: {fileID: 8300000, guid: cfe3c792b1eaf764194b29fa434f5a27, type: 3}
+    volume: 1
+    clip: {fileID: 8300000, guid: df84b47628675be40a1cd5af15101336, type: 3}
   - name: enemy_pew
     volume: 1
     clip: {fileID: 8300000, guid: e7510f6bbbe52154bb29cbcec144059f, type: 3}
@@ -64,3 +64,15 @@ MonoBehaviour:
   - name: wave
     volume: 1
     clip: {fileID: 8300000, guid: f182b11c492495849b2a8a1a5b03f190, type: 3}
+  - name: impact
+    volume: 1
+    clip: {fileID: 8300000, guid: 95916c07e06669e43b40673f23b8bfa8, type: 3}
+  - name: enemy_death_small
+    volume: 1
+    clip: {fileID: 8300000, guid: 902937ce6d5666044808161e472e5a1e, type: 3}
+  - name: enemy_death_med
+    volume: 1
+    clip: {fileID: 8300000, guid: c55daa599b2de16418640323add13820, type: 3}
+  - name: enemy_death_large
+    volume: 1
+    clip: {fileID: 8300000, guid: 2139b2aadedb91f468da45afa3c174ee, type: 3}
