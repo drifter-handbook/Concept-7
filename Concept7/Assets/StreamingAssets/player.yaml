@@ -46,6 +46,20 @@ timeline_Y:
       parent: actor
       emitters: [default]
 
+timeline_YY:
+  - time: 0
+    spawn:
+      actor: yyminion
+      y: 1
+      rel: pos
+      parent: actor
+  - time: 0
+    spawn:
+      actor: yyminion
+      y: -1
+      rel: pos
+      parent: actor
+
 timeline_B:
   - time: 0
     shoot:
