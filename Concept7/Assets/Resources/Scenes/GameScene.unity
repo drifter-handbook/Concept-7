@@ -3708,11 +3708,11 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.1947633, g: 0.13336597, b: 0.3490566, a: 1}
+  m_Color: {r: 0.7333011, g: 0.745283, b: 0.6784888, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 0000000099cc0308
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -9311,7 +9311,8 @@ MonoBehaviour:
   SoundLookup: {fileID: 11400000, guid: afe4cf7fa2d354444a00933f27c1ad15, type: 2}
   MusicBox: {fileID: 1974199847}
   SFXPrefab: {fileID: 6635459006954566471, guid: 3878528ebd2ce1a489d19833e9759a89, type: 3}
-  LevelID: 1
+  LevelID: 0
+  FlyoutTextPrefab: {fileID: 7064328460384311273, guid: d13ac74dd93f3e34c8ac493db7628bc1, type: 3}
 --- !u!4 &2109804104
 Transform:
   m_ObjectHideFlags: 0

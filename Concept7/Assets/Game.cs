@@ -38,6 +38,8 @@ public class Game : MonoBehaviour
    
     public int LevelID = 0;
 
+    public GameObject FlyoutTextPrefab;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -150,6 +152,12 @@ public class Game : MonoBehaviour
         PLAYING,
         ENDED,
         PAUSED
+    }
+
+    public void ShowFlyoutText(string text, Vector3 pos){
+        GameObject flyout = Instantiate(FlyoutTextPrefab);
+        flyout.transform.position = pos;
+        flyout.GetComponent<FlyoutText>().Initialize(text);
     }
 
 }

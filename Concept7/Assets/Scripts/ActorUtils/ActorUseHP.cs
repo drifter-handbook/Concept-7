@@ -25,6 +25,7 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
         if (ReadyToDie && !dyingAnim)
         {
             Game.Instance.PlaySFX(DeathNoise, 1f, UnityEngine.Random.Range(0.5f, 1));
+            Game.Instance.ShowFlyoutText("DEATH", transform.position);
             ParticleSystem deathJuice = transform.GetComponentInChildren<ParticleSystem>();
             if(deathJuice != null){
                 deathJuice.Play();
