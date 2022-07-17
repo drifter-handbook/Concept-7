@@ -4,3 +4,5 @@ stages:
     actor: stage1
   - name: Red Hill Zone
     actor: stage2
+  - name: Yellow Hill Zone
+    actor: stage2

@@ -126,6 +126,11 @@ public class Game : MonoBehaviour
         obj.name = "SFX - " + clip;
         AudioSource audioSource = obj.GetComponent<AudioSource>();
         SoundLookup.Sound snd = SoundLookup.GetSound(clip);
+        if (snd == null)
+        {
+            Debug.Log($"Warning: Sound Effect {clip} is not registered.");
+            return;
+        }
         audioSource.clip = snd.clip;
 
         if(volume > 0){

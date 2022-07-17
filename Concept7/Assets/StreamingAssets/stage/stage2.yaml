@@ -2,3 +2,10 @@
 core:
   name: stage2
   copy_from: [basestage]
+
+timeline_stage:
+  - time: 2
+    spawn:
+      actor: enginetestboss
+      x: 11
+      y: 0
