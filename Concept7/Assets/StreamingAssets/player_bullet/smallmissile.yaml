@@ -1,0 +1,11 @@
+core:
+  name: playersmallmissile
+  prefab: SmallMissile
+  tags: ["playerbullet"]
+  depth: -2
+  speed: 15
+  hp: 1
+  turn_on_move: true
+  destroy_offscreen: true
+  destroy_on_impact: false
+  lifetime: 8
