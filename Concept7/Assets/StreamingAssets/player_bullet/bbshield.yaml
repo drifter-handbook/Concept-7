@@ -1,0 +1,12 @@
+﻿core:
+  name: bbshield
+  prefab: BBShield
+  invuln: true
+  tags: ["playerbullet"]
+  depth: -2
+  speed: 0
+  hp: 1
+  destroy_offscreen: true
+  destroy_on_impact: false
+  lifetime: 4
+  attach_on_impact: reflectprojectile

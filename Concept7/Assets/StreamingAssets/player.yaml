@@ -67,6 +67,13 @@ timeline_B:
       parent: actor
       emitters: [default]
 
+timeline_BB:
+  - time: 0
+    shoot:
+      actor: bbshield
+      parent: actor
+      emitters: [default]
+
 timeline_BBB:
   - time: 0
     spawn:
