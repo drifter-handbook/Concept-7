@@ -146,3 +146,40 @@ timeline_YB:
       dir: 0
       angle: 50
       speed: 4
+
+timeline_YBB:
+  - time: 0
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: -30
+  - time: 0
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: -20
+  - time: 0
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: -10
+  - time: 0
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 0
+  - time: 0
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 10
+  - time: 0
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 20
+  - time: 0
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 30
