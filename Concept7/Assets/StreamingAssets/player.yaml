@@ -67,6 +67,20 @@ timeline_B:
       parent: actor
       emitters: [default]
 
+timeline_BBB:
+  - time: 0
+    spawn:
+      actor: bbbminion
+      y: 1
+      rel: pos
+      parent: actor
+  - time: 0
+    spawn:
+      actor: bbbminion
+      y: -1
+      rel: pos
+      parent: actor
+
 timeline_RBB:
   - time: 0
     shoot:
