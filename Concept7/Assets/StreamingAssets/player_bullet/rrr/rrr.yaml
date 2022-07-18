@@ -1,0 +1,24 @@
+core:
+  name: rrr
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spawn
+  speed: 0
+  lifetime: 8
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_spawn:
+  - time: 0
+    shoot:
+      actor: rrrball
+      parent: actor
+      dir: 0
+  - time: 2
+    shoot:
+      actor: rrrlaser
+      parent: actor
+      dir: 0

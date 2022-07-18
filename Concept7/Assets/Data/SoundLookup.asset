@@ -76,3 +76,9 @@ MonoBehaviour:
   - name: enemy_death_large
     volume: 1
     clip: {fileID: 8300000, guid: 2139b2aadedb91f468da45afa3c174ee, type: 3}
+  - name: rrr0
+    volume: 5
+    clip: {fileID: 8300000, guid: efb60332fd81c604aad26c69e5b97394, type: 3}
+  - name: rrr1
+    volume: 3
+    clip: {fileID: 8300000, guid: 0a83523aa24566f46980c8976abcacf5, type: 3}

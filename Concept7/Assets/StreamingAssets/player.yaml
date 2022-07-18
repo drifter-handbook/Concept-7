@@ -75,10 +75,11 @@ timeline_RBB:
 
 timeline_RRR:
   - time: 0
-    shoot:
-      actor: playerlonglaser
+    spawn:
+      actor: rrr
       parent: actor
-      emitters: [default]
+      x: 1
+      rel: pos
 
 timeline_YYY:
   - time: 0

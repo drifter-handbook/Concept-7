@@ -1,0 +1,15 @@
+core:
+  name: rrrballeffect
+  prefab: RRRBallEffect
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: spin
+  speed: 0
+  lifetime: 6
+
+timeline_spin:
+  - time: 0
+    rotate:
+      axis: x
+      speed: 100
