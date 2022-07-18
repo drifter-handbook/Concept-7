@@ -1,0 +1,18 @@
+core:
+  name: ryysingle
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  speed: 0
+  lifetime: 1
+  default_run: finish
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_finish:
+  - time: 0.01
+    shoot:
+      actor: ryypulse
+      facing: true

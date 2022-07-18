@@ -1,6 +1,6 @@
 # Homing bullet
 core:
-  name: playerfirework
+  name: ryy
   prefab: Firework
   invuln: true
   turn_on_move: true
@@ -10,7 +10,7 @@ core:
   hp: 1
   destroy_offscreen: false
   destroy_on_impact: false
-  lifetime: 2
+  lifetime: 1.5
   on_destroy:
     event: burst
     impact: burst
@@ -18,13 +18,12 @@ core:
 emitter_bursting:
   x: 0
   y: 0
-  actor: playerbasicbullet
 
 timeline_burst:
   - time: 0
     shoot:
-      actor: yellowprimary
-      num: 20
+      actor: ryysingle
+      num: 8
       dir: 180
       angle: 360
       speed: 4

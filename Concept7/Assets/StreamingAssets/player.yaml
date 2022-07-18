@@ -107,6 +107,21 @@ timeline_YYY:
     shoot:
       actor: playerfirework
       emitters: [default]
+      dir: 0
+
+timeline_RYY:
+  - time: 0
+    shoot:
+      actor: ryy
+      emitters: [default]
+      dir: 0
+
+timeline_YYB:
+  - time: 0
+    shoot:
+      actor: yyb
+      emitters: [default]
+      dir: 0
 
 timeline_RYB:
   - time: 0
