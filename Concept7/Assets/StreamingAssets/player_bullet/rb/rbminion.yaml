@@ -1,0 +1,35 @@
+core:
+  name: rbminion
+  prefab: RBNode
+  invuln: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 3
+  default_run: orbit
+  lifetime: 8
+  turn_on_move: true
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_orbit:
+  - time: 0.6
+    orbit:
+      speed: 180
+  - time: 0.5
+    run:
+      timeline: shoot
+  - time: 7.4
+    orbit:
+      radius: 0
+      dur: 0.6
+
+timeline_shoot:
+  - time: 0.1
+    run:
+      timeline: shoot
+  - time: 0.1
+    shoot:
+      actor: rbdamage
+      dir: 0

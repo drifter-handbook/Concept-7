@@ -6,6 +6,9 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
 {
     // connects to closest laser with Index-1
     public int Index;
+    public int IndexModulo;
+    public bool Repeat;
+    public bool AutoIndex;
     EngineTestConnectedLaser connected;
 
     public float FadeTime = 0.5f;
@@ -26,8 +29,17 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
 
     public void Initialize()
     {
+        if (AutoIndex)
+        {
+            foreach (EngineTestConnectedLaser laser in FindObjectsOfType<EngineTestConnectedLaser>())
+            {
+                Index = Mathf.Max(Index, laser.Index);
+            }
+            Index++;
+        }
         foreach (EngineTestConnectedLaser laser in FindObjectsOfType<EngineTestConnectedLaser>())
         {
+            bool matchIndex = Index == Index - 1 || (IndexModulo != 0 && Index % IndexModulo == (Index - 1 + IndexModulo) % IndexModulo);
             if (laser == this || laser.Index != Index - 1)
             {
                 continue;
@@ -75,6 +87,10 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
             lr.SetPosition(1, transform.position);
             yield return null;
             time += Time.deltaTime;
+        }
+        if (Repeat)
+        {
+            StartCoroutine(FadeEdgeCoroutine(dur));
         }
     }
 }

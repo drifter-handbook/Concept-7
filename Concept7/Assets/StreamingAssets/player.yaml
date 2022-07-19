@@ -74,6 +74,16 @@ timeline_BB:
       parent: actor
       emitters: [default]
 
+timeline_RB:
+  - time: 0
+    shoot:
+      actor: rbminion
+      num: 6
+      angle: 360
+      parent: actor
+      emitters: [default]
+      ring: true
+
 timeline_RY:
   - time: 0
     shoot:
@@ -139,15 +149,6 @@ timeline_RYB:
     shoot:
       actor: playerbomb
       emitters: [default]
-
-
-timeline_RB:
-  - time: 0
-    shoot:
-      actor: playerbuzzsaw
-      emitters: [default]
-      dir: 0
-      parent: emitter
 
 timeline_YB:
   - time: 0
