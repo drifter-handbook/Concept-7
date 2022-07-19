@@ -1,0 +1,24 @@
+core:
+  name: rronkill
+  prefab: RRAttach
+  speed: 0
+  lifetime: 1
+  on_destroy:
+    impact: burst
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_burst:
+  - time: 0
+    shoot:
+      actor: rrparticle
+  - time: 0
+    shoot:
+      actor: redprimary
+      num: 10
+      dir: 180
+      angle: 360
+      speed: 4
+      ring: true

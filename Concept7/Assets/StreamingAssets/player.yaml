@@ -115,6 +115,25 @@ timeline_RBB:
       actor: playerlargemissile
       emitters: [default]
 
+timeline_RR:
+  - time: 0
+    spawn:
+      actor: rrscreenwide
+      parent: actor
+      rel: pos
+    repeat: 8
+    interval: 1
+  - time: 0
+    spawn:
+      actor: rrparticle
+      rel: pos
+      parent: actor
+    repeat: 8
+    interval: 1
+  - time: 0
+    playsound:
+      sound: rr
+
 timeline_RRR:
   - time: 0
     spawn:
@@ -164,34 +183,6 @@ timeline_YBB:
     shoot:
       actor: playersmallmissile
       emitters: [default]
-      dir: -30
-  - time: 0
-    shoot:
-      actor: playersmallmissile
-      emitters: [default]
-      dir: -20
-  - time: 0
-    shoot:
-      actor: playersmallmissile
-      emitters: [default]
-      dir: -10
-  - time: 0
-    shoot:
-      actor: playersmallmissile
-      emitters: [default]
       dir: 0
-  - time: 0
-    shoot:
-      actor: playersmallmissile
-      emitters: [default]
-      dir: 10
-  - time: 0
-    shoot:
-      actor: playersmallmissile
-      emitters: [default]
-      dir: 20
-  - time: 0
-    shoot:
-      actor: playersmallmissile
-      emitters: [default]
-      dir: 30
+      num: 7
+      angle: 60
