@@ -6,3 +6,16 @@ core:
   destroy_on_impact: false
   speed: 0
   lifetime: 6
+  default_run: scale
+
+timeline_scale:
+  - time: 0
+    scale:
+      x: 1
+      y: 1
+      dur: 0.5
+  - time: 6
+    scale:
+      x: 0
+      y: 0
+      dur: 0.5

@@ -27,6 +27,7 @@ public class DestroyTimelineEvent : StageData.Actor.Timeline.IEvent
                 {
                     handler.HandleDestroy(ActorDestroyReason.Event);
                 }
+                actor.transform.parent = null;
                 UnityEngine.Object.Destroy(actor.gameObject);
             }
         }

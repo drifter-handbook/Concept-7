@@ -1,0 +1,30 @@
+core:
+  name: yyminion
+  prefab: YYMinion
+  invuln: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 3
+  default_run: orbit
+  lifetime: 8
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_orbit:
+  - time: 0
+    orbit:
+      speed: 180
+  - time: 0
+    run:
+      timeline: shoot
+
+timeline_shoot:
+  - time: 0.5
+    run:
+      timeline: shoot
+  - time: 0.5
+    shoot:
+      actor: yybullet
+      dir: 0

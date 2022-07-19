@@ -1,0 +1,26 @@
+core:
+  name: yyb
+  prefab: Firework
+  invuln: true
+  turn_on_move: true
+  tags: ["playerbullet"]
+  depth: -2
+  speed: 4
+  hp: 1
+  destroy_offscreen: false
+  destroy_on_impact: false
+  lifetime: 1.5
+  on_destroy:
+    event: burst
+    impact: burst
+
+emitter_bursting:
+  x: 0
+  y: 0
+
+timeline_burst:
+  - time: 0
+    shoot:
+      actor: yybshield
+      num: 1
+      dir: 0

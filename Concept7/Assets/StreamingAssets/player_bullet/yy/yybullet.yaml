@@ -1,0 +1,13 @@
+core:
+  name: yybullet
+  prefab: ProjectilePrimaryYellow
+  copy_from: [baseprimary]
+  speed: 18
+  turn_on_move: true
+  # default_run: move
+
+#timeline_move:
+#  - time: 0
+#    move_at:
+#      game_tag: Enemy
+#      classification: [Actor]

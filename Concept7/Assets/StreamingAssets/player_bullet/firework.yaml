@@ -10,17 +10,10 @@ core:
   hp: 1
   destroy_offscreen: false
   destroy_on_impact: false
-  default_run: travel
   lifetime: 2
   on_destroy:
     event: burst
     impact: burst
-
-timeline_travel:
-- time: 0
-  move:
-    dest:
-      - dir: 0
 
 emitter_bursting:
   x: 0

@@ -1,0 +1,44 @@
+core:
+  name: ryypulse
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: false
+  default_run: pulse
+  speed: 0
+  lifetime: 6
+  turn_on_move: true
+
+emitter_default:
+  x: 0
+  y: 0
+
+emitter_forward:
+  x: 0.25
+  y: 0
+
+timeline_pulse:
+  - time: 0
+    playsound:
+      sound: ryy
+  - time: 0
+    shoot:
+      actor: ryypulse_effect
+      facing: true
+      emitters: [forward]
+  - time: 0
+    shoot:
+      actor: ryypulse_laser
+      facing: true
+      emitters: [forward]
+  - time: 0
+    shoot:
+      actor: ryypulse_laser
+      facing: true
+      emitters: [forward]
+      run: up
+  - time: 0
+    shoot:
+      actor: ryypulse_laser
+      facing: true
+      emitters: [forward]
+      run: down

@@ -1,0 +1,29 @@
+﻿core:
+  name: yybshield
+  prefab: YYBShield
+  invuln: true
+  tags: ["playerbullet"]
+  depth: -2
+  speed: 0
+  hp: 1
+  destroy_offscreen: true
+  destroy_on_impact: false
+  lifetime: 3.3
+  attach_on_impact: reflectprojectile
+  default_run: grow
+
+timeline_grow:
+  - time: 0
+    scale:
+      x: 0
+      y: 0
+  - time: 0
+    scale:
+      x: 3
+      y: 3
+      dur: 0.15
+  - time: 3
+    scale:
+      x: 0
+      y: 0
+      dur: 0.15

@@ -6,20 +6,40 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
 {
     // connects to closest laser with Index-1
     public int Index;
+    public int IndexModulo;
+    public bool Repeat;
+    public bool AutoIndex;
     EngineTestConnectedLaser connected;
 
-    float FadeTime = 0.5f;
+    public float FadeTime = 0.5f;
     float FinishAlphaMult = 1f;
     float LaserAlpha = 1f;
 
     LineRenderer lr;
 
+    Coroutine lifetimeCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
         lr = GetComponent<LineRenderer>();
+        Initialize();
+        HandleLifetime(1f);
+    }
+
+    public void Initialize()
+    {
+        if (AutoIndex)
+        {
+            foreach (EngineTestConnectedLaser laser in FindObjectsOfType<EngineTestConnectedLaser>())
+            {
+                Index = Mathf.Max(Index, laser.Index);
+            }
+            Index++;
+        }
         foreach (EngineTestConnectedLaser laser in FindObjectsOfType<EngineTestConnectedLaser>())
         {
+            bool matchIndex = Index == Index - 1 || (IndexModulo != 0 && Index % IndexModulo == (Index - 1 + IndexModulo) % IndexModulo);
             if (laser == this || laser.Index != Index - 1)
             {
                 continue;
@@ -29,26 +49,15 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
                 connected = laser;
             }
         }
-        StartCoroutine(GrowNodeCoroutine());
-        HandleLifetime(2f);
     }
 
     public void HandleLifetime(float dur)
     {
-        StartCoroutine(FadeEdgeCoroutine(dur));
-    }
-
-    IEnumerator GrowNodeCoroutine()
-    {
-        float time = 0f;
-        while (time < FadeTime)
+        if (lifetimeCoroutine != null)
         {
-            float t = time / FadeTime;
-            Vector2 scale = Vector2.one * t;
-            transform.localScale = new Vector3(scale.x, scale.y, transform.localScale.z);
-            yield return null;
-            time += Time.deltaTime;
+            StopCoroutine(lifetimeCoroutine);
         }
+        lifetimeCoroutine = StartCoroutine(FadeEdgeCoroutine(dur));
     }
 
     IEnumerator FadeEdgeCoroutine(float dur)
@@ -78,6 +87,10 @@ public class EngineTestConnectedLaser : MonoBehaviour, IActorLifetimeHandler
             lr.SetPosition(1, transform.position);
             yield return null;
             time += Time.deltaTime;
+        }
+        if (Repeat)
+        {
+            StartCoroutine(FadeEdgeCoroutine(dur));
         }
     }
 }

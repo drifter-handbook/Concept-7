@@ -2735,8 +2735,12 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
-      propertyPath: Speed
+      propertyPath: Dir.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
+      propertyPath: Speed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4542137786842372122, guid: 1879026edcccde8409d28ff6a2fe9df8, type: 3}
       propertyPath: Lifetime
@@ -7396,6 +7400,7 @@ MonoBehaviour:
   MusicBox: {fileID: 0}
   SFXPrefab: {fileID: 6635459006954566471, guid: 3878528ebd2ce1a489d19833e9759a89, type: 3}
   LevelID: 0
+  FlyoutTextPrefab: {fileID: 0}
 --- !u!4 &1735036017
 Transform:
   m_ObjectHideFlags: 0
