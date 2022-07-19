@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3381424432124496197}
   m_Layer: 6
   m_Name: RYRadius
-  m_TagString: PlayerWeapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 4
 --- !u!50 &3381424432124496197
 Rigidbody2D:
   serializedVersion: 4

@@ -1,13 +1,12 @@
 # Bomb that clears Screen
 core:
-  name: ryradius
-  prefab: RYRadius
+  name: rydamage
+  prefab: RYDamage
   invuln: true
   turn_on_move: false
   tags: ["playerbullet"]
   depth: -2
   speed: 0
   destroy_offscreen: false
-  destroy_on_impact: false
+  destroy_on_impact: true
   lifetime: 0.1
-  attach_on_impact: rynode

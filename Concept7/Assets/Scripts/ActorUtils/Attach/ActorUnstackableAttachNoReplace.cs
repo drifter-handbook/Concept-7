@@ -8,7 +8,6 @@ public class ActorUnstackableAttachNoReplace : MonoBehaviour, IActorAttachment
     {
         StageActor actor = GetComponent<StageActor>();
         string actorType = GetComponent<StageActor>().ActorType;
-        transform.parent = target.transform;
         // prevent attachment if there are attached actors of same type
         bool destroySelf = false;
         foreach (Transform child in target.transform)
@@ -23,6 +22,10 @@ public class ActorUnstackableAttachNoReplace : MonoBehaviour, IActorAttachment
         if (destroySelf)
         {
             Destroy(gameObject);
+        }
+        else
+        {
+            transform.parent = target.transform;
         }
     }
 }

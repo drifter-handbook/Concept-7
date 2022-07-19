@@ -15,5 +15,5 @@ MonoBehaviour:
   r: 3
   y: 0
   b: 0
-  damage: 15
+  damage: 10
   fireRate: 1

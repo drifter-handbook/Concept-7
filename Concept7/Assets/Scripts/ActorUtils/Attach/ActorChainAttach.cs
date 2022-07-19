@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActorChainAttach : MonoBehaviour, IActorAttachment
+public class ActorChainAttach : MonoBehaviour, IActorAttachment, IActorDestroyHandler
 {
     int MAX_CHAIN = 10;
 
     public void Attach(StageActor target, StageActor source)
     {
         StartCoroutine(Chain());
+    }
+
+    public void HandleDestroy(ActorDestroyReason reason)
+    {
+        transform.parent = null;
     }
 
     IEnumerator Chain()
@@ -33,7 +38,6 @@ public class ActorChainAttach : MonoBehaviour, IActorAttachment
         }
         if (closest != null)
         {
-            Debug.Log($"Found closest: {closest.name} index {closest.Index}");
             nearestIndex = closest.Index;
         }
         if (nearestIndex > MAX_CHAIN)
@@ -43,7 +47,6 @@ public class ActorChainAttach : MonoBehaviour, IActorAttachment
         }
         EngineTestConnectedLaser laser = GetComponent<EngineTestConnectedLaser>();
         laser.Index = nearestIndex + 1;
-        GetComponent<Collider2D>().enabled = true;
         laser.Initialize();
     }
 }

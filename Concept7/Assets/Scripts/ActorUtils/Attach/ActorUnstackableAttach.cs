@@ -15,6 +15,7 @@ public class ActorUnstackableAttach : MonoBehaviour, IActorAttachment
             StageActor ac = child.GetComponent<StageActor>();
             if (ac != null && ac?.ActorType == actorType && ac != actor)
             {
+                child.gameObject.transform.parent = null;
                 Destroy(child.gameObject);
             }
         }

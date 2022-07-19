@@ -8,6 +8,7 @@ core:
   lifetime: 1
   default_run: scale
   actor_limit: 20
+  classification: Beam
 
 timeline_scale:
   - time: 0
@@ -23,4 +24,8 @@ timeline_scale:
   - time: 0.3
     spawn:
       actor: ryradius
+      rel: pos
+  - time: 0.15
+    spawn:
+      actor: rydamage
       rel: pos

@@ -79,6 +79,7 @@ timeline_RY:
     shoot:
       actor: rynode
       emitters: [default]
+      parent: actor
   - time: 0
     shoot:
       actor: rycarrier
