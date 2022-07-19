@@ -1,12 +1,13 @@
 core:
-  name: mray_beamstart
-  prefab: LaserNodeStart
+  name: rynode
+  prefab: RYNode
   invuln: true
   destroy_offscreen: false
   destroy_on_impact: false
   speed: 0
-  lifetime: 6
+  lifetime: 1
   default_run: scale
+  actor_limit: 20
 
 timeline_scale:
   - time: 0
@@ -14,8 +15,12 @@ timeline_scale:
       x: 1
       y: 1
       dur: 0.5
-  - time: 6
+  - time: 0.5
     scale:
       x: 0
       y: 0
       dur: 0.5
+  - time: 0.3
+    spawn:
+      actor: ryradius
+      rel: pos

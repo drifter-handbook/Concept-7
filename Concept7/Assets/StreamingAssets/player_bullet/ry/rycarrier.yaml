@@ -1,0 +1,15 @@
+core:
+  name: rycarrier
+  prefab: RYCarrier
+  invuln: true
+  destroy_offscreen: false
+  destroy_on_impact: true
+  attach_on_impact: rynode
+  default_run: carry
+
+timeline_carry:
+  - time: 0
+    move_at:
+      game_tag: Enemy
+      classification: [Actor]
+      instant: true

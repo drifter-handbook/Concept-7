@@ -74,6 +74,16 @@ timeline_BB:
       parent: actor
       emitters: [default]
 
+timeline_RY:
+  - time: 0
+    shoot:
+      actor: rynode
+      emitters: [default]
+  - time: 0
+    shoot:
+      actor: rycarrier
+      emitters: [default]
+
 timeline_BBB:
   - time: 0
     spawn:
