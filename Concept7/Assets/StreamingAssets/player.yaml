@@ -185,3 +185,10 @@ timeline_YBB:
       dir: 0
       num: 7
       angle: 60
+
+
+timeline_RRB:
+  - time: 0
+    shoot:
+      actor: rrbminion
+      parent: actor

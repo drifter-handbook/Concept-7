@@ -1,0 +1,65 @@
+core:
+  name: rrbminion
+  prefab: RRYMinion
+  invuln: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 0
+  default_run: shoot
+  lifetime: 4.5
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_shoot:
+  - time: 0.9
+    run:
+      timeline: shoot
+
+  - time: 0.10
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: -20
+  - time: 0.20
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: -10
+  - time: 0.30
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 0
+  - time: 0.40
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 10
+  - time: 0.50
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 20
+  # Going Back
+  - time: 0.60
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 10
+  - time: 0.70
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: 0
+  - time: 0.80
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: -10
+  - time: 0.90
+    shoot:
+      actor: playersmallmissile
+      emitters: [default]
+      dir: -20
