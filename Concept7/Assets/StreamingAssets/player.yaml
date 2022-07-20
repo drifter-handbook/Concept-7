@@ -149,6 +149,12 @@ timeline_RYY:
       emitters: [default]
       dir: 0
 
+timeline_RRY:
+  - time: 0
+    shoot:
+      actor: rryminion
+      parent: actor
+
 timeline_YYB:
   - time: 0
     shoot:
