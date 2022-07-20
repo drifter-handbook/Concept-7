@@ -13,18 +13,18 @@ emitter_default:
   y: 0
 
 timeline_orbit:
-  - time: 0
-    orbit:
-      speed: 180
+  # - time: 0
+  #   orbit:
+  #     speed: 180
   - time: 0
     run:
       timeline: shoot
 
 timeline_shoot:
-  - time: 0.25
+  - time: 0.15
     run:
       timeline: shoot
-  - time: 0.25
+  - time: 0.15
     shoot:
       actor: bbbbullet
       dir: 0
