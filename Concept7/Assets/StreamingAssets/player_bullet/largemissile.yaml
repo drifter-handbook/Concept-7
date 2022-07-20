@@ -9,12 +9,5 @@ core:
   speed: 6
   destroy_offscreen: true
   destroy_on_impact: false
-  default_run: travel
   lifetime: 8
   attach_on_impact: destroyprojectile
-
-timeline_travel:
-- time: 0
-  move:
-    dest:
-      - dir: 0
