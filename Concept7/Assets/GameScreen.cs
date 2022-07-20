@@ -25,7 +25,12 @@ public class GameScreen : MonoBehaviour
 
     public TextMeshProUGUI QuitContinueButton;
 
-    public Transform QueueParent;
+
+
+
+    public Transform Pip1;
+    public Transform Pip2;
+    public Transform Pip3;
     public Sprite RImage;
     public Sprite BImage;
     public Sprite YImage;
@@ -49,28 +54,34 @@ public class GameScreen : MonoBehaviour
        }
        
         bool setImage = false;
+        if(!setImage && Pip1.GetComponent<Image>().sprite == EmptyImage){
+            Pip1.GetComponent<Image>().sprite = newElem; 
+            setImage = true;
+        }
 
-       for(int i = 0; !setImage && i<QueueParent.childCount; i++){
-           Image img = QueueParent.GetChild(i).GetComponent<Image>();
-           if(img.sprite == EmptyImage){
-               img.sprite = newElem; 
-               setImage = true;
-           }
-       }
+        if(!setImage && Pip2.GetComponent<Image>().sprite == EmptyImage){
+            Pip2.GetComponent<Image>().sprite = newElem; 
+            setImage = true;
+        }
+
+        if(!setImage && Pip3.GetComponent<Image>().sprite == EmptyImage){
+            Pip3.GetComponent<Image>().sprite = newElem; 
+            setImage = true;
+        }
 
         if(!setImage){
             //shift
-            QueueParent.GetChild(2).GetComponent<Image>().sprite =  QueueParent.GetChild(1).GetComponent<Image>().sprite;
-            QueueParent.GetChild(1).GetComponent<Image>().sprite =  QueueParent.GetChild(0).GetComponent<Image>().sprite;
-            QueueParent.GetChild(0).GetComponent<Image>().sprite =  newElem;
+            Pip3.GetComponent<Image>().sprite =  Pip2.GetComponent<Image>().sprite;
+            Pip2.GetComponent<Image>().sprite =  Pip1.GetComponent<Image>().sprite;
+            Pip1.GetComponent<Image>().sprite =  newElem;
         }
 
     }
 
     public void ClearQueue(){
-        for(int i = 0; i < QueueParent.childCount; i++){
-            QueueParent.GetChild(i).GetComponent<Image>().sprite = EmptyImage;
-        }
+        Pip1.GetComponent<Image>().sprite = EmptyImage;
+         Pip2.GetComponent<Image>().sprite = EmptyImage;
+          Pip3.GetComponent<Image>().sprite = EmptyImage;
     }
 
     public void UpdateLives(){
