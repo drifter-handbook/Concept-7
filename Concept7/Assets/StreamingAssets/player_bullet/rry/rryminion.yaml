@@ -1,0 +1,22 @@
+core:
+  name: rryminion
+  prefab: RRYMinion
+  invuln: true
+  tags: ["bullet"]
+  depth: -1
+  speed: 0
+  default_run: shoot
+  lifetime: 8
+
+emitter_default:
+  x: 0
+  y: 0
+
+timeline_shoot:
+  - time: 0.25
+    run:
+      timeline: shoot
+  - time: 0.25
+    shoot:
+      actor: rrylaser
+      dir: 0
