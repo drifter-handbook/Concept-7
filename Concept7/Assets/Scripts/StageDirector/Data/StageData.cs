@@ -41,7 +41,8 @@ public partial class StageData
         new DetachTimelineEvent(),
         new ReattachTimelineEvent(),
         new ScaleTimelineEvent(),
-        new PlaySoundTimelineEvent()
+        new PlaySoundTimelineEvent(),
+        new CallTimelineEvent()
     };
 
     public static IDeserializer Deserializer;
