@@ -23,6 +23,7 @@ public class ActorOneFrameAttach : MonoBehaviour, IActorAttachment
     IEnumerator DestroyInOneFrame()
     {
         yield return null;
+        yield return null;
         if (gameObject != null)
         {
             Destroy(gameObject);
