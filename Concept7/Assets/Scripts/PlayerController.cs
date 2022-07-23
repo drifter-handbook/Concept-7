@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private MovementController movement;
     [SerializeField] private WeaponController weapon;
 
+    int blockWeapon;
+
     public int PlayerID = -1;
 
     public static PlayerController Instance { get; private set; }
@@ -31,11 +33,27 @@ public class PlayerController : MonoBehaviour
         weapon.Initialize(game.GameScreen);
     }
 
+    public void EnableWeapon()
+    {
+        blockWeapon--;
+    }
+    public void DisableWeapon()
+    {
+        blockWeapon++;
+    }
+
+
     void FixedUpdate()
     {
         if (input.move.pressed || input.move.released)
             movement.ChangeDir(input.dir);
 
+        if (input.action4.pressed)
+            weapon.TryFireAlchemy();
+        if (blockWeapon > 0)
+        {
+            return;
+        }
         if (input.action1.pressed){
             weapon.TryAddAlchemy(WeaponType.PRIMARYRED);
         }
@@ -53,9 +71,6 @@ public class PlayerController : MonoBehaviour
         }
         if (input.action3.down)
             weapon.Fire(WeaponType.PRIMARYBLUE);
-            
-        if (input.action4.pressed)
-            weapon.TryFireAlchemy();
     }
 
     public void SetInput(InputHandler input) {

@@ -128,12 +128,18 @@ timeline_RR:
       sound: rr
 
 timeline_RRR:
+  - time: 0.5
+    call:
+      event: DisableWeapon
   - time: 0
     spawn:
       actor: rrr
       parent: actor
       x: 1
       rel: pos
+  - time: 2.5
+    call:
+      event: EnableWeapon
 
 timeline_YYY:
   - time: 0
@@ -151,9 +157,15 @@ timeline_RYY:
 
 timeline_RRY:
   - time: 0
+    call:
+      event: DisableWeapon
+  - time: 0
     shoot:
       actor: rryminion
       parent: actor
+  - time: 6.5
+    call:
+      event: EnableWeapon
 
 timeline_YYB:
   - time: 0
@@ -189,6 +201,12 @@ timeline_YBB:
 
 timeline_RRB:
   - time: 0
+    call:
+      event: DisableWeapon
+  - time: 0
     shoot:
       actor: rrbminion
       parent: actor
+  - time: 4.5
+    call:
+      event: EnableWeapon

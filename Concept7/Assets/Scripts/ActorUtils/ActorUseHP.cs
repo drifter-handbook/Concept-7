@@ -33,6 +33,17 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 
             dyingAnim = true;
             dyingAnimTimer=0;
+
+            // disable colliders
+            foreach (Collider2D col in GetComponents<Collider2D>())
+            {
+                col.enabled = false;
+            }
+            // call actor destroy handlers when dying anim starts rather than on actual destroy
+            foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
+            {
+                handler.HandleDestroy(ActorDestroyReason.Health);
+            }
         }
 
         if(dyingAnim){
@@ -72,7 +83,6 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
                 if (health <= 0)
                 {
                     PrepareToDie();
-                    
                 }
             }
         }
@@ -88,10 +98,6 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)
         {
-            foreach (var handler in gameObject.GetComponentsInChildren<IActorDestroyHandler>())
-            {
-                handler.HandleDestroy(ActorDestroyReason.Health);
-            }
             Destroy(gameObject);
         }
     }

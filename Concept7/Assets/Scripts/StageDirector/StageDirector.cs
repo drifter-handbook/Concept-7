@@ -20,6 +20,8 @@ public class StageDirector : MonoBehaviour
 
     public Dictionary<string, int> ActorCount = new Dictionary<string, int>();
 
+    public GameObject Stage;
+
     // Singleton is a good design pattern, I swear
     public static StageDirector Instance { get; private set; }
     void Awake()
@@ -130,11 +132,19 @@ public class StageDirector : MonoBehaviour
     public static GameObject StartStage(int i)
     {
         StageData.Actor actor = Instance.Data.Actors[Instance.Data.Stages[i].Actor];
-        GameObject go = Spawn(actor.Name, Vector2.zero, 0f);
-        go.GetComponent<StageActor>().FinishSpawn(null);
-        return go;
+        Instance.Stage = Spawn(actor.Name, Vector2.zero, 0f);
+        Instance.Stage.GetComponent<StageActor>().FinishSpawn(null);
+        return Instance.Stage;
     }
 
+    public static bool IsStageFinished()
+    {
+        if (Instance.Stage == null || Instance.Stage.GetComponent<StageActor>().RunningTimelines.Count == 0)
+        {
+            return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
+        }
+        return false;
+    }
 
     public static GameObject FindCurrentActor(string actorType)
     {

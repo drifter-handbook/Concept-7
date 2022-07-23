@@ -2,13 +2,27 @@ core:
   name: rrylaser
   prefab: RRYBeam
   copy_from: [baseprimary]
-  speed: 18
+  speed: 0
   turn_on_move: true
   default_run: move
+  destroy_offscreen: false
+  destroy_on_impact: false
+  lifetime: 1
 
 timeline_move:
   - time: 0
+    scale:
+      y: 0
+      dur: 0
+  - time: 0
+    scale:
+      y: 1
+      dur: 0.2
+  - time: 0
     move_at:
       game_tag: Enemy
-      classification: [Bullet, Missile]
-
+      classification: [Actor]
+  - time: 0.8
+    scale:
+      y: 0
+      dur: 0.2
