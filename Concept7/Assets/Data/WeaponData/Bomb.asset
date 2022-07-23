@@ -17,3 +17,6 @@ MonoBehaviour:
   b: 1
   damage: 1
   fireRate: 0.5
+  attackName: Bomb
+  attackDesc: ???
+  icon: {fileID: 21300000, guid: 0662771d1fa43bf49ba01cbff8bec422, type: 3}

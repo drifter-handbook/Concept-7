@@ -17,3 +17,6 @@ MonoBehaviour:
   b: 0
   damage: 1000
   fireRate: 0.5
+  attackName: Long Beam
+  attackDesc: ???
+  icon: {fileID: 0}

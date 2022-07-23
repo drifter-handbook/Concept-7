@@ -25,9 +25,6 @@ public class GameScreen : MonoBehaviour
 
     public TextMeshProUGUI QuitContinueButton;
 
-
-
-
     public Transform Pip1;
     public Transform Pip2;
     public Transform Pip3;
@@ -36,11 +33,26 @@ public class GameScreen : MonoBehaviour
     public Sprite YImage;
     public Sprite EmptyImage;
 
+
+    public Image AlchemyMoveIcon;
+    public TextMeshProUGUI AlchemyMoveName;
+
     public GameObject SettingsPanel;
 
     void Update()
     {
         Time.timeScale = (PauseScreen.activeSelf || PauseScreen.activeInHierarchy) ? 0f : 1f;
+    }
+
+    public void UpdateAlchemyText(WeaponData weaponData){
+        if(weaponData == null){
+            AlchemyMoveName.text = "";
+            AlchemyMoveIcon.color = Color.clear;
+            return;
+        }
+        AlchemyMoveName.text = weaponData.attackName;
+        AlchemyMoveIcon.sprite = weaponData.icon;
+        AlchemyMoveIcon.color = Color.white;
     }
 
 

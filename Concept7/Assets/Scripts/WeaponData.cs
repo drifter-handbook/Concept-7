@@ -14,7 +14,10 @@ public class WeaponData : ScriptableObject
 
     public int damage = 1;
     public float fireRate = 0.5f;
-    
+    public string attackName = "???";
+	public string attackDesc = "???";
+	public Sprite icon = null;
+
 }
 
 public enum WeaponType {

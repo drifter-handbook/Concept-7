@@ -17,3 +17,6 @@ MonoBehaviour:
   b: 1
   damage: 10
   fireRate: 1
+  attackName: Splatter
+  attackDesc: ???
+  icon: {fileID: 1515908846, guid: 05557d04af3861749a0d4e14f5393e7b, type: 3}

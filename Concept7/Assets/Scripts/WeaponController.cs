@@ -66,13 +66,56 @@ public class WeaponController : MonoBehaviour
         }
         screen.AddQueueElement(type);//update the UI
         WeaponType[] alchemyArray = alchemyQueue.ToArray();
-        for(int i = 0; i < pips.Length; i++)
+        for(int i = 0; i < pips.Length && i < alchemyArray.Length; i++)
             pips[i].SetInteger("Color",(int)alchemyArray[i]);
+        
+        //update alchemy queue with new queued move's name
+        screen.UpdateAlchemyText(TryGetAlchemyCombo());
     }
 
-    public void TryFireAlchemy() {
+    public WeaponData TryGetAlchemyCombo() {
+        int r = 0;
+        int y = 0;
+        int b = 0;
 
-        // TODO: This is where we would add the ammo system
+        while (alchemyQueue.Count > 0) //TODO have a group discussion on what we want to do when the list fills up
+        {
+            WeaponType type = alchemyQueue.Dequeue();
+
+            switch(type)
+            {
+                case WeaponType.PRIMARYRED:
+                    r++;
+                    break;
+                case WeaponType.PRIMARYYELLOW:
+                    y++;
+                    break;
+                case WeaponType.PRIMARYBLUE:
+                    b++;
+                    break;
+                default:
+                    break;
+            }
+             // TODO: This is where we would add the ammo system
+        }
+        StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
+        string timeline = StageDirector.RYBStr(r, y, b);
+        if (actor != null && !string.IsNullOrWhiteSpace(timeline))
+        {
+            if (actor.Actor.Timelines.ContainsKey(timeline))
+            {
+                //return timeline.GetComponent<>
+            }
+            else
+            {
+                Debug.Log($"Warning: No weapon with timeline {timeline} found on player.");
+            }
+        }
+        return null;
+    }
+
+
+    public void TryFireAlchemy() {
 
         int r = 0;
         int y = 0;
@@ -96,7 +139,7 @@ public class WeaponController : MonoBehaviour
                 default:
                     break;
             }
-            
+             // TODO: This is where we would add the ammo system
         }
 
         StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
