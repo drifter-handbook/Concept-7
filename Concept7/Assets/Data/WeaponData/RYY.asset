@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
   m_Name: RYY
   m_EditorClassIdentifier: 
-  r: 3
-  y: 0
+  r: 1
+  y: 2
   b: 0
   damage: 15
   fireRate: 1
+  attackName: ???
+  attackDesc: ???
+  icon: {fileID: 0}
