@@ -33,6 +33,8 @@ public class GameScreen : MonoBehaviour
     public Sprite YImage;
     public Sprite EmptyImage;
 
+    public List<WeaponData> weaponInfos;
+
 
     public Image AlchemyMoveIcon;
     public TextMeshProUGUI AlchemyMoveName;
@@ -44,13 +46,23 @@ public class GameScreen : MonoBehaviour
         Time.timeScale = (PauseScreen.activeSelf || PauseScreen.activeInHierarchy) ? 0f : 1f;
     }
 
-    public void UpdateAlchemyText(WeaponData weaponData){
+    public void UpdateAlchemyText(int r, int y, int b){
        
+        WeaponData weaponData = null;
+        foreach(WeaponData weaponInfo in weaponInfos){
+            if(weaponInfo.r == r && weaponInfo.y == y && weaponInfo.b == b){
+                weaponData = weaponInfo;
+            }
+        }
+
+
+
         if(weaponData == null){
             AlchemyMoveName.text = "";
             AlchemyMoveIcon.color = Color.clear;
             return;
         }
+        
 
         if(weaponData.r > 0 || weaponData.y > 0 || weaponData.b > 0){
             AlchemyMoveName.text = weaponData.attackName;

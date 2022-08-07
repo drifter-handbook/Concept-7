@@ -4433,7 +4433,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EVICERATE
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d86c1225c847a1498f37d5a1c43b272, type: 2}
   m_sharedMaterial: {fileID: 4584467314711613000, guid: 1d86c1225c847a1498f37d5a1c43b272, type: 2}
@@ -4460,7 +4460,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.2
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5664,6 +5664,26 @@ MonoBehaviour:
   BImage: {fileID: 21300000, guid: a7d747c82f90fe34eb8a5625c193b95f, type: 3}
   YImage: {fileID: 21300000, guid: de2f3217d04dc7f47bfc0a04c2b839f4, type: 3}
   EmptyImage: {fileID: 21300000, guid: a2f8d45caf962b249982855e657828fb, type: 3}
+  weaponInfos:
+  - {fileID: 11400000, guid: ee4d7c76666ec384bb7287a0ad2ea0e7, type: 2}
+  - {fileID: 11400000, guid: 0a48aa861938eef4b833852cac9c9a5e, type: 2}
+  - {fileID: 11400000, guid: e4c96d6b5bf132344870d6c649e5c101, type: 2}
+  - {fileID: 11400000, guid: 850484233839f8b458de69de08a1f2e0, type: 2}
+  - {fileID: 11400000, guid: ab82999a8515ae64f8248a60a75da79a, type: 2}
+  - {fileID: 11400000, guid: 78ab3de7eb43124428d9387c2b8c27ce, type: 2}
+  - {fileID: 11400000, guid: a268a94f6efb72a49a97b25795e2c836, type: 2}
+  - {fileID: 11400000, guid: 83a3c9e9c3888f94d9453f31b8efbba3, type: 2}
+  - {fileID: 11400000, guid: d65f73f28a7d59f4088cfda24835b463, type: 2}
+  - {fileID: 11400000, guid: 5c842f774b31dce449b6b2b6c5f1b571, type: 2}
+  - {fileID: 11400000, guid: e012b859da5e8bd46ac113783e890ec6, type: 2}
+  - {fileID: 11400000, guid: 02b7eb7bb9239f34d89cb82e2a5eb4b3, type: 2}
+  - {fileID: 11400000, guid: e5ca5f24f1fb56c49a2fa4cd7bfe2a37, type: 2}
+  - {fileID: 11400000, guid: 849caf6b3f87e2a4c8d08da0e3c1a04f, type: 2}
+  - {fileID: 11400000, guid: 2107fa772a0d13540b23bf0ac7520296, type: 2}
+  - {fileID: 11400000, guid: fb01d3089b20574449de68ed08b171cf, type: 2}
+  - {fileID: 11400000, guid: a1f1c63faadad05488898529a7354f02, type: 2}
+  - {fileID: 11400000, guid: 374208aa52c62c2439d4d532d02359b3, type: 2}
+  - {fileID: 11400000, guid: 8f5dab47f6bf7bb46a846ac10b6b1264, type: 2}
   AlchemyMoveIcon: {fileID: 1630009473}
   AlchemyMoveName: {fileID: 637448266}
   SettingsPanel: {fileID: 509093180}
@@ -8403,7 +8423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

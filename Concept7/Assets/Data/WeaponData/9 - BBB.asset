@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   r: 0
   y: 0
-  b: 2
+  b: 3
   damage: 8
   fireRate: 1
   attackName: Indigo Flares

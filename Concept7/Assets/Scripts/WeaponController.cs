@@ -60,8 +60,6 @@ public class WeaponController : MonoBehaviour
 
     public void TryAddAlchemy(WeaponType type) {
 
-        UnityEngine.Debug.Log("attack Added");
-
         alchemyQueue.Enqueue(type);
         while (alchemyQueue.Count > MaxComboLength) {
             //TODO have a group discussion on what we want to do when the list fills up
@@ -73,8 +71,34 @@ public class WeaponController : MonoBehaviour
             pips[i].SetInteger("Color",(int)alchemyArray[i]);
         
         //update alchemy queue with new queued move's name
-        screen.UpdateAlchemyText(TryGetAlchemyCombo());
+
+        int r = 0;
+        int y = 0;
+        int b = 0;
+
+        foreach (WeaponType letter in alchemyQueue) 
+        {
+            switch(letter)
+            {
+                case WeaponType.PRIMARYRED:
+                    r++;
+                    break;
+                case WeaponType.PRIMARYYELLOW:
+                    y++;
+                    break;
+                case WeaponType.PRIMARYBLUE:
+                    b++;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        screen.UpdateAlchemyText(r,y,b);
     }
+
+
+
 
     public WeaponData TryGetAlchemyCombo() {
         int r = 0;
@@ -102,7 +126,7 @@ public class WeaponController : MonoBehaviour
         }
         StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
         string timeline = StageDirector.RYBStr(r, y, b);
-        UnityEngine.Debug.Log("Lookup string is " + timeline);
+
         if (actor != null && !string.IsNullOrWhiteSpace(timeline))
         {
             if (actor.Actor.Timelines.ContainsKey(timeline))
@@ -144,6 +168,7 @@ public class WeaponController : MonoBehaviour
                     break;
             }
              // TODO: This is where we would add the ammo system
+             
         }
 
         StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
@@ -172,6 +197,6 @@ public class WeaponController : MonoBehaviour
             alchemyQueue.Enqueue(WeaponType.DEFAULT);
             pips[i].SetInteger("Color",-1);
         }
-
+        screen.UpdateAlchemyText(0,0,0);
     }
 }
