@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
-  m_Name: Firework
+  m_Name: 4 - Y
   m_EditorClassIdentifier: 
   r: 0
-  y: 3
+  y: 1
   b: 0
-  damage: 1
-  fireRate: 0.5
+  damage: 10
+  fireRate: 1
+  attackName: Arc
+  attackDesc: Fires a short range arc which launches a burst of bullets from each
+    enemy hit
+  icon: {fileID: 2015189186, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}

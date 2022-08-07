@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
-  m_Name: BluePaintSplatter
+  m_Name: 12 - BBR
   m_EditorClassIdentifier: 
-  r: 0
+  r: 1
   y: 0
-  b: 1
-  damage: 10
-  fireRate: 1
-  attackName: Splatter
-  attackDesc: ???
-  icon: {fileID: 1515908846, guid: 05557d04af3861749a0d4e14f5393e7b, type: 3}
+  b: 2
+  damage: 6
+  fireRate: 2
+  attackName: Decoy
+  attackDesc: Fires a slow moving missile that clears enemy bullets that get near
+    it
+  icon: {fileID: -1184672474, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}

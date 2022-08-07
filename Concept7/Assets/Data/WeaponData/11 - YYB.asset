@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
-  m_Name: RY
+  m_Name: 11 - YYB
   m_EditorClassIdentifier: 
-  r: 1
-  y: 1
-  b: 0
-  damage: 10
+  r: 0
+  y: 2
+  b: 1
+  damage: 0
   fireRate: 1
-  attackName: ???
-  attackDesc: ???
-  icon: {fileID: 0}
+  attackName: Stealth Umbrella
+  attackDesc: Fires an bullet that stealths through enemies then reflects all enemy
+    bullets within its radius
+  icon: {fileID: 1262934524, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}

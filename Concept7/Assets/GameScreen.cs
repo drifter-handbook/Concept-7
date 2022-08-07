@@ -45,14 +45,18 @@ public class GameScreen : MonoBehaviour
     }
 
     public void UpdateAlchemyText(WeaponData weaponData){
+       
         if(weaponData == null){
             AlchemyMoveName.text = "";
             AlchemyMoveIcon.color = Color.clear;
             return;
         }
-        AlchemyMoveName.text = weaponData.attackName;
-        AlchemyMoveIcon.sprite = weaponData.icon;
-        AlchemyMoveIcon.color = Color.white;
+
+        if(weaponData.r > 0 || weaponData.y > 0 || weaponData.b > 0){
+            AlchemyMoveName.text = weaponData.attackName;
+            AlchemyMoveIcon.sprite = weaponData.icon;
+            AlchemyMoveIcon.color = Color.white;
+        }
     }
 
 

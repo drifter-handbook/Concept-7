@@ -59,6 +59,9 @@ public class WeaponController : MonoBehaviour
     }
 
     public void TryAddAlchemy(WeaponType type) {
+
+        UnityEngine.Debug.Log("attack Added");
+
         alchemyQueue.Enqueue(type);
         while (alchemyQueue.Count > MaxComboLength) {
             //TODO have a group discussion on what we want to do when the list fills up
@@ -78,11 +81,10 @@ public class WeaponController : MonoBehaviour
         int y = 0;
         int b = 0;
 
-        while (alchemyQueue.Count > 0) //TODO have a group discussion on what we want to do when the list fills up
+        foreach (WeaponType letter in alchemyQueue) 
+        //TODO have a group discussion on what we want to do when the list fills up
         {
-            WeaponType type = alchemyQueue.Dequeue();
-
-            switch(type)
+            switch(letter)
             {
                 case WeaponType.PRIMARYRED:
                     r++;
@@ -100,11 +102,13 @@ public class WeaponController : MonoBehaviour
         }
         StageActor actor = StageDirector.FindCurrentActor("player").GetComponent<StageActor>();
         string timeline = StageDirector.RYBStr(r, y, b);
+        UnityEngine.Debug.Log("Lookup string is " + timeline);
         if (actor != null && !string.IsNullOrWhiteSpace(timeline))
         {
             if (actor.Actor.Timelines.ContainsKey(timeline))
             {
-                //return timeline.GetComponent<>
+                UnityEngine.Debug.Log("Found is " + StageDirector.FindWeapon(timeline)?.PrefabObj?.GetComponent<PlayerWeapon>()?.weaponData.attackName);
+                 return StageDirector.FindWeapon(timeline)?.PrefabObj?.GetComponent<PlayerWeapon>()?.weaponData;
             }
             else
             {

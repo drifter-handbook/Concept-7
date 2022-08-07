@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
-  m_Name: Bomb
+  m_Name: 10 - RYY
   m_EditorClassIdentifier: 
   r: 1
-  y: 1
-  b: 1
-  damage: 1
-  fireRate: 0.5
-  attackName: Bomb
-  attackDesc: ???
-  icon: {fileID: 21300000, guid: 0662771d1fa43bf49ba01cbff8bec422, type: 3}
+  y: 2
+  b: 0
+  damage: 15
+  fireRate: 1
+  attackName: Stealth Shot
+  attackDesc: Fires an bullet that stealths through enemies then explodes
+  icon: {fileID: 88214776, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}

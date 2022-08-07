@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
-  m_Name: RRR
+  m_Name: 1 - R
   m_EditorClassIdentifier: 
-  r: 3
+  r: 1
   y: 0
   b: 0
-  damage: 8
+  damage: 10
   fireRate: 1
+  attackName: Piercing Shot
+  attackDesc: Fires a forward line of paint that creates a piercing bullet on-kill
+  icon: {fileID: -471660054, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}

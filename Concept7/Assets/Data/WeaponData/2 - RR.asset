@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
-  m_Name: RRY
+  m_Name: 2 - RR
   m_EditorClassIdentifier: 
   r: 2
-  y: 1
+  y: 0
   b: 0
-  damage: 3
+  damage: 10
   fireRate: 1
+  attackName: Explosive Dust
+  attackDesc: 'For a short while, enemies will explode on-kill '
+  icon: {fileID: -1588864085, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}

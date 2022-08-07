@@ -94,7 +94,7 @@ public partial class StageData
     {
         // load actor core fields
         Dictionary<string, object> actorData = Deserialize<Dictionary<string, object>>(null, path, File.ReadAllText(path));
-        Debug.Log($"Parsing {path}");
+        //Debug.Log($"Parsing {path}");  //shhhhhhhh
         Actor actor = Deserialize<Actor>(null, $"{path} core section", Serializer.Serialize(actorData["core"]));
         actor.File = path;
         if (string.IsNullOrEmpty(actor.Name))

@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76a3f617ac110fd4fbf1a7415e60eec2, type: 3}
-  m_Name: SmallMissile
+  m_Name: 15 - RRB
   m_EditorClassIdentifier: 
-  r: 1
+  r: 2
   y: 0
-  b: 2
-  damage: 6
-  fireRate: 2
+  b: 1
+  damage: 8
+  fireRate: 1
+  attackName: Missiles
+  attackDesc: Fires a spread of missiles (basic attacks cannot be used during this
+    time)
+  icon: {fileID: 1855633979, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}
