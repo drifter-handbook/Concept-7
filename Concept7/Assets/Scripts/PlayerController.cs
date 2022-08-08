@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public int PlayerID = -1;
 
-    public float PauseMenuReopenDelay = 0;
-    public float PauseMenuCloseDelay = 0;
+    Coroutine unpauseCoroutine;
 
     public static PlayerController Instance { get; private set; }
     void Awake()
@@ -48,10 +47,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if(!game.GameScreen.PauseScreen.activeSelf){
-             if (input.move.pressed || input.move.released)
-            movement.ChangeDir(input.dir);
+        if (!Game.Instance.Paused)
+        {
+            if (input.move.pressed || input.move.released)
+                movement.ChangeDir(input.dir);
 
             if (input.action4.pressed)
                 weapon.TryFireAlchemy();
@@ -59,47 +58,51 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
-            if (input.action1.pressed){
+            if (input.action1.pressed)
+            {
                 weapon.TryAddAlchemy(WeaponType.PRIMARYRED);
             }
             if (input.action1.down)
                 weapon.Fire(WeaponType.PRIMARYRED);
 
-            if (input.action2.pressed){
+            if (input.action2.pressed)
+            {
                 weapon.TryAddAlchemy(WeaponType.PRIMARYYELLOW);
             }
             if (input.action2.down)
                 weapon.Fire(WeaponType.PRIMARYYELLOW);
 
-            if (input.action3.pressed){
+            if (input.action3.pressed)
+            {
                 weapon.TryAddAlchemy(WeaponType.PRIMARYBLUE);
             }
             if (input.action3.down)
                 weapon.Fire(WeaponType.PRIMARYBLUE);
-
-            if (input.primary.pressed || input.action5.pressed){
-                if(PauseMenuReopenDelay <= 0){
-                    game.GameScreen.ShowPauseScreen();
-                    PauseMenuCloseDelay = 0.01f;
-                }
-                
-            }
         }
     }
 
     void Update()
     {
-        PauseMenuReopenDelay -= Time.deltaTime;
-        PauseMenuCloseDelay -= Time.deltaTime;
-
-        if (input.primary.pressed || input.action5.pressed){
-            if(game.GameScreen.PauseScreen.activeSelf && PauseMenuCloseDelay <= 0){
-                 game.GameScreen.HidePauseScreen();
-                PauseMenuReopenDelay = 0.1f;
-            }
-           
+        if (input.pause.pressed && unpauseCoroutine == null)
+        {
+            input.ResetPause();
+            Game.Instance.Paused = true;
+            game.GameScreen.ShowPauseScreen();
+            unpauseCoroutine = StartCoroutine(WaitForUnpause());
         }
-        
+    }
+
+    IEnumerator WaitForUnpause()
+    {
+        yield return null;
+        while (!input.pause.pressed) {
+            yield return null;
+        }
+        input.ResetPause();
+        Game.Instance.Paused = false;
+        game.GameScreen.HidePauseScreen();
+        yield return null;
+        unpauseCoroutine = null;
     }
 
     public void SetInput(InputHandler input) {

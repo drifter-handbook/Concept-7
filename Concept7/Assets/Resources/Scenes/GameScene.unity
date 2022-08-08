@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Time Slowed.
+  m_text: Game Paused.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d86c1225c847a1498f37d5a1c43b272, type: 2}
   m_sharedMaterial: {fileID: 4584467314711613000, guid: 1d86c1225c847a1498f37d5a1c43b272, type: 2}
@@ -11815,6 +11815,7 @@ MonoBehaviour:
   SFXPrefab: {fileID: 6635459006954566471, guid: 3878528ebd2ce1a489d19833e9759a89, type: 3}
   LevelID: 0
   FlyoutTextPrefab: {fileID: 7064328460384311273, guid: d13ac74dd93f3e34c8ac493db7628bc1, type: 3}
+  Paused: 0
 --- !u!4 &2109804104
 Transform:
   m_ObjectHideFlags: 0

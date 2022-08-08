@@ -43,7 +43,6 @@ public class GameScreen : MonoBehaviour
 
     void Update()
     {
-        Time.timeScale = (PauseScreen.activeSelf || PauseScreen.activeInHierarchy) ? 0.1f : 1f;
     }
 
     public void UpdateAlchemyText(int r, int y, int b){

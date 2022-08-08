@@ -40,6 +40,8 @@ public class Game : MonoBehaviour
 
     public GameObject FlyoutTextPrefab;
 
+    public bool Paused;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -76,7 +78,8 @@ public class Game : MonoBehaviour
     }
 
     public void Update(){
-        if(gameState == GameState.ENDED) return;
+        Time.timeScale = Paused ? 0f : 1f;
+        if (gameState == GameState.ENDED) return;
         if(gameState == GameState.PLAYING){
             TimeElapsed += Time.deltaTime;
         }

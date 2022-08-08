@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Action5",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "a2b0a5bc-598c-44f4-9329-344c50c93c26",
                     "expectedControlType": "Button",
@@ -203,7 +203,7 @@
                 {
                     "name": "",
                     "id": "573e3796-9e59-4f45-8d39-8e19d5dc7700",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/numpadEnter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -229,7 +229,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action5",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22abd405-d25d-49ff-8bc0-2ca1b1221d29",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
