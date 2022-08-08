@@ -170,6 +170,7 @@ public class GameScreen : MonoBehaviour
     }
 
     public void HidePauseScreen(){
+        Game.Instance.Paused = false;
         PauseScreen.SetActive(false);
     }
 }

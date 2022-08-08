@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     Coroutine unpauseCoroutine;
 
+    bool pausePressed;
+
     public static PlayerController Instance { get; private set; }
     void Awake()
     {
@@ -83,9 +85,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (input.pause.pressed && unpauseCoroutine == null)
+        pausePressed = input.pause.pressed;
+        if (pausePressed && unpauseCoroutine == null)
         {
-            input.ResetPause();
             Game.Instance.Paused = true;
             game.GameScreen.ShowPauseScreen();
             unpauseCoroutine = StartCoroutine(WaitForUnpause());
@@ -95,10 +97,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitForUnpause()
     {
         yield return null;
-        while (!input.pause.pressed) {
+        while (!pausePressed && Game.Instance.Paused) {
             yield return null;
         }
-        input.ResetPause();
         Game.Instance.Paused = false;
         game.GameScreen.HidePauseScreen();
         yield return null;

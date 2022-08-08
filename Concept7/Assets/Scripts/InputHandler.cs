@@ -32,11 +32,6 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
-        
-    }
-
-    public void ResetPause()
-    {
         pause.Reset();
     }
 
