@@ -128,6 +128,14 @@ public class GameScreen : MonoBehaviour
         SettingsPanel.SetActive(!SettingsPanel.activeSelf);
     }
 
+    public void QuitToMenu(){
+
+    }
+
+    public void ShowComboScreen(){
+        
+    }
+
     public void ShowEndScreen(bool wasWin){
         List<GameObject> objsToEnable = DefeatUIObjs;
         List<GameObject> objsToDisable = VictoryUIObjs;
