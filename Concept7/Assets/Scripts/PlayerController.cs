@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
 
     public int PlayerID = -1;
 
+    public float PauseMenuReopenDelay = 0;
+    public float PauseMenuCloseDelay = 0;
+
     public static PlayerController Instance { get; private set; }
     void Awake()
     {
@@ -45,32 +48,58 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (input.move.pressed || input.move.released)
+
+        if(!game.GameScreen.PauseScreen.activeSelf){
+             if (input.move.pressed || input.move.released)
             movement.ChangeDir(input.dir);
 
-        if (input.action4.pressed)
-            weapon.TryFireAlchemy();
-        if (blockWeapon > 0)
-        {
-            return;
-        }
-        if (input.action1.pressed){
-            weapon.TryAddAlchemy(WeaponType.PRIMARYRED);
-        }
-        if (input.action1.down)
-            weapon.Fire(WeaponType.PRIMARYRED);
+            if (input.action4.pressed)
+                weapon.TryFireAlchemy();
+            if (blockWeapon > 0)
+            {
+                return;
+            }
+            if (input.action1.pressed){
+                weapon.TryAddAlchemy(WeaponType.PRIMARYRED);
+            }
+            if (input.action1.down)
+                weapon.Fire(WeaponType.PRIMARYRED);
 
-        if (input.action2.pressed){
-            weapon.TryAddAlchemy(WeaponType.PRIMARYYELLOW);
-        }
-        if (input.action2.down)
-            weapon.Fire(WeaponType.PRIMARYYELLOW);
+            if (input.action2.pressed){
+                weapon.TryAddAlchemy(WeaponType.PRIMARYYELLOW);
+            }
+            if (input.action2.down)
+                weapon.Fire(WeaponType.PRIMARYYELLOW);
 
-        if (input.action3.pressed){
-            weapon.TryAddAlchemy(WeaponType.PRIMARYBLUE);
+            if (input.action3.pressed){
+                weapon.TryAddAlchemy(WeaponType.PRIMARYBLUE);
+            }
+            if (input.action3.down)
+                weapon.Fire(WeaponType.PRIMARYBLUE);
+
+            if (input.primary.pressed || input.action5.pressed){
+                if(PauseMenuReopenDelay <= 0){
+                    game.GameScreen.ShowPauseScreen();
+                    PauseMenuCloseDelay = 0.01f;
+                }
+                
+            }
         }
-        if (input.action3.down)
-            weapon.Fire(WeaponType.PRIMARYBLUE);
+    }
+
+    void Update()
+    {
+        PauseMenuReopenDelay -= Time.deltaTime;
+        PauseMenuCloseDelay -= Time.deltaTime;
+
+        if (input.primary.pressed || input.action5.pressed){
+            if(game.GameScreen.PauseScreen.activeSelf && PauseMenuCloseDelay <= 0){
+                 game.GameScreen.HidePauseScreen();
+                PauseMenuReopenDelay = 0.1f;
+            }
+           
+        }
+        
     }
 
     public void SetInput(InputHandler input) {

@@ -23,6 +23,8 @@ public class InputHandler : MonoBehaviour
     public Button action3 => m_action3;
     private Button m_action4;
     public Button action4 => m_action4;
+    private Button m_action5;
+    public Button action5=> m_action5;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -34,6 +36,7 @@ public class InputHandler : MonoBehaviour
         m_action2.Reset();
         m_action3.Reset();
         m_action4.Reset();
+        m_action5.Reset();
     }
 
     public void Move(InputAction.CallbackContext ctx) {
@@ -65,6 +68,7 @@ public class InputHandler : MonoBehaviour
         m_action4.Set(ctx);
     }
 }
+
 
 public struct Button {
     public bool down, released, pressed;

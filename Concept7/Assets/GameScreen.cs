@@ -43,7 +43,7 @@ public class GameScreen : MonoBehaviour
 
     void Update()
     {
-        Time.timeScale = (PauseScreen.activeSelf || PauseScreen.activeInHierarchy) ? 0f : 1f;
+        Time.timeScale = (PauseScreen.activeSelf || PauseScreen.activeInHierarchy) ? 0.1f : 1f;
     }
 
     public void UpdateAlchemyText(int r, int y, int b){
@@ -156,5 +156,13 @@ public class GameScreen : MonoBehaviour
             objToDisable.SetActive(false);
         }
 
+    }
+
+    public void ShowPauseScreen(){
+        PauseScreen.SetActive(true);
+    }
+
+    public void HidePauseScreen(){
+        PauseScreen.SetActive(false);
     }
 }
