@@ -12,6 +12,7 @@ public class GameScreen : MonoBehaviour
     public Transform LifebarParent;
 
     public GameObject PauseScreen;
+    public GameObject ComboScreen;
     public GameObject EndScreen;
 
     public List<GameObject> VictoryUIObjs = new List<GameObject>();
@@ -125,14 +126,15 @@ public class GameScreen : MonoBehaviour
 
     public void ToggleSettings(){
         SettingsPanel.SetActive(!SettingsPanel.activeSelf);
+        ComboScreen.SetActive(false);
     }
 
     public void QuitToMenu(){
 
     }
 
-    public void ShowComboScreen(){
-        
+    public void ToggleComboScreen(){
+        ComboScreen.SetActive(!ComboScreen.activeSelf);
     }
 
     public void ShowEndScreen(bool wasWin){
@@ -170,6 +172,8 @@ public class GameScreen : MonoBehaviour
     }
 
     public void HidePauseScreen(){
+        SettingsPanel.SetActive(false);
+        ComboScreen.SetActive(false);
         Game.Instance.Paused = false;
         PauseScreen.SetActive(false);
     }
