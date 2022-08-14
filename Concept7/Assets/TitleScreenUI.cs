@@ -17,6 +17,7 @@ public class TitleScreenUI : MonoBehaviour
 
    public GameObject SettingsPanel;
    public GameObject TitleImagePanel;
+   public GameObject ComboPanel;
    public LevelSelectGridPanel LevelSelectGridPanel;
 
    public TextMeshProUGUI ChapterStoryText;
@@ -30,6 +31,7 @@ public class TitleScreenUI : MonoBehaviour
         TITLE_SCREEN,
         GRID,
         CHAPTER_LAYOUT,
+        COMBO,
     }
 
    void Start(){
@@ -78,6 +80,12 @@ public class TitleScreenUI : MonoBehaviour
    }
 
     public void ToGrid(){
+
+
+        SceneManager.LoadScene("GameScene");
+        return; //currently only supporting one level
+
+
         anim.SetTrigger("ToGrid");
         SettingsButton.SetActive(true);
         ExitButton.SetActive(true);
@@ -94,6 +102,9 @@ public class TitleScreenUI : MonoBehaviour
    }
 
    public void ToChapter(int chapterNum){
+        SceneManager.LoadScene("GameScene");
+        return; //currently only supporting one level
+
         state = TitleScreenState.CHAPTER_LAYOUT;
         anim.SetTrigger("ToChapterScreen");
         List<LevelUIInfo> levels = new List<LevelUIInfo>();
@@ -124,12 +135,24 @@ public class TitleScreenUI : MonoBehaviour
 
    public void BackButtonPressed(){
         switch(state){
+            case TitleScreenState.COMBO:
+                ToggleComboPanel();
+                break;
             case TitleScreenState.CHAPTER_LAYOUT:
             case TitleScreenState.GRID:
                 ToTitle();
             break;
             default: break;
         }
+   }
+
+   public void ToggleComboPanel(){
+   
+    ComboPanel.SetActive(!ComboPanel.activeSelf);
+     state = ComboPanel.activeSelf ? TitleScreenState.COMBO : TitleScreenState.TITLE_SCREEN;
+     SettingsButton.SetActive(false);
+     ExitButton.SetActive(false);
+     BackButton.SetActive(true);
    }
 
    public void ExitButtonPressed(){
