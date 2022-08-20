@@ -83,9 +83,11 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
                     if (damage == 0)
                     {
                         // Debug.Log($"Warning: GameObject {other} of actor {actor.ActorType} deals no damage: {other.GetComponent<PlayerWeapon>()?.weaponData.damage}");
+                    } else {
+                        Game.Instance.PlaySFX("impact", 0.1f, UnityEngine.Random.Range(0.5f, 1));
                     }
                     health -= (float?)other.GetComponent<PlayerWeapon>()?.weaponData.damage ?? 0;
-                    Game.Instance.PlaySFX("impact", 0.1f, UnityEngine.Random.Range(0.5f, 1));
+                    
                 }
                 if (health <= 0)
                 {
