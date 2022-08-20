@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameScreen : MonoBehaviour
 {
@@ -176,5 +177,10 @@ public class GameScreen : MonoBehaviour
         ComboScreen.SetActive(false);
         Game.Instance.Paused = false;
         PauseScreen.SetActive(false);
+    }
+
+    public void Reload(){
+        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameScene");
     }
 }

@@ -8,6 +8,7 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 {
     public int Order => 2;
 
+    public float startingHealth;
     public float health;
     bool ReadyToDie = false;
     public string DeathNoise = "enemy_death_med";
@@ -18,6 +19,7 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
     public void Initialize(StageData.Actor actor)
     {
         health = actor.Hp ?? 1;
+        startingHealth = health;
     }
 
     void Update()
@@ -27,6 +29,11 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
             Game.Instance.PlaySFX(DeathNoise, 1f, UnityEngine.Random.Range(0.5f, 1));
             Game.Instance.ShowFlyoutText("DEATH", transform.position);
             ParticleSystem deathJuice = transform.GetComponentInChildren<ParticleSystem>();
+            deathJuice.transform.SetParent(null);
+            if(deathJuice.gameObject.GetComponent<KillAfterSeconds>() != null){
+                deathJuice.gameObject.GetComponent<KillAfterSeconds>().timerStart = true;
+            }
+            
             if(deathJuice != null){
                 deathJuice.Play();
             }
@@ -95,6 +102,7 @@ public class ActorUseHP : MonoBehaviour, IActorCollisionHandler
 
     void Die()
     {
+        Game.Instance.EnemyKilled((int)startingHealth);
         StageActor actor = GetComponent<StageActor>();
         if (gameObject != null && actor != null)
         {

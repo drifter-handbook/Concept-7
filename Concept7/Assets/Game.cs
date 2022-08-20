@@ -19,7 +19,7 @@ public class Game : MonoBehaviour
     //Queue
 
     [Header("Point Information")]
-    public int PointsPerEnemy = 10;
+    public int PointsPerEnemy = 20;
     public float MaxTimePoints = 180;
     [HideInInspector] public float TimeElapsed;
     [HideInInspector] public float EnemiesKilled;
@@ -83,11 +83,16 @@ public class Game : MonoBehaviour
         if(gameState == GameState.PLAYING){
             TimeElapsed += Time.deltaTime;
         }
+
+
+        if(StageDirector.IsStageFinished()){
+            EndGame(true);
+        }
     }
 
-    public void EnemyKilled(){
+    public void EnemyKilled(int healthMult){
         EnemiesKilled++;
-        Points += PointsPerEnemy;
+        Points += PointsPerEnemy*healthMult;
     }
 
     public void LivesChanged(int num){
@@ -101,6 +106,7 @@ public class Game : MonoBehaviour
 
     public void EndGame(bool wasWin){
         gameState = GameState.ENDED;
+        if(!wasWin)Paused = true;
         if(wasWin){
             Points = Points += (MaxTimePoints -= TimeElapsed);
             //Save level progress
