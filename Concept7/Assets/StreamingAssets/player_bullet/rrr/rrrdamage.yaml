@@ -4,5 +4,5 @@ core:
   destroy_offscreen: false
   destroy_on_impact: false
   speed: 0
-  lifetime: 0.1
+  lifetime: 0.05
   prefab: RRRDamage

@@ -15,7 +15,7 @@ MonoBehaviour:
   r: 1
   y: 1
   b: 0
-  damage: 10
+  damage: 5
   fireRate: 1
   attackName: Chain Lightning
   attackDesc: Fires bullets which bounce when hitting enemies

@@ -7,14 +7,15 @@ core:
   default_run: seek
 
 # TECH DEMO OF SEEKING ENEMIES, DO NOT SHIP THIS
+# We're shipping it
 timeline_seek:
   - time: 0
     move_at:
       game_tag: Enemy
       classification: [Actor, Missile]
-      max_turn: 3
+      max_turn: 2
     repeat: 100
-    interval: 0.03
+    interval: 0.05
 
 # timeline_travel:
 #   - time: 0

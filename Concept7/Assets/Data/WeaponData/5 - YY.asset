@@ -15,8 +15,8 @@ MonoBehaviour:
   r: 0
   y: 2
   b: 0
-  damage: 10
-  fireRate: 1
+  damage: 3
+  fireRate: 4
   attackName: Minions
   attackDesc: Adds two minions which circle the ship and fire bullets for a short
     while

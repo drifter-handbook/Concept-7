@@ -17,8 +17,8 @@ timeline_burst:
   - time: 0
     shoot:
       actor: redprimary
-      num: 10
+      num: 8
       dir: 180
       angle: 360
-      speed: 4
+      speed: 3
       ring: true

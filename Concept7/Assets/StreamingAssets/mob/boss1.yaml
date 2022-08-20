@@ -33,12 +33,12 @@ var_world:
   value: 0
 
 timeline_arrive:
-  - time: 5
-    shoot:
-      actor: lasercross
-      emitters: [gun0]
-      dir: 0
-      parent: emitter
+  # - time: 5
+  #   shoot:
+  #     actor: lasercross
+  #     emitters: [gun0]
+  #     dir: 0
+  #     parent: emitter
   - time: 0
     move:
       dest:

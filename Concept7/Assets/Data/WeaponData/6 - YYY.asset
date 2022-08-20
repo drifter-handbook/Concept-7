@@ -16,7 +16,7 @@ MonoBehaviour:
   y: 3
   b: 0
   damage: 1
-  fireRate: 0.5
+  fireRate: 1
   attackName: Fireworks
   attackDesc: Travels a long ways and then explodes into a massive ring of bullets
   icon: {fileID: 33355020, guid: 4f0f856825cdb504ca1c0214dd79174d, type: 3}

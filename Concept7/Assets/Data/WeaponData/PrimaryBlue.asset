@@ -16,4 +16,7 @@ MonoBehaviour:
   y: 0
   b: -1
   damage: 6
-  fireRate: 0.3
+  fireRate: 0.24
+  attackName: ???
+  attackDesc: ???
+  icon: {fileID: 0}

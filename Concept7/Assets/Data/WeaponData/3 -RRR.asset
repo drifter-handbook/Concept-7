@@ -15,7 +15,7 @@ MonoBehaviour:
   r: 3
   y: 0
   b: 0
-  damage: 8
+  damage: 3
   fireRate: 1
   attackName: Cataclysm Beam
   attackDesc: Fires a massive laser at the enemy (basic attacks are locked during

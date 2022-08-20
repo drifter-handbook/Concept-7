@@ -21,10 +21,10 @@ timeline_orbit:
       timeline: shoot
 
 timeline_shoot:
-  - time: 0.5
+  - time: 0.25
     run:
       timeline: shoot
-  - time: 0.5
+  - time: 0.25
     shoot:
       actor: yybullet
       dir: 0
