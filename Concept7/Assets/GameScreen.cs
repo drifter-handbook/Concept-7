@@ -154,9 +154,9 @@ public class GameScreen : MonoBehaviour
             QuitContinueButton.text = "Continue";
         }
 
-        EnemiesKilledLabel.text = Game.EnemiesKilled.ToString();
-        TimeElapsedLabel.text = Game.TimeElapsed.ToString();
-        ScoreLabel.text = Game.Points.ToString();
+        EnemiesKilledLabel.text = ((int)Game.EnemiesKilled).ToString();
+        TimeElapsedLabel.text = ((int)Game.TimeElapsed).ToString();
+        ScoreLabel.text = ((int)Game.Points).ToString();
 
         foreach(GameObject objToEnable in objsToEnable){
             objToEnable.SetActive(true);
