@@ -11,7 +11,8 @@ var_pos1:
 
 
 timeline_stage:
-
+  - time: 2
+    destroy: true
   - time: 2
     spawn:
       actor: drone2

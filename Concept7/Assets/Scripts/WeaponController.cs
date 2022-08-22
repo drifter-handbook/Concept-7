@@ -14,11 +14,14 @@ public class WeaponController : MonoBehaviour
 
     public void Start()
     {
+        foreach (Game game in FindObjectsOfType<Game>())
+        {
+            if (game != null)
+            {
+                screen = game.GameScreen;
+            }
+        }
         ResetQueue();
-    }
-
-    public void Initialize(GameScreen screen){
-        this.screen = screen;
     }
 
     private float timeStamp;

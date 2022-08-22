@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,12 +30,21 @@ public class PlayerController : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        RefreshGameScreen();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    // replace gamescreen reference on each scene load
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshGameScreen();
+    }
+
+    void RefreshGameScreen()
+    {
         game = FindObjectOfType<Game>();
         game.NumPlayers++;
         PlayerID = game.NumPlayers;
-
-        weapon.Initialize(game.GameScreen);
     }
 
     public void EnableWeapon()

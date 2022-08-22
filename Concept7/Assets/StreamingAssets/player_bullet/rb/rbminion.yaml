@@ -33,3 +33,4 @@ timeline_shoot:
     shoot:
       actor: rbdamage
       dir: 0
+      parent: actor

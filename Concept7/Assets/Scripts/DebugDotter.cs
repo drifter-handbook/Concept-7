@@ -19,7 +19,6 @@ public class DebugDotter : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 

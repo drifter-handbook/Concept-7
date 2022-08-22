@@ -470,12 +470,16 @@ public class StageActor : MonoBehaviour, IActorDestroyHandler
     {
         OrbitAngle = OrbitAngle ?? Mathf.Rad2Deg * Mathf.Atan2(transform.localPosition.y, transform.localPosition.x);
         OrbitRadius = OrbitRadius ?? ((Vector2)transform.localPosition).magnitude;
+        Vector2 prevPos = transform.localPosition;
         while (true)
         {
             OrbitAngle += Time.deltaTime * OrbitSpeed * Mathf.Sign(Mirror.x) * Mathf.Sign(Mirror.y);
             Vector3 v = Quaternion.Euler(0f, 0f, OrbitAngle.Value) * Vector3.right * OrbitRadius.Value;
             v = OrbitTilt * v;
             transform.localPosition = new Vector3(v.x, v.y, (Actor.Depth ?? 0) + 2f * Mathf.Sign(-v.normalized.z - 0.1f));
+            Direction = ((Vector2)transform.localPosition - prevPos).normalized;
+            RefreshAngle();
+            prevPos = transform.localPosition;
             yield return null;
         }
     }
