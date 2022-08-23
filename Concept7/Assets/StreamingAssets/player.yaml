@@ -48,6 +48,9 @@ timeline_Y:
 
 timeline_YY:
   - time: 0
+    destroyother:
+      actor: yyminion
+  - time: 0
     spawn:
       actor: yyminion
       y: 1
@@ -69,6 +72,9 @@ timeline_B:
 
 timeline_BB:
   - time: 0
+    destroyother:
+      actor: bbshield
+  - time: 0
     shoot:
       actor: bbshield
       parent: actor
@@ -76,6 +82,9 @@ timeline_BB:
 
 timeline_RB:
   - time: 0
+    destroyother:
+      actor: rbminion
+  - time: 0.05
     shoot:
       actor: rbminion
       num: 6
@@ -97,6 +106,9 @@ timeline_RY:
 
 timeline_BBB:
   - time: 0
+    destroyother:
+      actor: bbbminion
+  - time: 0
     spawn:
       actor: bbbminion
       rel: pos
@@ -110,22 +122,16 @@ timeline_RBB:
 
 timeline_RR:
   - time: 0
-    spawn:
+    destroyother:
+      actor: rreffect
+  - time: 0
+    destroyother:
       actor: rrscreenwide
-      parent: actor
-      rel: pos
-    repeat: 8
-    interval: 1
   - time: 0
     spawn:
-      actor: rrparticle
-      rel: pos
+      actor: rreffect
       parent: actor
-    repeat: 8
-    interval: 1
-  - time: 0
-    playsound:
-      sound: rr
+      rel: pos
 
 timeline_RRR:
   - time: 0.5
