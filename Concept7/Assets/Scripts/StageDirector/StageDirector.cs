@@ -68,7 +68,11 @@ public class StageDirector : MonoBehaviour
     {
         // load YAML data
         // if this is too much of a performance hit, load over a coroutine and set a flag when ready
-        Data = new StageData();
+        if (Data == null)
+        {
+            Data = new StageData();
+        }
+        // if you want to reload from YAML, call Data.Load() here
     }
 
     // Update is called once per frame

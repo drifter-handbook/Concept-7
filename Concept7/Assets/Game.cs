@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -64,6 +65,27 @@ public class Game : MonoBehaviour
         {
             Load();
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        foreach (GameScreen scr in FindObjectsOfType<GameScreen>())
+        {
+            if (scr != null)
+            {
+                GameScreen = scr;
+            }
+        }
+        CurrentLives = StartingLives;
+        TimeElapsed = 0;
+        GameScreen.Game = this;
+        GameScreen.UpdateLives();
+        if (StageEditor.Instance == null)
+        {
+            Load();
+        }
+        gameState = GameState.PLAYING;
     }
 
     public void Load(){

@@ -27,9 +27,9 @@ public class GameScreen : MonoBehaviour
 
     public TextMeshProUGUI QuitContinueButton;
 
-    public Transform Pip1;
-    public Transform Pip2;
-    public Transform Pip3;
+    public RectTransform Pip1;
+    public RectTransform Pip2;
+    public RectTransform Pip3;
     public Sprite RImage;
     public Sprite BImage;
     public Sprite YImage;
@@ -109,8 +109,8 @@ public class GameScreen : MonoBehaviour
 
     public void ClearQueue(){
         Pip1.GetComponent<Image>().sprite = EmptyImage;
-         Pip2.GetComponent<Image>().sprite = EmptyImage;
-          Pip3.GetComponent<Image>().sprite = EmptyImage;
+        Pip2.GetComponent<Image>().sprite = EmptyImage;
+        Pip3.GetComponent<Image>().sprite = EmptyImage;
     }
 
     public void UpdateLives(){
@@ -179,8 +179,11 @@ public class GameScreen : MonoBehaviour
         PauseScreen.SetActive(false);
     }
 
-    public void Reload(){
-        SceneManager.LoadScene(0);
+    public void Reload() {
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            Destroy(player);
+        }
         SceneManager.LoadScene("GameScene");
     }
 }
