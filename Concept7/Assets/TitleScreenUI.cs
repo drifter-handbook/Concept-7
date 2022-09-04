@@ -36,7 +36,7 @@ public class TitleScreenUI : MonoBehaviour
 
 
    void Start(){
-       Screen.SetResolution (800 , 450, false );
+       //Screen.SetResolution (800 , 450, false );
        anim = GetComponent<Animator>();
 
         //Initialize level select Grid Panel
