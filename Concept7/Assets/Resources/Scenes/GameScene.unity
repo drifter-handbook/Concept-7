@@ -174,7 +174,7 @@ MonoBehaviour:
   scrollingBackgrounds:
   - mainBackground: {fileID: 2459087421529202704, guid: 72ba36166084bc94aa5a6091af1bab97, type: 3}
     secondaryBackground: {fileID: 0}
-    repeatCount: 0
+    repeatCount: 2
     shouldrepeatNonstop: 1
     shouldStopScrolling: 0
 --- !u!1 &271210918
@@ -376,7 +376,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -438,9 +438,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_AssetsPPU: 24
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_AssetsPPU: 48
+  m_RefResolutionX: 800
+  m_RefResolutionY: 450
   m_CropFrame: 0
   m_GridSnapping: 0
   m_UpscaleRT: 0
@@ -478,7 +478,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.091329575, y: 0.74304676}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -489,7 +489,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24, y: 15}
+  m_Size: {x: 19.890095, y: 9.317888}
   m_EdgeRadius: 0
 --- !u!4 &519696386
 Transform:
@@ -702,7 +702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749242736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.16, z: 0}
+  m_LocalPosition: {x: 0, y: 1.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1283,7 +1283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e3f40c846f17e4c89cbc3308d0dba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invulnerable: 1
+  Invulnerable: 0
   ContinueWithNoLives: 0
   StartStage: 1
   OverrideLevelID: 1
@@ -1474,6 +1474,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1471920247812681481, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 10.349991
+      objectReference: {fileID: 0}
     - target: {fileID: 1471920247858598510, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1554,6 +1558,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1471920248119630137, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -26.24002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1471920248119630137, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.050064
+      objectReference: {fileID: 0}
     - target: {fileID: 1471920248183212808, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1614,6 +1626,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1471920248752496966, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.924942
+      objectReference: {fileID: 0}
     - target: {fileID: 1471920248933400248, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1633,6 +1649,14 @@ PrefabInstance:
     - target: {fileID: 1471920248933400248, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1471920249046283492, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30.840118
+      objectReference: {fileID: 0}
+    - target: {fileID: 1471920249046283492, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.050064
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e261e8818dccbd4caa55f9fa61f42b2, type: 3}

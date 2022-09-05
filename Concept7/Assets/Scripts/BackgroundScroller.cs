@@ -41,7 +41,7 @@ public class BackgroundScroller : MonoBehaviour
     {
         leftSide = standardCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, standardCamera.nearClipPlane)).x;
         rightSide = standardCamera.ViewportToWorldPoint(new Vector3(1, 0.5f, standardCamera.nearClipPlane)).x;
-        cameraWidth = standardCamera.orthographicSize * standardCamera.aspect;
+        cameraWidth = standardCamera.orthographicSize * standardCamera.aspect * 5f;
         CreateNewBackground(scrollingBackgrounds[currentListEntry].mainBackground, currentMainBackgrounds);
         CreateNewBackground(scrollingBackgrounds[currentListEntry].secondaryBackground, currentSecondaryBackgrounds);
     }
