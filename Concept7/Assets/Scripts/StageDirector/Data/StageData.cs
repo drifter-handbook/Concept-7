@@ -18,8 +18,7 @@ public partial class StageData
     // Holds all actor types, and their data, emitters, and timelines
     public Dictionary<string, Actor> Actors = new Dictionary<string, Actor>();
 
-    string WorkingDir => Application.streamingAssetsPath;
-    const string StagesFile = "stages.yaml";
+    const string StagesFile = "stages";
 
     const string EmitterPrefix = "emitter_";
     const string VarPrefix = "var_";
@@ -67,12 +66,23 @@ public partial class StageData
     {
 
         // parse stages file
-        string stagesPath = Path.Combine(WorkingDir, StagesFile);
+        string stagesPath = "CursedObjects\\" + StagesFile;
         Stages = ToStages(stagesPath);
+
+        TextAsset yaml=(TextAsset)Resources.Load(stagesPath);
+        string yamlRead=yaml.text;
         // parse all actor files
-        foreach (string p in Directory.GetFiles(WorkingDir, "*.yaml", SearchOption.AllDirectories))
+
+        TextAsset[] texts = Resources.LoadAll("CursedObjects").Cast<TextAsset>().ToArray();
+         
+        foreach (TextAsset text in texts)
         {
-            if (p == stagesPath)
+
+            //UnityEngine.Debug.Log(text.name + " Loading...");
+           
+            string p = text.text;
+
+            if (p == yamlRead)
             {
                 continue;
             }
@@ -88,16 +98,18 @@ public partial class StageData
 
     private List<Stage> ToStages(string path)
     {
-        StageList stages = Deserialize<StageList>(null, path, File.ReadAllText(path));
+        TextAsset yaml=(TextAsset)Resources.Load(path);
+        string yamlRead=yaml.text;
+        StageList stages = Deserialize<StageList>(null, path, yamlRead);
         return stages.Stages;
     }
-    private Actor ToActor(string path)
+    private Actor ToActor(string text)
     {
         // load actor core fields
-        Dictionary<string, object> actorData = Deserialize<Dictionary<string, object>>(null, path, File.ReadAllText(path));
+        Dictionary<string, object> actorData = Deserialize<Dictionary<string, object>>(null, text, text);
         //Debug.Log($"Parsing {path}");  //shhhhhhhh
-        Actor actor = Deserialize<Actor>(null, $"{path} core section", Serializer.Serialize(actorData["core"]));
-        actor.File = path;
+        Actor actor = Deserialize<Actor>(null, $"{text} core section", Serializer.Serialize(actorData["core"]));
+        actor.File = "???";
         if (string.IsNullOrEmpty(actor.Name))
         {
             throw new StageDataException($"Failed to load {actor.File}: Missing actor name");
