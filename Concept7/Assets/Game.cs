@@ -66,6 +66,7 @@ public class Game : MonoBehaviour
             Load();
         }
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -86,6 +87,7 @@ public class Game : MonoBehaviour
             Load();
         }
         gameState = GameState.PLAYING;
+    
     }
 
     public void Load(){

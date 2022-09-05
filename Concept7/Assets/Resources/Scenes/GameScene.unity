@@ -627,6 +627,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5978443422732715704, guid: e22559cc7dc3b0a4399f9b76045067dd, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7558628858048983521, guid: e22559cc7dc3b0a4399f9b76045067dd, type: 3}
       propertyPath: m_Name
       value: PlayerManager
