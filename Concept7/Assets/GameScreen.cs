@@ -180,6 +180,7 @@ public class GameScreen : MonoBehaviour
     }
 
     public void Reload() {
+         Game.Instance.Paused = false;
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
             Destroy(player);

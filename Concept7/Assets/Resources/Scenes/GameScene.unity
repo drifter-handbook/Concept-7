@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e3f40c846f17e4c89cbc3308d0dba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Invulnerable: 0
+  Invulnerable: 1
   ContinueWithNoLives: 0
   StartStage: 1
   OverrideLevelID: 1
